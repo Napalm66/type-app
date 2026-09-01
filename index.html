@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Type Classified</title>
+  <meta name="description" content="An interactive guide to type classification — from Blackletter and Oldstyle to Modern, Slab, and Sans." />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link id="specimen-fonts" rel="stylesheet" href="" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Fraunces:ital,wght@0,600;1,500&display=swap" />
+
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+  <div class="noise-overlay" aria-hidden="true"></div>
+
+  <header class="site-header">
+    <div class="wrap">
+      <h1 class="brand">Type Classified</h1>
+      <p class="brand-sub">A field guide to type classification, for people who read type like weather.</p>
+      <nav class="tabs" role="tablist" aria-label="Sections">
+        <button class="tab is-active" role="tab" aria-selected="true" data-view="explore">Explore</button>
+        <button class="tab" role="tab" aria-selected="false" data-view="identify">Identify</button>
+        <button class="tab" role="tab" aria-selected="false" data-view="compare">Compare</button>
+      </nav>
+    </div>
+  </header>
+
+  <main class="wrap">
+    <section id="view-explore" class="view is-active" aria-labelledby="explore-heading">
+      <div class="view-intro">
+        <h2 id="explore-heading">Explore the classifications</h2>
+        <p>Filter by structural family, or scroll through all fourteen. Each card shows the diagnostic features that separate it from its neighbors.</p>
+      </div>
+      <div class="filter-row" id="branch-filters"></div>
+      <div class="card-grid" id="card-grid"></div>
+    </section>
+
+    <section id="view-identify" class="view" aria-labelledby="identify-heading">
+      <div class="view-intro">
+        <h2 id="identify-heading">Identify a typeface</h2>
+        <p>Answer a few questions about what you're looking at, and we'll narrow it down to a classification.</p>
+      </div>
+      <div id="identify-root"></div>
+    </section>
+
+    <section id="view-compare" class="view" aria-labelledby="compare-heading">
+      <div class="view-intro">
+        <h2 id="compare-heading">Compare side by side</h2>
+        <p>Pick up to three classifications to line up against each other.</p>
+      </div>
+      <div id="compare-root"></div>
+    </section>
+  </main>
+
+  <div class="detail-overlay" id="detail-overlay" aria-hidden="true">
+    <div class="detail-panel" id="detail-panel" role="dialog" aria-modal="true"></div>
+  </div>
+
+  <footer class="site-footer">
+    <div class="wrap">
+      <p>Specimens are set in freely-licensed webfonts chosen as close visual analogs to each historical style — not the original designs. Built for exploring type, not as an academic taxonomy.</p>
+    </div>
+  </footer>
+
+  <script src="js/data.js"></script>
+  <script src="js/specimen.js"></script>
+  <script src="js/explore.js"></script>
+  <script src="js/detail.js"></script>
+  <script src="js/identify.js"></script>
+  <script src="js/compare.js"></script>
+  <script src="js/main.js"></script>
+</body>
+</html>
