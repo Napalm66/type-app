@@ -8,6 +8,7 @@ const detail = initDetail(
 initExplore({
   filterRoot: document.getElementById("branch-filters"),
   gridRoot: document.getElementById("card-grid"),
+  specimenInputRoot: document.getElementById("specimen-tool-root"),
   onOpenDetail: (id) => detail.open(id),
 });
 

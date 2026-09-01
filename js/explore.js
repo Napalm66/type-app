@@ -1,5 +1,40 @@
-function initExplore({ filterRoot, gridRoot, onOpenDetail }) {
+function initExplore({ filterRoot, gridRoot, onOpenDetail, specimenInputRoot }) {
   let activeBranch = "all";
+
+  function renderSpecimenInput() {
+    specimenInputRoot.innerHTML = `
+      <div class="specimen-tool">
+        <label class="specimen-tool-label" for="specimen-text-input">Try your own text</label>
+        <div class="specimen-tool-row">
+          <input id="specimen-text-input" class="specimen-tool-input" type="text"
+            placeholder="Type or paste a word, name, or short phrase…"
+            value="${getCustomSpecimenText().replace(/"/g, "&quot;")}" />
+          <button class="specimen-tool-clear" ${getCustomSpecimenText() ? "" : "hidden"}>Clear</button>
+        </div>
+      </div>
+    `;
+
+    const input = specimenInputRoot.querySelector(".specimen-tool-input");
+    const clearBtn = specimenInputRoot.querySelector(".specimen-tool-clear");
+
+    let debounceTimer;
+    input.addEventListener("input", () => {
+      clearTimeout(debounceTimer);
+      debounceTimer = setTimeout(() => {
+        setCustomSpecimenText(input.value);
+        clearBtn.hidden = !getCustomSpecimenText();
+        renderGrid();
+      }, 150);
+    });
+
+    clearBtn.addEventListener("click", () => {
+      setCustomSpecimenText("");
+      input.value = "";
+      clearBtn.hidden = true;
+      renderGrid();
+      input.focus();
+    });
+  }
 
   function renderFilters() {
     const branches = ["all", ...Object.keys(BRANCH_LABELS)];
@@ -33,7 +68,7 @@ function initExplore({ filterRoot, gridRoot, onOpenDetail }) {
           <span class="spec-card-name">${item.name}</span>
           <span class="spec-card-era">${item.era}</span>
         </div>
-        <div class="spec-card-specimen">${renderSpecimenHTML(item)}</div>
+        <div class="spec-card-specimen">${renderSpecimenHTML(item, "card")}</div>
         <p class="spec-card-tagline">${item.tagline}</p>
         <span class="branch-tag">${BRANCH_LABELS[item.branch]}</span>
       </button>
@@ -46,6 +81,7 @@ function initExplore({ filterRoot, gridRoot, onOpenDetail }) {
     });
   }
 
+  renderSpecimenInput();
   renderFilters();
   renderGrid();
 }

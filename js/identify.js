@@ -169,7 +169,7 @@ function initIdentify(root) {
         <div class="quiz-progress">${progressDots()}</div>
         <div class="quiz-result-label">Likely classification</div>
         <h3 class="quiz-result-name">${item.name}</h3>
-        <div class="quiz-result-specimen">${renderSpecimenHTML(item, "2.6rem")}</div>
+        <div class="quiz-result-specimen">${renderSpecimenHTML(item, "quizResult")}</div>
         <div class="quiz-trail">Your path: <span>${trail}</span></div>
         ${item.diagnostics ? `<div class="tell-box"><strong>Key tell</strong>${item.diagnostics.tell}</div>` : ""}
         <p class="detail-description">${item.description}</p>

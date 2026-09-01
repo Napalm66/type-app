@@ -28,7 +28,7 @@ function initCompare(root) {
             return `
             <div class="compare-col">
               <div class="compare-col-name">${item.name}</div>
-              <div class="compare-col-specimen">${renderSpecimenHTML(item, "2rem")}</div>
+              <div class="compare-col-specimen">${renderSpecimenHTML(item, "compare")}</div>
               <p class="spec-card-tagline">${item.tagline}</p>
               ${
                 item.diagnostics

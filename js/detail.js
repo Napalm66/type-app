@@ -44,7 +44,7 @@ function initDetail(overlayRoot, panelRoot) {
       <button class="detail-close" aria-label="Close">&times;</button>
       <div class="detail-era">${item.era}</div>
       <h3 class="detail-name">${item.name}</h3>
-      <div class="detail-specimen">${renderSpecimenHTML(item)}</div>
+      <div class="detail-specimen">${renderSpecimenHTML(item, "detail")}</div>
       <p class="detail-description">${item.description}</p>
       ${diagnosticsHTML}
       ${tellHTML}
