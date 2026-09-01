@@ -23,6 +23,7 @@
       <nav class="tabs" role="tablist" aria-label="Sections">
         <button class="tab is-active" role="tab" aria-selected="true" data-view="explore">Explore</button>
         <button class="tab" role="tab" aria-selected="false" data-view="identify">Identify</button>
+        <button class="tab" role="tab" aria-selected="false" data-view="timeline">Timeline</button>
         <button class="tab" role="tab" aria-selected="false" data-view="compare">Compare</button>
       </nav>
     </div>
@@ -44,6 +45,14 @@
         <p>Answer a few questions about what you're looking at, and we'll narrow it down to a classification.</p>
       </div>
       <div id="identify-root"></div>
+    </section>
+
+    <section id="view-timeline" class="view" aria-labelledby="timeline-heading">
+      <div class="view-intro">
+        <h2 id="timeline-heading">Timeline</h2>
+        <p>How the classifications stack up chronologically. Click any bar for the full detail. Faded, tapered bars are still in active use today.</p>
+      </div>
+      <div id="timeline-root"></div>
     </section>
 
     <section id="view-compare" class="view" aria-labelledby="compare-heading">
@@ -70,6 +79,7 @@
   <script src="js/explore.js"></script>
   <script src="js/detail.js"></script>
   <script src="js/identify.js"></script>
+  <script src="js/timeline.js"></script>
   <script src="js/compare.js"></script>
   <script src="js/main.js"></script>
 </body>
