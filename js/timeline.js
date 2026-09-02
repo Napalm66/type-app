@@ -48,6 +48,20 @@ function initTimeline(root, onOpenDetail) {
     const marks = [];
     for (let y = domainStart; y < domainEnd; y += 100) marks.push(y);
     marks.push(domainEnd);
+
+    // "Today" is whatever the current year happens to be, so the gap to the
+    // previous regular 100-year mark is arbitrary — it can land close enough
+    // that the two labels' text overlaps (e.g. "2000" and "Today" when
+    // domainEnd is 2026, only 26 years apart against a 100-year rhythm).
+    // Drop the second-to-last mark if there isn't room for both.
+    const MIN_LABEL_GAP_PX = 45;
+    const pxPerYear = CHART_WIDTH / span;
+    if (marks.length >= 2) {
+      const gapYears = marks[marks.length - 1] - marks[marks.length - 2];
+      if (gapYears * pxPerYear < MIN_LABEL_GAP_PX) {
+        marks.splice(marks.length - 2, 1);
+      }
+    }
     return marks;
   }
 
