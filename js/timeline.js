@@ -7,10 +7,12 @@ function initTimeline(root, onOpenDetail) {
   // Each period's onset year marks where its band starts and the prior
   // one ends (their canonical ranges actually overlap by decades, since
   // style transitions are gradual, not cutoffs — using onset years keeps
-  // the bands sequential and non-overlapping for this chart). Victorian's
-  // canonical range ends at 1900 with nothing named after it, so the band
-  // simply stops there rather than inventing a label for the remaining
-  // domain.
+  // the bands sequential and non-overlapping for this chart). Consecutive
+  // periods aren't always contiguous either — Romanticism ends at 1900 and
+  // Modernism doesn't begin until 1910, so that decade is left as an
+  // honest gap rather than stretched to fit. Modernism's own range ends
+  // at 1970 with nothing named after it, so the band simply stops there
+  // rather than inventing a label for the remaining domain.
   const ART_PERIODS = [
     {
       name: "Romanesque",
@@ -48,7 +50,7 @@ function initTimeline(root, onOpenDetail) {
       description: "Modern type (Didone). Characterized by extreme contrast between hair-thin and thick lines, vertical stress, and unbracketed, flat serifs (e.g., Bodoni, Didot).",
     },
     {
-      name: "Victorian",
+      name: "Romanticism",
       start: 1815,
       end: 1900,
       color: "rgba(130, 90, 122, 0.3)",
