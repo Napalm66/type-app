@@ -4,8 +4,31 @@ function initTimeline(root, onOpenDetail) {
   const span = domainEnd - domainStart;
   const MIN_WIDTH_PCT = 1.4;
 
+  // Broader art-historical backdrop the classifications emerged against.
+  // Trimmed to this chart's domain (1450–present) — Romanesque and Gothic
+  // precede it entirely, same reasoning as why Blackletter's own bar starts
+  // at Gutenberg's press rather than 12th-century manuscript hands.
+  const ART_PERIODS = [
+    { name: "Renaissance", start: 1450, end: 1600, color: "rgba(138, 155, 110, 0.3)" },
+    { name: "Baroque", start: 1600, end: 1700, color: "rgba(176, 120, 79, 0.3)" },
+    { name: "Classicism →", start: 1700, end: domainEnd, color: "rgba(91, 114, 144, 0.3)" },
+  ];
+
   function pct(year) {
     return ((year - domainStart) / span) * 100;
+  }
+
+  function eraBandHTML() {
+    const segments = ART_PERIODS.map((era) => {
+      const left = pct(era.start);
+      const width = pct(era.end) - left;
+      return `
+        <div class="timeline-era-segment" style="left:${left}%; width:${width}%; background:${era.color};">
+          <span class="timeline-era-label">${era.name}</span>
+        </div>
+      `;
+    }).join("");
+    return `<div class="timeline-era-band">${segments}</div>`;
   }
 
   function buildMarks() {
@@ -51,6 +74,7 @@ function initTimeline(root, onOpenDetail) {
     root.innerHTML = `
       <div class="timeline-wrap">
         <div class="timeline-inner">
+          ${eraBandHTML()}
           <div class="timeline-scale">
             <div class="timeline-scale-labels">
               ${marks

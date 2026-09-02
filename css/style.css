@@ -772,6 +772,34 @@ main.wrap {
   padding: 1.25rem clamp(1rem, 3vw, 1.75rem) 1.5rem;
 }
 
+.timeline-era-band {
+  position: relative;
+  height: 1.6rem;
+  margin-bottom: 0.6rem;
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.timeline-era-segment {
+  position: absolute;
+  top: 0;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-right: 1px solid var(--paper-raised);
+}
+
+.timeline-era-label {
+  font-size: 0.66rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--ink);
+  mix-blend-mode: normal;
+  white-space: nowrap;
+}
+
 .timeline-scale {
   position: relative;
   height: 2.25rem;
