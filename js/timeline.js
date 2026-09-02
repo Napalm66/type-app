@@ -3,17 +3,20 @@ function initTimeline(root, onOpenDetail) {
   const domainEnd = TIMELINE_DOMAIN_END;
   const span = domainEnd - domainStart;
 
-  // Broader art-historical backdrop the classifications emerged against,
-  // boundaries measured pixel-for-pixel off the reference deck's own
-  // timeline slide (century-tick calibrated). Romanesque precedes this
-  // chart's domain (1150–present) entirely, so it's left out — same
-  // reasoning as why the domain starts at Blackletter's own earliest year
-  // rather than further back.
+  // Broader art-historical backdrop the classifications emerged against.
+  // Each period's onset year marks where its band starts and the prior
+  // one ends (their canonical ranges actually overlap by decades, since
+  // style transitions are gradual, not cutoffs — using onset years keeps
+  // the bands sequential and non-overlapping for this chart). Romanesque
+  // (c. 1000–1150) precedes this chart's domain (1150–present) entirely,
+  // so it's left out. Classicism's canonical range ends at 1820 with
+  // nothing named after it, so the band simply stops there rather than
+  // inventing a label for the remaining domain.
   const ART_PERIODS = [
-    { name: "Gothic", start: 1150, end: 1400, color: "rgba(139, 58, 58, 0.3)" },
-    { name: "Renaissance", start: 1400, end: 1550, color: "rgba(138, 155, 110, 0.3)" },
-    { name: "Baroque", start: 1550, end: 1650, color: "rgba(176, 120, 79, 0.3)" },
-    { name: "Classicism →", start: 1650, end: domainEnd, color: "rgba(91, 114, 144, 0.3)" },
+    { name: "Gothic", start: 1150, end: 1450, color: "rgba(139, 58, 58, 0.3)" },
+    { name: "Renaissance", start: 1450, end: 1600, color: "rgba(138, 155, 110, 0.3)" },
+    { name: "Baroque", start: 1600, end: 1750, color: "rgba(176, 120, 79, 0.3)" },
+    { name: "Classicism", start: 1750, end: 1820, color: "rgba(91, 114, 144, 0.3)" },
   ];
 
   // Everything — ruler, era band, and every bar — is drawn in this single
