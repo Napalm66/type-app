@@ -54,6 +54,13 @@ function initTimeline(root, onOpenDetail) {
       color: "rgba(130, 90, 122, 0.3)",
       description: "The Industrial Revolution demands attention-grabbing type. Slab Serifs (Egyptians), Sans-Serifs (Grotesques), and heavily ornamented, decorative display fonts emerge for advertising.",
     },
+    {
+      name: "Modernism",
+      start: 1910,
+      end: 1970,
+      color: "rgba(90, 100, 110, 0.3)",
+      description: "The era of “form follows function.” Strips away ornament in favour of geometric and Neo-Grotesque sans-serifs (like Helvetica and Univers). Focuses on strict grids, asymmetry, and high legibility.",
+    },
   ];
 
   // Everything — ruler, era band, and every bar — is drawn in this single
