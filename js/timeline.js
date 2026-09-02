@@ -7,10 +7,10 @@ function initTimeline(root, onOpenDetail) {
   // Each period's onset year marks where its band starts and the prior
   // one ends (their canonical ranges actually overlap by decades, since
   // style transitions are gradual, not cutoffs — using onset years keeps
-  // the bands sequential and non-overlapping for this chart). Classicism's
-  // canonical range ends at 1820 with nothing named after it, so the band
-  // simply stops there rather than inventing a label for the remaining
-  // domain.
+  // the bands sequential and non-overlapping for this chart). Romanticism
+  // / Victorian's canonical range ends at 1900 with nothing named after
+  // it, so the band simply stops there rather than inventing a label for
+  // the remaining domain.
   const ART_PERIODS = [
     {
       name: "Romanesque",
@@ -43,9 +43,16 @@ function initTimeline(root, onOpenDetail) {
     {
       name: "Classicism",
       start: 1750,
-      end: 1820,
+      end: 1815,
       color: "rgba(91, 114, 144, 0.3)",
       description: "Modern type (Didone). Characterized by extreme contrast between hair-thin and thick lines, vertical stress, and unbracketed, flat serifs (e.g., Bodoni, Didot).",
+    },
+    {
+      name: "Romanticism / Victorian",
+      start: 1815,
+      end: 1900,
+      color: "rgba(130, 90, 122, 0.3)",
+      description: "The Industrial Revolution demands attention-grabbing type. Slab Serifs (Egyptians), Sans-Serifs (Grotesques), and heavily ornamented, decorative display fonts emerge for advertising.",
     },
   ];
 
@@ -96,25 +103,41 @@ function initTimeline(root, onOpenDetail) {
   }
 
   function eraBandSVG(topY) {
+    const font = "700 9px Inter, sans-serif";
+    let prevLabelRight = -Infinity;
+
     return ART_PERIODS.map((era, i) => {
       const left = x(era.start);
       const width = x(era.end) - left;
       const label = era.name.toUpperCase();
-      const font = "700 9px Inter, sans-serif";
       const labelW = textWidth(label, font);
+      const nextBoundary = i < ART_PERIODS.length - 1 ? x(ART_PERIODS[i + 1].start) : svgWidth;
 
-      // A narrow segment (Classicism, ~70yr) can't fit its label centered.
-      // Rather than hide it, left-align starting inside the segment — the
-      // text can spill into whatever's next (blank space past the last
-      // segment, or a neighboring band) instead of disappearing entirely.
+      // A narrow segment (Classicism, Romanticism/Victorian) can't fit its
+      // label centered. Try left-aligning it starting inside the segment —
+      // but only if that doesn't run into the previous segment's label
+      // (which may itself have spilled rightward) or past this segment's
+      // own right boundary. If neither placement fits, skip the inline
+      // label entirely rather than let two labels overlap; the tooltip
+      // still carries the full name and description on hover.
       const fitsCentered = labelW + 10 <= width;
-      const textX = fitsCentered ? left + width / 2 : left + 4;
-      const anchor = fitsCentered ? "middle" : "start";
+      let labelSVG = "";
+      if (fitsCentered) {
+        const textX = left + width / 2;
+        labelSVG = `<text x="${textX}" y="${topY + 14}" class="tl-era-label" text-anchor="middle">${label}</text>`;
+        prevLabelRight = textX + labelW / 2;
+      } else {
+        const textX = Math.max(left + 4, prevLabelRight + 10);
+        if (textX + labelW <= nextBoundary - 4) {
+          labelSVG = `<text x="${textX}" y="${topY + 14}" class="tl-era-label" text-anchor="start">${label}</text>`;
+          prevLabelRight = textX + labelW;
+        }
+      }
 
       return `
         <g class="tl-era-group" data-era-index="${i}">
           <rect x="${left}" y="${topY}" width="${width}" height="22" fill="${era.color}" />
-          <text x="${textX}" y="${topY + 14}" class="tl-era-label" text-anchor="${anchor}">${label}</text>
+          ${labelSVG}
         </g>
       `;
     }).join("");
