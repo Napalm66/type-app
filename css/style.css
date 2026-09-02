@@ -459,6 +459,124 @@ main.wrap {
   color: var(--accent);
 }
 
+/* ---------- anatomy diagram ---------- */
+
+.anatomy-heading {
+  font-size: 0.72rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--ink-faint);
+  margin-bottom: 0.6rem;
+}
+
+.anatomy-loading {
+  font-size: 0.85rem;
+  color: var(--ink-faint);
+  padding: 1.5rem 0;
+  text-align: center;
+}
+
+.anatomy-block {
+  background: var(--paper);
+  border: 1px solid var(--rule);
+  border-radius: 8px;
+  padding: 0.75rem 0.75rem 1rem;
+  margin-bottom: 1.25rem;
+}
+
+.anatomy-svg-wrap {
+  width: 100%;
+  overflow-x: auto;
+}
+
+.anatomy-guide {
+  stroke: var(--rule);
+  stroke-width: 1;
+}
+
+.anatomy-leader {
+  stroke: var(--ink-faint);
+  stroke-width: 1;
+  stroke-dasharray: 2 2;
+}
+
+.anatomy-guide-label {
+  font-family: var(--font-ui);
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 0.03em;
+  fill: var(--ink-faint);
+}
+
+.anatomy-specimen-text {
+  fill: var(--ink);
+}
+
+.anatomy-ref-glyph {
+  fill: var(--ink-faint);
+  opacity: 0.55;
+}
+
+.anatomy-ref-caption {
+  font-family: var(--font-ui);
+  font-size: 8px;
+  font-style: italic;
+  fill: var(--ink-faint);
+}
+
+.anatomy-stress {
+  stroke: var(--accent);
+  stroke-width: 1.5;
+  stroke-dasharray: 4 3;
+}
+
+.anatomy-stress-dot {
+  fill: var(--accent);
+}
+
+.anatomy-stress-label {
+  font-family: var(--font-ui);
+  font-size: 9px;
+  font-weight: 700;
+  fill: var(--accent);
+  letter-spacing: 0.03em;
+}
+
+.anatomy-facts {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+  margin-top: 0.75rem;
+  padding-top: 0.75rem;
+  border-top: 1px solid var(--rule);
+}
+
+.anatomy-fact {
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+  min-width: 130px;
+}
+
+.anatomy-fact--wide {
+  flex: 1;
+  min-width: 220px;
+}
+
+.anatomy-fact-label {
+  font-size: 0.65rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--ink-faint);
+}
+
+.anatomy-fact-value {
+  font-size: 0.82rem;
+  color: var(--ink-soft);
+}
+
 /* ---------- identify (quiz) ---------- */
 
 .quiz-card {

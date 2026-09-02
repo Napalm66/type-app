@@ -11,7 +11,7 @@ function initDetail(overlayRoot, panelRoot) {
     panelRoot.innerHTML = "";
   }
 
-  function open(id) {
+  async function open(id) {
     const item = getById(id);
     if (!item) return;
 
@@ -50,11 +50,19 @@ function initDetail(overlayRoot, panelRoot) {
       ${tellHTML}
       ${subStylesHTML}
       <p class="key-typefaces"><b>Reference typefaces:</b> ${item.keyTypefaces.join(", ")}</p>
+      <div class="anatomy-heading">Anatomy</div>
+      <div class="anatomy-loading" id="anatomy-slot">Measuring glyph metrics…</div>
     `;
 
     panelRoot.querySelector(".detail-close").addEventListener("click", close);
     overlayRoot.classList.add("is-open");
     overlayRoot.setAttribute("aria-hidden", "false");
+
+    const slot = panelRoot.querySelector("#anatomy-slot");
+    const html = await buildAnatomyHTML(item);
+    if (slot && document.contains(slot)) {
+      slot.outerHTML = html;
+    }
   }
 
   overlayRoot.addEventListener("click", (e) => {
