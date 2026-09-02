@@ -65,12 +65,18 @@ function initTimeline(root, onOpenDetail) {
   function rulerSVG(topY) {
     const marks = buildMarks();
     return marks
-      .map((y) => {
+      .map((y, i) => {
         const xPos = x(y);
         const label = y === domainEnd ? "Today" : String(y);
+        // First/last marks sit right at the chart's edges — a centered
+        // label there would have half its text clipped by the SVG bounds,
+        // which is exactly what was cutting "Today" off. Anchor those two
+        // outward from the edge instead; every mark in between stays centered.
+        const anchor = i === 0 ? "start" : i === marks.length - 1 ? "end" : "middle";
+        const labelX = anchor === "start" ? xPos + 3 : anchor === "end" ? xPos - 3 : xPos;
         return `
         <line x1="${xPos}" y1="${topY}" x2="${xPos}" y2="${svgHeight - BOTTOM_PAD}" class="tl-gridline" />
-        <text x="${xPos}" y="${topY - 6}" class="tl-mark-label" text-anchor="middle">${label}</text>
+        <text x="${labelX}" y="${topY - 6}" class="tl-mark-label" text-anchor="${anchor}">${label}</text>
       `;
       })
       .join("");
@@ -82,9 +88,21 @@ function initTimeline(root, onOpenDetail) {
 
     const start = Math.max(item.timelineStart, domainStart);
     const end = item.timelineEnd === null ? domainEnd : item.timelineEnd;
-    const barX = x(start);
-    const rawWidth = x(end) - barX;
-    const barWidth = Math.max(rawWidth, MIN_BAR_PX);
+    const trueStartX = x(start);
+    const trueWidth = x(end) - trueStartX;
+    // A very short span (e.g. Geometric Sans, 5 years) can round to a
+    // sliver under the minimum clickable/visible width. Pad it out
+    // symmetrically around its true midpoint rather than anchoring the
+    // padding at the start, so the bar doesn't visually overshoot its
+    // real end date.
+    let barX = trueStartX;
+    let barWidth = trueWidth;
+    if (trueWidth < MIN_BAR_PX) {
+      const mid = trueStartX + trueWidth / 2;
+      barX = mid - MIN_BAR_PX / 2;
+      barWidth = MIN_BAR_PX;
+    }
+
     const ongoing = item.timelineEnd === null;
     const yearLabel = ongoing ? `${item.timelineStart} – present` : `${item.timelineStart} – ${item.timelineEnd}`;
 
@@ -101,6 +119,27 @@ function initTimeline(root, onOpenDetail) {
     const branchTextW = textWidth(branchLabel, branchFont);
     const branchPillW = branchTextW + 12;
 
+    const rightEdge = barX + barWidth;
+    const fitsOutsideRight = rightEdge + 8 + labelW <= svgWidth - 4;
+    const chartLeftEdge = LABEL_WIDTH + 6;
+
+    let labelSVG;
+    let pinSVG = "";
+    if (fitsInside) {
+      labelSVG = `<text x="${barX + 7}" y="${rowCenter + 3.5}" class="tl-bar-label-inside" pointer-events="none">${yearLabel}</text>`;
+    } else if (fitsOutsideRight) {
+      const pinX = rightEdge + 4;
+      pinSVG = `<circle cx="${pinX}" cy="${rowCenter}" r="1.8" class="tl-bar-pin" />`;
+      labelSVG = `<text x="${pinX + 4}" y="${rowCenter + 3.5}" class="tl-bar-label-outside" pointer-events="none">${yearLabel}</text>`;
+    } else {
+      // Not enough room to the right (e.g. bars clustered near the chart's
+      // own right edge) — flip the label to the left of the bar instead of
+      // letting it run off the edge and get clipped.
+      const pinX = Math.max(barX - 4, chartLeftEdge + labelW);
+      pinSVG = `<circle cx="${pinX}" cy="${rowCenter}" r="1.8" class="tl-bar-pin" />`;
+      labelSVG = `<text x="${pinX - 4}" y="${rowCenter + 3.5}" class="tl-bar-label-outside" text-anchor="end" pointer-events="none">${yearLabel}</text>`;
+    }
+
     return `
       <g class="tl-row">
         <text x="4" y="${rowCenter - 3}" class="tl-row-name">${item.name}</text>
@@ -111,11 +150,8 @@ function initTimeline(root, onOpenDetail) {
           x="${barX}" y="${barY}" width="${barWidth}" height="${barH}" rx="4" fill="${fill}">
           <title>${item.name}: ${yearLabel}</title>
         </rect>
-        ${
-          fitsInside
-            ? `<text x="${barX + 7}" y="${rowCenter + 3.5}" class="tl-bar-label-inside" pointer-events="none">${yearLabel}</text>`
-            : `<text x="${barX + barWidth + 6}" y="${rowCenter + 3.5}" class="tl-bar-label-outside" pointer-events="none">${yearLabel}</text>`
-        }
+        ${pinSVG}
+        ${labelSVG}
       </g>
     `;
   }

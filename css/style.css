@@ -853,6 +853,10 @@ main.wrap {
   fill: var(--ink-soft);
 }
 
+.tl-bar-pin {
+  fill: var(--accent);
+}
+
 /* ---------- compare ---------- */
 
 .compare-picker {
