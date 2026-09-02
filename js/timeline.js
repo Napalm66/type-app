@@ -12,11 +12,41 @@ function initTimeline(root, onOpenDetail) {
   // simply stops there rather than inventing a label for the remaining
   // domain.
   const ART_PERIODS = [
-    { name: "Romanesque", start: 1000, end: 1150, color: "rgba(150, 130, 90, 0.3)" },
-    { name: "Gothic", start: 1150, end: 1450, color: "rgba(139, 58, 58, 0.3)" },
-    { name: "Renaissance", start: 1450, end: 1600, color: "rgba(138, 155, 110, 0.3)" },
-    { name: "Baroque", start: 1600, end: 1750, color: "rgba(176, 120, 79, 0.3)" },
-    { name: "Classicism", start: 1750, end: 1820, color: "rgba(91, 114, 144, 0.3)" },
+    {
+      name: "Romanesque",
+      start: 1000,
+      end: 1150,
+      color: "rgba(150, 130, 90, 0.3)",
+      description: "Pre-printing press era. Marked by Carolingian minuscule and rounded, thick manuscript lettering.",
+    },
+    {
+      name: "Gothic",
+      start: 1150,
+      end: 1450,
+      color: "rgba(139, 58, 58, 0.3)",
+      description: "Heavy, dark, and condensed manuscript lettering. Evolves into Blackletter (Textura), the typeface Gutenberg used for the first printing press in 1450.",
+    },
+    {
+      name: "Renaissance",
+      start: 1450,
+      end: 1600,
+      color: "rgba(138, 155, 110, 0.3)",
+      description: "The birth of Roman type (Humanist and Old Style/Garalde). Features lighter, highly legible letterforms inspired by classical Roman inscriptions and Italian handwriting.",
+    },
+    {
+      name: "Baroque",
+      start: 1600,
+      end: 1750,
+      color: "rgba(176, 120, 79, 0.3)",
+      description: "Transitional type. Features higher contrast between thick and thin strokes, more vertical axes, and sharper serifs (e.g., Baskerville, Caslon).",
+    },
+    {
+      name: "Classicism",
+      start: 1750,
+      end: 1820,
+      color: "rgba(91, 114, 144, 0.3)",
+      description: "Modern type (Didone). Characterized by extreme contrast between hair-thin and thick lines, vertical stress, and unbracketed, flat serifs (e.g., Bodoni, Didot).",
+    },
   ];
 
   // Everything — ruler, era band, and every bar — is drawn in this single
@@ -66,7 +96,7 @@ function initTimeline(root, onOpenDetail) {
   }
 
   function eraBandSVG(topY) {
-    return ART_PERIODS.map((era) => {
+    return ART_PERIODS.map((era, i) => {
       const left = x(era.start);
       const width = x(era.end) - left;
       const label = era.name.toUpperCase();
@@ -82,7 +112,7 @@ function initTimeline(root, onOpenDetail) {
       const anchor = fitsCentered ? "middle" : "start";
 
       return `
-        <g>
+        <g class="tl-era-group" data-era-index="${i}">
           <rect x="${left}" y="${topY}" width="${width}" height="22" fill="${era.color}" />
           <text x="${textX}" y="${topY + 14}" class="tl-era-label" text-anchor="${anchor}">${label}</text>
         </g>
@@ -213,6 +243,46 @@ function initTimeline(root, onOpenDetail) {
     svg.addEventListener("click", (e) => {
       const bar = e.target.closest("[data-id]");
       if (bar) onOpenDetail(bar.dataset.id);
+    });
+
+    attachEraTooltips(svg);
+  }
+
+  function attachEraTooltips(svg) {
+    document.querySelectorAll(".tl-era-tooltip").forEach((el) => el.remove());
+
+    const tooltip = document.createElement("div");
+    tooltip.className = "tl-era-tooltip";
+    document.body.appendChild(tooltip);
+
+    function place(target) {
+      const era = ART_PERIODS[Number(target.dataset.eraIndex)];
+      if (!era) return;
+      tooltip.innerHTML = `<strong>${era.name}</strong>${era.description}`;
+
+      const rect = target.getBoundingClientRect();
+      tooltip.classList.add("is-visible");
+      // Measure after making it visible (but still 0 height/width won't
+      // matter — offsetWidth/Height are read after content + class are set).
+      const ttRect = tooltip.getBoundingClientRect();
+      let left = rect.left + rect.width / 2 - ttRect.width / 2;
+      left = Math.max(8, Math.min(left, window.innerWidth - ttRect.width - 8));
+      let top = rect.top - ttRect.height - 10;
+      let arrowBelow = false;
+      if (top < 8) {
+        top = rect.bottom + 10;
+        arrowBelow = true;
+      }
+      tooltip.style.left = left + "px";
+      tooltip.style.top = top + "px";
+      tooltip.classList.toggle("arrow-top", arrowBelow);
+      tooltip.classList.toggle("arrow-bottom", !arrowBelow);
+      tooltip.style.setProperty("--arrow-x", rect.left + rect.width / 2 - left + "px");
+    }
+
+    svg.querySelectorAll(".tl-era-group").forEach((group) => {
+      group.addEventListener("mouseenter", () => place(group));
+      group.addEventListener("mouseleave", () => tooltip.classList.remove("is-visible"));
     });
   }
 

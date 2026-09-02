@@ -966,6 +966,70 @@ main.wrap {
   fill: var(--ink);
 }
 
+.tl-era-group {
+  cursor: help;
+}
+
+.tl-era-group rect {
+  transition: filter 0.15s ease;
+}
+
+.tl-era-group:hover rect {
+  filter: brightness(0.92);
+}
+
+.tl-era-tooltip {
+  position: fixed;
+  z-index: 250;
+  max-width: 230px;
+  background: var(--paper-raised);
+  border: 1px solid var(--rule);
+  border-radius: 8px;
+  box-shadow: var(--shadow);
+  padding: 0.65rem 0.8rem;
+  font-family: var(--font-ui);
+  font-size: 0.78rem;
+  line-height: 1.45;
+  color: var(--ink-soft);
+  pointer-events: none;
+  opacity: 0;
+  transform: translateY(4px);
+  transition: opacity 0.14s ease, transform 0.14s ease;
+}
+
+.tl-era-tooltip.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.tl-era-tooltip strong {
+  display: block;
+  font-size: 0.7rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--accent);
+  margin-bottom: 0.3rem;
+}
+
+.tl-era-tooltip::after {
+  content: "";
+  position: absolute;
+  left: var(--arrow-x, 50%);
+  transform: translateX(-50%);
+  border: 6px solid transparent;
+}
+
+.tl-era-tooltip.arrow-bottom::after {
+  top: 100%;
+  border-top-color: var(--paper-raised);
+}
+
+.tl-era-tooltip.arrow-top::after {
+  bottom: 100%;
+  border-bottom-color: var(--paper-raised);
+}
+
 .tl-mark-label {
   font-family: var(--font-ui);
   font-size: 10px;
