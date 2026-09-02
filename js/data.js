@@ -288,7 +288,7 @@ function googleFontsHref() {
   return `https://fonts.googleapis.com/css2?${families}&display=swap`;
 }
 
-const TIMELINE_DOMAIN_START = 1150;
+const TIMELINE_DOMAIN_START = 1000;
 const TIMELINE_DOMAIN_END = new Date().getFullYear();
 
 function formatTimelineYear(year) {

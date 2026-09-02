@@ -7,12 +7,12 @@ function initTimeline(root, onOpenDetail) {
   // Each period's onset year marks where its band starts and the prior
   // one ends (their canonical ranges actually overlap by decades, since
   // style transitions are gradual, not cutoffs — using onset years keeps
-  // the bands sequential and non-overlapping for this chart). Romanesque
-  // (c. 1000–1150) precedes this chart's domain (1150–present) entirely,
-  // so it's left out. Classicism's canonical range ends at 1820 with
-  // nothing named after it, so the band simply stops there rather than
-  // inventing a label for the remaining domain.
+  // the bands sequential and non-overlapping for this chart). Classicism's
+  // canonical range ends at 1820 with nothing named after it, so the band
+  // simply stops there rather than inventing a label for the remaining
+  // domain.
   const ART_PERIODS = [
+    { name: "Romanesque", start: 1000, end: 1150, color: "rgba(150, 130, 90, 0.3)" },
     { name: "Gothic", start: 1150, end: 1450, color: "rgba(139, 58, 58, 0.3)" },
     { name: "Renaissance", start: 1450, end: 1600, color: "rgba(138, 155, 110, 0.3)" },
     { name: "Baroque", start: 1600, end: 1750, color: "rgba(176, 120, 79, 0.3)" },
@@ -55,11 +55,22 @@ function initTimeline(root, onOpenDetail) {
     return ART_PERIODS.map((era) => {
       const left = x(era.start);
       const width = x(era.end) - left;
-      const labelFits = textWidth(era.name, "700 9px Inter, sans-serif") + 10 <= width;
+      const label = era.name.toUpperCase();
+      const font = "700 9px Inter, sans-serif";
+      const labelW = textWidth(label, font);
+
+      // A narrow segment (Classicism, ~70yr) can't fit its label centered.
+      // Rather than hide it, left-align starting inside the segment — the
+      // text can spill into whatever's next (blank space past the last
+      // segment, or a neighboring band) instead of disappearing entirely.
+      const fitsCentered = labelW + 10 <= width;
+      const textX = fitsCentered ? left + width / 2 : left + 4;
+      const anchor = fitsCentered ? "middle" : "start";
+
       return `
         <g>
           <rect x="${left}" y="${topY}" width="${width}" height="22" fill="${era.color}" />
-          ${labelFits ? `<text x="${left + width / 2}" y="${topY + 14}" class="tl-era-label" text-anchor="middle">${era.name.toUpperCase()}</text>` : ""}
+          <text x="${textX}" y="${topY + 14}" class="tl-era-label" text-anchor="${anchor}">${label}</text>
         </g>
       `;
     }).join("");
