@@ -9,6 +9,7 @@ function initDetail(overlayRoot, panelRoot) {
     overlayRoot.classList.remove("is-open");
     overlayRoot.setAttribute("aria-hidden", "true");
     panelRoot.innerHTML = "";
+    removeExistingLens();
   }
 
   async function open(id) {
@@ -50,7 +51,7 @@ function initDetail(overlayRoot, panelRoot) {
       ${tellHTML}
       ${subStylesHTML}
       <p class="key-typefaces"><b>Reference typefaces:</b> ${item.keyTypefaces.join(", ")}</p>
-      <div class="anatomy-heading">Anatomy</div>
+      <div class="anatomy-heading">Anatomy <span class="anatomy-hint">hover the diagram to zoom in</span></div>
       <div class="anatomy-loading" id="anatomy-slot">Measuring glyph metrics…</div>
     `;
 
@@ -62,6 +63,9 @@ function initDetail(overlayRoot, panelRoot) {
     const html = await buildAnatomyHTML(item);
     if (slot && document.contains(slot)) {
       slot.outerHTML = html;
+      const wrap = panelRoot.querySelector(".anatomy-svg-wrap");
+      const svg = wrap ? wrap.querySelector("svg") : null;
+      attachMagnifier(wrap, svg);
     }
   }
 
