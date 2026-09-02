@@ -58,6 +58,7 @@ function initTimeline(root, onOpenDetail) {
     },
     {
       name: "Modernism",
+      tooltipName: "Modernism (Bauhaus & Swiss)",
       start: 1910,
       end: 1970,
       color: "rgba(90, 100, 110, 0.3)",
@@ -65,6 +66,7 @@ function initTimeline(root, onOpenDetail) {
     },
     {
       name: "Postmodernism",
+      tooltipName: "Postmodernism / Punk / Grunge",
       start: 1970,
       end: 2000,
       color: "rgba(160, 80, 100, 0.3)",
@@ -84,7 +86,7 @@ function initTimeline(root, onOpenDetail) {
   // SVG children don't participate in sticky positioning the way HTML
   // block elements do). The chart's own SVG coordinate space now starts
   // at x=0 instead of being offset by a label column drawn inside it.
-  const CHART_WIDTH = 3200;
+  const CHART_WIDTH = 4800;
   const ROW_HEIGHT = 32;
   const HEADER_HEIGHT = 62;
   const TOP_PAD = 8;
@@ -270,7 +272,21 @@ function initTimeline(root, onOpenDetail) {
     `;
   }
 
-  function render() {
+  async function render() {
+    // All the fit/collision decisions above depend on canvas text
+    // measurement being accurate. If the Inter webfont hasn't finished
+    // loading yet, ctx.font silently falls back to a system font with
+    // different (usually wider) character widths — measured the actual
+    // gap once: ~3.4px on "DIGITAL & VARIABLE AGE", which was exactly
+    // enough to flip a borderline fit check to false. Wait for fonts
+    // before measuring anything, rather than risk baking in wrong widths
+    // from whatever font happened to be available at load time.
+    try {
+      await document.fonts.ready;
+    } catch (e) {
+      // font loading API unavailable — proceed with best-effort metrics
+    }
+
     const eraTop = TOP_PAD;
     const rulerTop = eraTop + 22 + 18;
 
@@ -319,7 +335,7 @@ function initTimeline(root, onOpenDetail) {
     function place(target) {
       const era = ART_PERIODS[Number(target.dataset.eraIndex)];
       if (!era) return;
-      tooltip.innerHTML = `<strong>${era.name}</strong>${era.description}`;
+      tooltip.innerHTML = `<strong>${era.tooltipName || era.name}</strong>${era.description}`;
 
       const rect = target.getBoundingClientRect();
       tooltip.classList.add("is-visible");
