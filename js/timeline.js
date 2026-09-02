@@ -60,7 +60,7 @@ function initTimeline(root, onOpenDetail) {
   // SVG's coordinate space via x(year), so nothing can drift out of sync
   // with anything else the way separately-positioned HTML elements could.
   const LABEL_WIDTH = 180;
-  const CHART_WIDTH = 760;
+  const CHART_WIDTH = 1150;
   const ROW_HEIGHT = 32;
   const HEADER_HEIGHT = 62;
   const TOP_PAD = 8;
