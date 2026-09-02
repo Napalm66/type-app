@@ -10,9 +10,9 @@ function initTimeline(root, onOpenDetail) {
   // the bands sequential and non-overlapping for this chart). Consecutive
   // periods aren't always contiguous either — Romanticism ends at 1900 and
   // Modernism doesn't begin until 1910, so that decade is left as an
-  // honest gap rather than stretched to fit. Modernism's own range ends
-  // at 1970 with nothing named after it, so the band simply stops there
-  // rather than inventing a label for the remaining domain.
+  // honest gap rather than stretched to fit. Digital & Variable Age's end
+  // is domainEnd itself (today), so it always reaches the chart's right
+  // edge rather than needing a hardcoded year that goes stale.
   const ART_PERIODS = [
     {
       name: "Romanesque",
@@ -63,24 +63,39 @@ function initTimeline(root, onOpenDetail) {
       color: "rgba(90, 100, 110, 0.3)",
       description: "The era of “form follows function.” Strips away ornament in favour of geometric and Neo-Grotesque sans-serifs (like Helvetica and Univers). Focuses on strict grids, asymmetry, and high legibility.",
     },
+    {
+      name: "Postmodernism",
+      start: 1970,
+      end: 2000,
+      color: "rgba(160, 80, 100, 0.3)",
+      description: "A rebellion against rigid modernist rules. Characters are distorted, layered, and chaotic. Photocomposition and early digital tools allow for experimental, “deconstructed” type.",
+    },
+    {
+      name: "Digital & Variable Age",
+      start: 2000,
+      end: domainEnd,
+      color: "rgba(80, 120, 130, 0.3)",
+      description: "Maximized flexibility for screens. Marked by the rise of Variable Fonts (where one font file holds endless weight and width variations), responsive typography, and minimalist web-safe type design.",
+    },
   ];
 
-  // Everything — ruler, era band, and every bar — is drawn in this single
-  // SVG's coordinate space via x(year), so nothing can drift out of sync
-  // with anything else the way separately-positioned HTML elements could.
-  const LABEL_WIDTH = 180;
-  const CHART_WIDTH = 1150;
+  // The row-label column is a separate, non-scrolling HTML panel (a plain
+  // flex sibling of the scrollable chart, not a "position: sticky" hack —
+  // SVG children don't participate in sticky positioning the way HTML
+  // block elements do). The chart's own SVG coordinate space now starts
+  // at x=0 instead of being offset by a label column drawn inside it.
+  const CHART_WIDTH = 3200;
   const ROW_HEIGHT = 32;
   const HEADER_HEIGHT = 62;
   const TOP_PAD = 8;
   const BOTTOM_PAD = 8;
   const MIN_BAR_PX = 10;
 
-  const svgWidth = LABEL_WIDTH + CHART_WIDTH;
+  const svgWidth = CHART_WIDTH;
   const svgHeight = HEADER_HEIGHT + CLASSIFICATIONS.length * ROW_HEIGHT + TOP_PAD + BOTTOM_PAD;
 
   function x(year) {
-    return LABEL_WIDTH + ((year - domainStart) / span) * CHART_WIDTH;
+    return ((year - domainStart) / span) * CHART_WIDTH;
   }
 
   let measureCtx = null;
@@ -204,14 +219,9 @@ function initTimeline(root, onOpenDetail) {
     const barH = 18;
     const fill = ongoing ? "url(#tlOngoingFade)" : "var(--accent)";
 
-    const branchLabel = BRANCH_LABELS[item.branch];
-    const branchFont = "700 8px Inter, sans-serif";
-    const branchTextW = textWidth(branchLabel, branchFont);
-    const branchPillW = branchTextW + 12;
-
     const rightEdge = barX + barWidth;
     const fitsOutsideRight = rightEdge + 8 + labelW <= svgWidth - 4;
-    const chartLeftEdge = LABEL_WIDTH + 6;
+    const chartLeftEdge = 6;
 
     let labelSVG;
     let pinSVG = "";
@@ -232,10 +242,6 @@ function initTimeline(root, onOpenDetail) {
 
     return `
       <g class="tl-row">
-        <text x="4" y="${rowCenter - 3}" class="tl-row-name">${item.name}</text>
-        <rect x="4" y="${rowCenter + 2}" width="${branchPillW}" height="13" rx="6.5" class="tl-branch-pill" />
-        <text x="${4 + branchPillW / 2}" y="${rowCenter + 11}" class="tl-branch-label" text-anchor="middle">${branchLabel.toUpperCase()}</text>
-
         <rect class="tl-bar ${ongoing ? "is-ongoing" : ""}" data-id="${item.id}"
           x="${barX}" y="${barY}" width="${barWidth}" height="${barH}" rx="4" fill="${fill}">
           <title>${item.name}: ${yearLabel}</title>
@@ -246,28 +252,47 @@ function initTimeline(root, onOpenDetail) {
     `;
   }
 
+  function labelColHTML() {
+    const rows = CLASSIFICATIONS.map((item) => {
+      const branchLabel = BRANCH_LABELS[item.branch];
+      return `
+        <button class="timeline-label-row" data-id="${item.id}">
+          <span class="timeline-label-name">${item.name}</span>
+          <span class="timeline-label-branch">${branchLabel.toUpperCase()}</span>
+        </button>
+      `;
+    }).join("");
+    return `
+      <div class="timeline-label-col">
+        <div class="timeline-label-header" style="height:${HEADER_HEIGHT + TOP_PAD}px"></div>
+        ${rows}
+      </div>
+    `;
+  }
+
   function render() {
     const eraTop = TOP_PAD;
     const rulerTop = eraTop + 22 + 18;
 
     root.innerHTML = `
-      <div class="timeline-wrap">
-        <svg class="timeline-svg" viewBox="0 0 ${svgWidth} ${svgHeight}" width="${svgWidth}" height="${svgHeight}" role="img" aria-label="Timeline of type classifications">
-          <defs>
-            <linearGradient id="tlOngoingFade" x1="0" y1="0" x2="1" y2="0">
-              <stop offset="0%" style="stop-color:var(--accent); stop-opacity:1" />
-              <stop offset="70%" style="stop-color:var(--accent); stop-opacity:1" />
-              <stop offset="100%" style="stop-color:var(--accent); stop-opacity:0.35" />
-            </linearGradient>
-          </defs>
+      <div class="timeline-frozen-wrap">
+        ${labelColHTML()}
+        <div class="timeline-scroll-area">
+          <svg class="timeline-svg" viewBox="0 0 ${svgWidth} ${svgHeight}" width="${svgWidth}" height="${svgHeight}" role="img" aria-label="Timeline of type classifications">
+            <defs>
+              <linearGradient id="tlOngoingFade" x1="0" y1="0" x2="1" y2="0">
+                <stop offset="0%" style="stop-color:var(--accent); stop-opacity:1" />
+                <stop offset="70%" style="stop-color:var(--accent); stop-opacity:1" />
+                <stop offset="100%" style="stop-color:var(--accent); stop-opacity:0.35" />
+              </linearGradient>
+            </defs>
 
-          <line x1="${LABEL_WIDTH}" y1="0" x2="${LABEL_WIDTH}" y2="${svgHeight}" class="tl-divider" />
+            ${eraBandSVG(eraTop)}
+            ${rulerSVG(rulerTop)}
 
-          ${eraBandSVG(eraTop)}
-          ${rulerSVG(rulerTop)}
-
-          ${CLASSIFICATIONS.map(rowSVG).join("")}
-        </svg>
+            ${CLASSIFICATIONS.map(rowSVG).join("")}
+          </svg>
+        </div>
       </div>
     `;
 
@@ -275,6 +300,10 @@ function initTimeline(root, onOpenDetail) {
     svg.addEventListener("click", (e) => {
       const bar = e.target.closest("[data-id]");
       if (bar) onOpenDetail(bar.dataset.id);
+    });
+
+    root.querySelectorAll(".timeline-label-row").forEach((rowBtn) => {
+      rowBtn.addEventListener("click", () => onOpenDetail(rowBtn.dataset.id));
     });
 
     attachEraTooltips(svg);

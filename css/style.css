@@ -941,21 +941,80 @@ main.wrap {
 
 /* ---------- timeline ---------- */
 
-.timeline-wrap {
-  overflow-x: auto;
-  padding: 1rem clamp(0.75rem, 3vw, 1.5rem);
+.timeline-frozen-wrap {
+  display: flex;
+  align-items: stretch;
   border: 1px solid var(--rule);
   border-radius: var(--radius);
   background: var(--paper-raised);
+  overflow: hidden;
+}
+
+.timeline-label-col {
+  flex-shrink: 0;
+  width: 168px;
+  padding: 16px 8px 16px 12px;
+  box-sizing: border-box;
+  border-right: 1px solid var(--rule);
+  background: var(--paper-raised);
+  z-index: 1;
+}
+
+.timeline-label-header {
+  flex-shrink: 0;
+}
+
+.timeline-label-row {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 3px;
+  height: 32px;
+  width: 100%;
+  padding: 0;
+  background: none;
+  border: none;
+  text-align: left;
+  cursor: pointer;
+  font-family: inherit;
+}
+
+.timeline-label-row:hover .timeline-label-name {
+  color: var(--accent);
+}
+
+.timeline-label-name {
+  font-family: var(--font-ui);
+  font-size: 11.5px;
+  font-weight: 700;
+  color: var(--ink);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  transition: color 0.15s ease;
+}
+
+.timeline-label-branch {
+  align-self: flex-start;
+  font-family: var(--font-ui);
+  font-size: 7.5px;
+  font-weight: 700;
+  letter-spacing: 0.03em;
+  color: var(--accent);
+  background: color-mix(in srgb, var(--accent) 12%, transparent);
+  padding: 1px 5px;
+  border-radius: 6px;
+}
+
+.timeline-scroll-area {
+  flex: 1;
+  min-width: 0;
+  overflow-x: auto;
+  padding: 16px clamp(0.75rem, 3vw, 1.5rem) 16px 10px;
 }
 
 .timeline-svg {
   display: block;
-}
-
-.tl-divider {
-  stroke: var(--rule);
-  stroke-width: 1;
 }
 
 .tl-era-label {
@@ -1040,25 +1099,6 @@ main.wrap {
 .tl-gridline {
   stroke: var(--rule);
   stroke-width: 1;
-}
-
-.tl-row-name {
-  font-family: var(--font-ui);
-  font-size: 11.5px;
-  font-weight: 700;
-  fill: var(--ink);
-}
-
-.tl-branch-pill {
-  fill: color-mix(in srgb, var(--accent) 12%, transparent);
-}
-
-.tl-branch-label {
-  font-family: var(--font-ui);
-  font-size: 7.5px;
-  font-weight: 700;
-  letter-spacing: 0.03em;
-  fill: var(--accent);
 }
 
 .tl-bar {
