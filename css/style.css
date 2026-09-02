@@ -16,12 +16,27 @@
   --shadow: 0 1px 2px rgba(28, 26, 21, 0.06), 0 8px 24px -12px rgba(28, 26, 21, 0.18);
 }
 
+@media (prefers-color-scheme: dark) {
+  :root {
+    --paper: #17150f;
+    --paper-raised: #211e17;
+    --ink: #f2ede0;
+    --ink-soft: #b8ae98;
+    --ink-faint: #7d7562;
+    --rule: #38342a;
+    --accent: #d9714a;
+    --accent-soft: #4a3324;
+    --focus: #f2ede0;
+    --shadow: 0 1px 2px rgba(0, 0, 0, 0.3), 0 8px 24px -12px rgba(0, 0, 0, 0.5);
+  }
+}
+
 * {
   box-sizing: border-box;
 }
 
 html {
-  color-scheme: light;
+  color-scheme: light dark;
 }
 
 body {
