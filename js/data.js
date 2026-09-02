@@ -8,7 +8,7 @@ const CLASSIFICATIONS = [
     branch: "blackletter",
     name: "Blackletter",
     era: "c. 1150 – 1500",
-    timelineStart: 1450,
+    timelineStart: 1150,
     timelineEnd: 1500,
     tagline: "The angular hand of medieval scribes, cut into the first metal type.",
     description:
@@ -288,7 +288,7 @@ function googleFontsHref() {
   return `https://fonts.googleapis.com/css2?${families}&display=swap`;
 }
 
-const TIMELINE_DOMAIN_START = 1450;
+const TIMELINE_DOMAIN_START = 1150;
 const TIMELINE_DOMAIN_END = new Date().getFullYear();
 
 function formatTimelineYear(year) {

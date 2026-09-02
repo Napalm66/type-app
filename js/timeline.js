@@ -4,14 +4,17 @@ function initTimeline(root, onOpenDetail) {
   const span = domainEnd - domainStart;
   const MIN_WIDTH_PCT = 1.4;
 
-  // Broader art-historical backdrop the classifications emerged against.
-  // Trimmed to this chart's domain (1450–present) — Romanesque and Gothic
-  // precede it entirely, same reasoning as why Blackletter's own bar starts
-  // at Gutenberg's press rather than 12th-century manuscript hands.
+  // Broader art-historical backdrop the classifications emerged against,
+  // boundaries measured pixel-for-pixel off the reference deck's own
+  // timeline slide (century-tick calibrated). Romanesque precedes this
+  // chart's domain (1150–present) entirely, so it's left out — same
+  // reasoning as why the domain starts at Blackletter's own earliest year
+  // rather than further back.
   const ART_PERIODS = [
-    { name: "Renaissance", start: 1450, end: 1600, color: "rgba(138, 155, 110, 0.3)" },
-    { name: "Baroque", start: 1600, end: 1700, color: "rgba(176, 120, 79, 0.3)" },
-    { name: "Classicism →", start: 1700, end: domainEnd, color: "rgba(91, 114, 144, 0.3)" },
+    { name: "Gothic", start: 1150, end: 1400, color: "rgba(139, 58, 58, 0.3)" },
+    { name: "Renaissance", start: 1400, end: 1550, color: "rgba(138, 155, 110, 0.3)" },
+    { name: "Baroque", start: 1550, end: 1650, color: "rgba(176, 120, 79, 0.3)" },
+    { name: "Classicism →", start: 1650, end: domainEnd, color: "rgba(91, 114, 144, 0.3)" },
   ];
 
   function pct(year) {
@@ -33,7 +36,7 @@ function initTimeline(root, onOpenDetail) {
 
   function buildMarks() {
     const marks = [];
-    for (let y = 1450; y < domainEnd; y += 50) marks.push(y);
+    for (let y = domainStart; y < domainEnd; y += 100) marks.push(y);
     marks.push(domainEnd);
     return marks;
   }
