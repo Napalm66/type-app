@@ -7,6 +7,8 @@
   --rule: #d9d3c1;
   --accent: #a8391f;
   --accent-soft: #d9c9a8;
+  --success: #4a7a4f;
+  --success-soft: #dce7d9;
   --focus: #1c1a15;
 
   --font-ui: "Inter", system-ui, -apple-system, sans-serif;
@@ -26,6 +28,8 @@
     --rule: #38342a;
     --accent: #d9714a;
     --accent-soft: #4a3324;
+    --success: #7bab7f;
+    --success-soft: #2a3a2b;
     --focus: #f2ede0;
     --shadow: 0 1px 2px rgba(0, 0, 0, 0.3), 0 8px 24px -12px rgba(0, 0, 0, 0.5);
   }
@@ -770,6 +774,169 @@ main.wrap {
 .quiz-trail span {
   color: var(--ink-soft);
   font-weight: 600;
+}
+
+/* ---------- practice ---------- */
+
+.practice-card {
+  animation: fade-in 0.2s ease;
+}
+
+.practice-meta {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: var(--ink-faint);
+  margin-bottom: 1.25rem;
+}
+
+.practice-score {
+  color: var(--ink-soft);
+}
+
+.practice-specimen {
+  line-height: 1.15;
+  padding: 1.5rem 0;
+  border-top: 1px solid var(--rule);
+  border-bottom: 1px solid var(--rule);
+  margin-bottom: 1rem;
+  min-height: 4.5rem;
+  display: flex;
+  align-items: center;
+  word-break: break-word;
+}
+
+.practice-hint {
+  color: var(--ink-soft);
+  font-size: 0.9rem;
+  margin: 0 0 1rem;
+}
+
+.practice-options {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 0.6rem;
+}
+
+.practice-option {
+  text-align: left;
+  background: var(--paper);
+  border: 1px solid var(--rule);
+  border-radius: 8px;
+  padding: 0.75rem 0.9rem;
+  cursor: pointer;
+  font-family: var(--font-ui);
+  font-weight: 700;
+  font-size: 0.88rem;
+  color: var(--ink);
+  transition: border-color 0.15s ease, background 0.15s ease, opacity 0.15s ease;
+}
+
+.practice-option:hover:not(:disabled) {
+  border-color: var(--accent);
+}
+
+.practice-option:focus-visible {
+  outline: 2px solid var(--focus);
+  outline-offset: 2px;
+}
+
+.practice-option:disabled {
+  cursor: default;
+}
+
+.practice-option.is-correct {
+  background: var(--success-soft);
+  border-color: var(--success);
+  color: var(--success);
+}
+
+.practice-option.is-incorrect {
+  background: color-mix(in srgb, var(--accent) 12%, var(--paper));
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+.practice-option.is-disabled {
+  opacity: 0.5;
+}
+
+.practice-feedback {
+  margin-top: 1.25rem;
+  padding: 0.9rem 1rem;
+  border-radius: 8px;
+  border-left: 3px solid var(--accent);
+  background: color-mix(in srgb, var(--accent) 8%, var(--paper));
+}
+
+.practice-feedback.is-correct {
+  border-left-color: var(--success);
+  background: color-mix(in srgb, var(--success) 10%, var(--paper));
+}
+
+.practice-feedback-label {
+  font-size: 0.72rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--accent);
+  margin-bottom: 0.3rem;
+}
+
+.practice-feedback.is-correct .practice-feedback-label {
+  color: var(--success);
+}
+
+.practice-feedback-text {
+  font-size: 0.88rem;
+  color: var(--ink-soft);
+  margin: 0;
+}
+
+.practice-next {
+  margin-top: 1.25rem;
+  background: var(--ink);
+  color: var(--paper);
+  border: none;
+  border-radius: 8px;
+  padding: 0.7rem 1.2rem;
+  font-family: var(--font-ui);
+  font-weight: 700;
+  font-size: 0.9rem;
+  cursor: pointer;
+}
+
+.practice-next:hover {
+  filter: brightness(1.15);
+}
+
+.practice-summary {
+  text-align: center;
+  padding-top: 2rem;
+  padding-bottom: 2rem;
+}
+
+.practice-summary-label {
+  font-size: 0.78rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--ink-faint);
+  margin-bottom: 0.5rem;
+}
+
+.practice-summary-score {
+  font-family: var(--font-display);
+  font-size: 3rem;
+  font-weight: 600;
+}
+
+.practice-summary-detail {
+  color: var(--ink-soft);
+  font-size: 0.9rem;
+  margin: 0.5rem 0 1.5rem;
 }
 
 /* ---------- timeline ---------- */

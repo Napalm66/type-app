@@ -36,6 +36,7 @@
       <nav class="tabs" role="tablist" aria-label="Sections">
         <button class="tab is-active" role="tab" aria-selected="true" data-view="explore">Explore</button>
         <button class="tab" role="tab" aria-selected="false" data-view="identify">Identify</button>
+        <button class="tab" role="tab" aria-selected="false" data-view="practice">Practice</button>
         <button class="tab" role="tab" aria-selected="false" data-view="timeline">Timeline</button>
         <button class="tab" role="tab" aria-selected="false" data-view="compare">Compare</button>
       </nav>
@@ -59,6 +60,14 @@
         <p>Answer a few questions about what you're looking at, and we'll narrow it down to a classification.</p>
       </div>
       <div id="identify-root"></div>
+    </section>
+
+    <section id="view-practice" class="view" aria-labelledby="practice-heading">
+      <div class="view-intro">
+        <h2 id="practice-heading">Practice</h2>
+        <p>A specimen, cold — no diagnostic hints. Pick the classification and build a streak.</p>
+      </div>
+      <div id="practice-root"></div>
     </section>
 
     <section id="view-timeline" class="view" aria-labelledby="timeline-heading">
@@ -95,6 +104,7 @@
   <script src="js/magnifier.js"></script>
   <script src="js/detail.js"></script>
   <script src="js/identify.js"></script>
+  <script src="js/practice.js"></script>
   <script src="js/timeline.js"></script>
   <script src="js/compare.js"></script>
   <script src="js/main.js"></script>
