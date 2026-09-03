@@ -7,12 +7,13 @@ function initTimeline(root, onOpenDetail) {
   // Each period's onset year marks where its band starts and the prior
   // one ends (their canonical ranges actually overlap by decades, since
   // style transitions are gradual, not cutoffs — using onset years keeps
-  // the bands sequential and non-overlapping for this chart). Consecutive
-  // periods aren't always contiguous either — Romanticism ends at 1900 and
-  // Modernism doesn't begin until 1910, so that decade is left as an
-  // honest gap rather than stretched to fit. Digital & Variable Age's end
-  // is domainEnd itself (today), so it always reaches the chart's right
-  // edge rather than needing a hardcoded year that goes stale.
+  // the bands sequential and non-overlapping for this chart). The
+  // 1900-1910 stretch between Romanticism and Modernism used to be left
+  // as an honest gap, but it's Art Nouveau's own well-documented span
+  // (c. 1890-1910) — filled in as its own band rather than stretching a
+  // neighbor to cover it. Digital & Variable Age's end is domainEnd
+  // itself (today), so it always reaches the chart's right edge rather
+  // than needing a hardcoded year that goes stale.
   const ART_PERIODS = [
     {
       name: "Romanesque",
@@ -55,6 +56,13 @@ function initTimeline(root, onOpenDetail) {
       end: 1900,
       color: "rgba(130, 90, 122, 0.3)",
       description: "The Industrial Revolution demands attention-grabbing type. Slab Serifs (Egyptians), Sans-Serifs (Grotesques), and heavily ornamented, decorative display fonts emerge for advertising.",
+    },
+    {
+      name: "Art Nouveau",
+      start: 1900,
+      end: 1910,
+      color: "rgba(175, 140, 60, 0.3)",
+      description: "A reaction against Victorian industrial excess, drawing on organic, flowing forms from nature. Typefaces like Eckmann and Auriol blur the line between lettering and illustration — whiplash curves, floral motifs, and stylized terminals define the era's display faces.",
     },
     {
       name: "Modernism",
