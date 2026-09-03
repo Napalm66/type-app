@@ -151,12 +151,11 @@ async function buildAnatomyHTML(item) {
   // actually measuring, not just stating it as a number below.
   const xHeightArrowX = padLeft - 7;
   const xHeightArrowMidY = (meanLineY + baselineY) / 2;
-  const xHeightLabelX = xHeightArrowX - 9;
   const xHeightArrowSVG = `
     <line x1="${xHeightArrowX}" y1="${meanLineY}" x2="${xHeightArrowX}" y2="${baselineY}" class="anatomy-xheight-arrow" />
     <line x1="${xHeightArrowX - 4}" y1="${meanLineY}" x2="${xHeightArrowX + 4}" y2="${meanLineY}" class="anatomy-xheight-arrow" />
     <line x1="${xHeightArrowX - 4}" y1="${baselineY}" x2="${xHeightArrowX + 4}" y2="${baselineY}" class="anatomy-xheight-arrow" />
-    <text x="${xHeightLabelX}" y="${xHeightArrowMidY}" class="anatomy-xheight-label" text-anchor="middle" dominant-baseline="middle" transform="rotate(-90 ${xHeightLabelX} ${xHeightArrowMidY})">X-HEIGHT</text>
+    <text x="${xHeightArrowX}" y="${xHeightArrowMidY}" class="anatomy-xheight-label" text-anchor="end" dominant-baseline="middle">x-height</text>
   `;
 
   // stress axis, illustrated on a small reference "o" beside the main word
