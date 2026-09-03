@@ -145,6 +145,16 @@ async function buildAnatomyHTML(item) {
 
   const xHeightPct = Math.round((metrics.xHeight / metrics.capHeight) * 100);
 
+  // Measurement arrow between the mean line (x-height) and baseline,
+  // just left of the specimen word — shows what the x-height % is
+  // actually measuring, not just stating it as a number below.
+  const xHeightArrowX = padLeft - 7;
+  const xHeightArrowSVG = `
+    <line x1="${xHeightArrowX}" y1="${meanLineY}" x2="${xHeightArrowX}" y2="${baselineY}" class="anatomy-xheight-arrow" />
+    <line x1="${xHeightArrowX - 4}" y1="${meanLineY}" x2="${xHeightArrowX + 4}" y2="${meanLineY}" class="anatomy-xheight-arrow" />
+    <line x1="${xHeightArrowX - 4}" y1="${baselineY}" x2="${xHeightArrowX + 4}" y2="${baselineY}" class="anatomy-xheight-arrow" />
+  `;
+
   // stress axis, illustrated on a small reference "o" beside the main word
   const axisDeg = item.diagnostics ? AXIS_ANGLES[item.diagnostics.axis] : null;
   let stressSVG = "";
@@ -178,6 +188,7 @@ async function buildAnatomyHTML(item) {
       <div class="anatomy-svg-wrap">
         <svg viewBox="0 0 ${svgWidth} ${svgHeight}" width="100%" height="${svgHeight}" role="img" aria-label="Anatomy diagram for ${item.name}">
           ${guideSVG}
+          ${xHeightArrowSVG}
           ${refOSVG}
           ${stressSVG}
           ${textSVG}

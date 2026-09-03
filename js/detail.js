@@ -167,6 +167,15 @@ function initDetail(overlayRoot, panelRoot) {
         </div>`
       : "";
 
+    const additionalFeaturesHTML = item.additionalFeatures
+      ? `<div class="additional-features">
+          <div class="additional-features-heading">Additional features</div>
+          <ul class="additional-features-list">
+            ${item.additionalFeatures.map((f) => `<li>${f}</li>`).join("")}
+          </ul>
+        </div>`
+      : "";
+
     panelRoot.innerHTML = `
       <button class="detail-close" aria-label="Close">&times;</button>
       <div class="detail-era">${item.era}</div>
@@ -181,6 +190,7 @@ function initDetail(overlayRoot, panelRoot) {
       <div class="anatomy-heading">Anatomy <span class="anatomy-hint">hover the diagram to zoom in</span></div>
       <div class="anatomy-loading" id="anatomy-slot">Measuring glyph metrics…</div>
       ${visualCharacteristicsHTML}
+      ${additionalFeaturesHTML}
     `;
 
     panelRoot.querySelector(".detail-close").addEventListener("click", close);

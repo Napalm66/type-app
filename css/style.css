@@ -508,6 +508,35 @@ main.wrap {
   color: var(--accent);
 }
 
+.additional-features {
+  margin-top: 1.25rem;
+  padding-top: 1rem;
+  border-top: 1px solid var(--rule);
+}
+
+.additional-features-heading {
+  font-size: 0.72rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--ink-faint);
+  margin-bottom: 0.6rem;
+}
+
+.additional-features-list {
+  margin: 0;
+  padding-left: 1.1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  font-size: 0.85rem;
+  color: var(--ink-soft);
+}
+
+.additional-features-list li {
+  padding-left: 0.15rem;
+}
+
 /* ---------- serif spectrum ---------- */
 
 .serif-spectrum {
@@ -725,6 +754,11 @@ main.wrap {
   stroke: var(--accent);
   stroke-width: 1.5;
   stroke-dasharray: 4 3;
+}
+
+.anatomy-xheight-arrow {
+  stroke: var(--accent);
+  stroke-width: 1.5;
 }
 
 .anatomy-stress-dot {

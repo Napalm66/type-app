@@ -51,6 +51,11 @@ const CLASSIFICATIONS = [
       { label: "Set width", text: "Characters tend to be moderate to wide." },
       { label: "Positive/Negative space", text: "Increased spacing and counters give a lighter overall appearance than Blackletters." },
     ],
+    additionalFeatures: [
+      "Based on handwriting styles of Italian medieval scribes",
+      "Characters tend to have organic, rounded shapes and medium-to-heavy calligraphic strokes",
+      "Lowercase \"e\" has a slanted bar",
+    ],
     keyTypefaces: ["Jenson", "Centaur", "Verona", "Golden Type"],
     fontStack: "'Cormorant Garamond', 'EB Garamond', serif",
     googleFont: "Cormorant Garamond:wght@500",
