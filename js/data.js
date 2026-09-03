@@ -104,13 +104,14 @@ const CLASSIFICATIONS = [
       tell: "Higher contrast than Garalde, but serifs still bracketed (not hairline) and axis close to vertical.",
     },
     keyTypefaces: ["Baskerville", "Times New Roman", "Georgia", "Mrs Eaves"],
-    // Libre Baskerville leads: a genuine Baskerville revival (based on
-    // the 1941 ATF Baskerville) that's an embedded web font, so it
-    // renders identically for every visitor — unlike a system-font-first
-    // stack (e.g. "Times New Roman"), which silently falls back on any
-    // device that doesn't have it installed (many Android/Linux setups).
-    fontStack: "'Libre Baskerville', 'PT Serif', serif",
-    googleFont: "Libre Baskerville",
+    // Tinos leads: a free, SIL-OFL metric-compatible match for Times New
+    // Roman (same brief as Arimo for Helvetica/Arial), self-hosted so it
+    // renders identically for every visitor — unlike referencing "Times
+    // New Roman" by name, which silently falls back on any device that
+    // doesn't have it installed (many Android/Linux setups), and unlike
+    // embedding the real Times New Roman, which its Monotype license
+    // doesn't permit redistributing on a public site.
+    fontStack: "'Tinos', 'Times New Roman', 'Liberation Serif', serif",
     specimenSize: "2.8rem",
   },
   {

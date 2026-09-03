@@ -18,6 +18,19 @@
   font-display: swap;
 }
 
+/* Tinos (Steve Matteson, SIL OFL — see fonts/OFL-Tinos.txt) is Google's
+   free, metric-compatible match for Times New Roman — the same approach
+   already used for Arimo/Helvetica. Self-hosted so Transitional's
+   specimens don't depend on Times New Roman being installed locally,
+   and without embedding the real (non-redistributable) font file. */
+@font-face {
+  font-family: "Tinos";
+  src: url("../fonts/Tinos-Regular.ttf") format("truetype");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
 :root {
   --paper: #f4f1ea;
   --paper-raised: #fbf9f4;
