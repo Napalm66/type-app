@@ -13,7 +13,6 @@ initExplore({
 });
 
 initIdentify(document.getElementById("identify-root"));
-initPractice(document.getElementById("practice-root"));
 initTimeline(document.getElementById("timeline-root"), (id) => detail.open(id));
 initCompare(document.getElementById("compare-root"));
 
