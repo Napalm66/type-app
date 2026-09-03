@@ -20,8 +20,8 @@ function deriveAnatomyWord(name) {
   return match ? match[0] : name;
 }
 
-async function measureGlyphMetrics(item, fontSizePx, word) {
-  const fontSpec = `${fontSizePx}px ${item.fontStack}`;
+async function measureGlyphMetrics(item, fontSizePx, word, fontStack) {
+  const fontSpec = `${fontSizePx}px ${fontStack}`;
   try {
     await document.fonts.load(fontSpec, word + "Hxyo");
   } catch (e) {
@@ -85,16 +85,17 @@ function contentWidthFor(metrics) {
 
 async function buildAnatomyHTML(item) {
   const word = deriveAnatomyWord(item.name);
+  const anatomyFontStack = item.anatomyFontStack || item.fontStack;
 
   let fontSizePx = ANATOMY_MAX_FONT_SIZE;
-  let metrics = await measureGlyphMetrics(item, fontSizePx, word);
+  let metrics = await measureGlyphMetrics(item, fontSizePx, word, anatomyFontStack);
   const variablePart = metrics.wordWidth + metrics.oWidth;
   const targetVariablePart = ANATOMY_TARGET_WIDTH - ANATOMY_FIXED_CHROME;
 
   if (variablePart > targetVariablePart) {
     const scale = targetVariablePart / variablePart;
     fontSizePx = Math.max(ANATOMY_MIN_FONT_SIZE, Math.round(fontSizePx * scale));
-    metrics = await measureGlyphMetrics(item, fontSizePx, word);
+    metrics = await measureGlyphMetrics(item, fontSizePx, word, anatomyFontStack);
   }
 
   const padTop = Math.max(34, Math.round(fontSizePx * 0.34));
@@ -114,7 +115,7 @@ async function buildAnatomyHTML(item) {
 
   const guides = [
     { y: capLineY, label: "CAP LINE" },
-    { y: meanLineY, label: "MEAN LINE / X-HEIGHT" },
+    { y: meanLineY, label: "MEAN LINE" },
     { y: baselineY, label: "BASELINE" },
     { y: descLineY, label: "DESCENDER LINE" },
   ];
@@ -149,10 +150,13 @@ async function buildAnatomyHTML(item) {
   // just left of the specimen word — shows what the x-height % is
   // actually measuring, not just stating it as a number below.
   const xHeightArrowX = padLeft - 7;
+  const xHeightArrowMidY = (meanLineY + baselineY) / 2;
+  const xHeightLabelX = xHeightArrowX - 9;
   const xHeightArrowSVG = `
     <line x1="${xHeightArrowX}" y1="${meanLineY}" x2="${xHeightArrowX}" y2="${baselineY}" class="anatomy-xheight-arrow" />
     <line x1="${xHeightArrowX - 4}" y1="${meanLineY}" x2="${xHeightArrowX + 4}" y2="${meanLineY}" class="anatomy-xheight-arrow" />
     <line x1="${xHeightArrowX - 4}" y1="${baselineY}" x2="${xHeightArrowX + 4}" y2="${baselineY}" class="anatomy-xheight-arrow" />
+    <text x="${xHeightLabelX}" y="${xHeightArrowMidY}" class="anatomy-xheight-label" text-anchor="middle" dominant-baseline="middle" transform="rotate(-90 ${xHeightLabelX} ${xHeightArrowMidY})">X-HEIGHT</text>
   `;
 
   // stress axis, illustrated on a small reference "o" beside the main word
@@ -169,7 +173,7 @@ async function buildAnatomyHTML(item) {
     const x2 = oCenterX + halfLen * Math.sin(rad);
     const y2 = oCenterY + halfLen * Math.cos(rad);
 
-    refOSVG = `<text x="${refOX}" y="${baselineY}" class="anatomy-ref-glyph" style="font-family:${item.fontStack}; font-size:${fontSizePx}px;">o</text>`;
+    refOSVG = `<text x="${refOX}" y="${baselineY}" class="anatomy-ref-glyph" style="font-family:${anatomyFontStack}; font-size:${fontSizePx}px;">o</text>`;
     stressSVG = `
       <line x1="${x1}" y1="${y1}" x2="${x2}" y2="${y2}" class="anatomy-stress" />
       <circle cx="${x1}" cy="${y1}" r="2.5" class="anatomy-stress-dot" />
@@ -179,7 +183,7 @@ async function buildAnatomyHTML(item) {
     `;
   }
 
-  const textSVG = `<text x="${padLeft}" y="${baselineY}" class="anatomy-specimen-text" style="font-family:${item.fontStack}; font-size:${fontSizePx}px;">${escapeHtml(word)}</text>`;
+  const textSVG = `<text x="${padLeft}" y="${baselineY}" class="anatomy-specimen-text" style="font-family:${anatomyFontStack}; font-size:${fontSizePx}px;">${escapeHtml(word)}</text>`;
 
   const note = serifNote(item);
 

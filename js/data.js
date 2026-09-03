@@ -54,11 +54,20 @@ const CLASSIFICATIONS = [
     additionalFeatures: [
       "Based on handwriting styles of Italian medieval scribes",
       "Characters tend to have organic, rounded shapes and medium-to-heavy calligraphic strokes",
-      "Lowercase \"e\" has a slanted bar",
+      "Lowercase \"e\" has a slanted crossbar",
     ],
     keyTypefaces: ["Jenson", "Centaur", "Verona", "Golden Type"],
     fontStack: "'Cormorant Garamond', 'EB Garamond', serif",
     googleFont: "Cormorant Garamond:wght@500",
+    // Cormorant Garamond is a Garalde revival (horizontal 'e' crossbar) —
+    // fine as the general specimen face, but wrong for the one diagram
+    // meant to demonstrate Venetian's own defining "slanted e" tell. IM
+    // Fell English (a digital revival of the 17th-c. Fell Types) is one
+    // of the few free web fonts with a genuinely diagonal e crossbar, so
+    // the anatomy diagram uses it instead — regular weight only, that's
+    // all Google Fonts serves for this family.
+    anatomyFontStack: "'IM Fell English', serif",
+    anatomyGoogleFont: "IM Fell English",
     specimenSize: "3rem",
   },
   {
@@ -311,7 +320,9 @@ function getById(id) {
 }
 
 function googleFontsHref() {
-  const families = CLASSIFICATIONS.map((c) => "family=" + c.googleFont).join("&");
+  const families = CLASSIFICATIONS.flatMap((c) => [c.googleFont, c.anatomyGoogleFont].filter(Boolean))
+    .map((f) => "family=" + f)
+    .join("&");
   return `https://fonts.googleapis.com/css2?${families}&display=swap`;
 }
 
