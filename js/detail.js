@@ -59,7 +59,7 @@ function serifSpectrumHTML(currentId) {
   const items = SERIF_SPECTRUM.map((s) => {
     const isCurrent = s.id === currentId;
     return `
-      <div class="serif-spectrum-item ${isCurrent ? "is-current" : ""}">
+      <div class="serif-spectrum-item ${isCurrent ? "is-current" : ""}" data-serif-id="${s.id}">
         <svg class="serif-spectrum-svg" viewBox="0 0 ${SERIF_VB_W} ${SERIF_VB_H}" aria-hidden="true">
           <path d="${s.path || serifShapePath(s)}" />
         </svg>
@@ -69,10 +69,41 @@ function serifSpectrumHTML(currentId) {
   }).join("");
   return `
     <div class="serif-spectrum">
-      <div class="serif-spectrum-heading">Serif shape, oldstyle to slab</div>
+      <div class="serif-spectrum-heading">Serif shape, oldstyle to slab <span class="serif-spectrum-hint">hover a shape to zoom in</span></div>
       <div class="serif-spectrum-row">${items}</div>
     </div>
   `;
+}
+
+function attachSerifSpectrumZoom(panelRoot) {
+  const row = panelRoot.querySelector(".serif-spectrum-row");
+  if (!row) return;
+
+  document.querySelectorAll(".serif-spectrum-zoom").forEach((el) => el.remove());
+  const zoom = document.createElement("div");
+  zoom.className = "serif-spectrum-zoom";
+  document.body.appendChild(zoom);
+
+  row.querySelectorAll(".serif-spectrum-item").forEach((item) => {
+    item.addEventListener("mouseenter", () => {
+      const spec = SERIF_SPECTRUM.find((s) => s.id === item.dataset.serifId);
+      if (!spec) return;
+      zoom.innerHTML = `
+        <svg viewBox="0 0 ${SERIF_VB_W} ${SERIF_VB_H}"><path d="${spec.path || serifShapePath(spec)}" /></svg>
+        <div class="serif-spectrum-zoom-label">${spec.label}</div>
+      `;
+      const rect = item.getBoundingClientRect();
+      zoom.classList.add("is-visible");
+      const zRect = zoom.getBoundingClientRect();
+      let left = rect.left + rect.width / 2 - zRect.width / 2;
+      left = Math.max(8, Math.min(left, window.innerWidth - zRect.width - 8));
+      let top = rect.top - zRect.height - 12;
+      if (top < 8) top = rect.bottom + 12;
+      zoom.style.left = left + "px";
+      zoom.style.top = top + "px";
+    });
+    item.addEventListener("mouseleave", () => zoom.classList.remove("is-visible"));
+  });
 }
 
 function initDetail(overlayRoot, panelRoot) {
@@ -81,6 +112,7 @@ function initDetail(overlayRoot, panelRoot) {
     overlayRoot.setAttribute("aria-hidden", "true");
     panelRoot.innerHTML = "";
     removeExistingLens();
+    document.querySelectorAll(".serif-spectrum-zoom").forEach((el) => el.remove());
   }
 
   async function open(id) {
@@ -130,6 +162,7 @@ function initDetail(overlayRoot, panelRoot) {
     panelRoot.querySelector(".detail-close").addEventListener("click", close);
     overlayRoot.classList.add("is-open");
     overlayRoot.setAttribute("aria-hidden", "false");
+    attachSerifSpectrumZoom(panelRoot);
 
     const slot = panelRoot.querySelector("#anatomy-slot");
     const html = await buildAnatomyHTML(item);

@@ -488,6 +488,51 @@ main.wrap {
   margin-bottom: 0.6rem;
 }
 
+.serif-spectrum-hint {
+  font-weight: 500;
+  text-transform: none;
+  letter-spacing: normal;
+  font-style: italic;
+}
+
+.serif-spectrum-zoom {
+  position: fixed;
+  z-index: 250;
+  width: 260px;
+  padding: 1.25rem 1.25rem 0.75rem;
+  background: var(--paper-raised);
+  border: 1px solid var(--rule);
+  border-radius: 10px;
+  box-shadow: var(--shadow);
+  pointer-events: none;
+  opacity: 0;
+  transform: translateY(4px) scale(0.97);
+  transition: opacity 0.14s ease, transform 0.14s ease;
+}
+
+.serif-spectrum-zoom.is-visible {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+}
+
+.serif-spectrum-zoom svg {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.serif-spectrum-zoom svg path {
+  fill: var(--accent);
+}
+
+.serif-spectrum-zoom-label {
+  text-align: center;
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: var(--ink);
+  margin-top: 0.5rem;
+}
+
 .serif-spectrum-row {
   display: grid;
   grid-template-columns: repeat(5, 1fr);
