@@ -158,9 +158,13 @@ const CLASSIFICATIONS = [
       serif: "square-slab",
       tell: "Thick, squared-off serifs roughly as heavy as the stems; minimal or heavy bracketing.",
     },
-    keyTypefaces: ["Clarendon", "Rockwell", "Courier", "Roboto Slab"],
-    fontStack: "'Roboto Slab', serif",
-    googleFont: "Roboto Slab:wght@600",
+    keyTypefaces: ["Clarendon", "Rockwell", "Courier", "Kameron"],
+    // Kameron (Vernon Adams) is explicitly a reworking of classic Slab
+    // Serif/Egyptian forms blending geometric and Clarendon influences —
+    // a closer match to this card than Roboto Slab, which is a screen-
+    // optimized companion to Roboto rather than a period-form revival.
+    fontStack: "'Kameron', serif",
+    googleFont: "Kameron:wght@600",
     specimenSize: "2.8rem",
   },
   {
