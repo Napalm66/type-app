@@ -61,7 +61,10 @@ function initTimeline(root, onOpenDetail) {
       name: "Art Nouveau",
       start: 1900,
       end: 1910,
-      color: "rgba(175, 140, 60, 0.3)",
+      // Same grey family as Modernism, just darker — reads as a cut
+      // within the Romanticism-to-Modernism span rather than a band
+      // with its own distinct identity, since it has no inline label.
+      color: "rgba(55, 61, 67, 0.3)",
       description: "A reaction against Victorian industrial excess, drawing on organic, flowing forms from nature. Typefaces like Eckmann and Auriol blur the line between lettering and illustration — whiplash curves, floral motifs, and stylized terminals define the era's display faces.",
     },
     {
