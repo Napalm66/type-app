@@ -110,8 +110,11 @@ const CLASSIFICATIONS = [
     // New Roman" by name, which silently falls back on any device that
     // doesn't have it installed (many Android/Linux setups), and unlike
     // embedding the real Times New Roman, which its Monotype license
-    // doesn't permit redistributing on a public site.
-    fontStack: "'Tinos', 'Times New Roman', 'Liberation Serif', serif",
+    // doesn't permit redistributing on a public site. Libre Baskerville
+    // (also a loaded web font, not a system-font guess) is the fallback
+    // if Tinos ever fails to load.
+    fontStack: "'Tinos', 'Libre Baskerville', 'Times New Roman', 'Liberation Serif', serif",
+    googleFont: "Libre Baskerville",
     specimenSize: "2.8rem",
   },
   {
