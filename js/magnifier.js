@@ -52,12 +52,21 @@ function attachMagnifier(wrapEl, svgEl) {
   // continuous touch to reposition, tap once more (a touch that doesn't
   // move) to close. A drag never closes the lens; only a stationary tap
   // on an already-open lens does.
+  //
+  // Once open, a new touch doesn't snap the lens to that touch point —
+  // it stays put until the finger actually moves, then tracks the
+  // finger's movement (delta), preserving whatever offset existed
+  // between the touch and the lens when the finger came down.
   const TAP_MOVE_THRESHOLD = 8;
   let isOpen = false;
   let wasOpenAtGestureStart = false;
   let touchMoved = false;
   let dragStartX = 0;
   let dragStartY = 0;
+  let anchorX = 0;
+  let anchorY = 0;
+  let lensX = 0;
+  let lensY = 0;
 
   wrapEl.addEventListener(
     "touchstart",
@@ -69,12 +78,18 @@ function attachMagnifier(wrapEl, svgEl) {
       touchMoved = false;
       dragStartX = touch.clientX;
       dragStartY = touch.clientY;
+      anchorX = lensX;
+      anchorY = lensY;
 
       if (!isOpen) {
         isOpen = true;
         lens.classList.add("is-visible");
+        moveLens(touch.clientX, touch.clientY);
+        lensX = touch.clientX;
+        lensY = touch.clientY;
+        anchorX = lensX;
+        anchorY = lensY;
       }
-      moveLens(touch.clientX, touch.clientY);
       e.preventDefault();
     },
     { passive: false }
@@ -84,12 +99,14 @@ function attachMagnifier(wrapEl, svgEl) {
     (e) => {
       const touch = e.touches[0];
       if (!touch) return;
-      if (!touchMoved) {
-        const dx = touch.clientX - dragStartX;
-        const dy = touch.clientY - dragStartY;
-        if (Math.hypot(dx, dy) > TAP_MOVE_THRESHOLD) touchMoved = true;
+      const dx = touch.clientX - dragStartX;
+      const dy = touch.clientY - dragStartY;
+      if (!touchMoved && Math.hypot(dx, dy) > TAP_MOVE_THRESHOLD) touchMoved = true;
+      if (touchMoved) {
+        lensX = anchorX + dx;
+        lensY = anchorY + dy;
+        moveLens(lensX, lensY);
       }
-      if (touchMoved) moveLens(touch.clientX, touch.clientY);
       e.preventDefault();
     },
     { passive: false }
