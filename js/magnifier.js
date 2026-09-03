@@ -47,4 +47,31 @@ function attachMagnifier(wrapEl, svgEl) {
   wrapEl.addEventListener("mousemove", (e) => {
     moveLens(e.clientX, e.clientY);
   });
+
+  wrapEl.addEventListener(
+    "touchstart",
+    (e) => {
+      const touch = e.touches[0];
+      if (!touch) return;
+      lens.classList.add("is-visible");
+      moveLens(touch.clientX, touch.clientY);
+    },
+    { passive: true }
+  );
+  wrapEl.addEventListener(
+    "touchmove",
+    (e) => {
+      const touch = e.touches[0];
+      if (!touch) return;
+      moveLens(touch.clientX, touch.clientY);
+      e.preventDefault();
+    },
+    { passive: false }
+  );
+  wrapEl.addEventListener("touchend", () => {
+    lens.classList.remove("is-visible");
+  });
+  wrapEl.addEventListener("touchcancel", () => {
+    lens.classList.remove("is-visible");
+  });
 }
