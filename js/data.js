@@ -125,9 +125,15 @@ const CLASSIFICATIONS = [
       serif: "unbracketed-hairline",
       tell: "Unbracketed hairline serifs; extreme thick/thin contrast; perfectly vertical stress.",
     },
-    keyTypefaces: ["Bodoni", "Didot", "Walbaum", "Playfair Display"],
-    fontStack: "'Playfair Display', serif",
-    googleFont: "Playfair Display:wght@700",
+    keyTypefaces: ["Bodoni", "Didot", "Walbaum", "Bodoni Moda"],
+    // Playfair Display (previously used here) is explicitly not a direct
+    // Bodoni/Didot revival — its own designer describes it as synthesizing
+    // Baskerville (Transitional), Didot, Bodoni, and Scotch Roman together,
+    // which blurs exactly the boundary this card exists to draw. Bodoni
+    // Moda is a genuine, direct Bodoni revival (Owen Earl), with real
+    // optical sizes, on Google Fonts.
+    fontStack: "'Bodoni Moda', serif",
+    googleFont: "Bodoni Moda:wght@700",
     specimenSize: "3rem",
   },
   {
