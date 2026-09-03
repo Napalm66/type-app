@@ -48,30 +48,56 @@ function attachMagnifier(wrapEl, svgEl) {
     moveLens(e.clientX, e.clientY);
   });
 
+  // Mobile: tap once to open (centered on that tap), drag with a
+  // continuous touch to reposition, tap once more (a touch that doesn't
+  // move) to close. A drag never closes the lens; only a stationary tap
+  // on an already-open lens does.
+  const TAP_MOVE_THRESHOLD = 8;
+  let isOpen = false;
+  let wasOpenAtGestureStart = false;
+  let touchMoved = false;
+  let dragStartX = 0;
+  let dragStartY = 0;
+
   wrapEl.addEventListener(
     "touchstart",
     (e) => {
       const touch = e.touches[0];
       if (!touch) return;
-      lens.classList.add("is-visible");
+
+      wasOpenAtGestureStart = isOpen;
+      touchMoved = false;
+      dragStartX = touch.clientX;
+      dragStartY = touch.clientY;
+
+      if (!isOpen) {
+        isOpen = true;
+        lens.classList.add("is-visible");
+      }
       moveLens(touch.clientX, touch.clientY);
+      e.preventDefault();
     },
-    { passive: true }
+    { passive: false }
   );
   wrapEl.addEventListener(
     "touchmove",
     (e) => {
       const touch = e.touches[0];
       if (!touch) return;
-      moveLens(touch.clientX, touch.clientY);
+      if (!touchMoved) {
+        const dx = touch.clientX - dragStartX;
+        const dy = touch.clientY - dragStartY;
+        if (Math.hypot(dx, dy) > TAP_MOVE_THRESHOLD) touchMoved = true;
+      }
+      if (touchMoved) moveLens(touch.clientX, touch.clientY);
       e.preventDefault();
     },
     { passive: false }
   );
   wrapEl.addEventListener("touchend", () => {
-    lens.classList.remove("is-visible");
-  });
-  wrapEl.addEventListener("touchcancel", () => {
-    lens.classList.remove("is-visible");
+    if (!touchMoved && wasOpenAtGestureStart) {
+      isOpen = false;
+      lens.classList.remove("is-visible");
+    }
   });
 }
