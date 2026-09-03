@@ -185,8 +185,12 @@ const CLASSIFICATIONS = [
       tell: "Slightly irregular widths, squarish curves, a hint of stroke contrast — less 'engineered' than neo-grotesques.",
     },
     keyTypefaces: ["Akzidenz-Grotesk", "Franklin Gothic", "News Gothic"],
-    fontStack: "'Archivo', 'Libre Franklin', sans-serif",
-    googleFont: "Archivo:wght@700",
+    // Libre Franklin (Impallari Type) is an explicit open-source
+    // revival of Franklin Gothic — this card's own key typeface —
+    // unlike Archivo, an original 2012 design in the genre but not a
+    // revival of anything specific. Swapped to lead.
+    fontStack: "'Libre Franklin', 'Archivo', sans-serif",
+    googleFont: "Libre Franklin:wght@700",
     specimenSize: "2.8rem",
   },
   {
@@ -229,8 +233,13 @@ const CLASSIFICATIONS = [
       tell: "Near-circular bowls, single-story 'a' and 'g', very consistent, mechanical proportions.",
     },
     keyTypefaces: ["Futura", "Century Gothic", "Avant Garde", "Kabel"],
-    fontStack: "'Poppins', 'Josefin Sans', sans-serif",
-    googleFont: "Poppins:wght@600",
+    // Jost was designed as an explicit homage to Paul Renner (Futura's
+    // designer) — originally named "Renner*" before release — capturing
+    // Futura's geometric proportions directly. Poppins is an original
+    // 2015 design in the genre, but its own foundry describes it as
+    // deliberately not evoking Futura's retro feel.
+    fontStack: "'Jost', 'Poppins', sans-serif",
+    googleFont: "Jost:wght@600",
     specimenSize: "2.8rem",
   },
   {
