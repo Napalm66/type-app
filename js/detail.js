@@ -16,7 +16,7 @@ const DIAGNOSTIC_LABELS = {
 // the stem, modest width) — both far more restrained/blocky than the
 // oldstyle flare, per Wikipedia's Didone and slab-serif descriptions.
 const SERIF_SPECTRUM = [
-  { id: "venetian", label: "Venetian", stemW: 32, serifW: 104, serifH: 12, curveH: 105 },
+  { id: "venetian", label: "Venetian", stemW: 32, serifW: 100, serifH: 9, curveH: 65 },
   { id: "garalde", label: "Garalde", stemW: 32, serifW: 96, serifH: 11, curveH: 62 },
   { id: "transitional", label: "Transitional", stemW: 28, serifW: 80, serifH: 8, curveH: 34 },
   { id: "modern", label: "Modern", stemW: 42, serifW: 64, serifH: 3, curveH: 0 },
@@ -42,6 +42,7 @@ function serifShapePath({ stemW, serifW, serifH, curveH }) {
     L ${cx + serifHalf} ${footY}
     L ${cx + serifHalf} ${footTopY}
     C ${cx + serifHalf} ${curveStartY}, ${cx + stemHalf} ${footTopY}, ${cx + stemHalf} ${curveStartY}
+    L ${cx + stemHalf} ${top}
     Z`;
 }
 
