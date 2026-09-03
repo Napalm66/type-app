@@ -86,7 +86,7 @@ function initTimeline(root, onOpenDetail) {
   // SVG children don't participate in sticky positioning the way HTML
   // block elements do). The chart's own SVG coordinate space now starts
   // at x=0 instead of being offset by a label column drawn inside it.
-  const CHART_WIDTH = 4800;
+  const CHART_WIDTH = 4300;
   const ROW_HEIGHT = 32;
   const HEADER_HEIGHT = 62;
   const TOP_PAD = 8;
