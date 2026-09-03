@@ -4,16 +4,23 @@ const DIAGNOSTIC_LABELS = {
   serif: "Serif shape",
 };
 
-// The oldstyle-to-slab bracket spectrum: as contrast rises, the curve
-// connecting stem to serif tightens, then vanishes entirely at Modern
-// (a sharp right angle meeting a hairline foot) before Slab returns to
-// low contrast with a thick, minimally-bracketed foot instead.
+// Venetian/Garalde/Transitional proportions traced from a reference
+// slider (Humanist -> Garalde -> Transitional -> Didone -> Slab) showing
+// one stem+serif silhouette per style: as the style progresses, the
+// straight stem section gets longer and the flare curve gets shorter and
+// less wide, but doesn't disappear until Modern. Modern and Slab are NOT
+// flared like the oldstyle trio — the wide trumpet-bell bracket is
+// specifically an oldstyle trait. Didone serifs are unbracketed hairlines
+// (sharp 90 degree join, thick stem, thin flat foot, modest width) and
+// slab serifs are unbracketed blocks (sharp join, foot nearly as thick as
+// the stem, modest width) — both far more restrained/blocky than the
+// oldstyle flare, per Wikipedia's Didone and slab-serif descriptions.
 const SERIF_SPECTRUM = [
-  { id: "venetian", label: "Venetian", stemW: 34, serifW: 100, serifH: 14, curveH: 92 },
-  { id: "garalde", label: "Garalde", stemW: 34, serifW: 95, serifH: 13, curveH: 58 },
-  { id: "transitional", label: "Transitional", stemW: 30, serifW: 85, serifH: 10, curveH: 30 },
-  { id: "modern", label: "Modern", stemW: 38, serifW: 70, serifH: 4, curveH: 0 },
-  { id: "slab", label: "Slab", stemW: 34, serifW: 100, serifH: 26, curveH: 0 },
+  { id: "venetian", label: "Venetian", stemW: 32, serifW: 104, serifH: 12, curveH: 105 },
+  { id: "garalde", label: "Garalde", stemW: 32, serifW: 96, serifH: 11, curveH: 62 },
+  { id: "transitional", label: "Transitional", stemW: 28, serifW: 80, serifH: 8, curveH: 34 },
+  { id: "modern", label: "Modern", stemW: 42, serifW: 64, serifH: 3, curveH: 0 },
+  { id: "slab", label: "Slab", stemW: 34, serifW: 54, serifH: 30, curveH: 0 },
 ];
 
 function serifShapePath({ stemW, serifW, serifH, curveH }) {
