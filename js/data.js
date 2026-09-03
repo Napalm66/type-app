@@ -112,9 +112,9 @@ const CLASSIFICATIONS = [
     id: "slab",
     branch: "serif",
     name: "Slab Serif (Egyptian)",
-    era: "1815 – present",
+    era: "1815 – 1934",
     timelineStart: 1815,
-    timelineEnd: null,
+    timelineEnd: 1934,
     tagline: "Serifs as thick as the stems — built to shout from a poster.",
     description:
       "Slab serifs emerged for advertising and display, where oldstyle and modern faces disappeared at a distance. Serifs become heavy, squared-off slabs with little or no bracketing, and contrast drops back to low. Later 20th-century 'geometric slabs' (Rockwell) and 'clarendons' (bracketed slabs with more warmth) both fall under this umbrella.",
@@ -196,9 +196,9 @@ const CLASSIFICATIONS = [
     id: "humanist-sans",
     branch: "sans",
     name: "Humanist Sans",
-    era: "1916 – present",
+    era: "1916 – 1976",
     timelineStart: 1916,
-    timelineEnd: null,
+    timelineEnd: 1976,
     tagline: "Sans serif with a calligrapher's hand still visible underneath.",
     description:
       "Humanist sans serifs keep proportions and some stroke modulation inherited from Roman inscriptional and oldstyle serif letterforms — the most 'readable' and warmest of the sans genres. Apertures are open, and the two-story 'a' and 'g' are common, unlike geometric sans.",
@@ -217,9 +217,9 @@ const CLASSIFICATIONS = [
     id: "glyphic",
     branch: "glyphic",
     name: "Glyphic / Latin",
-    era: "c. 1900 – present",
+    era: "c. 1900 – 1940",
     timelineStart: 1900,
-    timelineEnd: null,
+    timelineEnd: 1940,
     tagline: "Letters chiseled in stone, not drawn with a pen.",
     description:
       "Glyphic (or 'Latin') faces evoke carved or inscribed letters rather than pen or brush strokes — small triangular flared serifs instead of bracketed ones, and a monumental, static feel. Roman inscriptional capitals (as on Trajan's Column) are the archetype.",
@@ -238,9 +238,9 @@ const CLASSIFICATIONS = [
     id: "script",
     branch: "script",
     name: "Script",
-    era: "c. 1700 – present",
+    era: "c. 1700 – 1965",
     timelineStart: 1700,
-    timelineEnd: null,
+    timelineEnd: 1965,
     tagline: "Type that imitates the connected stroke of handwriting.",
     description:
       "Script faces imitate handwriting, from formal engraved copperplate scripts (used for invitations and certificates) to casual brush and marker scripts. Letters often connect or nearly connect, mimicking a single continuous pen or brush stroke.",
@@ -257,9 +257,9 @@ const CLASSIFICATIONS = [
     id: "display",
     branch: "display",
     name: "Display / Decorative",
-    era: "1803 – present",
+    era: "1803 – 2000",
     timelineStart: 1803,
-    timelineEnd: null,
+    timelineEnd: 2000,
     tagline: "Type designed to be looked at, not read in paragraphs.",
     description:
       "Display faces prioritize impact and personality over extended readability — fat faces, wood-type Western faces, grunge and novelty faces all live here. They frequently exaggerate a trait from another classification (extreme contrast, extreme weight, decorative ornament) past the point of legibility at text size.",
@@ -288,7 +288,7 @@ function googleFontsHref() {
   return `https://fonts.googleapis.com/css2?${families}&display=swap`;
 }
 
-const TIMELINE_DOMAIN_START = 1000;
+const TIMELINE_DOMAIN_START = 1100;
 const TIMELINE_DOMAIN_END = new Date().getFullYear();
 
 function formatTimelineYear(year) {

@@ -133,7 +133,9 @@ function initTimeline(root, onOpenDetail) {
     let prevLabelRight = -Infinity;
 
     return ART_PERIODS.map((era, i) => {
-      const left = x(era.start);
+      // Romanesque starts before the chart's domain (1000 vs. domainStart
+      // 1100) — clamp to the left edge instead of rendering off-canvas.
+      const left = x(Math.max(era.start, domainStart));
       const width = x(era.end) - left;
       const label = era.name.toUpperCase();
       const labelW = textWidth(label, font);
