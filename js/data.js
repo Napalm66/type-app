@@ -59,18 +59,6 @@ const CLASSIFICATIONS = [
     keyTypefaces: ["Jenson", "Centaur", "Verona", "Golden Type"],
     fontStack: "'Cormorant Garamond', 'EB Garamond', serif",
     googleFont: "Cormorant Garamond:wght@500",
-    // Cormorant Garamond is a Garalde revival (horizontal 'e' crossbar) —
-    // fine as the general specimen face, but wrong for the one diagram
-    // meant to demonstrate Venetian's own defining "slanted e" tell. The
-    // period-correct choice, ITC Berkeley Old Style (the exact face used
-    // in the reference PDF), is a paid ITC/Monotype font not available
-    // on Google Fonts — but Berkeley was itself modeled on the Fell
-    // Types, so IM Fell Double Pica (a free digital revival of those same
-    // Fell Types) is a genuine relative, not an arbitrary substitute, and
-    // reads cleaner than IM Fell English. Regular weight only, that's all
-    // Google Fonts serves for this family.
-    anatomyFontStack: "'IM Fell Double Pica', serif",
-    anatomyGoogleFont: "IM Fell Double Pica",
     specimenSize: "3rem",
   },
   {

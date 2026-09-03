@@ -20,8 +20,8 @@ function deriveAnatomyWord(name) {
   return match ? match[0] : name;
 }
 
-async function measureGlyphMetrics(item, fontSizePx, word, fontStack) {
-  const fontSpec = `${fontSizePx}px ${fontStack}`;
+async function measureGlyphMetrics(item, fontSizePx, word, fontStack, fontWeight) {
+  const fontSpec = `${fontWeight || "400"} ${fontSizePx}px ${fontStack}`;
   try {
     await document.fonts.load(fontSpec, word + "Hxyo");
   } catch (e) {
@@ -86,16 +86,17 @@ function contentWidthFor(metrics) {
 async function buildAnatomyHTML(item) {
   const word = deriveAnatomyWord(item.name);
   const anatomyFontStack = item.anatomyFontStack || item.fontStack;
+  const anatomyFontWeight = item.anatomyFontStack ? item.anatomyFontWeight || "400" : null;
 
   let fontSizePx = ANATOMY_MAX_FONT_SIZE;
-  let metrics = await measureGlyphMetrics(item, fontSizePx, word, anatomyFontStack);
+  let metrics = await measureGlyphMetrics(item, fontSizePx, word, anatomyFontStack, anatomyFontWeight);
   const variablePart = metrics.wordWidth + metrics.oWidth;
   const targetVariablePart = ANATOMY_TARGET_WIDTH - ANATOMY_FIXED_CHROME;
 
   if (variablePart > targetVariablePart) {
     const scale = targetVariablePart / variablePart;
     fontSizePx = Math.max(ANATOMY_MIN_FONT_SIZE, Math.round(fontSizePx * scale));
-    metrics = await measureGlyphMetrics(item, fontSizePx, word, anatomyFontStack);
+    metrics = await measureGlyphMetrics(item, fontSizePx, word, anatomyFontStack, anatomyFontWeight);
   }
 
   const padTop = Math.max(34, Math.round(fontSizePx * 0.34));
@@ -172,7 +173,7 @@ async function buildAnatomyHTML(item) {
     const x2 = oCenterX + halfLen * Math.sin(rad);
     const y2 = oCenterY + halfLen * Math.cos(rad);
 
-    refOSVG = `<text x="${refOX}" y="${baselineY}" class="anatomy-ref-glyph" style="font-family:${anatomyFontStack}; font-size:${fontSizePx}px;">o</text>`;
+    refOSVG = `<text x="${refOX}" y="${baselineY}" class="anatomy-ref-glyph" style="font-family:${anatomyFontStack}; font-size:${fontSizePx}px;${anatomyFontWeight ? ` font-weight:${anatomyFontWeight};` : ""}">o</text>`;
     stressSVG = `
       <line x1="${x1}" y1="${y1}" x2="${x2}" y2="${y2}" class="anatomy-stress" />
       <circle cx="${x1}" cy="${y1}" r="2.5" class="anatomy-stress-dot" />
@@ -182,7 +183,7 @@ async function buildAnatomyHTML(item) {
     `;
   }
 
-  const textSVG = `<text x="${padLeft}" y="${baselineY}" class="anatomy-specimen-text" style="font-family:${anatomyFontStack}; font-size:${fontSizePx}px;">${escapeHtml(word)}</text>`;
+  const textSVG = `<text x="${padLeft}" y="${baselineY}" class="anatomy-specimen-text" style="font-family:${anatomyFontStack}; font-size:${fontSizePx}px;${anatomyFontWeight ? ` font-weight:${anatomyFontWeight};` : ""}">${escapeHtml(word)}</text>`;
 
   const note = serifNote(item);
 
