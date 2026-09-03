@@ -45,7 +45,8 @@ function renderSpecimenHTML(item, context) {
   const isCustom = customSpecimenText.length > 0;
   const text = isCustom ? customSpecimenText : SPECIMEN_TEXT;
   const sizes = SPECIMEN_SIZES[context] || SPECIMEN_SIZES.detail;
-  const size = isCustom ? sizes.custom : sizes.default || item.specimenSize || "2.5rem";
+  let size = isCustom ? sizes.custom : sizes.default || item.specimenSize || "2.5rem";
+  if (!isCustom && context === "card") size = `calc(${size} * 1.25)`;
   const style = isCustom
     ? `font-family:${item.fontStack}; font-size:${size}; line-height:1.4; white-space:normal; word-break:break-word;`
     : `font-family:${item.fontStack}; font-size:${size};`;
