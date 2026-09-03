@@ -473,6 +473,67 @@ main.wrap {
   color: var(--accent);
 }
 
+/* ---------- serif spectrum ---------- */
+
+.serif-spectrum {
+  margin-bottom: 1.25rem;
+}
+
+.serif-spectrum-heading {
+  font-size: 0.72rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--ink-faint);
+  margin-bottom: 0.6rem;
+}
+
+.serif-spectrum-row {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 0.5rem;
+}
+
+.serif-spectrum-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0.5rem 0.25rem;
+  border-radius: 8px;
+  border: 1px solid transparent;
+}
+
+.serif-spectrum-item.is-current {
+  background: color-mix(in srgb, var(--accent) 8%, var(--paper));
+  border-color: var(--accent-soft);
+}
+
+.serif-spectrum-svg {
+  width: 100%;
+  height: 44px;
+}
+
+.serif-spectrum-svg path {
+  fill: var(--ink-faint);
+}
+
+.serif-spectrum-item.is-current .serif-spectrum-svg path {
+  fill: var(--accent);
+}
+
+.serif-spectrum-label {
+  font-size: 0.68rem;
+  font-weight: 600;
+  color: var(--ink-faint);
+  text-align: center;
+}
+
+.serif-spectrum-item.is-current .serif-spectrum-label {
+  color: var(--accent);
+  font-weight: 700;
+}
+
 /* ---------- anatomy diagram ---------- */
 
 .anatomy-heading {

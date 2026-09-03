@@ -4,6 +4,61 @@ const DIAGNOSTIC_LABELS = {
   serif: "Serif shape",
 };
 
+// The oldstyle-to-slab bracket spectrum: as contrast rises, the curve
+// connecting stem to serif tightens, then vanishes entirely at Modern
+// (a sharp right angle meeting a hairline foot) before Slab returns to
+// low contrast with a thick, minimally-bracketed foot instead.
+const SERIF_SPECTRUM = [
+  { id: "venetian", label: "Venetian", stemW: 34, serifW: 100, serifH: 14, curveH: 92 },
+  { id: "garalde", label: "Garalde", stemW: 34, serifW: 95, serifH: 13, curveH: 58 },
+  { id: "transitional", label: "Transitional", stemW: 30, serifW: 85, serifH: 10, curveH: 30 },
+  { id: "modern", label: "Modern", stemW: 38, serifW: 70, serifH: 4, curveH: 0 },
+  { id: "slab", label: "Slab", stemW: 34, serifW: 100, serifH: 26, curveH: 0 },
+];
+
+function serifShapePath({ stemW, serifW, serifH, curveH }) {
+  const cx = 60;
+  const top = 12;
+  const footY = 148;
+  const footTopY = footY - serifH;
+  const curveStartY = footTopY - curveH;
+  const stemHalf = stemW / 2;
+  const serifHalf = serifW / 2;
+
+  if (curveH <= 0) {
+    return `M ${cx - stemHalf} ${top} L ${cx - stemHalf} ${footTopY} L ${cx - serifHalf} ${footTopY} L ${cx - serifHalf} ${footY} L ${cx + serifHalf} ${footY} L ${cx + serifHalf} ${footTopY} L ${cx + stemHalf} ${footTopY} L ${cx + stemHalf} ${top} Z`;
+  }
+  return `M ${cx - stemHalf} ${top}
+    L ${cx - stemHalf} ${curveStartY}
+    C ${cx - stemHalf} ${footTopY}, ${cx - serifHalf} ${curveStartY}, ${cx - serifHalf} ${footTopY}
+    L ${cx - serifHalf} ${footY}
+    L ${cx + serifHalf} ${footY}
+    L ${cx + serifHalf} ${footTopY}
+    C ${cx + serifHalf} ${curveStartY}, ${cx + stemHalf} ${footTopY}, ${cx + stemHalf} ${curveStartY}
+    Z`;
+}
+
+function serifSpectrumHTML(currentId) {
+  if (!SERIF_SPECTRUM.some((s) => s.id === currentId)) return "";
+  const items = SERIF_SPECTRUM.map((s) => {
+    const isCurrent = s.id === currentId;
+    return `
+      <div class="serif-spectrum-item ${isCurrent ? "is-current" : ""}">
+        <svg class="serif-spectrum-svg" viewBox="0 0 120 160" aria-hidden="true">
+          <path d="${serifShapePath(s)}" />
+        </svg>
+        <span class="serif-spectrum-label">${s.label}</span>
+      </div>
+    `;
+  }).join("");
+  return `
+    <div class="serif-spectrum">
+      <div class="serif-spectrum-heading">Serif shape, oldstyle to slab</div>
+      <div class="serif-spectrum-row">${items}</div>
+    </div>
+  `;
+}
+
 function initDetail(overlayRoot, panelRoot) {
   function close() {
     overlayRoot.classList.remove("is-open");
@@ -49,6 +104,7 @@ function initDetail(overlayRoot, panelRoot) {
       <p class="detail-description">${item.description}</p>
       ${diagnosticsHTML}
       ${tellHTML}
+      ${serifSpectrumHTML(item.id)}
       ${subStylesHTML}
       <p class="key-typefaces"><b>Reference typefaces:</b> ${item.keyTypefaces.join(", ")}</p>
       <div class="anatomy-heading">Anatomy <span class="anatomy-hint">hover the diagram to zoom in</span></div>
