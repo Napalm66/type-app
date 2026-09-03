@@ -104,7 +104,12 @@ const CLASSIFICATIONS = [
       tell: "Higher contrast than Garalde, but serifs still bracketed (not hairline) and axis close to vertical.",
     },
     keyTypefaces: ["Baskerville", "Times New Roman", "Georgia", "Mrs Eaves"],
-    fontStack: "'Libre Baskerville', 'PT Serif', serif",
+    // "Times New Roman" first: a near-universal system font (not a web
+    // font — nothing to embed/license, just asks the OS for its own
+    // already-licensed copy) and explicitly cited in this card's own
+    // description. Libre Baskerville/PT Serif stay as the web-font
+    // fallback for systems without it (e.g. many Linux setups).
+    fontStack: "'Times New Roman', 'Libre Baskerville', 'PT Serif', serif",
     googleFont: "Libre Baskerville",
     specimenSize: "2.8rem",
   },
