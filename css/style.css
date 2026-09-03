@@ -473,6 +473,41 @@ main.wrap {
   color: var(--accent);
 }
 
+.visual-characteristics {
+  margin-top: 1.25rem;
+}
+
+.visual-characteristics-heading {
+  font-size: 0.72rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--ink-faint);
+  margin-bottom: 0.6rem;
+}
+
+.visual-characteristics-list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.visual-characteristics-list li {
+  font-size: 0.85rem;
+  color: var(--ink-soft);
+  background: var(--paper);
+  border: 1px solid var(--rule);
+  border-radius: 6px;
+  padding: 0.5rem 0.75rem;
+}
+
+.visual-characteristics-list b {
+  color: var(--accent);
+}
+
 /* ---------- serif spectrum ---------- */
 
 .serif-spectrum {
