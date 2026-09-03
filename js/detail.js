@@ -34,8 +34,8 @@ const SERIF_SPECTRUM = [
     viewBox: "340 65 830 510",
     path: "M 638,84 C 718,84.5 799,85 879,86 C 878.5,169 877.5,253 878,330 C 878.5,387 883,427 899,454 C 920,489 967,501 1038,506 C 1075,508.5 1113,508.5 1149,508 L 1146,558 C 1010,556.5 878,555.5 756,555.5 C 625,555.5 493,555.5 362,556 L 361,507 C 405,507.5 451,507.5 493,505 C 555,502 594,492 615,467 C 633,444 638,402 640,344 C 641,258 639.5,171 638,84 Z",
   },
-  { id: "modern", label: "Modern", stemW: 340, serifW: 500, serifH: 25, curveH: 0 },
-  { id: "slab", label: "Slab", stemW: 300, serifW: 460, serifH: 280, curveH: 0 },
+  { id: "modern", label: "Modern", stemW: 340, serifW: 720, serifH: 25, curveH: 0 },
+  { id: "slab", label: "Slab", stemW: 300, serifW: 680, serifH: 280, curveH: 0 },
 ];
 
 const SERIF_VB_W = 973;
