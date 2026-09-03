@@ -371,7 +371,7 @@ function initTimeline(root, onOpenDetail) {
         if (!item) return;
         const yearLabel = `${item.timelineStart} – ${item.timelineEnd}`;
         const closesHTML = item.closesBecause
-          ? `<div class="tl-tooltip-closes"><b>Closes because:</b> ${item.closesBecause}</div>`
+          ? `<div class="tl-tooltip-closes"><b>Ends because:</b> ${item.closesBecause}</div>`
           : "";
         place(bar, `<strong>${item.name}</strong><div class="tl-tooltip-years">${yearLabel}</div>${closesHTML}`);
       });
