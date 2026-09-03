@@ -1,3 +1,23 @@
+/* Coelacanth (Ben Whitmore, SIL OFL 1.1 — see fonts/OFL-Coelacanth.md) is
+   a free, direct type revival of Bruce Rogers' Centaur, itself a bona fide
+   Jenson/Venetian revival — used for Venetian Oldstyle's specimens since
+   the correct classification lineage matters more than any single Google
+   Fonts stand-in. Self-hosted since it isn't on Google Fonts. */
+@font-face {
+  font-family: "Coelacanth";
+  src: url("../fonts/Coelacanth.otf") format("opentype");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Coelacanth";
+  src: url("../fonts/Coelacanth-Bold.otf") format("opentype");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
 :root {
   --paper: #f4f1ea;
   --paper-raised: #fbf9f4;
@@ -1211,6 +1231,20 @@ main.wrap {
   color: var(--ink-faint);
   max-width: 60ch;
   margin: 0;
+}
+
+.site-footer p + p {
+  margin-top: 0.5rem;
+}
+
+.site-footer a {
+  color: inherit;
+  text-decoration-color: var(--rule);
+}
+
+.site-footer a:hover {
+  color: var(--accent);
+  text-decoration-color: var(--accent);
 }
 
 @media (max-width: 520px) {

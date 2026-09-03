@@ -57,8 +57,11 @@ const CLASSIFICATIONS = [
       "Lowercase \"e\" has a slanted crossbar",
     ],
     keyTypefaces: ["Jenson", "Centaur", "Verona", "Golden Type"],
-    fontStack: "'Cormorant Garamond', 'EB Garamond', serif",
-    googleFont: "Cormorant Garamond:wght@500",
+    // Coelacanth (self-hosted, see fonts/OFL-Coelacanth.md) is a free
+    // direct revival of Bruce Rogers' Centaur — a genuine Jenson/Venetian
+    // lineage typeface, unlike Cormorant Garamond (which is Garalde, i.e.
+    // technically the wrong classification for this card).
+    fontStack: "'Coelacanth', 'Cormorant Garamond', 'EB Garamond', serif",
     specimenSize: "3rem",
   },
   {
