@@ -97,6 +97,7 @@ function attachMagnifier(wrapEl, svgEl) {
   wrapEl.addEventListener(
     "touchmove",
     (e) => {
+      if (!isOpen) return;
       const touch = e.touches[0];
       if (!touch) return;
       const dx = touch.clientX - dragStartX;
@@ -105,7 +106,17 @@ function attachMagnifier(wrapEl, svgEl) {
       if (touchMoved) {
         lensX = anchorX + dx;
         lensY = anchorY + dy;
-        moveLens(lensX, lensY);
+        // Touch capture keeps firing on wrapEl even once the finger has
+        // moved off it, so the lens has to be closed explicitly once its
+        // center leaves the diagram's own box — it isn't clamped to the
+        // edge, it just disappears.
+        const rect = wrapEl.getBoundingClientRect();
+        if (lensX < rect.left || lensX > rect.right || lensY < rect.top || lensY > rect.bottom) {
+          isOpen = false;
+          lens.classList.remove("is-visible");
+        } else {
+          moveLens(lensX, lensY);
+        }
       }
       e.preventDefault();
     },
