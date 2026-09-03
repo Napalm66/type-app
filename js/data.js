@@ -259,9 +259,14 @@ const CLASSIFICATIONS = [
       serif: "none",
       tell: "Open apertures, some stroke modulation, often a two-story 'g' — feels closer to a serif face without the serifs.",
     },
-    keyTypefaces: ["Gill Sans", "Frutiger", "Optima", "Source Sans Pro"],
-    fontStack: "'Source Sans 3', 'Open Sans', sans-serif",
-    googleFont: "Source Sans 3:wght@600",
+    keyTypefaces: ["Gill Sans", "Frutiger", "Optima", "Open Sans"],
+    // Open Sans is unambiguously classified as humanist by its own
+    // designer (Steve Matteson) and design brief — "open apertures,
+    // wide forms" match this card's own diagnostic tell directly.
+    // Source Sans 3 is based on Franklin Gothic/News Gothic, a more
+    // grotesque-leaning lineage described as mixed Grotesque/Humanist.
+    fontStack: "'Open Sans', 'Source Sans 3', sans-serif",
+    googleFont: "Open Sans:wght@600",
     specimenSize: "2.8rem",
   },
   {
