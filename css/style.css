@@ -904,6 +904,23 @@ main.wrap {
   margin-bottom: 0.3rem;
 }
 
+.tl-tooltip-years {
+  font-size: 0.72rem;
+  font-weight: 600;
+  color: var(--ink-faint);
+  margin-bottom: 0.4rem;
+}
+
+.tl-tooltip-closes {
+  margin-top: 0.4rem;
+  padding-top: 0.4rem;
+  border-top: 1px solid var(--rule);
+}
+
+.tl-tooltip-closes b {
+  color: var(--ink);
+}
+
 .tl-era-tooltip::after {
   content: "";
   position: absolute;

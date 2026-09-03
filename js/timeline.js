@@ -247,9 +247,8 @@ function initTimeline(root, onOpenDetail) {
     return `
       <g class="tl-row">
         <rect class="tl-bar ${ongoing ? "is-ongoing" : ""}" data-id="${item.id}"
-          x="${barX}" y="${barY}" width="${barWidth}" height="${barH}" rx="4" fill="${fill}">
-          <title>${item.name}: ${yearLabel}</title>
-        </rect>
+          x="${barX}" y="${barY}" width="${barWidth}" height="${barH}" rx="4" fill="${fill}"
+          aria-label="${item.name}: ${yearLabel}"></rect>
         ${pinSVG}
         ${labelSVG}
       </g>
@@ -334,10 +333,8 @@ function initTimeline(root, onOpenDetail) {
     tooltip.className = "tl-era-tooltip";
     document.body.appendChild(tooltip);
 
-    function place(target) {
-      const era = ART_PERIODS[Number(target.dataset.eraIndex)];
-      if (!era) return;
-      tooltip.innerHTML = `<strong>${era.tooltipName || era.name}</strong>${era.description}`;
+    function place(target, html) {
+      tooltip.innerHTML = html;
 
       const rect = target.getBoundingClientRect();
       tooltip.classList.add("is-visible");
@@ -360,8 +357,25 @@ function initTimeline(root, onOpenDetail) {
     }
 
     svg.querySelectorAll(".tl-era-group").forEach((group) => {
-      group.addEventListener("mouseenter", () => place(group));
+      group.addEventListener("mouseenter", () => {
+        const era = ART_PERIODS[Number(group.dataset.eraIndex)];
+        if (!era) return;
+        place(group, `<strong>${era.tooltipName || era.name}</strong>${era.description}`);
+      });
       group.addEventListener("mouseleave", () => tooltip.classList.remove("is-visible"));
+    });
+
+    svg.querySelectorAll(".tl-bar").forEach((bar) => {
+      bar.addEventListener("mouseenter", () => {
+        const item = getById(bar.dataset.id);
+        if (!item) return;
+        const yearLabel = `${item.timelineStart} – ${item.timelineEnd}`;
+        const closesHTML = item.closesBecause
+          ? `<div class="tl-tooltip-closes"><b>Closes because:</b> ${item.closesBecause}</div>`
+          : "";
+        place(bar, `<strong>${item.name}</strong><div class="tl-tooltip-years">${yearLabel}</div>${closesHTML}`);
+      });
+      bar.addEventListener("mouseleave", () => tooltip.classList.remove("is-visible"));
     });
   }
 

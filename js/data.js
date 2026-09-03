@@ -13,6 +13,7 @@ const CLASSIFICATIONS = [
     tagline: "The angular hand of medieval scribes, cut into the first metal type.",
     description:
       "Blackletter (or Gothic) scripts grew out of northern European manuscript hands. Letters are dense, angular, and vertical, with dramatic contrast built from a broad-nib pen held at a steep angle. Gutenberg's 42-line Bible was set in a Textura blackletter. It splintered into regional sub-styles before Roman letterforms took over most of Europe.",
+    closesBecause: "Roman letterforms displaced blackletter as the dominant book type across most of Europe by 1500.",
     subStyles: [
       { name: "Textura", note: "Most rigid and vertical; dense 'woven' texture, sharp diamond feet." },
       { name: "Rotunda", note: "Rounder, southern-European variant; softer curves than Textura." },
@@ -34,6 +35,7 @@ const CLASSIFICATIONS = [
     tagline: "Humanist type at its origin — a printed echo of the pen.",
     description:
       "The earliest Roman printing types, cut in Venice by Nicolas Jenson and others, translated the humanist scribal hand almost directly into metal. Contrast is very low, the axis of stress is strongly oblique (as if drawn with a broad pen tilted to the left), and the lowercase 'e' has a slanted, sometimes diagonal crossbar — the clearest tell distinguishing Venetian from later Garalde types.",
+    closesBecause: "Superseded by the Garalde style pioneered by Aldus Manutius and Claude Garamond, which begins almost exactly where this one ends.",
     diagnostics: {
       contrast: "low",
       axis: "oblique-strong",
@@ -55,6 +57,7 @@ const CLASSIFICATIONS = [
     tagline: "The Aldine-Garamond tradition — the workhorse of Western printing.",
     description:
       "Named for Aldus Manutius and Claude Garamond, Garalde types refined the Venetian model: contrast is slightly higher, the axis is still oblique but less extreme, and the crossbar of the lowercase 'e' returns to horizontal. Garalde oldstyles dominated book printing for over a century and remain a byword for warmth and readability at text size.",
+    closesBecause: "Gave way to Transitional types like Baskerville as printing and paper technology advanced.",
     diagnostics: {
       contrast: "low-medium",
       axis: "oblique-moderate",
@@ -76,6 +79,7 @@ const CLASSIFICATIONS = [
     tagline: "The pivot point — pen-drawn warmth meeting ruler-drawn precision.",
     description:
       "Transitional types, epitomized by John Baskerville, sit between oldstyle and modern. The axis of stress straightens toward vertical, contrast increases noticeably, and serifs are more sharply bracketed. Advances in paper and printing let punchcutters render finer detail than the Garalde era allowed. Many later 'modern-revival' text faces (including most Times New Roman-style faces) are technically Transitional.",
+    closesBecause: "Bodoni and Didot's Modern (Didone) style takes over exactly as this one closes.",
     diagnostics: {
       contrast: "medium",
       axis: "near-vertical",
@@ -97,6 +101,7 @@ const CLASSIFICATIONS = [
     tagline: "Maximum contrast, ruled precision, and hairline drama.",
     description:
       "Named for Firmin Didot and Giambattista Bodoni, Didone types push contrast to its extreme: thick vertical stems meet hairline-thin serifs and horizontals, the axis is perfectly vertical, and serifs lose their brackets entirely. The effect is crisp, geometric, and coolly elegant — closer to a ruled drawing than a pen stroke.",
+    closesBecause: "Marks the end of Bodoni's active career and the rise of slab serifs and grotesques for advertising.",
     diagnostics: {
       contrast: "high",
       axis: "vertical",
@@ -118,6 +123,7 @@ const CLASSIFICATIONS = [
     tagline: "Serifs as thick as the stems — built to shout from a poster.",
     description:
       "Slab serifs emerged for advertising and display, where oldstyle and modern faces disappeared at a distance. Serifs become heavy, squared-off slabs with little or no bracketing, and contrast drops back to low. Later 20th-century 'geometric slabs' (Rockwell) and 'clarendons' (bracketed slabs with more warmth) both fall under this umbrella.",
+    closesBecause: "Closes at Rockwell (1934), the last major 20th-century geometric-slab revival cited as part of this classification.",
     diagnostics: {
       contrast: "low",
       axis: "vertical",
@@ -139,6 +145,7 @@ const CLASSIFICATIONS = [
     tagline: "The first sans serifs — blunt, quirky, and built for the poster.",
     description:
       "The earliest sans serifs (originally called 'grotesque' because contemporaries found letters without serifs ugly) have slightly irregular proportions, a squarish bowl structure, and a bit of stroke contrast inherited from their serif ancestors. Akzidenz-Grotesk, cut in 1898, became the direct ancestor of Helvetica and the whole neo-grotesque movement.",
+    closesBecause: "Superseded by the mid-century Swiss regularization into Neo-Grotesque.",
     diagnostics: {
       contrast: "low",
       axis: "vertical",
@@ -160,6 +167,7 @@ const CLASSIFICATIONS = [
     tagline: "The corporate default — refined, neutral, endlessly copied.",
     description:
       "Mid-century Swiss designers regularized the grotesque: strokes became more uniform, contrast dropped further toward zero, and apertures tightened. Helvetica and Univers are the defining faces of this style — deliberately 'neutral' letterforms meant to disappear into the message.",
+    closesBecause: "Marks the end of the core Swiss International Style wave that produced Helvetica and Univers.",
     diagnostics: {
       contrast: "none",
       axis: "vertical",
@@ -181,6 +189,7 @@ const CLASSIFICATIONS = [
     tagline: "Compass-and-ruler letters, straight from the Bauhaus.",
     description:
       "Geometric sans serifs build letters from simple, near-mathematical shapes — true circles for bowls, perfect verticals and horizontals. Futura, drawn by Paul Renner, is the archetype: the lowercase 'o' is nearly a perfect circle, and the 'a' and 'g' are typically single-story.",
+    closesBecause: "Closes at Avant Garde (1970), the last major mid-century revival of Futura's geometric approach.",
     diagnostics: {
       contrast: "none",
       axis: "vertical",
@@ -202,6 +211,7 @@ const CLASSIFICATIONS = [
     tagline: "Sans serif with a calligrapher's hand still visible underneath.",
     description:
       "Humanist sans serifs keep proportions and some stroke modulation inherited from Roman inscriptional and oldstyle serif letterforms — the most 'readable' and warmest of the sans genres. Apertures are open, and the two-story 'a' and 'g' are common, unlike geometric sans.",
+    closesBecause: "Closes at Frutiger (1976), which revived the Johnston/Gill Sans lineage as a legibility-driven signage genre.",
     diagnostics: {
       contrast: "low",
       axis: "slightly-oblique",
@@ -223,6 +233,7 @@ const CLASSIFICATIONS = [
     tagline: "Letters chiseled in stone, not drawn with a pen.",
     description:
       "Glyphic (or 'Latin') faces evoke carved or inscribed letters rather than pen or brush strokes — small triangular flared serifs instead of bracketed ones, and a monumental, static feel. Roman inscriptional capitals (as on Trajan's Column) are the archetype.",
+    closesBecause: "Closes at Albertus (1932–1940), the last major typeface of its formative wave.",
     diagnostics: {
       contrast: "medium",
       axis: "vertical",
@@ -244,6 +255,7 @@ const CLASSIFICATIONS = [
     tagline: "Type that imitates the connected stroke of handwriting.",
     description:
       "Script faces imitate handwriting, from formal engraved copperplate scripts (used for invitations and certificates) to casual brush and marker scripts. Letters often connect or nearly connect, mimicking a single continuous pen or brush stroke.",
+    closesBecause: "Closes as brush and casual script popularity waned with the rise of the International Typographic Style.",
     subStyles: [
       { name: "Formal / Copperplate", note: "Based on engraved calligraphy; fine hairlines, high contrast, often all-connected." },
       { name: "Casual", note: "Looser, based on brush or marker lettering; less rigid connection between letters." },
@@ -263,6 +275,7 @@ const CLASSIFICATIONS = [
     tagline: "Type designed to be looked at, not read in paragraphs.",
     description:
       "Display faces prioritize impact and personality over extended readability — fat faces, wood-type Western faces, grunge and novelty faces all live here. They frequently exaggerate a trait from another classification (extreme contrast, extreme weight, decorative ornament) past the point of legibility at text size.",
+    closesBecause: "Closes at the 1990s grunge wave, matching the Postmodernism/Punk/Grunge era.",
     keyTypefaces: ["Fat Face", "Cooper Black", "Bungee", "Circus/Western faces"],
     fontStack: "'Bungee', cursive",
     googleFont: "Bungee",
