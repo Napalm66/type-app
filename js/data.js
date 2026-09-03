@@ -40,7 +40,7 @@ const CLASSIFICATIONS = [
       contrast: "low",
       axis: "oblique-strong",
       serif: "bracketed-robust",
-      tell: "Slanted crossbar on the lowercase 'e'; very low stroke contrast.",
+      tell: "Some Venetian typefaces have a slanted lowercase 'e'; very low stroke contrast.",
     },
     visualCharacteristics: [
       { label: "Terminals", text: "The ends of strokes may be softly pointed, rounded, angled, or may end in a teardrop or ball shape." },

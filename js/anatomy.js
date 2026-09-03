@@ -156,7 +156,7 @@ async function buildAnatomyHTML(item) {
     <line x1="${xHeightArrowX}" y1="${meanLineY}" x2="${xHeightArrowX}" y2="${baselineY}" class="anatomy-xheight-arrow" />
     <line x1="${xHeightArrowX - 4}" y1="${meanLineY}" x2="${xHeightArrowX + 4}" y2="${meanLineY}" class="anatomy-xheight-arrow" />
     <line x1="${xHeightArrowX - 4}" y1="${baselineY}" x2="${xHeightArrowX + 4}" y2="${baselineY}" class="anatomy-xheight-arrow" />
-    <text x="${xHeightArrowX}" y="${xHeightArrowMidY}" class="anatomy-xheight-label" text-anchor="end" dominant-baseline="middle">x-height</text>
+    <text x="${xHeightArrowX - 8}" y="${xHeightArrowMidY}" class="anatomy-xheight-label" text-anchor="end" dominant-baseline="middle">x-height</text>
   `;
 
   // stress axis, illustrated on a small reference "o" beside the main word
