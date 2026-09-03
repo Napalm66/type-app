@@ -54,7 +54,7 @@ const CLASSIFICATIONS = [
     timelineEnd: 1600,
     tagline: "The Aldine-Garamond tradition — the workhorse of Western printing.",
     description:
-      "Named for Aldus Manutius and Claude Garamond, Garalde types refined the Venetian model: contrast is slightly higher, the axis is still oblique but less extreme, and the crossbar of the lowercase 'e' returns to horizontal. Garalde oldstyles dominated book printing for two centuries and remain a byword for warmth and readability at text size.",
+      "Named for Aldus Manutius and Claude Garamond, Garalde types refined the Venetian model: contrast is slightly higher, the axis is still oblique but less extreme, and the crossbar of the lowercase 'e' returns to horizontal. Garalde oldstyles dominated book printing for over a century and remain a byword for warmth and readability at text size.",
     diagnostics: {
       contrast: "low-medium",
       axis: "oblique-moderate",
@@ -175,9 +175,9 @@ const CLASSIFICATIONS = [
     id: "geometric",
     branch: "sans",
     name: "Geometric Sans",
-    era: "c. 1925 – 1930",
+    era: "c. 1925 – 1970",
     timelineStart: 1925,
-    timelineEnd: 1930,
+    timelineEnd: 1970,
     tagline: "Compass-and-ruler letters, straight from the Bauhaus.",
     description:
       "Geometric sans serifs build letters from simple, near-mathematical shapes — true circles for bowls, perfect verticals and horizontals. Futura, drawn by Paul Renner, is the archetype: the lowercase 'o' is nearly a perfect circle, and the 'a' and 'g' are typically single-story.",
