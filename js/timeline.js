@@ -365,16 +365,32 @@ function initTimeline(root, onOpenDetail) {
       group.addEventListener("mouseleave", () => tooltip.classList.remove("is-visible"));
     });
 
+    // Bar tooltips follow the cursor instead of anchoring to the bar itself —
+    // bars are thin and often near the chart's top/bottom, where the
+    // anchored placement above/below would frequently flip or clip.
+    function positionNearCursor(x, y) {
+      const ttRect = tooltip.getBoundingClientRect();
+      const offset = 16;
+      let left = Math.min(x + offset, window.innerWidth - ttRect.width - 8);
+      let top = Math.min(y + offset, window.innerHeight - ttRect.height - 8);
+      tooltip.style.left = left + "px";
+      tooltip.style.top = top + "px";
+    }
+
     svg.querySelectorAll(".tl-bar").forEach((bar) => {
-      bar.addEventListener("mouseenter", () => {
+      bar.addEventListener("mouseenter", (e) => {
         const item = getById(bar.dataset.id);
         if (!item) return;
         const yearLabel = `${item.timelineStart} – ${item.timelineEnd}`;
         const closesHTML = item.closesBecause
           ? `<div class="tl-tooltip-closes"><b>Ends because:</b> ${item.closesBecause}</div>`
           : "";
-        place(bar, `<strong>${item.name}</strong><div class="tl-tooltip-years">${yearLabel}</div>${closesHTML}`);
+        tooltip.innerHTML = `<strong>${item.name}</strong><div class="tl-tooltip-years">${yearLabel}</div>${closesHTML}`;
+        tooltip.classList.remove("arrow-top", "arrow-bottom");
+        tooltip.classList.add("is-visible");
+        positionNearCursor(e.clientX, e.clientY);
       });
+      bar.addEventListener("mousemove", (e) => positionNearCursor(e.clientX, e.clientY));
       bar.addEventListener("mouseleave", () => tooltip.classList.remove("is-visible"));
     });
   }
