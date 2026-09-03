@@ -104,16 +104,15 @@ const CLASSIFICATIONS = [
       tell: "Higher contrast than Garalde, but serifs still bracketed (not hairline) and axis close to vertical.",
     },
     keyTypefaces: ["Baskerville", "Times New Roman", "Georgia", "Mrs Eaves"],
-    // Tinos leads: a free, SIL-OFL metric-compatible match for Times New
-    // Roman (same brief as Arimo for Helvetica/Arial), self-hosted so it
-    // renders identically for every visitor — unlike referencing "Times
-    // New Roman" by name, which silently falls back on any device that
-    // doesn't have it installed (many Android/Linux setups), and unlike
-    // embedding the real Times New Roman, which its Monotype license
-    // doesn't permit redistributing on a public site. Libre Baskerville
-    // (also a loaded web font, not a system-font guess) is the fallback
-    // if Tinos ever fails to load.
-    fontStack: "'Tinos', 'Libre Baskerville', 'Times New Roman', 'Liberation Serif', serif",
+    // "Times New Roman" leads by name — genuine, if the visitor's device
+    // has it installed (no redistribution involved, just a CSS reference).
+    // Tinos, a free SIL-OFL metric-compatible match for Times New Roman
+    // (same brief as Arimo for Helvetica/Arial), is self-hosted right
+    // behind it — so any visitor without Times New Roman installed
+    // (many Android/Linux setups) still gets the same look instead of
+    // silently falling back to a generic serif. Libre Baskerville (also
+    // a loaded web font) is the fallback if Tinos ever fails to load.
+    fontStack: "'Times New Roman', 'Tinos', 'Libre Baskerville', 'Liberation Serif', serif",
     googleFont: "Libre Baskerville",
     specimenSize: "2.8rem",
   },
