@@ -252,6 +252,21 @@ const CLASSIFICATIONS = [
       serif: "none",
       tell: "Slightly irregular widths, squarish curves, a hint of stroke contrast — less 'engineered' than neo-grotesques.",
     },
+    visualCharacteristics: [
+      { label: "Terminals", text: "The ends of strokes may be rounded, squared, or angled." },
+      { label: "Serifs", text: "No serifs." },
+      { label: "Stress", text: "Usually vertical." },
+      { label: "Contrast", text: "Little or no contrast between thick and thin strokes." },
+      { label: "X-height", text: "Generally tall in relation to the cap height." },
+      { label: "Set width", text: "Characters tend to be narrow to moderate." },
+    ],
+    additionalFeatures: [
+      "Apex of capital A is usually squared",
+      "Lowercase a is usually double storey",
+      "Lowercase g is usually single storey",
+      "Capital G usually has a spur",
+      "Often have a slightly squared appearance",
+    ],
     keyTypefaces: ["Akzidenz-Grotesk", "Franklin Gothic", "News Gothic"],
     // Libre Franklin (Impallari Type) is an explicit open-source
     // revival of Franklin Gothic — this card's own key typeface —
