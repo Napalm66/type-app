@@ -1,77 +1,85 @@
 {
   "schemaVersion": 2,
-  "generatedAt": "2026-09-04T12:00:00Z",
+  "generatedAt": "2026-09-04T13:00:00Z",
   "title": "Design System: Type Classified",
   "extensions": {
     "colorMeta": {
       "paper": {
         "role": "neutral",
         "displayName": "Paper",
-        "canonical": "#efece6",
-        "darkVariant": "#18160f",
-        "tonalRamp": ["#1c1a15", "#362f24", "#514c3f", "#635c4e", "#716a5e", "#a49b8c", "#d7d2c5", "#fdfcfa"]
+        "canonical": "#e6e6e6",
+        "darkVariant": "#161616",
+        "tonalRamp": ["#161616", "#2e2e2e", "#474745", "#5c5c5a", "#606060", "#8f8f8d", "#cfcfcf", "#ffffff"]
       },
       "panel": {
         "role": "neutral",
         "displayName": "Panel",
-        "canonical": "#fdfcfa",
-        "darkVariant": "#221f18",
-        "tonalRamp": ["#1c1a15", "#362f24", "#514c3f", "#635c4e", "#716a5e", "#a49b8c", "#d7d2c5", "#fdfcfa"]
+        "canonical": "#ffffff",
+        "darkVariant": "#242424",
+        "tonalRamp": ["#161616", "#2e2e2e", "#474745", "#5c5c5a", "#606060", "#8f8f8d", "#cfcfcf", "#ffffff"]
       },
       "ink": {
         "role": "neutral",
         "displayName": "Ink",
-        "canonical": "#1c1a15",
-        "darkVariant": "#f2ede0",
-        "tonalRamp": ["#1c1a15", "#362f24", "#514c3f", "#635c4e", "#716a5e", "#a49b8c", "#d7d2c5", "#fdfcfa"]
+        "canonical": "#161616",
+        "darkVariant": "#f2f2f0",
+        "tonalRamp": ["#161616", "#2e2e2e", "#474745", "#5c5c5a", "#606060", "#8f8f8d", "#cfcfcf", "#ffffff"]
       },
       "ink-soft": {
         "role": "neutral",
         "displayName": "Ink Soft",
-        "canonical": "#514c3f",
-        "darkVariant": "#b8ae98",
-        "tonalRamp": ["#1c1a15", "#362f24", "#514c3f", "#635c4e", "#716a5e", "#a49b8c", "#d7d2c5", "#fdfcfa"]
+        "canonical": "#474745",
+        "darkVariant": "#c2c2bf",
+        "tonalRamp": ["#161616", "#2e2e2e", "#474745", "#5c5c5a", "#606060", "#8f8f8d", "#cfcfcf", "#ffffff"]
       },
       "ink-faint": {
         "role": "neutral",
         "displayName": "Ink Faint",
-        "canonical": "#716a5e",
-        "darkVariant": "#968e7c",
-        "tonalRamp": ["#1c1a15", "#362f24", "#514c3f", "#635c4e", "#716a5e", "#a49b8c", "#d7d2c5", "#fdfcfa"],
-        "contrastNote": "4.54:1 vs paper (light), 5.56:1 vs paper (dark) — both clear WCAG AA 4.5:1 for text, verified 2026-09-04."
+        "canonical": "#606060",
+        "darkVariant": "#b0b0ad",
+        "tonalRamp": ["#161616", "#2e2e2e", "#474745", "#5c5c5a", "#606060", "#8f8f8d", "#cfcfcf", "#ffffff"],
+        "contrastNote": "5.04:1 vs paper (light), 8.32:1 vs paper (dark) — both clear WCAG AA 4.5:1 for text, verified 2026-09-04."
       },
       "rule-solid": {
         "role": "neutral",
         "displayName": "Rule Solid",
-        "canonical": "#d7d2c5",
-        "darkVariant": "#38342a",
-        "tonalRamp": ["#1c1a15", "#362f24", "#514c3f", "#635c4e", "#716a5e", "#a49b8c", "#d7d2c5", "#fdfcfa"]
+        "canonical": "#cfcfcf",
+        "darkVariant": "#3a3a38",
+        "tonalRamp": ["#161616", "#2e2e2e", "#474745", "#5c5c5a", "#606060", "#8f8f8d", "#cfcfcf", "#ffffff"]
       },
       "rule-dashed": {
         "role": "neutral",
         "displayName": "Rule Dashed",
-        "canonical": "rgba(28, 26, 21, 0.22)",
-        "darkVariant": "rgba(242, 237, 224, 0.2)",
+        "canonical": "rgba(22, 22, 22, 0.22)",
+        "darkVariant": "rgba(242, 242, 240, 0.2)",
         "tonalRamp": []
       },
       "sealing-wax": {
         "role": "primary",
         "displayName": "Sealing Wax",
-        "canonical": "#a8391f",
-        "darkVariant": "#d9714a",
-        "tonalRamp": ["#3a1108", "#4a170b", "#6e2210", "#922c16", "#a8391f", "#c2532f", "#d9714a", "#f3c3ab"],
-        "contrastNote": "5.45:1 vs paper (light), 5.52:1 vs dark paper (dark) — verified 2026-09-04."
+        "canonical": "#c22400",
+        "darkVariant": "#ff5a33",
+        "tonalRamp": ["#3d0c00", "#5c1200", "#821a00", "#a01f00", "#c22400", "#e05530", "#ff8560", "#ffc4ac"],
+        "contrastNote": "4.74:1 vs paper / 5.92:1 vs panel (light), 5.83:1 vs paper / 5.00:1 vs panel (dark) — brightened from the redesign's first-pass #a8391f at the user's explicit request for more accent presence; verified 2026-09-04."
+      },
+      "accent-tint": {
+        "role": "primary",
+        "displayName": "Sealing Wax, Tinted",
+        "canonical": "color-mix(in srgb, #c22400 12%, #ffffff)",
+        "darkVariant": "color-mix(in srgb, #ff5a33 14%, #242424)",
+        "tonalRamp": [],
+        "purpose": "Light background fill behind branch tags, added in the same pass as the brighter accent so tags read as distinct marks instead of a thin outline that's easy to miss."
       },
       "focus-ring": {
         "role": "neutral",
         "displayName": "Focus Ring",
-        "canonical": "#1c1a15",
-        "darkVariant": "#f2ede0",
-        "tonalRamp": ["#1c1a15", "#362f24", "#514c3f", "#635c4e", "#716a5e", "#a49b8c", "#d7d2c5", "#fdfcfa"]
+        "canonical": "#161616",
+        "darkVariant": "#f2f2f0",
+        "tonalRamp": ["#161616", "#2e2e2e", "#474745", "#5c5c5a", "#606060", "#8f8f8d", "#cfcfcf", "#ffffff"]
       }
     },
     "typographyMeta": {
-      "display": { "displayName": "Display", "purpose": "Every classification name and heading, always uppercase — the site brand, Explore row names, detail panel name, quiz question/result. The system's one loud gesture." },
+      "display": { "displayName": "Display", "purpose": "Every classification name and heading, always uppercase — the site brand, Explore row names, detail panel name, quiz question/result. The brand itself runs large (clamp(3.4rem, 11vw, 7rem)) so it reads as the first viewport's actual headline." },
       "title": { "displayName": "Title", "purpose": "Section intros and the same oversized-uppercase treatment as display, at a slightly narrower size range for secondary headings." },
       "body": { "displayName": "Body", "purpose": "Running prose — descriptions, taglines, hints — plus the rotated tab labels." },
       "mono": { "displayName": "Mono", "purpose": "Anything measured: indices, era dates, diagnostic labels, branch tags, footer credits, timeline marks. A number set in this face reads as data, not prose." }
@@ -79,7 +87,7 @@
     "shadows": [],
     "shadowNote": "This system uses no box-shadow anywhere — see DESIGN.md's 'The Line, Not Light Rule'. Separation between surfaces comes from a 1px border (rule-solid for flush content, ink for floating panels) or a paper/panel tone shift, never blur.",
     "motion": [
-      { "name": "ease-cut", "value": "0.1s-0.2s steps(2, end) or steps(3, end)", "purpose": "Every state change (view fade-in, tooltip/popover appearance, row hover) steps rather than eases — an instant two-or-three-frame cut instead of a smooth curve, matching the system's printed/mechanical register. Replaces the previous world's soft opacity+translateY eases entirely." }
+      { "name": "ease-cut", "value": "0.1s-0.2s steps(2, end) or steps(3, end)", "purpose": "Every state change (view fade-in, tooltip/popover appearance, row hover) steps rather than eases — an instant two-or-three-frame cut instead of a smooth curve, matching the system's printed/mechanical register." }
     ],
     "breakpoints": [
       { "name": "tablet", "value": "640px", "purpose": "Brand tagline switches from right-aligned to left-aligned and drops its max-width." },
@@ -91,33 +99,33 @@
       "name": "Tab",
       "kind": "nav",
       "refersTo": "tab",
-      "description": "Rotated vertical label riding a dashed grid rule — the header's view switcher, translating the pinned poster reference's own navigation device.",
+      "description": "Rotated vertical label riding a dashed grid rule — the header's view switcher. The active state's rule is now sealing-wax red (was ink) for a small deliberate dash of color in the header.",
       "html": "<nav class=\"ds-tabs\"><button class=\"ds-tab ds-tab--active\"><span class=\"ds-tab-rule\"></span><span class=\"ds-tab-label\">Explore</span></button><button class=\"ds-tab\"><span class=\"ds-tab-rule\"></span><span class=\"ds-tab-label\">Identify</span></button></nav>",
-      "css": ".ds-tabs { display: flex; gap: 2rem; height: 78px; align-items: flex-end; border-bottom: 1px solid #d7d2c5; } .ds-tab { display: flex; flex-direction: column; align-items: center; justify-content: flex-end; height: 100%; background: none; border: none; padding: 0; cursor: pointer; } .ds-tab-rule { flex: 1; width: 0; border-left: 1px dashed #716a5e; } .ds-tab-label { writing-mode: vertical-rl; transform: rotate(180deg); font-family: Inter, sans-serif; font-size: 0.7rem; font-weight: 600; letter-spacing: 0.05em; text-transform: uppercase; color: #716a5e; margin-top: 0.5rem; } .ds-tab--active .ds-tab-rule { border-left-style: solid; border-left-color: #1c1a15; } .ds-tab--active .ds-tab-label { color: #1c1a15; font-weight: 700; }"
+      "css": ".ds-tabs { display: flex; gap: 2rem; height: 78px; align-items: flex-end; border-bottom: 1px solid #cfcfcf; } .ds-tab { display: flex; flex-direction: column; align-items: center; justify-content: flex-end; height: 100%; background: none; border: none; padding: 0; cursor: pointer; } .ds-tab-rule { flex: 1; width: 0; border-left: 1px dashed #606060; } .ds-tab-label { writing-mode: vertical-rl; transform: rotate(180deg); font-family: Inter, sans-serif; font-size: 0.7rem; font-weight: 600; letter-spacing: 0.05em; text-transform: uppercase; color: #606060; margin-top: 0.5rem; } .ds-tab--active .ds-tab-rule { border-left-style: solid; border-left-color: #c22400; border-left-width: 2px; } .ds-tab--active .ds-tab-label { color: #161616; font-weight: 700; }"
     },
     {
       "name": "Filter Chip",
       "kind": "chip",
       "refersTo": "chip",
-      "description": "Branch filter above the Explore list and the Compare picker.",
+      "description": "Branch filter above the Explore list and the Compare picker. Now a solid white (panel) fill rather than transparent, so each chip reads as a distinct element against the grey paper page.",
       "html": "<div class=\"ds-chip-row\"><button class=\"ds-chip ds-chip--active\">ALL</button><button class=\"ds-chip\">SERIF</button></div>",
-      "css": ".ds-chip-row { display: flex; gap: 0.5rem; } .ds-chip { font-family: 'JetBrains Mono', monospace; font-size: 0.7rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.04em; color: #514c3f; background: none; border: 1px solid #d7d2c5; border-radius: 0; padding: 0.4rem 0.75rem; cursor: pointer; } .ds-chip--active { background: #1c1a15; border-color: #1c1a15; color: #efece6; }"
+      "css": ".ds-chip-row { display: flex; gap: 0.5rem; } .ds-chip { font-family: 'JetBrains Mono', monospace; font-size: 0.7rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.04em; color: #474745; background: #ffffff; border: 1px solid #161616; border-radius: 0; padding: 0.4rem 0.75rem; cursor: pointer; } .ds-chip:hover { border-color: #c22400; color: #c22400; } .ds-chip--active { background: #161616; border-color: #161616; color: #e6e6e6; }"
     },
     {
       "name": "Branch Tag",
       "kind": "chip",
       "refersTo": "tag",
-      "description": "Outlined (not filled) classification-branch mark — a departure from the previous world's tinted pill.",
+      "description": "Classification-branch mark: sealing-wax text and border over a light accent-tint fill (revised from a fully transparent outline, which read as too faint).",
       "html": "<span class=\"ds-tag\">SERIF</span>",
-      "css": ".ds-tag { display: inline-block; font-family: 'JetBrains Mono', monospace; font-size: 0.62rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; color: #a8391f; background: none; border: 1px solid #a8391f; padding: 0.15rem 0.4rem; border-radius: 0; }"
+      "css": ".ds-tag { display: inline-block; font-family: 'JetBrains Mono', monospace; font-size: 0.65rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; color: #c22400; background: color-mix(in srgb, #c22400 12%, #ffffff); border: 1px solid #c22400; padding: 0.2rem 0.5rem; border-radius: 0; }"
     },
     {
       "name": "Spec Row",
       "kind": "custom",
       "refersTo": "row",
-      "description": "Explore-list row: index, oversized display name, live specimen (set in the classification's own verified font), tagline, era, branch tag. Replaces the previous world's card grid entirely.",
+      "description": "Explore-list row: index, oversized display name, live specimen (set in the classification's own verified font), tagline, era, branch tag.",
       "html": "<button class=\"ds-row\"><span class=\"ds-row-index\">03</span><span class=\"ds-row-main\"><span class=\"ds-row-name\">Garalde Oldstyle</span><span class=\"ds-row-specimen\">Aa Gg Qy</span><span class=\"ds-row-tagline\">The Aldine-Garamond tradition.</span></span><span class=\"ds-row-meta\"><span class=\"ds-row-era\">c. 1495 – 1700</span><span class=\"ds-tag\">SERIF</span></span></button>",
-      "css": ".ds-row { display: flex; align-items: baseline; gap: 1.25rem; width: 100%; text-align: left; background: none; border: none; border-top: 1px solid #d7d2c5; padding: 1rem 0; cursor: pointer; } .ds-row:hover { background: #fdfcfa; } .ds-row-index { font-family: 'JetBrains Mono', monospace; font-size: 0.68rem; color: #716a5e; width: 24px; flex-shrink: 0; padding-top: 0.4em; } .ds-row-main { flex: 1; } .ds-row-name { display: block; font-family: Anton, sans-serif; font-size: 2rem; text-transform: uppercase; line-height: 1; color: #1c1a15; } .ds-row-specimen { display: block; margin-top: 0.4rem; font-family: Georgia, serif; font-size: 1.5rem; color: #514c3f; } .ds-row-tagline { display: block; margin-top: 0.3rem; font-family: Inter, sans-serif; font-size: 0.82rem; color: #514c3f; } .ds-row-meta { flex-shrink: 0; display: flex; flex-direction: column; align-items: flex-end; gap: 0.4rem; } .ds-row-era { font-family: 'JetBrains Mono', monospace; font-size: 0.68rem; color: #716a5e; }"
+      "css": ".ds-row { display: flex; align-items: baseline; gap: 1.25rem; width: 100%; text-align: left; background: none; border: none; border-top: 1px solid #cfcfcf; padding: 1rem 0; cursor: pointer; } .ds-row:hover { background: #ffffff; } .ds-row-index { font-family: 'JetBrains Mono', monospace; font-size: 0.68rem; color: #606060; width: 24px; flex-shrink: 0; padding-top: 0.4em; } .ds-row-main { flex: 1; } .ds-row-name { display: block; font-family: Anton, sans-serif; font-size: 2rem; text-transform: uppercase; line-height: 1; color: #161616; } .ds-row-specimen { display: block; margin-top: 0.4rem; font-family: Georgia, serif; font-size: 1.5rem; color: #474745; } .ds-row-tagline { display: block; margin-top: 0.3rem; font-family: Inter, sans-serif; font-size: 0.82rem; color: #474745; } .ds-row-meta { flex-shrink: 0; display: flex; flex-direction: column; align-items: flex-end; gap: 0.4rem; } .ds-row-era { font-family: 'JetBrains Mono', monospace; font-size: 0.68rem; color: #606060; }"
     },
     {
       "name": "Text Input",
@@ -125,7 +133,7 @@
       "refersTo": "n/a",
       "description": "The \"try your own text\" custom specimen field.",
       "html": "<input class=\"ds-input\" type=\"text\" placeholder=\"Type or paste a word…\" />",
-      "css": ".ds-input { font-family: Inter, sans-serif; font-size: 0.92rem; padding: 0.6rem 0.85rem; border: 1px solid #d7d2c5; border-radius: 0; background: #fdfcfa; color: #1c1a15; } .ds-input::placeholder { color: #716a5e; } .ds-input:focus-visible { outline: 2px solid #1c1a15; outline-offset: 1px; border-color: #716a5e; }"
+      "css": ".ds-input { font-family: Inter, sans-serif; font-size: 0.92rem; padding: 0.6rem 0.85rem; border: 1px solid #cfcfcf; border-radius: 0; background: #ffffff; color: #161616; } .ds-input::placeholder { color: #606060; } .ds-input:focus-visible { outline: 2px solid #161616; outline-offset: 1px; border-color: #606060; }"
     },
     {
       "name": "Floating Panel",
@@ -133,39 +141,39 @@
       "refersTo": "panel",
       "description": "The detail modal and quiz card shell — no shadow; separation from the page comes entirely from the solid ink border.",
       "html": "<div class=\"ds-panel\"><div class=\"ds-panel-era\">C. 1495 – 1700</div><div class=\"ds-panel-name\">Garalde Oldstyle</div></div>",
-      "css": ".ds-panel { background: #fdfcfa; border: 1px solid #1c1a15; border-radius: 0; padding: 2rem; max-width: 640px; } .ds-panel-era { font-family: 'JetBrains Mono', monospace; font-size: 0.72rem; color: #716a5e; font-weight: 600; text-transform: uppercase; } .ds-panel-name { font-family: Anton, sans-serif; font-size: 2.4rem; text-transform: uppercase; line-height: 0.95; margin-top: 0.35rem; color: #1c1a15; }"
+      "css": ".ds-panel { background: #ffffff; border: 1px solid #161616; border-radius: 0; padding: 2rem; max-width: 640px; } .ds-panel-era { font-family: 'JetBrains Mono', monospace; font-size: 0.72rem; color: #606060; font-weight: 600; text-transform: uppercase; } .ds-panel-name { font-family: Anton, sans-serif; font-size: 2.4rem; text-transform: uppercase; line-height: 0.95; margin-top: 0.35rem; color: #161616; }"
     },
     {
       "name": "Anatomy Leader-Line",
       "kind": "custom",
       "refersTo": "n/a",
-      "description": "Signature component (extended, not new): the dashed cap-line/mean-line/baseline annotation that previously lived only in the anatomy diagram is now the whole system's structural idiom — dashed rules and mono labels reading a specimen like a dimensioned drawing.",
-      "html": "<svg width=\"280\" height=\"90\" viewBox=\"0 0 280 90\"><line x1=\"0\" y1=\"10\" x2=\"280\" y2=\"10\" stroke=\"#716a5e\" stroke-width=\"1\" stroke-dasharray=\"3 3\"/><text x=\"0\" y=\"7\" font-family=\"JetBrains Mono\" font-size=\"8\" fill=\"#716a5e\">CAP LINE</text><text x=\"10\" y=\"70\" font-family=\"Anton\" font-size=\"48\" fill=\"#1c1a15\">Aa</text><line x1=\"0\" y1=\"75\" x2=\"280\" y2=\"75\" stroke=\"#716a5e\" stroke-width=\"1\" stroke-dasharray=\"3 3\"/><text x=\"0\" y=\"72\" font-family=\"JetBrains Mono\" font-size=\"8\" fill=\"#716a5e\">BASELINE</text></svg>",
+      "description": "Signature component: the dashed cap-line/mean-line/baseline annotation, the system's structural idiom extended app-wide.",
+      "html": "<svg width=\"280\" height=\"90\" viewBox=\"0 0 280 90\"><line x1=\"0\" y1=\"10\" x2=\"280\" y2=\"10\" stroke=\"#606060\" stroke-width=\"1\" stroke-dasharray=\"3 3\"/><text x=\"0\" y=\"7\" font-family=\"JetBrains Mono\" font-size=\"8\" fill=\"#606060\">CAP LINE</text><text x=\"10\" y=\"70\" font-family=\"Anton\" font-size=\"48\" fill=\"#161616\">Aa</text><line x1=\"0\" y1=\"75\" x2=\"280\" y2=\"75\" stroke=\"#606060\" stroke-width=\"1\" stroke-dasharray=\"3 3\"/><text x=\"0\" y=\"72\" font-family=\"JetBrains Mono\" font-size=\"8\" fill=\"#606060\">BASELINE</text></svg>",
       "css": "svg text { letter-spacing: 0.03em; font-weight: 700; }"
     },
     {
       "name": "Timeline Bar",
       "kind": "custom",
       "refersTo": "n/a",
-      "description": "Signature component: classification bars in flat sealing-wax over near-monochrome era-band tints (down from nine distinct hues), with square corners (rx=0, changed from the previous world's rx=4) and dashed gridlines.",
-      "html": "<svg width=\"320\" height=\"70\" viewBox=\"0 0 320 70\"><rect x=\"0\" y=\"10\" width=\"320\" height=\"50\" fill=\"rgba(28,26,21,0.08)\" /><line x1=\"160\" y1=\"10\" x2=\"160\" y2=\"60\" stroke=\"rgba(28,26,21,0.22)\" stroke-width=\"1\" stroke-dasharray=\"3 3\"/><rect x=\"40\" y=\"22\" width=\"200\" height=\"18\" rx=\"0\" fill=\"#a8391f\" /><text x=\"48\" y=\"34\" font-family=\"JetBrains Mono\" font-size=\"10\" font-weight=\"700\" fill=\"#fdfcfa\">1150 – 1500</text></svg>",
+      "description": "Signature component: classification bars in flat sealing-wax over near-monochrome era-band tints, square corners, dashed gridlines.",
+      "html": "<svg width=\"320\" height=\"70\" viewBox=\"0 0 320 70\"><rect x=\"0\" y=\"10\" width=\"320\" height=\"50\" fill=\"rgba(22,22,22,0.08)\" /><line x1=\"160\" y1=\"10\" x2=\"160\" y2=\"60\" stroke=\"rgba(22,22,22,0.22)\" stroke-width=\"1\" stroke-dasharray=\"3 3\"/><rect x=\"40\" y=\"22\" width=\"200\" height=\"18\" rx=\"0\" fill=\"#c22400\" /><text x=\"48\" y=\"34\" font-family=\"JetBrains Mono\" font-size=\"10\" font-weight=\"700\" fill=\"#ffffff\">1150 – 1500</text></svg>",
       "css": "text { letter-spacing: 0.02em; }"
     }
   ],
   "narrative": {
     "northStar": "The Measured Document",
-    "overview": "Type Classified reads as a technical reference, not a book: a page built like a measured drawing, where a dashed rule and a leader line prove a claim instead of decorating it. This replaced an earlier 'Specimen Ledger' identity (warm parchment, a serif display face, soft ambient shadows) at the user's explicit direction, pinned to two references — a portfolio built from massive stacked client names, and the Cooper Hewitt Museum's 'Type Culture Now' poster, with its dashed vertical grid and rotated section labels — translated onto a white ground instead of the originals' black.\n\nEvery classification name is set in a single oversized condensed grotesque, uppercase, carrying the page the way a poster's headline carries a spread. Everything measured — indices, era dates, diagnostic labels, dimension callouts — is set in a monospace, because a number in a monospace face reads as data, not prose. The one color note is a sealing-wax red, held to tags and measurement marks exactly as before; nothing else about the palette survived the replacement. Corners are square throughout and nothing casts a shadow — separation between surfaces comes from a rule line or a change in tone, never blur.",
+    "overview": "Type Classified reads as a technical reference, not a book: a page built like a measured drawing, where a dashed rule and a leader line prove a claim instead of decorating it. This replaced an earlier 'Specimen Ledger' identity (warm parchment, a serif display face, soft ambient shadows) at the user's explicit direction, pinned to two references — a portfolio built from massive stacked client names, and the Cooper Hewitt Museum's 'Type Culture Now' poster, with its dashed vertical grid and rotated section labels — translated onto a white ground instead of the originals' black.\n\nA follow-up pass corrected the neutrals to genuine grey (paper was still faintly warm at #efece6; now #e6e6e6), brightened and re-saturated the accent (#a8391f -> #c22400 light, #d9714a -> #ff5a33 dark), gave branch tags a light tint fill so they read clearly instead of nearly disappearing, and enlarged the brand headline substantially (clamp(2.4rem,7vw,4rem) -> clamp(3.4rem,11vw,7rem)) so it functions as the first viewport's actual headline.\n\nEvery classification name is set in a single oversized condensed grotesque, uppercase, carrying the page the way a poster's headline carries a spread. Everything measured — indices, era dates, diagnostic labels, dimension callouts — is set in a monospace, because a number in a monospace face reads as data, not prose. Corners are square throughout and nothing casts a shadow — separation between surfaces comes from a rule line or a change in tone, never blur.",
     "keyCharacteristics": [
-      "Near-white ground, near-black ink — never a warm cream, never a soft shadow",
-      "One condensed display face (Anton) carries every name and headline, always uppercase",
+      "Genuinely neutral light grey ground (not a warm off-white), near-black ink, white raised panels",
+      "One condensed display face (Anton) carries every name and headline, always uppercase, at a deliberately large scale",
       "A monospace face marks anything measured: indices, dates, dimensions, tags",
       "Dashed rules are structural, not decorative — they mark a grid, a leader line, a boundary",
       "Square corners everywhere; separation comes from a rule or a tone change, never a shadow",
-      "The one accent color still marks only small things — tags, bars, measurement call-outs — never a fill"
+      "One bright accent color marks small things — tags (with a tint fill), bars, the active tab, measurement call-outs — never a large fill"
     ],
     "rules": [
-      { "name": "The Small Mark Rule", "body": "Sealing Wax never fills a surface larger than a tag, a 2px border, or a bar on the timeline. It marks; it never fills.", "section": "colors" },
-      { "name": "The No-Warm-Neutral Rule", "body": "No neutral in this system carries a warm parchment cast — paper, panel, ink, and rule are all genuinely near-white/near-black/near-gray. The previous identity's entire palette is the anti-reference here.", "section": "colors" },
+      { "name": "The Small Mark Rule", "body": "Sealing Wax never fills a surface larger than a tag, a 2px border, or a bar on the timeline — a tag's light accent-tint background is a tint, not a fill, and stays inside this rule.", "section": "colors" },
+      { "name": "The No-Warm-Neutral Rule", "body": "No neutral in this system carries a warm cast in either direction — paper, panel, ink, and rule are all genuinely neutral grey, black, or white.", "section": "colors" },
       { "name": "The One Voice, One Data Rule", "body": "Anton names things; Inter explains things; JetBrains Mono measures things. No role ever borrows another's job.", "section": "typography" },
       { "name": "The Line, Not Light Rule", "body": "No box-shadow appears anywhere in this system. A surface separates from the page behind it with a border or a tone change; if neither reads clearly enough, the surface's content or size is wrong, not its shadow.", "section": "elevation" }
     ],
@@ -173,7 +181,7 @@
       "Do set every classification name and heading in Anton, uppercase, at large scale.",
       "Do set anything measured (an index, a date, a diagnostic, a dimension) in JetBrains Mono.",
       "Do separate every surface with a border or a tone shift, never a shadow.",
-      "Do keep Sealing Wax to tags, bars, and measurement marks."
+      "Do keep Sealing Wax to tags (with a tint fill), bars, and measurement marks — bright, but still small."
     ],
     "donts": [
       "Don't reintroduce a shadow anywhere, however soft.",

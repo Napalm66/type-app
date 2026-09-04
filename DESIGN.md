@@ -2,21 +2,22 @@
 name: Type Classified
 description: A field guide to type classification, for people who read type like weather.
 colors:
-  paper: "#efece6"
-  panel: "#fdfcfa"
-  ink: "#1c1a15"
-  ink-soft: "#514c3f"
-  ink-faint: "#716a5e"
-  rule-solid: "#d7d2c5"
-  rule-dashed: "rgba(28, 26, 21, 0.22)"
-  sealing-wax: "#a8391f"
-  focus-ring: "#1c1a15"
+  paper: "#e6e6e6"
+  panel: "#ffffff"
+  ink: "#161616"
+  ink-soft: "#474745"
+  ink-faint: "#606060"
+  rule-solid: "#cfcfcf"
+  rule-dashed: "rgba(22, 22, 22, 0.22)"
+  sealing-wax: "#c22400"
+  accent-tint: "color-mix(in srgb, #c22400 12%, #ffffff)"
+  focus-ring: "#161616"
 typography:
   display:
     fontFamily: "Anton, 'Arial Narrow', sans-serif"
-    fontSize: "clamp(2.4rem, 7vw, 4rem)"
+    fontSize: "clamp(3.4rem, 11vw, 7rem)"
     fontWeight: 400
-    lineHeight: 0.92
+    lineHeight: 0.88
     letterSpacing: "0.003em"
   title:
     fontFamily: "Anton, 'Arial Narrow', sans-serif"
@@ -83,36 +84,36 @@ components:
 
 Type Classified reads as a technical reference, not a book: a page built like a measured drawing, where a dashed rule and a leader line prove a claim instead of decorating it. This replaced an earlier "Specimen Ledger" identity (warm parchment, a serif display face, soft ambient shadows) at the user's explicit direction, pinned to two references — a portfolio built from massive stacked client names, and the Cooper Hewitt Museum's "Type Culture Now" poster, with its dashed vertical grid and rotated section labels — translated onto a white ground instead of the originals' black.
 
-Every classification name is set in a single oversized condensed grotesque, uppercase, carrying the page the way a poster's headline carries a spread. Everything measured — indices, era dates, diagnostic labels, dimension callouts — is set in a monospace, because a number in a monospace face reads as data, not as prose. The one color note is a sealing-wax red, held to tags and measurement marks exactly as before; nothing else about the palette survived the replacement. Corners are square throughout and nothing casts a shadow — separation between surfaces comes from a rule line or a change in tone, never blur.
+Every classification name is set in a single oversized condensed grotesque, uppercase, carrying the page the way a poster's headline carries a spread — the brand lockup itself runs large enough to anchor the whole first viewport, not just introduce it. Everything measured — indices, era dates, diagnostic labels, dimension callouts — is set in a monospace, because a number in a monospace face reads as data, not as prose. The one color note is a bright sealing-wax red, held to tags, bars, and small marks; nothing else about the palette carries color. Corners are square throughout and nothing casts a shadow — separation between surfaces comes from a rule line or a change in tone, never blur.
 
 **Key Characteristics:**
-- Near-white ground, near-black ink — never a warm cream, never a soft shadow
-- One condensed display face (Anton) carries every name and headline, always uppercase
+- Genuinely neutral light grey ground (not a warm off-white), near-black ink, white raised panels
+- One condensed display face (Anton) carries every name and headline, always uppercase, at a deliberately large scale
 - A monospace face marks anything measured: indices, dates, dimensions, tags
 - Dashed rules are structural, not decorative — they mark a grid, a leader line, a boundary
 - Square corners everywhere; separation comes from a rule or a tone change, never a shadow
-- The one accent color still marks only small things — tags, bars, measurement call-outs — never a fill
+- One bright accent color marks small things — tags (with a light tint fill so they read clearly), bars, the active tab, measurement call-outs — never a large fill
 
 ## Colors
 
-A near-monochrome ink-on-paper system with one accent, used exactly as sparingly as the world it replaced.
+A neutral grey-and-ink system with one bright accent, used sparingly but with enough presence (a tint fill on tags, the active tab's rule) that it doesn't disappear the way a purely line-only accent can.
 
 ### Primary
-- **Sealing Wax** (`#a8391f` light / `#d9714a` dark): branch tags, the timeline's classification bars and era pins, the "key tell" callout's left rule, active states. Still never a background fill of any real size — that discipline survived the redesign untouched.
+- **Sealing Wax** (`#c22400` light / `#ff5a33` dark): branch tags (text + border + a light `accent-tint` fill for legibility), the timeline's classification bars and era pins, the "key tell" callout's left rule, the active tab's rule. Brightened and re-saturated from the redesign's first pass specifically so it reads at a glance rather than needing a second look — still never a large background fill.
 
 ### Neutral
-- **Paper** (`#efece6` light / `#18160f` dark): page background.
-- **Panel** (`#fdfcfa` light / `#221f18` dark): any surface that sits above the page — the detail modal, quiz card, row hover state, tooltips, popovers. Counterintuitively lighter than Paper in light mode (and correspondingly darker in dark mode) — a raised surface reads as a distinct sheet laid on the page, not a tinted variant of it.
-- **Ink** (`#1c1a15` light / `#f2ede0` dark): primary text, headings, borders on floating surfaces (modal, quiz card, tooltips), focus rings.
-- **Ink Soft** (`#514c3f` light / `#b8ae98` dark): secondary text — descriptions, taglines.
-- **Ink Faint** (`#716a5e` light / `#968e7c` dark): tertiary text and structural marks — indices, era dates, dashed grid rules, inactive tab labels.
-- **Rule Solid** (`#d7d2c5` light / `#38342a` dark): ordinary hairline dividers between rows and sections.
-- **Rule Dashed** (`rgba(28,26,21,.22)` light / `rgba(242,237,224,.2)` dark): the timeline's gridlines — the one place the dashed-rule motif survives as an actual stroke rather than a border style.
+- **Paper** (`#e6e6e6` light / `#161616` dark): page background — a genuinely neutral light grey, not an off-white or a warm cream.
+- **Panel** (`#ffffff` light / `#242424` dark): any surface that sits above the page — the detail modal, quiz card, row hover state, filter chips, tooltips, popovers. Filter chips in particular carry a solid Panel fill at rest (not transparent) specifically so each one reads as a distinct white rectangle against the grey page, rather than blending into it.
+- **Ink** (`#161616` light / `#f2f2f0` dark): primary text, headings, borders on floating surfaces (modal, quiz card, filter chips, tooltips), focus rings.
+- **Ink Soft** (`#474745` light / `#c2c2bf` dark): secondary text — descriptions, taglines.
+- **Ink Faint** (`#606060` light / `#b0b0ad` dark): tertiary text and structural marks — indices, era dates, dashed grid rules, inactive tab labels.
+- **Rule Solid** (`#cfcfcf` light / `#3a3a38` dark): ordinary hairline dividers between rows and sections.
+- **Rule Dashed** (`rgba(22,22,22,.22)` light / `rgba(242,242,240,.2)` dark): the timeline's gridlines — the one place the dashed-rule motif survives as an actual stroke rather than a border style.
 
 ### Named Rules
-**The Small Mark Rule.** (Carried over from the previous world, unchanged.) Sealing Wax never fills a surface larger than a tag, a 2px border, or a bar on the timeline. It marks; it never fills.
+**The Small Mark Rule.** Sealing Wax never fills a surface larger than a tag, a 2px border, or a bar on the timeline — a tag's light `accent-tint` background is a tint, not a fill, and stays inside this rule.
 
-**The No-Warm-Neutral Rule.** (Replaces the old world's opposite instinct.) No neutral in this system carries a warm parchment cast — paper, panel, ink, and rule are all genuinely near-white/near-black/near-gray. The previous identity's entire palette is the anti-reference here.
+**The No-Warm-Neutral Rule.** No neutral in this system carries a warm cast in either direction — paper, panel, ink, and rule are all genuinely neutral grey, black, or white. A prior draft's paper (`#efece6`) still had a faint warm bias; this pass corrected it to true grey (`#e6e6e6`) at the user's explicit request.
 
 ## Typography
 
@@ -123,7 +124,7 @@ A near-monochrome ink-on-paper system with one accent, used exactly as sparingly
 **Character:** One oversized condensed grotesque carries every name and heading, always uppercase, the way a poster's headline or a portfolio's client list does — against a plain Inter for running prose and a JetBrains Mono for anything measured. There is no serif anywhere in the interface; the previous world's Fraunces is gone entirely, not merely demoted.
 
 ### Hierarchy
-- **Display** (400, `clamp(2.4rem, 7vw, 4rem)`, 0.92 line-height, uppercase): the site brand only.
+- **Display** (400, `clamp(3.4rem, 11vw, 7rem)`, 0.88 line-height, uppercase): the site brand only. Sized deliberately large — at the user's explicit request after the first pass read too modest — so the brand lockup functions as the first viewport's actual headline, not a polite introduction above it.
 - **Title** (400, `clamp(1.4rem, 4vw, 2.1rem)` down to `clamp(1.6rem, 4.4vw, 2.5rem)` depending on context, 1.0–1.05 line-height, uppercase): every classification name — the Explore row, the detail panel, the quiz result — plus section intros and the quiz question. This single oversized-condensed-uppercase treatment is the system's most repeated move.
 - **Body** (400, `1rem`, 1.5 line-height): running prose — descriptions, taglines, quiz hints.
 - **Mono** (700, `0.62rem`–`0.72rem`, 1.3 line-height, `0.04em`–`0.06em` tracking, usually uppercase): the system's other workhorse — row indices, era dates, diagnostic labels, branch tags, footer credits, timeline marks. Where the old system's "Whisper Label" was small Inter, this system's equivalent is monospace: it reads as data being cited, not prose being introduced.
@@ -156,9 +157,9 @@ Every corner in the system is square — `border-radius: 0` everywhere, with no 
 - **Focus:** `2px focus-ring` outline, `2px` offset.
 
 ### Chips (filters, branch tags)
-- **Filter chip:** transparent background, `1px rule-solid` border, square corners, JetBrains Mono uppercase text.
+- **Filter chip:** solid `panel` (white) background, `1px ink` border, square corners, JetBrains Mono uppercase text — given a solid fill rather than transparent specifically so each chip reads as a distinct element against the grey `paper` page instead of nearly disappearing into it. Hover turns the border and text `sealing-wax`.
 - **Active filter chip:** inverts to `ink` background / `paper` text — unchanged behavior from the previous system, just square instead of pill-shaped now.
-- **Branch tag:** JetBrains Mono, `sealing-wax` text on a transparent fill with a `sealing-wax` border — a genuine departure from the old tinted-pill tag: this system prefers an outlined "stamped" mark over any tinted fill, even at tag scale.
+- **Branch tag:** JetBrains Mono, `sealing-wax` text and border over a light `accent-tint` fill (`color-mix(sealing-wax 12%, panel)`) — revised from a fully transparent outline after the first pass read as too faint to "tell apart" at a glance; the tint gives it real presence while staying well inside the Small Mark Rule.
 
 ### Rows (Explore list)
 - **Style:** a full-width flex row — mono index, then the classification's oversized Anton name with its live specimen and tagline beneath, then era date and branch tag at the trailing edge. Separated by `1px rule-solid` hairlines, no card border, no radius.

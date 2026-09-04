@@ -41,15 +41,16 @@
    ========================================================================== */
 
 :root {
-  --paper: #efece6;
-  --panel: #fdfcfa;
-  --ink: #1c1a15;
-  --ink-soft: #514c3f;
-  --ink-faint: #716a5e;
-  --rule: rgba(28, 26, 21, 0.22);
-  --rule-solid: #d7d2c5;
-  --accent: #a8391f;
-  --focus: #1c1a15;
+  --paper: #e6e6e6;
+  --panel: #ffffff;
+  --ink: #161616;
+  --ink-soft: #474745;
+  --ink-faint: #606060;
+  --rule: rgba(22, 22, 22, 0.22);
+  --rule-solid: #cfcfcf;
+  --accent: #c22400;
+  --accent-tint: color-mix(in srgb, var(--accent) 12%, var(--panel));
+  --focus: #161616;
 
   --font-ui: "Inter", system-ui, -apple-system, sans-serif;
   --font-display: "Anton", "Arial Narrow", sans-serif;
@@ -60,15 +61,16 @@
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --paper: #18160f;
-    --panel: #221f18;
-    --ink: #f2ede0;
-    --ink-soft: #b8ae98;
-    --ink-faint: #968e7c;
-    --rule: rgba(242, 237, 224, 0.2);
-    --rule-solid: #38342a;
-    --accent: #d9714a;
-    --focus: #f2ede0;
+    --paper: #161616;
+    --panel: #242424;
+    --ink: #f2f2f0;
+    --ink-soft: #c2c2bf;
+    --ink-faint: #b0b0ad;
+    --rule: rgba(242, 242, 240, 0.2);
+    --rule-solid: #3a3a38;
+    --accent: #ff5a33;
+    --accent-tint: color-mix(in srgb, var(--accent) 14%, var(--panel));
+    --focus: #f2f2f0;
   }
 }
 
@@ -111,8 +113,8 @@ body {
 
 .brand {
   font-family: var(--font-display);
-  font-size: clamp(2.4rem, 7vw, 4rem);
-  line-height: 0.92;
+  font-size: clamp(3.4rem, 11vw, 7rem);
+  line-height: 0.88;
   text-transform: uppercase;
   letter-spacing: 0.003em;
   margin: 0;
@@ -174,7 +176,8 @@ body {
 
 .tab.is-active .tab-rule {
   border-left-style: solid;
-  border-left-color: var(--ink);
+  border-left-color: var(--accent);
+  border-left-width: 2px;
 }
 
 .tab.is-active .tab-label {
@@ -309,8 +312,8 @@ main.wrap {
   text-transform: uppercase;
   letter-spacing: 0.04em;
   color: var(--ink-soft);
-  background: none;
-  border: 1px solid var(--rule-solid);
+  background: var(--panel);
+  border: 1px solid var(--ink);
   border-radius: var(--radius);
   padding: 0.4rem 0.75rem;
   cursor: pointer;
@@ -318,7 +321,8 @@ main.wrap {
 }
 
 .filter-chip:hover {
-  border-color: var(--ink-faint);
+  border-color: var(--accent);
+  color: var(--accent);
 }
 
 .filter-chip:focus-visible {
@@ -432,14 +436,14 @@ main.wrap {
 
 .branch-tag {
   font-family: var(--font-mono);
-  font-size: 0.62rem;
+  font-size: 0.65rem;
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 0.05em;
   color: var(--accent);
-  background: none;
+  background: var(--accent-tint);
   border: 1px solid var(--accent);
-  padding: 0.15rem 0.4rem;
+  padding: 0.2rem 0.5rem;
   border-radius: var(--radius);
   white-space: nowrap;
 }
@@ -1176,6 +1180,7 @@ main.wrap {
   font-weight: 700;
   letter-spacing: 0.03em;
   color: var(--accent);
+  background: var(--accent-tint);
   border: 1px solid var(--accent);
   padding: 1px 4px;
   border-radius: var(--radius);
