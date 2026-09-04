@@ -2,15 +2,15 @@
 name: Type Classified
 description: A field guide to type classification, for people who read type like weather.
 colors:
-  paper: "#e6e6e6"
+  paper: "#f3e9dc"
   panel: "#ffffff"
-  ink: "#161616"
-  ink-soft: "#474745"
-  ink-faint: "#606060"
-  rule-solid: "#cfcfcf"
-  rule-dashed: "rgba(22, 22, 22, 0.22)"
-  sealing-wax: "#c22400"
-  focus-ring: "#161616"
+  ink: "#1a1611"
+  ink-soft: "#5a5044"
+  ink-faint: "#706557"
+  rule-solid: "#ddd0bd"
+  rule-dashed: "rgba(26, 22, 17, 0.22)"
+  sealing-wax: "#bc3a14"
+  focus-ring: "#1a1611"
 typography:
   display:
     fontFamily: "Anton, 'Arial Narrow', sans-serif"
@@ -83,36 +83,36 @@ components:
 
 Type Classified reads as a technical reference, not a book: a page built like a measured drawing, where a dashed rule and a leader line prove a claim instead of decorating it. This replaced an earlier "Specimen Ledger" identity (warm parchment, a serif display face, soft ambient shadows) at the user's explicit direction, pinned to two references — a portfolio built from massive stacked client names, and the Cooper Hewitt Museum's "Type Culture Now" poster, with its dashed vertical grid and rotated section labels — translated onto a white ground instead of the originals' black.
 
-Every classification name is set in a single oversized condensed grotesque, uppercase, carrying the page the way a poster's headline carries a spread — the brand lockup itself runs large enough to anchor the whole first viewport, not just introduce it. Everything measured — indices, era dates, diagnostic labels, dimension callouts — is set in a monospace, because a number in a monospace face reads as data, not as prose. The one color note is a bright sealing-wax red, held to tags, bars, and small marks; nothing else about the palette carries color. Corners are square throughout and nothing casts a shadow — separation between surfaces comes from a rule line or a change in tone, never blur.
+Every classification name is set in a single oversized condensed grotesque, uppercase, carrying the page the way a poster's headline carries a spread — the brand lockup itself runs large enough to anchor the whole first viewport, not just introduce it. Everything measured — indices, era dates, diagnostic labels, dimension callouts — is set in a monospace, because a number in a monospace face reads as data, not as prose. The one color note is a coral-orange, held to tags, bars, and small marks; nothing else about the palette carries color. Corners are square throughout and nothing casts a shadow — separation between surfaces comes from a rule line or a change in tone, never blur.
 
 **Key Characteristics:**
-- Genuinely neutral light grey ground (not a warm off-white), near-black ink, white raised panels
+- Warm cream ground in light mode, rich near-black in dark mode — not a neutral grey, not a stark white/black
 - One condensed display face (Anton) carries every name and headline, always uppercase, at a deliberately large scale
 - A monospace face marks anything measured: indices, dates, dimensions, tags
 - Dashed rules are structural, not decorative — they mark a grid, a leader line, a boundary
 - Square corners everywhere; separation comes from a rule or a tone change, never a shadow
-- One bright accent color marks small things — a marker square on every tag, bars, the active tab, measurement call-outs — never a large fill
+- One coral-orange accent marks small things — a marker square on every tag, bars, the active tab, measurement call-outs — never a large fill
 
 ## Colors
 
-A neutral grey-and-ink system with one bright accent, used sparingly but with enough presence (the active tab's rule, a small marker square on every tag) that it doesn't disappear the way a purely line-only accent can.
+A warm cream/near-black system with one coral-orange accent — a deliberate move (at the user's direction, referencing a font-marketplace specimen sheet) away from the redesign's earlier neutral-grey palette, while keeping the accent just as restrained.
 
 ### Primary
-- **Sealing Wax** (`#c22400` light / `#ff5a33` dark): a small marker square before every branch tag, the timeline's classification bars and era pins, the "key tell" callout's left rule, the active tab's rule. Brightened and re-saturated from the redesign's first pass specifically so it reads at a glance rather than needing a second look — still never a large background fill.
+- **Sealing Wax** (`#bc3a14` light / `#f2743f` dark): a small marker square before every branch tag, the timeline's classification bars and era pins, the "key tell" callout's left rule, the active tab's rule. The light-mode value is deliberately deeper/more burnt than the dark-mode one — the same vivid coral read as text on cream measured only 2.85:1 contrast, so it was darkened to `#bc3a14` (4.66:1) while staying clearly coral, not brick-red.
 
 ### Neutral
-- **Paper** (`#e6e6e6` light / `#161616` dark): page background — a genuinely neutral light grey, not an off-white or a warm cream.
-- **Panel** (`#ffffff` light / `#242424` dark): any surface that sits above the page — the detail modal, quiz card, row hover state, filter chips, tooltips, popovers. Filter chips in particular carry a solid Panel fill at rest (not transparent) specifically so each one reads as a distinct white rectangle against the grey page, rather than blending into it.
-- **Ink** (`#161616` light / `#f2f2f0` dark): primary text, headings, borders on floating surfaces (modal, quiz card, filter chips, tooltips), focus rings.
-- **Ink Soft** (`#474745` light / `#c2c2bf` dark): secondary text — descriptions, taglines.
-- **Ink Faint** (`#606060` light / `#b0b0ad` dark): tertiary text and structural marks — indices, era dates, dashed grid rules, inactive tab labels.
-- **Rule Solid** (`#cfcfcf` light / `#3a3a38` dark): ordinary hairline dividers between rows and sections.
-- **Rule Dashed** (`rgba(22,22,22,.22)` light / `rgba(242,242,240,.2)` dark): the timeline's gridlines — the one place the dashed-rule motif survives as an actual stroke rather than a border style.
+- **Paper** (`#f3e9dc` light / `#191510` dark): page background — a warm cream in light mode, a rich near-black (not neutral) in dark mode.
+- **Panel** (`#ffffff` light / `#221d16` dark): any surface that sits above the page — the detail modal, quiz card, row hover state, filter chips, tooltips, popovers.
+- **Ink** (`#1a1611` light / `#f3e9dc` dark): primary text, headings, borders on floating surfaces (modal, quiz card, filter chips, tooltips), focus rings.
+- **Ink Soft** (`#5a5044` light / `#c9bca8` dark): secondary text — descriptions, taglines.
+- **Ink Faint** (`#706557` light / `#9c8f7c` dark): tertiary text and structural marks — indices, era dates, dashed grid rules, inactive tab labels.
+- **Rule Solid** (`#ddd0bd` light / `#3a3226` dark): ordinary hairline dividers between rows and sections.
+- **Rule Dashed** (`rgba(26,22,17,.22)` light / `rgba(243,233,220,.2)` dark): the timeline's gridlines — the one place the dashed-rule motif survives as an actual stroke rather than a border style.
 
 ### Named Rules
 **The Small Mark Rule.** Sealing Wax never fills a surface larger than a 7px marker square, a 2px border, or a bar on the timeline. A branch tag's own text stays `ink-soft`, not accent — the color lives in the marker, not the label.
 
-**The No-Warm-Neutral Rule.** No neutral in this system carries a warm cast in either direction — paper, panel, ink, and rule are all genuinely neutral grey, black, or white. A prior draft's paper (`#efece6`) still had a faint warm bias; this pass corrected it to true grey (`#e6e6e6`) at the user's explicit request.
+**The Cream-and-Black Rule.** Every neutral carries the same warm cast, consistently — paper/rule/ink-faint lean toward cream, ink/panel-dark lean toward a rich near-black. This reverses an earlier pass's rule (neutral grey, no warmth at all), itself a correction of the original redesign's faintly-warm-but-not-committed grey; the palette has now moved twice and should stop drifting between "warm" and "neutral" on the next pass — pick one deliberately if it changes again.
 
 ## Typography
 
@@ -185,5 +185,5 @@ Era bands lost their nine distinct historical hues in favor of two alternating n
 ### Don't:
 - **Don't** reintroduce a shadow anywhere, however soft — this system's entire elevation model depends on lines and tone doing that job instead.
 - **Don't** round a corner. `border-radius: 0` is absolute, no exceptions — including SVG geometry (`rx`/`ry`).
-- **Don't** bring back a warm-toned neutral. Paper, panel, and every ink step are genuinely near-white/near-black/near-gray now; a beige creeping back in is the old world reasserting itself.
+- **Don't** drift the neutrals' warmth without a deliberate decision — this palette has already moved from warm-but-uncommitted to neutral-grey to warm-cream across three passes; the next change should be a decision, not another wobble.
 - **Don't** ship a font whose classification lineage is wrong for the sake of a better-looking specimen — this constraint predates and survives the redesign untouched (see PRODUCT.md); the live "Aa Gg Qy" specimens still render in each classification's own verified typeface, underneath the new Anton display name, not replaced by it.

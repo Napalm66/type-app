@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<title>Palette Preview</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@400;600;700&family=JetBrains+Mono:wght@400;700&display=swap" />
+<style>
+  * { box-sizing: border-box; }
+  body { margin: 0; background: #ccc; font-family: 'Inter', sans-serif; padding: 2rem; }
+  h1 { font-family: 'JetBrains Mono', monospace; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.06em; color: #333; margin: 0 0 1.5rem; }
+  .cols { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; }
+  .col-label { font-family: 'JetBrains Mono', monospace; font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.05em; color: #555; margin-bottom: 0.6rem; }
+
+  .stage { padding: 2rem; }
+
+  /* ---- LIGHT (cream) ---- */
+  .stage-light {
+    --paper: #f3e9dc;
+    --panel: #ffffff;
+    --ink: #1a1611;
+    --ink-soft: #5a5044;
+    --ink-faint: #7a6f60;
+    --rule-solid: #ddd0bd;
+    --accent: #ee5a35;
+    background: var(--paper);
+  }
+
+  /* ---- DARK (near-black) ---- */
+  .stage-dark {
+    --paper: #191510;
+    --panel: #221d16;
+    --ink: #f3e9dc;
+    --ink-soft: #c9bca8;
+    --ink-faint: #9c8f7c;
+    --rule-solid: #3a3226;
+    --accent: #f2743f;
+    background: var(--paper);
+  }
+
+  .brand-row { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 1.5rem; }
+  .brand { font-family: 'Anton', sans-serif; font-size: 3.2rem; line-height: 0.9; text-transform: uppercase; color: var(--ink); margin: 0; }
+  .brand-sub { font-size: 0.78rem; color: var(--ink-soft); max-width: 22ch; text-align: right; margin: 0; }
+
+  .tabs { display: flex; gap: 1.5rem; height: 60px; align-items: flex-end; border-bottom: 1px solid var(--rule-solid); margin-bottom: 1.5rem; }
+  .tab { display: flex; flex-direction: column; align-items: center; height: 100%; justify-content: flex-end; }
+  .tab-rule { flex: 1; width: 0; border-left: 1px dashed var(--ink-faint); }
+  .tab.is-active .tab-rule { border-left-style: solid; border-left-color: var(--accent); border-left-width: 2px; }
+  .tab-label { writing-mode: vertical-rl; transform: rotate(180deg); font-family: 'Inter', sans-serif; font-size: 0.62rem; font-weight: 600; letter-spacing: 0.05em; text-transform: uppercase; color: var(--ink-faint); margin-top: 0.4rem; }
+  .tab.is-active .tab-label { color: var(--ink); font-weight: 700; }
+
+  .row { display: flex; align-items: baseline; gap: 1rem; border-top: 1px solid var(--rule-solid); padding: 0.85rem 0; }
+  .row:last-child { border-bottom: 1px solid var(--rule-solid); }
+  .idx { font-family: 'JetBrains Mono', monospace; font-size: 0.65rem; color: var(--ink-faint); width: 20px; }
+  .name { font-family: 'Anton', sans-serif; font-size: 1.6rem; text-transform: uppercase; line-height: 1; color: var(--ink); flex: 1; }
+  .specimen { display: block; margin-top: 0.3rem; color: var(--ink-soft); font-size: 1rem; }
+  .meta { display: flex; flex-direction: column; align-items: flex-end; gap: 0.3rem; }
+  .era { font-family: 'JetBrains Mono', monospace; font-size: 0.6rem; color: var(--ink-faint); }
+  .tag { display: inline-flex; align-items: center; gap: 0.35rem; font-family: 'JetBrains Mono', monospace; font-size: 0.6rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; color: var(--ink-soft); }
+  .tag::before { content: ""; width: 6px; height: 6px; background: var(--accent); }
+
+  .filters { display: flex; gap: 0.4rem; margin-bottom: 1.25rem; flex-wrap: wrap; }
+  .chip { font-family: 'JetBrains Mono', monospace; font-size: 0.62rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.04em; color: var(--ink-soft); background: var(--panel); border: 1px solid var(--ink); padding: 0.3rem 0.55rem; }
+  .chip.is-active { background: var(--ink); border-color: var(--ink); color: var(--paper); }
+</style>
+</head>
+<body>
+  <h1>Palette exploration — near-black / warm cream / coral-orange, same minimal layout</h1>
+  <div class="cols">
+    <div>
+      <div class="col-label">Light mode — cream ground</div>
+      <div class="stage stage-light">
+        <div class="brand-row">
+          <h2 class="brand">Type<br/>Classified</h2>
+          <p class="brand-sub">A field guide to type classification.</p>
+        </div>
+        <div class="tabs">
+          <div class="tab is-active"><span class="tab-rule"></span><span class="tab-label">Explore</span></div>
+          <div class="tab"><span class="tab-rule"></span><span class="tab-label">Identify</span></div>
+          <div class="tab"><span class="tab-rule"></span><span class="tab-label">Timeline</span></div>
+        </div>
+        <div class="filters">
+          <span class="chip is-active">All</span>
+          <span class="chip">Blackletter</span>
+          <span class="chip">Serif</span>
+          <span class="chip">Sans Serif</span>
+        </div>
+        <div class="row">
+          <span class="idx">01</span>
+          <span style="flex:1;"><span class="name">Blackletter</span><span class="specimen" style="font-family: Georgia, serif;">Aa Gg Qy</span></span>
+          <span class="meta"><span class="era">c. 1150–1500</span><span class="tag">Blackletter</span></span>
+        </div>
+        <div class="row">
+          <span class="idx">02</span>
+          <span style="flex:1;"><span class="name">Garalde Oldstyle</span><span class="specimen" style="font-family: Georgia, serif;">Aa Gg Qy</span></span>
+          <span class="meta"><span class="era">c. 1495–1700</span><span class="tag">Serif</span></span>
+        </div>
+      </div>
+    </div>
+
+    <div>
+      <div class="col-label">Dark mode — near-black ground</div>
+      <div class="stage stage-dark">
+        <div class="brand-row">
+          <h2 class="brand">Type<br/>Classified</h2>
+          <p class="brand-sub">A field guide to type classification.</p>
+        </div>
+        <div class="tabs">
+          <div class="tab is-active"><span class="tab-rule"></span><span class="tab-label">Explore</span></div>
+          <div class="tab"><span class="tab-rule"></span><span class="tab-label">Identify</span></div>
+          <div class="tab"><span class="tab-rule"></span><span class="tab-label">Timeline</span></div>
+        </div>
+        <div class="filters">
+          <span class="chip is-active">All</span>
+          <span class="chip">Blackletter</span>
+          <span class="chip">Serif</span>
+          <span class="chip">Sans Serif</span>
+        </div>
+        <div class="row">
+          <span class="idx">01</span>
+          <span style="flex:1;"><span class="name">Blackletter</span><span class="specimen" style="font-family: Georgia, serif;">Aa Gg Qy</span></span>
+          <span class="meta"><span class="era">c. 1150–1500</span><span class="tag">Blackletter</span></span>
+        </div>
+        <div class="row">
+          <span class="idx">02</span>
+          <span style="flex:1;"><span class="name">Garalde Oldstyle</span><span class="specimen" style="font-family: Georgia, serif;">Aa Gg Qy</span></span>
+          <span class="meta"><span class="era">c. 1495–1700</span><span class="tag">Serif</span></span>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

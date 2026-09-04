@@ -4,7 +4,8 @@
     "ignoreFiles": [
       ".impeccable/mocks/direction-preview.html",
       ".impeccable/mocks/pinned-direction-preview.html",
-      ".impeccable/mocks/tag-treatment-preview.html"
+      ".impeccable/mocks/tag-treatment-preview.html",
+      ".impeccable/mocks/palette-explore-preview.html"
     ],
     "ignoreValues": [
       {

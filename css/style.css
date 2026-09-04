@@ -41,15 +41,15 @@
    ========================================================================== */
 
 :root {
-  --paper: #e6e6e6;
+  --paper: #f3e9dc;
   --panel: #ffffff;
-  --ink: #161616;
-  --ink-soft: #474745;
-  --ink-faint: #606060;
-  --rule: rgba(22, 22, 22, 0.22);
-  --rule-solid: #cfcfcf;
-  --accent: #c22400;
-  --focus: #161616;
+  --ink: #1a1611;
+  --ink-soft: #5a5044;
+  --ink-faint: #706557;
+  --rule: rgba(26, 22, 17, 0.22);
+  --rule-solid: #ddd0bd;
+  --accent: #bc3a14;
+  --focus: #1a1611;
 
   --font-ui: "Inter", system-ui, -apple-system, sans-serif;
   --font-display: "Anton", "Arial Narrow", sans-serif;
@@ -60,15 +60,15 @@
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --paper: #161616;
-    --panel: #242424;
-    --ink: #f2f2f0;
-    --ink-soft: #c2c2bf;
-    --ink-faint: #b0b0ad;
-    --rule: rgba(242, 242, 240, 0.2);
-    --rule-solid: #3a3a38;
-    --accent: #ff5a33;
-    --focus: #f2f2f0;
+    --paper: #191510;
+    --panel: #221d16;
+    --ink: #f3e9dc;
+    --ink-soft: #c9bca8;
+    --ink-faint: #9c8f7c;
+    --rule: rgba(243, 233, 220, 0.2);
+    --rule-solid: #3a3226;
+    --accent: #f2743f;
+    --focus: #f3e9dc;
   }
 }
 
@@ -458,7 +458,7 @@ main.wrap {
 .detail-overlay {
   position: fixed;
   inset: 0;
-  background: rgba(28, 26, 21, 0.5);
+  background: rgba(26, 22, 17, 0.5);
   display: none;
   align-items: flex-start;
   justify-content: center;
