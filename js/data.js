@@ -214,6 +214,18 @@ const CLASSIFICATIONS = [
       serif: "square-slab",
       tell: "Thick, squared-off serifs roughly as heavy as the stems; minimal or heavy bracketing.",
     },
+    visualCharacteristics: [
+      { label: "Terminals", text: "The ends of strokes may be rounded or squared; lowercase ascender terminals are usually horizontal." },
+      { label: "Serifs", text: "Usually have little to no bracketing, and are generally as thick as stem strokes; serifs often look like thick slabs." },
+      { label: "Stress", text: "Usually vertical." },
+      { label: "Contrast", text: "Little contrast between thick and thin strokes." },
+      { label: "X-height", text: "Generally medium to tall in relation to the cap height." },
+      { label: "Set width", text: "Characters tend to be wide." },
+      { label: "Positive/Negative space", text: "Moderate spacing and counters with heavy letterforms give a darker overall appearance." },
+    ],
+    additionalFeatures: [
+      "Characters appear precise and mechanical, likely to be constructed of interchangeable parts",
+    ],
     keyTypefaces: ["Clarendon", "Rockwell", "Courier", "Kameron"],
     // Kameron (Vernon Adams) is explicitly a reworking of classic Slab
     // Serif/Egyptian forms blending geometric and Clarendon influences —
