@@ -43,11 +43,15 @@ function escapeHtml(str) {
 
 function renderSpecimenHTML(item, context) {
   const isCustom = customSpecimenText.length > 0;
-  // The Explore row's specimen shows the same word as the classification's
-  // own anatomy diagram (deriveAnatomyWord, from anatomy.js) instead of the
-  // generic "Aa Gg Qy" — a live look at that classification's own name set
-  // in its own face, not a shared pangram-style sample.
-  const defaultText = context === "row" ? deriveAnatomyWord(item.name) : SPECIMEN_TEXT;
+  // The Explore row and detail-panel specimens show the same word as the
+  // classification's own anatomy diagram (deriveAnatomyWord, from
+  // anatomy.js) instead of the generic "Aa Gg Qy" — a live look at that
+  // classification's own name set in its own face, not a shared
+  // pangram-style sample. Compare and the quiz result keep "Aa Gg Qy",
+  // since those show several classifications side by side, where a shared
+  // sample text is the point of the comparison.
+  const defaultText =
+    context === "row" || context === "detail" ? deriveAnatomyWord(item.name) : SPECIMEN_TEXT;
   const text = isCustom ? customSpecimenText : defaultText;
   const sizes = SPECIMEN_SIZES[context] || SPECIMEN_SIZES.detail;
   const size = isCustom ? sizes.custom : sizes.default || item.specimenSize || "2.5rem";
