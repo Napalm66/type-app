@@ -7,7 +7,8 @@
       ".impeccable/mocks/tag-treatment-preview.html",
       ".impeccable/mocks/palette-explore-preview.html",
       ".impeccable/mocks/bold-orange-preview.html",
-      ".impeccable/mocks/teal-palette-preview.html"
+      ".impeccable/mocks/teal-palette-preview.html",
+      ".impeccable/mocks/era-color-preview.html"
     ],
     "ignoreValues": [
       {
