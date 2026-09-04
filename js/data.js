@@ -315,6 +315,22 @@ const CLASSIFICATIONS = [
       serif: "none",
       tell: "Near-circular bowls, single-story 'a' and 'g', very consistent, mechanical proportions.",
     },
+    visualCharacteristics: [
+      { label: "Terminals", text: "The ends of strokes may be rounded, squared, or angled." },
+      { label: "Serifs", text: "No serifs." },
+      { label: "Stress", text: "Usually vertical." },
+      { label: "Contrast", text: "Little or no contrast between thick and thin strokes." },
+      { label: "X-height", text: "Generally medium in relation to the cap height." },
+      { label: "Set width", text: "Characters tend to be wide." },
+    ],
+    additionalFeatures: [
+      "Apex of capital A is usually pointed",
+      "Lowercase a is usually single storey",
+      "Lowercase g is usually single storey",
+      "Capital G does not have a spur",
+      "Very precise and mechanical",
+      "Proportions of characters are based on geometric shapes",
+    ],
     keyTypefaces: ["Futura", "Century Gothic", "Avant Garde", "Kabel"],
     // Jost was designed as an explicit homage to Paul Renner (Futura's
     // designer) — originally named "Renner*" before release — capturing
