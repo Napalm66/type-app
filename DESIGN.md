@@ -153,8 +153,11 @@ Every corner in the system is square — `border-radius: 0` everywhere, with no 
 
 ### Tabs (header navigation)
 - **Style:** each tab is a vertical dashed rule (`border-left: 1px dashed ink-faint`) topped by a rotated label (`writing-mode: vertical-rl`, Inter, uppercase, tracked).
-- **Active:** the rule turns solid `ink`, the label turns `ink` and bold — the direct replacement for the old underline-on-hover pattern.
+- **Active:** the rule turns solid `sealing-wax` (2px, was `ink`), the label turns `ink` and bold.
 - **Focus:** `2px focus-ring` outline, `2px` offset.
+
+### Header Graphic (signature component)
+A faint, decorative inline SVG (`.site-header-graphic`) fills the header behind the brand lockup and tabs, absolutely positioned inside `.site-header .wrap` (`inset: 0`) so it starts at the header's top edge and ends exactly at the tabs' bottom rule — never bleeding into the page content below. It extends the anatomy diagram's own dimension-line vocabulary into the one place the app had no imagery at all: four dashed guide lines (cap line / mean line / baseline / descender line) with mono labels at the left edge, a large ghost glyph ("Ag", stroke-only outline at ~7% opacity, generic Georgia serif rather than the site's own Anton — it represents an abstract "any specimen," not the brand voice), and one `sealing-wax` x-height dimension arrow with its mono label, positioned in the open space beside the tagline. `preserveAspectRatio="none"` (stretch-to-fill, not crop) — a `slice` value cropped the top guide line off at some viewport ratios, which stretch never does, and the ghost glyph is abstract enough that mild non-uniform scaling is invisible. Brand row and tabs both carry `position: relative; z-index: 1` so they paint above the graphic; the graphic itself is `pointer-events: none` and hidden below 640px width, where the header has no open space left for it.
 
 ### Chips (filters, branch tags)
 - **Filter chip:** solid `panel` (white) background, `1px ink` border, square corners, JetBrains Mono uppercase text — given a solid fill rather than transparent specifically so each chip reads as a distinct element against the grey `paper` page instead of nearly disappearing into it. Hover turns the border and text `sealing-wax`.
