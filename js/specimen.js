@@ -2,7 +2,7 @@ const SPECIMEN_TEXT = "Aa Gg Qy";
 const SPECIMEN_STORAGE_KEY = "type-classified:custom-specimen";
 
 const SPECIMEN_SIZES = {
-  card: { default: null, custom: "1.3rem" },
+  row: { default: "1.5rem", custom: "1.15rem" },
   detail: { default: null, custom: "1.6rem" },
   compare: { default: "2rem", custom: "1.25rem" },
   quizResult: { default: "2.6rem", custom: "1.5rem" },
@@ -45,8 +45,7 @@ function renderSpecimenHTML(item, context) {
   const isCustom = customSpecimenText.length > 0;
   const text = isCustom ? customSpecimenText : SPECIMEN_TEXT;
   const sizes = SPECIMEN_SIZES[context] || SPECIMEN_SIZES.detail;
-  let size = isCustom ? sizes.custom : sizes.default || item.specimenSize || "2.5rem";
-  if (context === "card") size = `calc(${isCustom ? item.specimenSize || "2.5rem" : size} * 1.25)`;
+  const size = isCustom ? sizes.custom : sizes.default || item.specimenSize || "2.5rem";
   const style = isCustom
     ? `font-family:${item.fontStack}; font-size:${size}; line-height:1.4; white-space:normal; word-break:break-word;`
     : `font-family:${item.fontStack}; font-size:${size};`;

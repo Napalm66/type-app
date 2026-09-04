@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<title>Pinned Direction Preview</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" />
+<style>
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    background: #efece6;
+    padding: 3rem 3rem 4rem;
+    font-family: 'Inter', sans-serif;
+  }
+  .meta {
+    color: #9a9186;
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    margin-bottom: 2.5rem;
+  }
+  .stage {
+    position: relative;
+    background: #fdfcfa;
+    border: 1px solid #1c1a15;
+    padding: 3rem 3rem 3.5rem;
+    overflow: hidden;
+  }
+  /* dashed grid rules */
+  .grid-rule {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 0;
+    border-left: 1px dashed #1c1a15;
+    opacity: 0.35;
+  }
+  .grid-rule .rule-cap {
+    position: absolute;
+    left: -3px;
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: #1c1a15;
+  }
+  .grid-rule .cap-top { top: -3px; }
+  .grid-rule .cap-bottom { bottom: -3px; }
+
+  .brand-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 2.5rem;
+    position: relative;
+    z-index: 2;
+  }
+  .brand-name {
+    font-family: 'Anton', sans-serif;
+    font-size: 3.2rem;
+    letter-spacing: 0.005em;
+    color: #1c1a15;
+    line-height: 0.9;
+    text-transform: uppercase;
+  }
+  .brand-tagline {
+    max-width: 26ch;
+    font-size: 0.85rem;
+    color: #514c3f;
+    text-align: right;
+    line-height: 1.4;
+  }
+
+  .rotated-labels {
+    display: flex;
+    gap: 2.2rem;
+    position: relative;
+    z-index: 2;
+    height: 90px;
+    align-items: flex-end;
+    margin-bottom: 1rem;
+  }
+  .rotated-label {
+    writing-mode: vertical-rl;
+    transform: rotate(180deg);
+    font-family: 'Inter', sans-serif;
+    font-size: 0.72rem;
+    font-weight: 600;
+    letter-spacing: 0.03em;
+    color: #1c1a15;
+    white-space: nowrap;
+  }
+
+  .entries {
+    position: relative;
+    z-index: 2;
+  }
+  .entry-row {
+    display: flex;
+    align-items: baseline;
+    gap: 1.4rem;
+    border-top: 1px solid rgba(28,26,21,0.12);
+    padding: 0.85rem 0;
+  }
+  .entry-row:first-child { border-top: none; }
+  .entry-index {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.7rem;
+    color: #9a9186;
+    width: 22px;
+    flex-shrink: 0;
+  }
+  .entry-name {
+    font-family: 'Anton', sans-serif;
+    font-size: 2.6rem;
+    letter-spacing: 0.005em;
+    text-transform: uppercase;
+    color: #1c1a15;
+    line-height: 0.95;
+    flex: 1;
+  }
+  .entry-era {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.68rem;
+    color: #9a9186;
+    white-space: nowrap;
+  }
+  .entry-tag {
+    font-size: 0.62rem;
+    font-weight: 700;
+    letter-spacing: 0.07em;
+    text-transform: uppercase;
+    color: #a8391f;
+    white-space: nowrap;
+  }
+
+  /* --- anatomy panel: leader-line annotation, reusing existing pattern --- */
+  .anatomy-panel {
+    position: relative;
+    margin-top: 3rem;
+    padding-top: 2.5rem;
+    border-top: 1px solid rgba(28,26,21,0.12);
+    z-index: 2;
+  }
+  .anatomy-heading {
+    font-size: 0.7rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: #9a9186;
+    margin-bottom: 1.5rem;
+  }
+  .anatomy-word {
+    font-family: 'Anton', sans-serif;
+    font-size: 4.2rem;
+    color: #1c1a15;
+    line-height: 1;
+    position: relative;
+    display: inline-block;
+    letter-spacing: 0.005em;
+  }
+  .anatomy-guides { position: relative; }
+  .anatomy-guide-line {
+    position: absolute;
+    left: -220px;
+    right: 0;
+    height: 0;
+    border-top: 1px dashed rgba(28,26,21,0.3);
+  }
+  .anatomy-guide-label {
+    position: absolute;
+    left: -220px;
+    width: 190px;
+    text-align: right;
+    padding-right: 12px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.62rem;
+    letter-spacing: 0.05em;
+    color: #9a9186;
+    transform: translateY(-50%);
+  }
+  .stress-callout {
+    position: absolute;
+    right: -170px;
+    top: -8px;
+    width: 150px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.62rem;
+    color: #a8391f;
+    line-height: 1.5;
+  }
+  .stress-callout .leader {
+    position: absolute;
+    left: -14px;
+    top: 6px;
+    width: 14px;
+    border-top: 1px dashed #a8391f;
+  }
+</style>
+</head>
+<body>
+  <div class="meta">Pinned direction — white ground, dashed grid, leader-line annotation, oversized display type</div>
+  <div class="stage" id="stage">
+    <div class="brand-row">
+      <div class="brand-name">Type<br/>Classified</div>
+      <div class="brand-tagline">A field guide to type classification, for people who read type like weather.</div>
+    </div>
+
+    <div class="rotated-labels">
+      <div class="rotated-label">EXPLORE</div>
+      <div class="rotated-label">IDENTIFY</div>
+      <div class="rotated-label">TIMELINE</div>
+      <div class="rotated-label">COMPARE</div>
+      <div class="rotated-label">13 CLASSIFICATIONS</div>
+      <div class="rotated-label">c. 1150 &ndash; PRESENT</div>
+    </div>
+
+    <div class="entries">
+      <div class="entry-row">
+        <div class="entry-index">01</div>
+        <div class="entry-name">Blackletter</div>
+        <div class="entry-era">c. 1150&ndash;1500</div>
+        <div class="entry-tag">Broken</div>
+      </div>
+      <div class="entry-row">
+        <div class="entry-index">02</div>
+        <div class="entry-name">Venetian Oldstyle</div>
+        <div class="entry-era">c. 1470&ndash;1500</div>
+        <div class="entry-tag">Serif</div>
+      </div>
+      <div class="entry-row">
+        <div class="entry-index">03</div>
+        <div class="entry-name">Garalde Oldstyle</div>
+        <div class="entry-era">c. 1495&ndash;1700</div>
+        <div class="entry-tag">Serif</div>
+      </div>
+      <div class="entry-row">
+        <div class="entry-index">04</div>
+        <div class="entry-name">Transitional</div>
+        <div class="entry-era">c. 1700&ndash;1790</div>
+        <div class="entry-tag">Serif</div>
+      </div>
+    </div>
+
+    <div class="anatomy-panel">
+      <div class="anatomy-heading">Anatomy — Garalde Oldstyle</div>
+      <div class="anatomy-guides" style="margin-left:230px; width: 420px;">
+        <div class="anatomy-guide-label" style="top:0;">CAP LINE</div>
+        <div class="anatomy-guide-line" style="top:0;"></div>
+        <div class="anatomy-guide-label" style="top:22px;">MEAN LINE</div>
+        <div class="anatomy-guide-line" style="top:22px;"></div>
+        <span class="anatomy-word">Garalde</span>
+        <div class="stress-callout"><span class="leader"></span>STRESS &asymp; 20&deg;<br/><span style="color:#9a9186;">X-HEIGHT 68% CAP</span></div>
+        <div class="anatomy-guide-label" style="top:72px;">BASELINE</div>
+        <div class="anatomy-guide-line" style="top:72px;"></div>
+        <div class="anatomy-guide-label" style="top:92px;">DESCENDER LINE</div>
+        <div class="anatomy-guide-line" style="top:92px;"></div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // scatter a few dashed vertical grid rules across the stage, with end caps
+    const stage = document.getElementById('stage');
+    const positions = [8, 24, 42, 58, 74, 90];
+    positions.forEach(pct => {
+      const rule = document.createElement('div');
+      rule.className = 'grid-rule';
+      rule.style.left = pct + '%';
+      rule.innerHTML = '<span class="rule-cap cap-top"></span><span class="rule-cap cap-bottom"></span>';
+      stage.appendChild(rule);
+    });
+  </script>
+</body>
+</html>

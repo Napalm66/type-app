@@ -2,215 +2,188 @@
 name: Type Classified
 description: A field guide to type classification, for people who read type like weather.
 colors:
-  parchment: "#f4f1ea"
-  parchment-raised: "#fbf9f4"
+  paper: "#efece6"
+  panel: "#fdfcfa"
   ink: "#1c1a15"
   ink-soft: "#514c3f"
-  ink-faint: "#8a8371"
-  rule: "#d9d3c1"
+  ink-faint: "#716a5e"
+  rule-solid: "#d7d2c5"
+  rule-dashed: "rgba(28, 26, 21, 0.22)"
   sealing-wax: "#a8391f"
-  sealing-wax-soft: "#d9c9a8"
   focus-ring: "#1c1a15"
 typography:
   display:
-    fontFamily: "Fraunces, Georgia, serif"
-    fontSize: "clamp(2.2rem, 5vw, 3.2rem)"
-    fontWeight: 600
-    lineHeight: 1.05
-    letterSpacing: "-0.01em"
-  headline:
-    fontFamily: "Fraunces, Georgia, serif"
-    fontSize: "2rem"
-    fontWeight: 600
-    lineHeight: 1.1
-    letterSpacing: "normal"
+    fontFamily: "Anton, 'Arial Narrow', sans-serif"
+    fontSize: "clamp(2.4rem, 7vw, 4rem)"
+    fontWeight: 400
+    lineHeight: 0.92
+    letterSpacing: "0.003em"
   title:
-    fontFamily: "Fraunces, Georgia, serif"
-    fontSize: "1.4rem"
-    fontWeight: 600
-    lineHeight: 1.2
-    letterSpacing: "normal"
+    fontFamily: "Anton, 'Arial Narrow', sans-serif"
+    fontSize: "clamp(1.4rem, 4vw, 2.1rem)"
+    fontWeight: 400
+    lineHeight: 1
   body:
     fontFamily: "Inter, system-ui, -apple-system, sans-serif"
     fontSize: "1rem"
     fontWeight: 400
     lineHeight: 1.5
-    letterSpacing: "normal"
-  label:
-    fontFamily: "Inter, system-ui, -apple-system, sans-serif"
+  mono:
+    fontFamily: "'JetBrains Mono', 'Space Mono', monospace"
     fontSize: "0.7rem"
     fontWeight: 700
     lineHeight: 1.3
-    letterSpacing: "0.05em"
+    letterSpacing: "0.045em"
 rounded:
-  sm: "4px"
-  md: "6px"
-  lg: "8px"
-  xl: "10px"
-  pill: "999px"
-  circle: "50%"
+  flat: "0px"
 spacing:
-  xs: "0.35rem"
-  sm: "0.5rem"
-  md: "0.75rem"
+  xs: "0.4rem"
+  sm: "0.6rem"
+  md: "0.85rem"
   lg: "1.25rem"
   xl: "1.75rem"
   2xl: "2.5rem"
 components:
-  card:
-    backgroundColor: "{colors.parchment-raised}"
+  row:
+    backgroundColor: "transparent"
     textColor: "{colors.ink}"
-    rounded: "{rounded.xl}"
-    padding: "1.25rem 1.25rem 1.1rem"
+    padding: "1rem 0"
+  row-hover:
+    backgroundColor: "{colors.panel}"
+    textColor: "{colors.ink}"
   tab:
     textColor: "{colors.ink-faint}"
-    typography: "{typography.label}"
-    padding: "0.65rem 0.9rem"
+    typography: "{typography.body}"
   tab-active:
     textColor: "{colors.ink}"
-  filter-chip:
-    backgroundColor: "{colors.parchment-raised}"
+  chip:
     textColor: "{colors.ink-soft}"
-    rounded: "{rounded.pill}"
-    padding: "0.4rem 0.9rem"
-  filter-chip-active:
+    typography: "{typography.mono}"
+    rounded: "{rounded.flat}"
+    padding: "0.4rem 0.75rem"
+  chip-active:
     backgroundColor: "{colors.ink}"
-    textColor: "{colors.parchment}"
-    rounded: "{rounded.pill}"
-  input:
-    backgroundColor: "{colors.parchment-raised}"
+    textColor: "{colors.paper}"
+  tag:
+    textColor: "{colors.sealing-wax}"
+    typography: "{typography.mono}"
+    padding: "0.15rem 0.4rem"
+  panel:
+    backgroundColor: "{colors.panel}"
     textColor: "{colors.ink}"
-    rounded: "{rounded.lg}"
-    padding: "0.6rem 0.85rem"
-  quiz-option:
-    backgroundColor: "{colors.parchment}"
-    textColor: "{colors.ink}"
-    rounded: "{rounded.lg}"
-    padding: "0.85rem 1rem"
-  quiz-option-hover:
-    backgroundColor: "{colors.parchment}"
-    textColor: "{colors.ink}"
-    rounded: "{rounded.lg}"
+    rounded: "{rounded.flat}"
+    padding: "clamp(1.5rem, 4vw, 2.5rem)"
 ---
 
 # Design System: Type Classified
 
 ## Overview
 
-**Creative North Star: "The Specimen Ledger"**
+**Creative North Star: "The Measured Document"**
 
-Type Classified reads like a naturalist's logbook crossed with a type foundry's specimen book: warm parchment pages, ink-brown text, and each classification laid out and labeled like a catalogued specimen — measured, comparative, quietly authoritative. Nothing here performs; it records. The system exists to make a diagnostic legible (contrast, axis, serif shape, x-height) at a glance, then reward a closer look with real detail — a magnifiable anatomy diagram, a font rendered in its correct historical lineage, a timeline that places the specimen in its century.
+Type Classified reads as a technical reference, not a book: a page built like a measured drawing, where a dashed rule and a leader line prove a claim instead of decorating it. This replaced an earlier "Specimen Ledger" identity (warm parchment, a serif display face, soft ambient shadows) at the user's explicit direction, pinned to two references — a portfolio built from massive stacked client names, and the Cooper Hewitt Museum's "Type Culture Now" poster, with its dashed vertical grid and rotated section labels — translated onto a white ground instead of the originals' black.
 
-The palette and type pairing commit to warm and unhurried over cold and efficient: a serif display face (Fraunces) for names and headings paired with a plain, quiet sans (Inter) for everything functional, sitting on parchment rather than white or near-black. The one color note — a sealing-wax red — is used the way a stamp or a wax seal is used: sparingly, to mark something as worth attention, never as a fill. This system explicitly rejects the flashy SaaS-dashboard register (no neon gradients, no glassmorphism, no dense KPI-tile chrome) and the cold-minimalist-tech register (no stark white/black, no monospace-everything) in favor of staying legible, precise, and warm throughout.
+Every classification name is set in a single oversized condensed grotesque, uppercase, carrying the page the way a poster's headline carries a spread. Everything measured — indices, era dates, diagnostic labels, dimension callouts — is set in a monospace, because a number in a monospace face reads as data, not as prose. The one color note is a sealing-wax red, held to tags and measurement marks exactly as before; nothing else about the palette survived the replacement. Corners are square throughout and nothing casts a shadow — separation between surfaces comes from a rule line or a change in tone, never blur.
 
 **Key Characteristics:**
-- Warm parchment surfaces, never true white or true black
-- A serif display face for identity and naming; a quiet sans for everything else
-- One accent color, used only as a mark (underline, tag, border, dot) — never a fill
-- Flat surfaces at rest; shadow appears only as a response to hover or an overlay opening
-- Diagnostic, comparative density — small uppercase tracked labels do a lot of the organizing work
+- Near-white ground, near-black ink — never a warm cream, never a soft shadow
+- One condensed display face (Anton) carries every name and headline, always uppercase
+- A monospace face marks anything measured: indices, dates, dimensions, tags
+- Dashed rules are structural, not decorative — they mark a grid, a leader line, a boundary
+- Square corners everywhere; separation comes from a rule or a tone change, never a shadow
+- The one accent color still marks only small things — tags, bars, measurement call-outs — never a fill
 
 ## Colors
 
-A parchment-and-ink palette with a single sealing-wax accent used exclusively as a small mark, never a field.
+A near-monochrome ink-on-paper system with one accent, used exactly as sparingly as the world it replaced.
 
 ### Primary
-- **Sealing Wax** (`#a8391f` light / `#d9714a` dark): the system's only accent. Marks the active tab's underline, classification branch tags, the "key tell" callout's left border and heading, the timeline's era pins and progress dots, and link/hover states. Never used as a background fill of any real size.
+- **Sealing Wax** (`#a8391f` light / `#d9714a` dark): branch tags, the timeline's classification bars and era pins, the "key tell" callout's left rule, active states. Still never a background fill of any real size — that discipline survived the redesign untouched.
 
 ### Neutral
-- **Parchment** (`#f4f1ea` light / `#17150f` dark): page background.
-- **Parchment Raised** (`#fbf9f4` light / `#211e17` dark): the surface color for anything that sits above the page — cards, panels, modals, tooltips, popovers.
-- **Ink** (`#1c1a15` light / `#f2ede0` dark): primary text and the highest-emphasis foreground color (active states, headings, focus rings).
-- **Ink Soft** (`#514c3f` light / `#b8ae98` dark): secondary text — descriptions, taglines, body copy that isn't the headline.
-- **Ink Faint** (`#8a8371` light / `#7d7562` dark): tertiary text — eyebrow labels, era text, disabled/quiet chrome.
-- **Rule** (`#d9d3c1` light / `#38342a` dark): every hairline border and divider in the system.
+- **Paper** (`#efece6` light / `#18160f` dark): page background.
+- **Panel** (`#fdfcfa` light / `#221f18` dark): any surface that sits above the page — the detail modal, quiz card, row hover state, tooltips, popovers. Counterintuitively lighter than Paper in light mode (and correspondingly darker in dark mode) — a raised surface reads as a distinct sheet laid on the page, not a tinted variant of it.
+- **Ink** (`#1c1a15` light / `#f2ede0` dark): primary text, headings, borders on floating surfaces (modal, quiz card, tooltips), focus rings.
+- **Ink Soft** (`#514c3f` light / `#b8ae98` dark): secondary text — descriptions, taglines.
+- **Ink Faint** (`#716a5e` light / `#968e7c` dark): tertiary text and structural marks — indices, era dates, dashed grid rules, inactive tab labels.
+- **Rule Solid** (`#d7d2c5` light / `#38342a` dark): ordinary hairline dividers between rows and sections.
+- **Rule Dashed** (`rgba(28,26,21,.22)` light / `rgba(242,237,224,.2)` dark): the timeline's gridlines — the one place the dashed-rule motif survives as an actual stroke rather than a border style.
 
 ### Named Rules
-**The Small Mark Rule.** Sealing Wax never fills a surface larger than a tag, a 3px border, or a 1-2px underline/pin. If an element needs to feel important, give it a mark in this color; do not give it a background in this color.
+**The Small Mark Rule.** (Carried over from the previous world, unchanged.) Sealing Wax never fills a surface larger than a tag, a 2px border, or a bar on the timeline. It marks; it never fills.
 
-**The Warm-Neutral-Only Rule.** No pure white (`#fff`) or pure black (`#000`) appears anywhere in the system, light or dark mode. Every neutral — background, text, or border — carries the same warm, slightly yellow-brown cast, so the whole page reads as one paper stock rather than a UI floating on top of a color.
+**The No-Warm-Neutral Rule.** (Replaces the old world's opposite instinct.) No neutral in this system carries a warm parchment cast — paper, panel, ink, and rule are all genuinely near-white/near-black/near-gray. The previous identity's entire palette is the anti-reference here.
 
 ## Typography
 
-**Display Font:** Fraunces (with Georgia, serif fallback)
+**Display Font:** Anton (with Arial Narrow, sans-serif fallback)
 **Body Font:** Inter (with system-ui, -apple-system, sans-serif fallback)
+**Mono Font:** JetBrains Mono (with Space Mono, monospace fallback)
 
-**Character:** A classical serif for anything that names or announces (the brand, a classification's name, a quiz result) against a plain, disciplined sans for everything functional (navigation, body copy, form fields, diagnostic data) — the pairing of a specimen's handwritten label against the printed ledger it's filed in.
+**Character:** One oversized condensed grotesque carries every name and heading, always uppercase, the way a poster's headline or a portfolio's client list does — against a plain Inter for running prose and a JetBrains Mono for anything measured. There is no serif anywhere in the interface; the previous world's Fraunces is gone entirely, not merely demoted.
 
 ### Hierarchy
-- **Display** (600, `clamp(2.2rem, 5vw, 3.2rem)`, 1.05, -0.01em tracking): the site brand/H1 only.
-- **Headline** (600, `2rem`, 1.1): a classification's name in the detail panel and quiz result screen.
-- **Title** (600, `1.4rem`–`1.9rem` depending on context, 1.1–1.2): section intros (`view-intro h2`) and the quiz question.
-- **Body** (400, `1rem`, 1.5): running copy — classification descriptions, quiz hints, tagline text. Body copy is capped at a readable measure (`max-width: 62ch` / `46ch` in narrower contexts), never allowed to run full-width.
-- **Label** (700, `0.65rem`–`0.85rem`, 1.3, `0.05em`–`0.06em` tracking, uppercase): the system's workhorse — eyebrow labels on diagnostics, branch tags, section headings ("SERIF SHAPE, OLDSTYLE TO SLAB", "ANATOMY"), timeline branch pills. Small, uppercase, and letter-spaced is the system's default way of saying "this is a label, not content."
+- **Display** (400, `clamp(2.4rem, 7vw, 4rem)`, 0.92 line-height, uppercase): the site brand only.
+- **Title** (400, `clamp(1.4rem, 4vw, 2.1rem)` down to `clamp(1.6rem, 4.4vw, 2.5rem)` depending on context, 1.0–1.05 line-height, uppercase): every classification name — the Explore row, the detail panel, the quiz result — plus section intros and the quiz question. This single oversized-condensed-uppercase treatment is the system's most repeated move.
+- **Body** (400, `1rem`, 1.5 line-height): running prose — descriptions, taglines, quiz hints.
+- **Mono** (700, `0.62rem`–`0.72rem`, 1.3 line-height, `0.04em`–`0.06em` tracking, usually uppercase): the system's other workhorse — row indices, era dates, diagnostic labels, branch tags, footer credits, timeline marks. Where the old system's "Whisper Label" was small Inter, this system's equivalent is monospace: it reads as data being cited, not prose being introduced.
 
 ### Named Rules
-**The Whisper-Label Rule.** Every organizing label in the system (section headings, diagnostic tags, branch pills) is small, uppercase, letter-spaced, and colored `ink-faint` — quiet enough to never compete with the content it's labeling.
+**The One Voice, One Data Rule.** Anton names things; Inter explains things; JetBrains Mono measures things. No role ever borrows another's job — body copy never goes condensed-uppercase, and a measurement is never set in anything but mono.
 
 ## Layout
 
-A single centered column, `max-width: 1080px`, with fluid `clamp()`-based horizontal padding (`1.25rem` to `2.5vw`→`2.5rem`) rather than a hard breakpoint grid — the layout compresses continuously as the viewport narrows instead of jumping between fixed states. The only hard breakpoint (`520px`) tightens tab padding for small phones; everything else (headings, section padding, card grids) is fluid via `clamp()`.
+Unchanged from the previous system at the structural level: a single centered column, `max-width: 1120px` (widened slightly from `1080px`), fluid `clamp()`-based padding, no hard breakpoint grid. What changed is the header: the old horizontal tab bar with an underline became a row of rotated, vertical labels riding dashed rules (`writing-mode: vertical-rl`), directly translating the pinned poster reference's own navigation device — each tab is now literally a labeled grid line, and its active state is the line turning solid.
 
-Content density stays generous and unhurried: `1.5` body line-height, `62ch`/`46ch` measure caps on prose, and consistent `1.25rem`–`1.75rem` breathing room between major blocks. The card grid (`repeat(auto-fill, minmax(260px, 1fr))`) and compare grid (`minmax(220px, 1fr)`) reflow by content, not by named breakpoints. Modals (the detail overlay) center over a dimmed backdrop and scroll independently once content exceeds the viewport.
+Explore's card grid became a numbered list: each classification is a full-width row (index, oversized name, live specimen, tagline, era, branch tag) separated by hairline rules, rather than a grid of bordered cards. Compare's columns lost their individual card borders in favor of a single shared 1px rule grid (a `background`-and-`gap` trick, not per-cell borders) — reads as one ruled table, not three adjacent cards.
 
 ## Elevation & Depth
 
-Flat by default; shadow is a response, not a resting state. Cards, chips, and panels sit flush with the page — no ambient shadow at rest. Depth appears only when something becomes interactive or floats above the page: a card lifts 2px and gains the ambient shadow on hover, and anything that floats over content (the detail modal, tooltips, the serif-spectrum zoom popover, the anatomy magnifier lens) carries its own shadow because it structurally needs to read as "above" the page, not because elevation is decorative.
-
-### Shadow Vocabulary
-- **Ambient** (`0 1px 2px rgba(28,26,21,.06), 0 8px 24px -12px rgba(28,26,21,.18)`; dark mode swaps to a pure-black-based rgba pair): the shared soft, two-layer shadow — card hover, tooltips, the serif-spectrum zoom popover.
-- **Modal** (`0 24px 64px -12px rgba(28,26,21,.35)`): heavier and more diffuse, reserved for the detail overlay panel — the one surface that needs to visually separate from everything behind it.
-- **Lens** (`0 6px 20px -4px rgba(28,26,21,.4)`): tight and directional, under the circular anatomy magnifier only.
+No shadows anywhere — this is a hard departure from the previous system, which used a soft ambient shadow on hover and floating surfaces. Every surface in this system separates from its neighbor with a rule line (`rule-solid`) or a tone shift (`paper` → `panel`), never blur. Floating surfaces (the detail modal, the quiz card, tooltips, the serif-spectrum zoom popover) get a solid 1px `ink` border instead of a shadow — a page in a measured document doesn't cast light, it's outlined.
 
 ### Named Rules
-**The Flat-At-Rest Rule.** No card, chip, or panel carries a shadow in its default state. Shadow is earned by hover or by floating above the page — never applied as ambient decoration.
+**The Line, Not Light Rule.** No `box-shadow` appears anywhere in this system. A surface separates from the page behind it with a border or a tone change; if neither reads clearly enough, the surface's content or size is wrong, not its shadow.
 
 ## Shapes
 
-Every surface is bordered with a 1px `rule` hairline before it is (optionally) shadowed — borders, not shadows, do the primary job of separating one surface from another. Corner radius scales with a surface's size and role: small tags and micro-chips use `4px`–`6px`, functional controls (inputs, diagnostic boxes, quiz options) use `8px`, and major containers (cards, the detail panel, the quiz card, the timeline frame) use the shared `10px` (`--radius`). Filter chips and progress dots go fully circular/pill (`999px`); the anatomy magnifier lens is a true circle. Nothing in the system uses a sharp 0px corner or an exaggerated large radius — corners stay modest and consistent within each size class.
+Every corner in the system is square — `border-radius: 0` everywhere, with no exceptions; the timeline bars' old `rx="4"` rounding was flattened to `rx="0"` in this pass specifically to hold that line. Structure comes from rule lines: solid hairlines divide ordinary content, dashed lines mark the timeline's year grid and the header's tab rail. Borders, not radius or shadow, are this system's entire form language.
 
 ## Components
 
-### Tabs
-- **Style:** plain text buttons in the Label type role, `ink-faint` at rest, `ink` on hover, sitting on a shared `1px rule` bottom border.
-- **Active:** `ink` text with a `2px sealing-wax` underline — the system's clearest use of the Small Mark Rule.
+### Tabs (header navigation)
+- **Style:** each tab is a vertical dashed rule (`border-left: 1px dashed ink-faint`) topped by a rotated label (`writing-mode: vertical-rl`, Inter, uppercase, tracked).
+- **Active:** the rule turns solid `ink`, the label turns `ink` and bold — the direct replacement for the old underline-on-hover pattern.
 - **Focus:** `2px focus-ring` outline, `2px` offset.
 
-### Chips
-- **Filter chip:** `parchment-raised` background, `1px rule` border, full pill radius (`999px`), `ink-soft` text.
-- **Active filter chip:** inverts to `ink` background / `parchment` text — the one place a neutral (not the accent) carries a filled background, reserved for "this is currently selected."
-- **Branch tag:** small, uppercase, `sealing-wax` text on a `color-mix(sealing-wax 12%, transparent)` tint background, `4px` radius — the system's only tinted (not solid) accent fill, used at tag scale only.
+### Chips (filters, branch tags)
+- **Filter chip:** transparent background, `1px rule-solid` border, square corners, JetBrains Mono uppercase text.
+- **Active filter chip:** inverts to `ink` background / `paper` text — unchanged behavior from the previous system, just square instead of pill-shaped now.
+- **Branch tag:** JetBrains Mono, `sealing-wax` text on a transparent fill with a `sealing-wax` border — a genuine departure from the old tinted-pill tag: this system prefers an outlined "stamped" mark over any tinted fill, even at tag scale.
 
-### Cards / Containers
-- **Family:** the spec-card (Explore grid), compare-col, quiz-card, and timeline frame all share one visual language: `parchment-raised` background, `1px rule` border, `10px` radius, `1.25rem` internal padding.
-- **Shadow Strategy:** flat at rest; the Explore spec-card is the only one with a hover state (2px lift + ambient shadow + border darkens to `ink-faint`) since it's the only card that's also a button.
-- **Border:** always `1px solid rule`.
+### Rows (Explore list)
+- **Style:** a full-width flex row — mono index, then the classification's oversized Anton name with its live specimen and tagline beneath, then era date and branch tag at the trailing edge. Separated by `1px rule-solid` hairlines, no card border, no radius.
+- **Hover/Focus:** background shifts from `paper` to `panel` — the entire row highlights, the way a finger running down a ledger would.
 
-### Inputs / Fields
-- **Style:** `parchment-raised` background, `1px rule` border, `8px` radius, `Inter` body type.
-- **Focus:** `2px focus-ring` outline with `1px` offset, border deepens to `ink-faint`.
+### Panels (detail modal, quiz card)
+- **Style:** `panel` background, `1px solid ink` border (not `rule-solid` — floating surfaces get the stronger, higher-contrast border since they're not sitting flush with the page), square corners, no shadow.
+- **Internal rhythm:** unchanged from the previous system — diagnostics grid, key-tell callout, serif spectrum, anatomy diagram all keep their prior structure, restyled into this system's mono/display vocabulary rather than rebuilt.
 
-### Buttons (quiz options / nav)
-- **Quiz option:** full-width, left-aligned, `parchment` background (one step quieter than a card), `1px rule` border, `8px` radius; hover deepens the border to `sealing-wax` rather than changing the fill — the interaction stays a mark, not a repaint.
-- **Text buttons** (back/restart/clear): no border or fill, `ink-faint` → `ink` on hover, Label-scale type.
+### Anatomy Diagram (signature component, extended)
+The dashed-leader-line language that previously lived only inside this one component (cap line / mean line / baseline / x-height) is now the whole system's structural idiom, not a one-off — the redesign's central move was recognizing this component already was the pinned reference's grammar and building outward from it rather than in.
 
-### Anatomy Lens (signature component)
-A fixed-position circular magnifier (`170px` diameter) that renders a live, scaled (2.8×) clone of the anatomy diagram's SVG under the cursor or touch point. Circular clipping, a `2px ink` ring, and the Lens shadow give it real object-hood — it should read as a physical magnifying glass laid over a specimen, not a UI tooltip. Hidden by default (`opacity: 0`, `scale(0.85)`), it snaps to `opacity:1`/`scale(1)` over `120ms`. On mobile it's tap-to-open/tap-to-close with drag-to-reposition rather than hover, and is constrained to disappear once its center leaves the diagram it's magnifying — it never floats free of the thing it's meant to be inspecting.
-
-### Timeline Bar & Era Band (signature component)
-The Gantt-style timeline layers two systems on one shared linear year-axis: broad, low-contrast "era band" rectangles (art-historical backdrop, `cursor: help`, darken slightly on hover) behind narrower, saturated classification bars (`cursor: pointer`, brighten on hover) with a `sealing-wax` pin marker. Both drive the same cursor-following or anchored tooltip pattern (`parchment-raised` background, `rule` border, Ambient shadow, small arrow tail) — era tooltips stay anchored to the band; bar tooltips follow the cursor, since a bar is a specific thing being inspected rather than a broad backdrop being labeled.
+### Timeline (signature component)
+Era bands lost their nine distinct historical hues in favor of two alternating near-monochrome ink tints (`rgba(28,26,21,.05)` / `.1`) — the old multi-color backdrop was decorative under this system's near-monochrome discipline; boundary information survives fully in the inline label and hover tooltip, just not in hue. Gridlines are now genuinely dashed (`rule-dashed`), and classification bars keep their `sealing-wax` fill and pin marker unchanged.
 
 ## Do's and Don'ts
 
 ### Do:
-- **Do** keep every neutral warm — background, text, and border colors all carry the same paper-and-ink cast; never introduce a cool gray or pure white/black.
-- **Do** use Sealing Wax only as a mark: an underline, a border, a tag tint, a dot, a pin. If it needs to fill a surface larger than a few px of border or a small tag, use `ink` instead.
-- **Do** pair Fraunces (names, headings, identity) with Inter (everything functional) — never use Fraunces for body copy or Inter for a classification's name.
-- **Do** leave cards and panels flat at rest; only add shadow in response to hover or when a surface floats above the page (modal, tooltip, popover, lens).
-- **Do** use the small-uppercase-tracked Label style for anything that organizes content (section headers, diagnostic tags) rather than making it look like body copy.
+- **Do** set every classification name and heading in Anton, uppercase, at large scale — this is the system's one repeated gesture, and it should stay the loudest thing on any screen.
+- **Do** set anything measured (an index, a date, a diagnostic, a dimension) in JetBrains Mono — a number in Inter reads as prose, not data.
+- **Do** separate every surface with a border or a tone shift, never a shadow.
+- **Do** keep Sealing Wax to tags, bars, and measurement marks — the Small Mark Rule survived the redesign intact.
 
 ### Don't:
-- **Don't** add shadows, gradients, or glassmorphism as decoration — this system explicitly rejects the flashy SaaS-dashboard register.
-- **Don't** introduce a second accent color. One mark color, used sparingly, is the entire palette's point.
-- **Don't** let corner radius exceed `10px` on any surface, or drop to a sharp `0px` — the modest, consistent radius scale is part of the paper-and-ink materiality, not an arbitrary choice.
-- **Don't** ship a font whose classification lineage is wrong for the sake of a better-looking specimen — accuracy is a harder constraint here than in almost any other kind of app (see PRODUCT.md).
+- **Don't** reintroduce a shadow anywhere, however soft — this system's entire elevation model depends on lines and tone doing that job instead.
+- **Don't** round a corner. `border-radius: 0` is absolute, no exceptions — including SVG geometry (`rx`/`ry`).
+- **Don't** bring back a warm-toned neutral. Paper, panel, and every ink step are genuinely near-white/near-black/near-gray now; a beige creeping back in is the old world reasserting itself.
+- **Don't** ship a font whose classification lineage is wrong for the sake of a better-looking specimen — this constraint predates and survives the redesign untouched (see PRODUCT.md); the live "Aa Gg Qy" specimens still render in each classification's own verified typeface, underneath the new Anton display name, not replaced by it.

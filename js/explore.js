@@ -62,22 +62,25 @@ function initExplore({ filterRoot, gridRoot, onOpenDetail, specimenInputRoot }) 
 
     gridRoot.innerHTML = items
       .map(
-        (item) => `
-      <button class="spec-card" data-id="${item.id}">
-        <div class="spec-card-meta">
-          <span class="spec-card-name">${item.name}</span>
-          <span class="spec-card-era">${item.era}</span>
-        </div>
-        <div class="spec-card-specimen">${renderSpecimenHTML(item, "card")}</div>
-        <p class="spec-card-tagline">${item.tagline}</p>
-        <span class="branch-tag">${BRANCH_LABELS[item.branch]}</span>
+        (item, i) => `
+      <button class="spec-row" data-id="${item.id}">
+        <span class="spec-row-index">${String(i + 1).padStart(2, "0")}</span>
+        <span class="spec-row-main">
+          <span class="spec-row-name">${item.name}</span>
+          <span class="spec-row-specimen">${renderSpecimenHTML(item, "row")}</span>
+          <span class="spec-row-tagline">${item.tagline}</span>
+        </span>
+        <span class="spec-row-meta">
+          <span class="spec-row-era">${item.era}</span>
+          <span class="branch-tag">${BRANCH_LABELS[item.branch]}</span>
+        </span>
       </button>
     `
       )
       .join("");
 
-    gridRoot.querySelectorAll(".spec-card").forEach((card) => {
-      card.addEventListener("click", () => onOpenDetail(card.dataset.id));
+    gridRoot.querySelectorAll(".spec-row").forEach((row) => {
+      row.addEventListener("click", () => onOpenDetail(row.dataset.id));
     });
   }
 

@@ -14,57 +14,65 @@ function initTimeline(root, onOpenDetail) {
   // neighbor to cover it. Digital & Variable Age's end is domainEnd
   // itself (today), so it always reaches the chart's right edge rather
   // than needing a hardcoded year that goes stale.
+  // Era bands used to carry a distinct hue each; the redesign's near-
+  // monochrome world (one accent, reserved for classification bars and
+  // measurements — see DESIGN.md) reads that as decoration rather than
+  // information, so bands now alternate between two neutral ink tints.
+  // The boundary between eras is still fully legible from the inline
+  // label plus the tooltip's full name/description on hover.
+  const ERA_TINT_A = "rgba(28, 26, 21, 0.05)";
+  const ERA_TINT_B = "rgba(28, 26, 21, 0.1)";
   const ART_PERIODS = [
     {
       name: "Romanesque",
       start: 1000,
       end: 1150,
-      color: "rgba(150, 130, 90, 0.3)",
+      color: ERA_TINT_A,
       description: "Pre-printing press era. Marked by Carolingian minuscule and rounded, thick manuscript lettering.",
     },
     {
       name: "Gothic",
       start: 1150,
       end: 1450,
-      color: "rgba(139, 58, 58, 0.3)",
+      color: ERA_TINT_B,
       description: "Heavy, dark, and condensed manuscript lettering. Evolves into Blackletter (Textura), the typeface Gutenberg used for the first printing press in 1450.",
     },
     {
       name: "Renaissance",
       start: 1450,
       end: 1600,
-      color: "rgba(138, 155, 110, 0.3)",
+      color: ERA_TINT_A,
       description: "The birth of Roman type (Humanist and Old Style/Garalde). Features lighter, highly legible letterforms inspired by classical Roman inscriptions and Italian handwriting.",
     },
     {
       name: "Baroque",
       start: 1600,
       end: 1750,
-      color: "rgba(176, 120, 79, 0.3)",
+      color: ERA_TINT_B,
       description: "Transitional type. Features higher contrast between thick and thin strokes, more vertical axes, and sharper serifs (e.g., Baskerville, Caslon).",
     },
     {
       name: "Classicism",
       start: 1750,
       end: 1815,
-      color: "rgba(91, 114, 144, 0.3)",
+      color: ERA_TINT_A,
       description: "Modern type (Didone). Characterized by extreme contrast between hair-thin and thick lines, vertical stress, and unbracketed, flat serifs (e.g., Bodoni, Didot).",
     },
     {
       name: "Romanticism",
       start: 1815,
       end: 1900,
-      color: "rgba(130, 90, 122, 0.3)",
+      color: ERA_TINT_B,
       description: "The Industrial Revolution demands attention-grabbing type. Slab Serifs (Egyptians), Sans-Serifs (Grotesques), and heavily ornamented, decorative display fonts emerge for advertising.",
     },
     {
       name: "Art Nouveau",
       start: 1900,
       end: 1910,
-      // Same grey family as Modernism, just darker — reads as a cut
-      // within the Romanticism-to-Modernism span rather than a band
-      // with its own distinct identity, since it has no inline label.
-      color: "rgba(55, 61, 67, 0.3)",
+      // No inline label (segment too narrow) — reads as a cut within the
+      // Romanticism-to-Modernism span, so it takes the same tint as its
+      // neighbor rather than needing a distinct one.
+      color: ERA_TINT_B,
       description: "A reaction against Victorian industrial excess, drawing on organic, flowing forms from nature. Typefaces like Eckmann and Auriol blur the line between lettering and illustration — whiplash curves, floral motifs, and stylized terminals define the era's display faces.",
     },
     {
@@ -72,7 +80,7 @@ function initTimeline(root, onOpenDetail) {
       tooltipName: "Modernism (Bauhaus & Swiss)",
       start: 1910,
       end: 1970,
-      color: "rgba(90, 100, 110, 0.3)",
+      color: ERA_TINT_A,
       description: "The era of “form follows function.” Strips away ornament in favour of geometric and Neo-Grotesque sans-serifs (like Helvetica and Univers). Focuses on strict grids, asymmetry, and high legibility.",
     },
     {
@@ -80,14 +88,14 @@ function initTimeline(root, onOpenDetail) {
       tooltipName: "Postmodernism / Punk / Grunge",
       start: 1970,
       end: 2000,
-      color: "rgba(160, 80, 100, 0.3)",
+      color: ERA_TINT_B,
       description: "A rebellion against rigid modernist rules. Characters are distorted, layered, and chaotic. Photocomposition and early digital tools allow for experimental, “deconstructed” type.",
     },
     {
       name: "Digital & Variable Age",
       start: 2000,
       end: domainEnd,
-      color: "rgba(80, 120, 130, 0.3)",
+      color: ERA_TINT_A,
       description: "Maximized flexibility for screens. Marked by the rise of Variable Fonts (where one font file holds endless weight and width variations), responsive typography, and minimalist web-safe type design.",
     },
   ];
@@ -258,7 +266,7 @@ function initTimeline(root, onOpenDetail) {
     return `
       <g class="tl-row">
         <rect class="tl-bar ${ongoing ? "is-ongoing" : ""}" data-id="${item.id}"
-          x="${barX}" y="${barY}" width="${barWidth}" height="${barH}" rx="4" fill="${fill}"
+          x="${barX}" y="${barY}" width="${barWidth}" height="${barH}" rx="0" fill="${fill}"
           aria-label="${item.name}: ${yearLabel}"></rect>
         ${pinSVG}
         ${labelSVG}
