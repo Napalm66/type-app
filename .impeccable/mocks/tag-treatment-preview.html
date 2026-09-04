@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<title>Tag Treatment Preview</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@400;600;700&family=JetBrains+Mono:wght@400;700&display=swap" />
+<style>
+  :root {
+    --paper: #e6e6e6;
+    --panel: #ffffff;
+    --ink: #161616;
+    --ink-soft: #474745;
+    --ink-faint: #606060;
+    --rule-solid: #cfcfcf;
+    --accent: #c22400;
+    --accent-tint: color-mix(in srgb, var(--accent) 12%, var(--panel));
+    --font-ui: "Inter", sans-serif;
+    --font-display: "Anton", sans-serif;
+    --font-mono: "JetBrains Mono", monospace;
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--paper); font-family: var(--font-ui); padding: 2rem; }
+  h1 { font-family: var(--font-mono); font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.06em; color: var(--ink); margin: 0 0 1.5rem; }
+  .option { background: var(--panel); border: 1px solid var(--rule-solid); padding: 1.25rem 1.5rem; margin-bottom: 1px; }
+  .option-label { font-family: var(--font-mono); font-size: 0.65rem; text-transform: uppercase; letter-spacing: 0.05em; color: var(--ink-faint); margin-bottom: 0.6rem; }
+  .row { display: flex; align-items: baseline; gap: 1.25rem; }
+  .idx { font-family: var(--font-mono); font-size: 0.68rem; color: var(--ink-faint); width: 22px; }
+  .name { font-family: var(--font-display); font-size: 2rem; text-transform: uppercase; line-height: 1; color: var(--ink); flex: 1; }
+  .meta { display: flex; flex-direction: column; align-items: flex-end; gap: 0.4rem; }
+  .era { font-family: var(--font-mono); font-size: 0.68rem; color: var(--ink-faint); }
+
+  /* A: current — bordered + tinted fill */
+  .tag-a { font-family: var(--font-mono); font-size: 0.65rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; color: var(--accent); background: var(--accent-tint); border: 1px solid var(--accent); padding: 0.2rem 0.5rem; }
+
+  /* B: solid filled stamp */
+  .tag-b { font-family: var(--font-mono); font-size: 0.65rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; color: var(--panel); background: var(--accent); padding: 0.2rem 0.5rem; }
+
+  /* C: plain text + small square marker, no box */
+  .tag-c { display: inline-flex; align-items: center; gap: 0.4rem; font-family: var(--font-mono); font-size: 0.68rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; color: var(--ink-soft); }
+  .tag-c::before { content: ""; width: 7px; height: 7px; background: var(--accent); flex-shrink: 0; }
+
+  /* D: thin outline only, no fill */
+  .tag-d { font-family: var(--font-mono); font-size: 0.65rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; color: var(--accent); background: none; border: 1px solid var(--accent); padding: 0.2rem 0.5rem; }
+
+  /* E: underline only, no box */
+  .tag-e { font-family: var(--font-mono); font-size: 0.68rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; color: var(--ink-soft); border-bottom: 2px solid var(--accent); padding-bottom: 0.15rem; }
+
+  /* F: plain mono text, accent color, no decoration at all */
+  .tag-f { font-family: var(--font-mono); font-size: 0.68rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; color: var(--accent); }
+</style>
+</head>
+<body>
+  <h1>Branch tag treatments — same row, six options</h1>
+
+  <div class="option">
+    <div class="option-label">A — current: bordered box + tint fill</div>
+    <div class="row"><span class="idx">01</span><span class="name">Blackletter</span><span class="meta"><span class="era">c. 1150–1500</span><span class="tag-a">Blackletter</span></span></div>
+  </div>
+
+  <div class="option">
+    <div class="option-label">B — solid filled stamp</div>
+    <div class="row"><span class="idx">01</span><span class="name">Blackletter</span><span class="meta"><span class="era">c. 1150–1500</span><span class="tag-b">Blackletter</span></span></div>
+  </div>
+
+  <div class="option">
+    <div class="option-label">C — small square marker + plain text, no box</div>
+    <div class="row"><span class="idx">01</span><span class="name">Blackletter</span><span class="meta"><span class="era">c. 1150–1500</span><span class="tag-c">Blackletter</span></span></div>
+  </div>
+
+  <div class="option">
+    <div class="option-label">D — thin outline only, no fill (the pre-tint version)</div>
+    <div class="row"><span class="idx">01</span><span class="name">Blackletter</span><span class="meta"><span class="era">c. 1150–1500</span><span class="tag-d">Blackletter</span></span></div>
+  </div>
+
+  <div class="option">
+    <div class="option-label">E — underline only, no box</div>
+    <div class="row"><span class="idx">01</span><span class="name">Blackletter</span><span class="meta"><span class="era">c. 1150–1500</span><span class="tag-e">Blackletter</span></span></div>
+  </div>
+
+  <div class="option">
+    <div class="option-label">F — plain accent-colored mono text, no decoration</div>
+    <div class="row"><span class="idx">01</span><span class="name">Blackletter</span><span class="meta"><span class="era">c. 1150–1500</span><span class="tag-f">Blackletter</span></span></div>
+  </div>
+</body>
+</html>

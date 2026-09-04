@@ -49,7 +49,6 @@
   --rule: rgba(22, 22, 22, 0.22);
   --rule-solid: #cfcfcf;
   --accent: #c22400;
-  --accent-tint: color-mix(in srgb, var(--accent) 12%, var(--panel));
   --focus: #161616;
 
   --font-ui: "Inter", system-ui, -apple-system, sans-serif;
@@ -69,7 +68,6 @@
     --rule: rgba(242, 242, 240, 0.2);
     --rule-solid: #3a3a38;
     --accent: #ff5a33;
-    --accent-tint: color-mix(in srgb, var(--accent) 14%, var(--panel));
     --focus: #f2f2f0;
   }
 }
@@ -435,17 +433,24 @@ main.wrap {
 }
 
 .branch-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
   font-family: var(--font-mono);
-  font-size: 0.65rem;
+  font-size: 0.68rem;
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 0.05em;
-  color: var(--accent);
-  background: var(--accent-tint);
-  border: 1px solid var(--accent);
-  padding: 0.2rem 0.5rem;
-  border-radius: var(--radius);
+  color: var(--ink-soft);
   white-space: nowrap;
+}
+
+.branch-tag::before {
+  content: "";
+  width: 7px;
+  height: 7px;
+  background: var(--accent);
+  flex-shrink: 0;
 }
 
 /* ---------- detail overlay ---------- */
@@ -1175,15 +1180,22 @@ main.wrap {
 
 .timeline-label-branch {
   align-self: flex-start;
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
   font-family: var(--font-mono);
   font-size: 7.5px;
   font-weight: 700;
   letter-spacing: 0.03em;
-  color: var(--accent);
-  background: var(--accent-tint);
-  border: 1px solid var(--accent);
-  padding: 1px 4px;
-  border-radius: var(--radius);
+  color: var(--ink-soft);
+}
+
+.timeline-label-branch::before {
+  content: "";
+  width: 5px;
+  height: 5px;
+  background: var(--accent);
+  flex-shrink: 0;
 }
 
 .timeline-scroll-area {

@@ -62,14 +62,6 @@
         "tonalRamp": ["#3d0c00", "#5c1200", "#821a00", "#a01f00", "#c22400", "#e05530", "#ff8560", "#ffc4ac"],
         "contrastNote": "4.74:1 vs paper / 5.92:1 vs panel (light), 5.83:1 vs paper / 5.00:1 vs panel (dark) — brightened from the redesign's first-pass #a8391f at the user's explicit request for more accent presence; verified 2026-09-04."
       },
-      "accent-tint": {
-        "role": "primary",
-        "displayName": "Sealing Wax, Tinted",
-        "canonical": "color-mix(in srgb, #c22400 12%, #ffffff)",
-        "darkVariant": "color-mix(in srgb, #ff5a33 14%, #242424)",
-        "tonalRamp": [],
-        "purpose": "Light background fill behind branch tags, added in the same pass as the brighter accent so tags read as distinct marks instead of a thin outline that's easy to miss."
-      },
       "focus-ring": {
         "role": "neutral",
         "displayName": "Focus Ring",
@@ -115,9 +107,9 @@
       "name": "Branch Tag",
       "kind": "chip",
       "refersTo": "tag",
-      "description": "Classification-branch mark: sealing-wax text and border over a light accent-tint fill (revised from a fully transparent outline, which read as too faint).",
+      "description": "Classification-branch mark: a 7px sealing-wax marker square before plain ink-soft text, no box/border/fill. Third revision — a transparent outline read as too faint, a bordered+tinted box read as a heavy UI badge ('looks like a slob'); the marker square gives a legible color cue without the tag reading as a button.",
       "html": "<span class=\"ds-tag\">SERIF</span>",
-      "css": ".ds-tag { display: inline-block; font-family: 'JetBrains Mono', monospace; font-size: 0.65rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; color: #c22400; background: color-mix(in srgb, #c22400 12%, #ffffff); border: 1px solid #c22400; padding: 0.2rem 0.5rem; border-radius: 0; }"
+      "css": ".ds-tag { display: inline-flex; align-items: center; gap: 0.4rem; font-family: 'JetBrains Mono', monospace; font-size: 0.68rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; color: #474745; } .ds-tag::before { content: \"\"; width: 7px; height: 7px; background: #c22400; flex-shrink: 0; }"
     },
     {
       "name": "Spec Row",
@@ -162,17 +154,17 @@
   ],
   "narrative": {
     "northStar": "The Measured Document",
-    "overview": "Type Classified reads as a technical reference, not a book: a page built like a measured drawing, where a dashed rule and a leader line prove a claim instead of decorating it. This replaced an earlier 'Specimen Ledger' identity (warm parchment, a serif display face, soft ambient shadows) at the user's explicit direction, pinned to two references — a portfolio built from massive stacked client names, and the Cooper Hewitt Museum's 'Type Culture Now' poster, with its dashed vertical grid and rotated section labels — translated onto a white ground instead of the originals' black.\n\nA follow-up pass corrected the neutrals to genuine grey (paper was still faintly warm at #efece6; now #e6e6e6), brightened and re-saturated the accent (#a8391f -> #c22400 light, #d9714a -> #ff5a33 dark), gave branch tags a light tint fill so they read clearly instead of nearly disappearing, and enlarged the brand headline substantially (clamp(2.4rem,7vw,4rem) -> clamp(3.4rem,11vw,7rem)) so it functions as the first viewport's actual headline.\n\nEvery classification name is set in a single oversized condensed grotesque, uppercase, carrying the page the way a poster's headline carries a spread. Everything measured — indices, era dates, diagnostic labels, dimension callouts — is set in a monospace, because a number in a monospace face reads as data, not prose. Corners are square throughout and nothing casts a shadow — separation between surfaces comes from a rule line or a change in tone, never blur.",
+    "overview": "Type Classified reads as a technical reference, not a book: a page built like a measured drawing, where a dashed rule and a leader line prove a claim instead of decorating it. This replaced an earlier 'Specimen Ledger' identity (warm parchment, a serif display face, soft ambient shadows) at the user's explicit direction, pinned to two references — a portfolio built from massive stacked client names, and the Cooper Hewitt Museum's 'Type Culture Now' poster, with its dashed vertical grid and rotated section labels — translated onto a white ground instead of the originals' black.\n\nA follow-up pass corrected the neutrals to genuine grey (paper was still faintly warm at #efece6; now #e6e6e6), brightened and re-saturated the accent (#a8391f -> #c22400 light, #d9714a -> #ff5a33 dark), and enlarged the brand headline substantially (clamp(2.4rem,7vw,4rem) -> clamp(3.4rem,11vw,7rem)) so it functions as the first viewport's actual headline. Branch tags went through three revisions: a transparent outline (too faint), a bordered box with a tint fill (\"looks like a slob\" — too heavy, read as a UI badge), and finally a small marker square beside plain text — a legible color cue without the tag reading as a button. A header graphic (dimension-line SVG) was tried and then removed entirely as clutter.\n\nEvery classification name is set in a single oversized condensed grotesque, uppercase, carrying the page the way a poster's headline carries a spread. Everything measured — indices, era dates, diagnostic labels, dimension callouts — is set in a monospace, because a number in a monospace face reads as data, not prose. Corners are square throughout and nothing casts a shadow — separation between surfaces comes from a rule line or a change in tone, never blur.",
     "keyCharacteristics": [
       "Genuinely neutral light grey ground (not a warm off-white), near-black ink, white raised panels",
       "One condensed display face (Anton) carries every name and headline, always uppercase, at a deliberately large scale",
       "A monospace face marks anything measured: indices, dates, dimensions, tags",
       "Dashed rules are structural, not decorative — they mark a grid, a leader line, a boundary",
       "Square corners everywhere; separation comes from a rule or a tone change, never a shadow",
-      "One bright accent color marks small things — tags (with a tint fill), bars, the active tab, measurement call-outs — never a large fill"
+      "One bright accent color marks small things — a marker square on every tag, bars, the active tab, measurement call-outs — never a large fill"
     ],
     "rules": [
-      { "name": "The Small Mark Rule", "body": "Sealing Wax never fills a surface larger than a tag, a 2px border, or a bar on the timeline — a tag's light accent-tint background is a tint, not a fill, and stays inside this rule.", "section": "colors" },
+      { "name": "The Small Mark Rule", "body": "Sealing Wax never fills a surface larger than a 7px marker square, a 2px border, or a bar on the timeline. A branch tag's own text stays ink-soft, not accent — the color lives in the marker, not the label.", "section": "colors" },
       { "name": "The No-Warm-Neutral Rule", "body": "No neutral in this system carries a warm cast in either direction — paper, panel, ink, and rule are all genuinely neutral grey, black, or white.", "section": "colors" },
       { "name": "The One Voice, One Data Rule", "body": "Anton names things; Inter explains things; JetBrains Mono measures things. No role ever borrows another's job.", "section": "typography" },
       { "name": "The Line, Not Light Rule", "body": "No box-shadow appears anywhere in this system. A surface separates from the page behind it with a border or a tone change; if neither reads clearly enough, the surface's content or size is wrong, not its shadow.", "section": "elevation" }
@@ -181,7 +173,7 @@
       "Do set every classification name and heading in Anton, uppercase, at large scale.",
       "Do set anything measured (an index, a date, a diagnostic, a dimension) in JetBrains Mono.",
       "Do separate every surface with a border or a tone shift, never a shadow.",
-      "Do keep Sealing Wax to tags (with a tint fill), bars, and measurement marks — bright, but still small."
+      "Do keep Sealing Wax to a marker square on tags, bars, and measurement marks — bright, but still small."
     ],
     "donts": [
       "Don't reintroduce a shadow anywhere, however soft.",

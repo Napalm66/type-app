@@ -10,7 +10,6 @@ colors:
   rule-solid: "#cfcfcf"
   rule-dashed: "rgba(22, 22, 22, 0.22)"
   sealing-wax: "#c22400"
-  accent-tint: "color-mix(in srgb, #c22400 12%, #ffffff)"
   focus-ring: "#161616"
 typography:
   display:
@@ -92,14 +91,14 @@ Every classification name is set in a single oversized condensed grotesque, uppe
 - A monospace face marks anything measured: indices, dates, dimensions, tags
 - Dashed rules are structural, not decorative — they mark a grid, a leader line, a boundary
 - Square corners everywhere; separation comes from a rule or a tone change, never a shadow
-- One bright accent color marks small things — tags (with a light tint fill so they read clearly), bars, the active tab, measurement call-outs — never a large fill
+- One bright accent color marks small things — a marker square on every tag, bars, the active tab, measurement call-outs — never a large fill
 
 ## Colors
 
-A neutral grey-and-ink system with one bright accent, used sparingly but with enough presence (a tint fill on tags, the active tab's rule) that it doesn't disappear the way a purely line-only accent can.
+A neutral grey-and-ink system with one bright accent, used sparingly but with enough presence (the active tab's rule, a small marker square on every tag) that it doesn't disappear the way a purely line-only accent can.
 
 ### Primary
-- **Sealing Wax** (`#c22400` light / `#ff5a33` dark): branch tags (text + border + a light `accent-tint` fill for legibility), the timeline's classification bars and era pins, the "key tell" callout's left rule, the active tab's rule. Brightened and re-saturated from the redesign's first pass specifically so it reads at a glance rather than needing a second look — still never a large background fill.
+- **Sealing Wax** (`#c22400` light / `#ff5a33` dark): a small marker square before every branch tag, the timeline's classification bars and era pins, the "key tell" callout's left rule, the active tab's rule. Brightened and re-saturated from the redesign's first pass specifically so it reads at a glance rather than needing a second look — still never a large background fill.
 
 ### Neutral
 - **Paper** (`#e6e6e6` light / `#161616` dark): page background — a genuinely neutral light grey, not an off-white or a warm cream.
@@ -111,7 +110,7 @@ A neutral grey-and-ink system with one bright accent, used sparingly but with en
 - **Rule Dashed** (`rgba(22,22,22,.22)` light / `rgba(242,242,240,.2)` dark): the timeline's gridlines — the one place the dashed-rule motif survives as an actual stroke rather than a border style.
 
 ### Named Rules
-**The Small Mark Rule.** Sealing Wax never fills a surface larger than a tag, a 2px border, or a bar on the timeline — a tag's light `accent-tint` background is a tint, not a fill, and stays inside this rule.
+**The Small Mark Rule.** Sealing Wax never fills a surface larger than a 7px marker square, a 2px border, or a bar on the timeline. A branch tag's own text stays `ink-soft`, not accent — the color lives in the marker, not the label.
 
 **The No-Warm-Neutral Rule.** No neutral in this system carries a warm cast in either direction — paper, panel, ink, and rule are all genuinely neutral grey, black, or white. A prior draft's paper (`#efece6`) still had a faint warm bias; this pass corrected it to true grey (`#e6e6e6`) at the user's explicit request.
 
@@ -159,7 +158,7 @@ Every corner in the system is square — `border-radius: 0` everywhere, with no 
 ### Chips (filters, branch tags)
 - **Filter chip:** solid `panel` (white) background, `1px ink` border, square corners, JetBrains Mono uppercase text — given a solid fill rather than transparent specifically so each chip reads as a distinct element against the grey `paper` page instead of nearly disappearing into it. Hover turns the border and text `sealing-wax`.
 - **Active filter chip:** inverts to `ink` background / `paper` text — unchanged behavior from the previous system, just square instead of pill-shaped now.
-- **Branch tag:** JetBrains Mono, `sealing-wax` text and border over a light `accent-tint` fill (`color-mix(sealing-wax 12%, panel)`) — revised from a fully transparent outline after the first pass read as too faint to "tell apart" at a glance; the tint gives it real presence while staying well inside the Small Mark Rule.
+- **Branch tag:** a 7px `sealing-wax` marker square (`::before`) beside plain `ink-soft` JetBrains Mono text — no box, no border, no fill. Went through two earlier revisions: a transparent outline (too faint to "tell apart"), then a bordered box with an `accent-tint` fill ("looks like a slob" — too heavy, read as a UI badge rather than an annotation). The marker-square treatment settled on a small, legible color cue without turning the tag into a button.
 
 ### Rows (Explore list)
 - **Style:** a full-width flex row — mono index, then the classification's oversized Anton name with its live specimen and tagline beneath, then era date and branch tag at the trailing edge. Separated by `1px rule-solid` hairlines, no card border, no radius.
