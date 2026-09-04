@@ -79,7 +79,8 @@
     "shadows": [],
     "shadowNote": "This system uses no box-shadow anywhere — see DESIGN.md's 'The Line, Not Light Rule'. Separation between surfaces comes from a 1px border (rule-solid for flush content, ink for floating panels) or a paper/panel tone shift, never blur.",
     "motion": [
-      { "name": "ease-cut", "value": "0.1s-0.2s steps(2, end) or steps(3, end)", "purpose": "Every state change (view fade-in, tooltip/popover appearance, row hover) steps rather than eases — an instant two-or-three-frame cut instead of a smooth curve, matching the system's printed/mechanical register." }
+      { "name": "ease-cut", "value": "0.1s-0.2s steps(2, end) or steps(3, end)", "purpose": "Every state change (view fade-in, tooltip/popover appearance, row hover) steps rather than eases — an instant two-or-three-frame cut instead of a smooth curve, matching the system's printed/mechanical register." },
+      { "name": "bar-draw-in", "value": "0.55s cubic-bezier(0.16, 1, 0.3, 1) width transition, ~22ms per-row stagger", "purpose": "The Timeline chart's one authored focal entrance: bars sweep from zero to their true width the first time the Timeline tab is opened (not on every tab switch), via a CSS class forcing width:0 that's removed on that first open. Fully skipped (not shortened) under prefers-reduced-motion." }
     ],
     "breakpoints": [
       { "name": "tablet", "value": "640px", "purpose": "Brand tagline switches from right-aligned to left-aligned and drops its max-width." },
@@ -147,9 +148,9 @@
       "name": "Timeline Bar",
       "kind": "custom",
       "refersTo": "n/a",
-      "description": "Signature component: classification bars in flat sealing-wax over near-monochrome era-band tints, square corners, dashed gridlines.",
-      "html": "<svg width=\"320\" height=\"70\" viewBox=\"0 0 320 70\"><rect x=\"0\" y=\"10\" width=\"320\" height=\"50\" fill=\"rgba(0,70,67,0.08)\" /><line x1=\"160\" y1=\"10\" x2=\"160\" y2=\"60\" stroke=\"rgba(0,70,67,0.22)\" stroke-width=\"1\" stroke-dasharray=\"3 3\"/><rect x=\"40\" y=\"22\" width=\"200\" height=\"18\" rx=\"0\" fill=\"#bc3a14\" /><text x=\"48\" y=\"34\" font-family=\"JetBrains Mono\" font-size=\"10\" font-weight=\"700\" fill=\"#ffffff\">1150 – 1500</text></svg>",
-      "css": "text { letter-spacing: 0.02em; }"
+      "description": "Signature component: classification bars in flat accent-coral over a chronological teal-to-coral era-band arc, square corners, dashed gridlines. Bars draw themselves in on first reveal (bar-draw-in motion token); era labels scale with era duration; hovering a row label or a bar highlights that pair and dims the rest.",
+      "html": "<svg width=\"320\" height=\"70\" viewBox=\"0 0 320 70\"><rect x=\"0\" y=\"10\" width=\"320\" height=\"50\" fill=\"rgba(0,70,67,0.35)\" /><line x1=\"160\" y1=\"10\" x2=\"160\" y2=\"60\" stroke=\"rgba(0,70,67,0.22)\" stroke-width=\"1\" stroke-dasharray=\"3 3\"/><rect x=\"40\" y=\"22\" width=\"200\" height=\"18\" rx=\"0\" fill=\"#bc3a14\" /><text x=\"48\" y=\"34\" font-family=\"JetBrains Mono\" font-size=\"10\" font-weight=\"700\" fill=\"#ffffff\">1150 – 1500</text></svg>",
+      "css": "text { letter-spacing: 0.02em; } .tl-bar { transition: filter 0.15s ease, width 0.55s cubic-bezier(0.16,1,0.3,1), opacity 0.15s ease; } .tl-bar.tl-bar--enter { width: 0; } .timeline-frozen-wrap.is-hovering .tl-row { opacity: 0.35; } .timeline-frozen-wrap.is-hovering .tl-row.tl-row--highlight { opacity: 1; }"
     }
   ],
   "narrative": {

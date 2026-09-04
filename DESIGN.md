@@ -172,7 +172,12 @@ Every corner in the system is square — `border-radius: 0` everywhere, with no 
 The dashed-leader-line language that previously lived only inside this one component (cap line / mean line / baseline / x-height) is now the whole system's structural idiom, not a one-off — the redesign's central move was recognizing this component already was the pinned reference's grammar and building outward from it rather than in.
 
 ### Timeline (signature component)
-Era bands lost their nine distinct historical hues in favor of two alternating near-monochrome ink tints (`rgba(28,26,21,.05)` / `.1`) — the old multi-color backdrop was decorative under this system's near-monochrome discipline; boundary information survives fully in the inline label and hover tooltip, just not in hue. Gridlines are now genuinely dashed (`rule-dashed`), and classification bars keep their `sealing-wax` fill and pin marker unchanged.
+Era bands now walk a deliberate chronological color arc rather than sitting near-monochrome: Romanesque opens at the app's own ink teal and the arc lands on Digital & Variable Age in the app's own accent coral, so hue narrates "then" to "now" using the brand's own two colors, not an arbitrary rainbow. This is framed as chart/data-encoding color (legitimate categorical variation), distinct from UI-chrome accent use, which stays restrained. Gridlines are genuinely dashed (`rule-dashed`), and classification bars keep their accent fill and pin marker.
+
+Three data-driven refinements layer on top of the static chart:
+- **Duration-scaled era labels** — an era band's inline label size is sqrt-scaled to how long that era actually lasted (26–300 years maps to 8–13px), so Gothic's label reads visibly larger than Digital & Variable Age's. Type size carries a real chart value here, not decoration for its own sake.
+- **Bar draw-in** — classification bars animate from zero width to their true width the first time the Timeline tab is opened (not on every tab switch), via a CSS class forcing `width: 0` that's removed on that first open so the transition sweeps the bar in. This is the chart's one authored focal entrance (animate.md), staggered slightly per row. Skipped entirely — no shortened version — under `prefers-reduced-motion`, since a width sweep has no non-motion equivalent.
+- **Row ↔ bar hover sync** — hovering a row label in the left column highlights that row's bar in the chart and dims the rest (and the reverse: hovering a bar highlights its row label), making the label-to-chart relationship legible without a click.
 
 ## Do's and Don'ts
 

@@ -1300,11 +1300,46 @@ main.wrap {
 
 .tl-bar {
   cursor: pointer;
-  transition: filter 0.15s ease;
+  transition: filter 0.15s ease, width 0.55s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.15s ease;
 }
 
 .tl-bar:hover {
   filter: brightness(1.15);
+}
+
+/* Draw-in: rendered at full width via the SVG attribute, forced to 0 by
+   this class (a plain CSS rule outranks an SVG presentation attribute),
+   then the class is removed once the Timeline tab is first opened — the
+   attribute's real width "returns" and the transition above animates it. */
+.tl-bar.tl-bar--enter {
+  width: 0;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .tl-bar {
+    transition: filter 0.15s ease, opacity 0.15s ease;
+  }
+}
+
+.timeline-frozen-wrap.is-hovering .tl-row {
+  opacity: 0.35;
+  transition: opacity 0.15s ease;
+}
+
+.timeline-frozen-wrap.is-hovering .tl-row.tl-row--highlight {
+  opacity: 1;
+}
+
+.timeline-label-row {
+  transition: opacity 0.15s ease, color 0.15s ease;
+}
+
+.timeline-frozen-wrap.is-hovering .timeline-label-row {
+  opacity: 0.45;
+}
+
+.timeline-frozen-wrap.is-hovering .timeline-label-row.is-highlighted {
+  opacity: 1;
 }
 
 .tl-bar-label-inside {

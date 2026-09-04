@@ -124,6 +124,15 @@ function initTimeline(root, onOpenDetail) {
     return measureCtx.measureText(text).width;
   }
 
+  // Bars draw themselves in the first time the Timeline tab is opened —
+  // an authored focal entrance (animate.md), not a decorative flourish:
+  // it's the one moment this chart's own core content (the bars) appears,
+  // so it's allowed to take up to ~600ms. Skipped entirely under
+  // prefers-reduced-motion rather than reduced-and-shortened, since a
+  // width sweep has no non-motion equivalent to fall back to.
+  const prefersReducedMotion =
+    typeof window.matchMedia === "function" && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
   function buildMarks() {
     const marks = [];
     for (let y = domainStart; y < domainEnd; y += 100) marks.push(y);
@@ -145,8 +154,24 @@ function initTimeline(root, onOpenDetail) {
     return marks;
   }
 
+  // Era-label size encodes era duration — a 300-year era (Gothic) reads
+  // in a visibly larger label than a 26-year one (Digital & Variable
+  // Age), so the type itself carries the chart's own data dimension
+  // instead of just varying for variety's sake. Sqrt-scaled so the
+  // longest eras don't dwarf the rest disproportionately.
+  const ERA_LABEL_MIN_DURATION = 26;
+  const ERA_LABEL_MAX_DURATION = 300;
+  const ERA_LABEL_MIN_SIZE = 8;
+  const ERA_LABEL_MAX_SIZE = 13;
+  function eraLabelFontSize(duration) {
+    const clamped = Math.max(ERA_LABEL_MIN_DURATION, Math.min(ERA_LABEL_MAX_DURATION, duration));
+    const t =
+      (Math.sqrt(clamped) - Math.sqrt(ERA_LABEL_MIN_DURATION)) /
+      (Math.sqrt(ERA_LABEL_MAX_DURATION) - Math.sqrt(ERA_LABEL_MIN_DURATION));
+    return ERA_LABEL_MIN_SIZE + t * (ERA_LABEL_MAX_SIZE - ERA_LABEL_MIN_SIZE);
+  }
+
   function eraBandSVG(topY) {
-    const font = "700 9px Inter, sans-serif";
     let prevLabelRight = -Infinity;
 
     return ART_PERIODS.map((era, i) => {
@@ -155,6 +180,8 @@ function initTimeline(root, onOpenDetail) {
       const left = x(Math.max(era.start, domainStart));
       const width = x(era.end) - left;
       const label = era.name.toUpperCase();
+      const fontSize = eraLabelFontSize(era.end - era.start);
+      const font = `700 ${fontSize}px Inter, sans-serif`;
       const labelW = textWidth(label, font);
       const nextBoundary = i < ART_PERIODS.length - 1 ? x(ART_PERIODS[i + 1].start) : svgWidth;
 
@@ -169,12 +196,12 @@ function initTimeline(root, onOpenDetail) {
       let labelSVG = "";
       if (fitsCentered) {
         const textX = left + width / 2;
-        labelSVG = `<text x="${textX}" y="${topY + 14}" class="tl-era-label" text-anchor="middle">${label}</text>`;
+        labelSVG = `<text x="${textX}" y="${topY + 14}" class="tl-era-label" style="font-size:${fontSize}px" text-anchor="middle">${label}</text>`;
         prevLabelRight = textX + labelW / 2;
       } else {
         const textX = Math.max(left + 4, prevLabelRight + 10);
         if (textX + labelW <= nextBoundary - 4) {
-          labelSVG = `<text x="${textX}" y="${topY + 14}" class="tl-era-label" text-anchor="start">${label}</text>`;
+          labelSVG = `<text x="${textX}" y="${topY + 14}" class="tl-era-label" style="font-size:${fontSize}px" text-anchor="start">${label}</text>`;
           prevLabelRight = textX + labelW;
         }
       }
@@ -261,9 +288,12 @@ function initTimeline(root, onOpenDetail) {
       labelSVG = `<text x="${pinX - 4}" y="${rowCenter + 3.5}" class="tl-bar-label-outside" text-anchor="end" pointer-events="none">${yearLabel}</text>`;
     }
 
+    const enterClass = prefersReducedMotion ? "" : "tl-bar--enter";
+    const enterDelay = prefersReducedMotion ? "" : `style="transition-delay:${index * 22}ms"`;
+
     return `
-      <g class="tl-row">
-        <rect class="tl-bar ${ongoing ? "is-ongoing" : ""}" data-id="${item.id}"
+      <g class="tl-row" data-id="${item.id}">
+        <rect class="tl-bar ${ongoing ? "is-ongoing" : ""} ${enterClass}" data-id="${item.id}" ${enterDelay}
           x="${barX}" y="${barY}" width="${barWidth}" height="${barH}" rx="0" fill="${fill}"
           aria-label="${item.name}: ${yearLabel}"></rect>
         ${pinSVG}
@@ -341,6 +371,53 @@ function initTimeline(root, onOpenDetail) {
     });
 
     attachEraTooltips(svg);
+    attachRowBarSync(svg);
+    attachEntranceAnimation(svg);
+  }
+
+  // Hovering a row label highlights that row's bar in the chart (and dims
+  // the rest); hovering a bar does the same for its row label. Makes the
+  // label-column-to-chart relationship legible without requiring a click.
+  function attachRowBarSync(svg) {
+    const wrap = svg.closest(".timeline-frozen-wrap");
+    const rowGroups = svg.querySelectorAll(".tl-row");
+    const rowButtons = root.querySelectorAll(".timeline-label-row");
+
+    function setHighlight(id) {
+      wrap.classList.toggle("is-hovering", Boolean(id));
+      rowGroups.forEach((g) => g.classList.toggle("tl-row--highlight", g.dataset.id === id));
+      rowButtons.forEach((b) => b.classList.toggle("is-highlighted", b.dataset.id === id));
+    }
+
+    rowButtons.forEach((btn) => {
+      btn.addEventListener("mouseenter", () => setHighlight(btn.dataset.id));
+      btn.addEventListener("mouseleave", () => setHighlight(null));
+    });
+    rowGroups.forEach((g) => {
+      g.addEventListener("mouseenter", () => setHighlight(g.dataset.id));
+      g.addEventListener("mouseleave", () => setHighlight(null));
+    });
+  }
+
+  // The chart renders once at page load, well before the user has clicked
+  // over to the Timeline tab — its view is still display:none at that
+  // point, so any transition started immediately would jump instead of
+  // animate. Defer the draw-in to the first time the tab is actually
+  // opened, then never repeat it.
+  function attachEntranceAnimation(svg) {
+    if (prefersReducedMotion) return;
+    const tabBtn = document.querySelector('.tab[data-view="timeline"]');
+    if (!tabBtn) return;
+    let fired = false;
+    tabBtn.addEventListener("click", () => {
+      if (fired) return;
+      fired = true;
+      requestAnimationFrame(() => {
+        requestAnimationFrame(() => {
+          svg.querySelectorAll(".tl-bar--enter").forEach((bar) => bar.classList.remove("tl-bar--enter"));
+        });
+      });
+    });
   }
 
   function attachEraTooltips(svg) {
