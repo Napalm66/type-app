@@ -62,6 +62,14 @@
         "tonalRamp": [],
         "contrastNote": "Not a text/UI contrast pair — a 28px repeating-linear-gradient grid on the body background, same ink/cream base as rule-dashed at a much lower 5% alpha, giving the whole page a faint graph-paper texture instead of a flat paper fill."
       },
+      "hero-ink": {
+        "role": "neutral",
+        "displayName": "Hero Ink",
+        "canonical": "#f5f2ea",
+        "darkVariant": "#f5f2ea",
+        "tonalRamp": [],
+        "contrastNote": "Fixed, not theme-swapped — the site-header hero photo's own text color. The photo and its teal wash render identically in light/dark mode, so text on it stays this same cream in both rather than following --ink."
+      },
       "sealing-wax": {
         "role": "primary",
         "displayName": "Sealing Wax",
@@ -98,6 +106,14 @@
     ]
   },
   "components": [
+    {
+      "name": "Hero",
+      "kind": "custom",
+      "refersTo": "n/a",
+      "description": "Full-bleed black-and-white photo (a type designer at their desk, user-supplied) behind the brand lockup/tagline/tab-nav, under a fixed teal wash fading to paper. Photo/wash/fade are sized to the header's real content height (not a fixed aspect-ratio box) so the fade always lands at the text's own bottom edge; background-position: center top keeps the subject's face intact when a short layout crops the frame.",
+      "html": "<header class=\"ds-hero\"><div class=\"ds-hero-text\"><h1>Type<br/>Classified</h1></div></header>",
+      "css": ".ds-hero { position: relative; min-height: 26vw; background-image: linear-gradient(rgba(0,70,67,0.6), rgba(0,70,67,0.6) 60%, #f0ede5 100%), url(hero.jpg); background-size: 100% 100%, cover; background-position: center top, center top; background-repeat: no-repeat, no-repeat; } .ds-hero-text { padding-top: 34%; color: #f5f2ea; }"
+    },
     {
       "name": "Tab",
       "kind": "nav",

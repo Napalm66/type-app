@@ -51,6 +51,10 @@
   --accent: #bc3a14;
   --focus: #004643;
   --paper-grid: rgba(0, 70, 67, 0.05);
+  /* Fixed (not theme-swapped) — the hero photo's own text color. The photo
+     and its teal wash look the same in light and dark mode, so the text
+     sitting on it stays a fixed cream rather than following --ink. */
+  --hero-ink: #f5f2ea;
 
   --font-ui: "Inter", system-ui, -apple-system, sans-serif;
   --font-display: "Anton", "Arial Narrow", sans-serif;
@@ -108,7 +112,56 @@ body {
 /* ---------- header ---------- */
 
 .site-header {
-  padding: clamp(2rem, 5vw, 3rem) 0 0;
+  padding: 0;
+}
+
+/* Hero photo + teal wash + fade-to-paper all live on .site-header itself,
+   sized to whatever height the text content actually takes — not a fixed
+   aspect-ratio guess. That matters because the text stacks much taller on
+   narrow viewports (brand wraps, tagline drops below), and a fixed-height
+   photo frame left the tagline spilling onto plain paper below it, still
+   styled in the light "on-photo" color and unreadable there. Tying the
+   wash/fade to the real content box means the fade always ends exactly
+   at the content's own bottom edge, at any width. The photo itself stays
+   anchored to the top (background-position: top) so its own crop always
+   favors keeping the top of the frame — where his face sits — intact;
+   min-height keeps that top slice tall enough on short/compact layouts. */
+.site-header {
+  position: relative;
+  min-height: 26vw;
+  background-image:
+    linear-gradient(rgba(0, 70, 67, 0.6), rgba(0, 70, 67, 0.6) 60%, var(--paper) 100%),
+    url("../images/hero-typographer.jpg");
+  background-size: 100% 100%, cover;
+  background-position: center top, center top;
+  background-repeat: no-repeat, no-repeat;
+}
+
+.hero-text {
+  position: relative;
+  padding-top: 34%;
+  padding-bottom: clamp(2rem, 5vw, 3rem);
+}
+
+.hero-text .brand,
+.hero-text .brand-sub {
+  color: var(--hero-ink);
+}
+
+.hero-text .brand-sub {
+  color: rgba(245, 242, 234, 0.82);
+}
+
+.hero-text .tabs {
+  border-bottom-color: rgba(245, 242, 234, 0.28);
+}
+
+.hero-text .tab-rule {
+  border-left-color: rgba(245, 242, 234, 0.4);
+}
+
+.hero-text .tab.is-active .tab-rule {
+  border-left-color: var(--accent);
 }
 
 .brand-row {

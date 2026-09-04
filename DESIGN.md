@@ -11,6 +11,8 @@ colors:
   rule-dashed: "rgba(0, 70, 67, 0.22)"
   sealing-wax: "#bc3a14"
   focus-ring: "#004643"
+  # Fixed, not theme-swapped — see Layout's hero-photo note.
+  hero-ink: "#f5f2ea"
 typography:
   display:
     fontFamily: "Anton, 'Arial Narrow', sans-serif"
@@ -185,6 +187,8 @@ Explore's card grid became a numbered list: each classification is a full-width 
 
 The page background (`body`) carries a faint 28px graph-paper grid (`--paper-grid`, an `ink`/`cream`-derived rgba at 5% alpha, swapping with the theme like `--rule` does) instead of a flat `paper` color, added at the user's request for "texture... to make it newspaper feel." Chosen over a literal newsprint grain or a halftone dot screen (both previewed) specifically because a grid reads as this system's own structural-line language extended to the whole page, not a borrowed print effect — it's the same idea as the dashed timeline/anatomy rules, just ambient rather than functional.
 
+The header itself (`.site-header`) now carries a full-bleed photograph — a black-and-white portrait of a type designer at their desk, user-supplied — under a teal wash (the same rgba the timeline's Romanesque era band opens on) fading to `paper` at the bottom, with the brand lockup, tagline, and tab nav sitting on top in a fixed cream (`--hero-ink`, not theme-swapped, since the photo doesn't theme-swap either). Three previewed options (a teal duotone, a straight-grayscale dark scrim, and a contained side panel) were narrowed to the duotone per explicit request. The photo, wash, and fade are all sized to `.site-header`'s own content-driven height (not a fixed aspect-ratio box) specifically so the tagline/tab-nav — which stack taller on narrow viewports as the brand wraps — never spill past the tinted area onto plain paper still carrying the light on-photo text color; the photo crops from `background-position: center top` so its own top (where the subject's face sits) is never the part sacrificed to a short container.
+
 ## Elevation & Depth
 
 No shadows anywhere — this is a hard departure from the previous system, which used a soft ambient shadow on hover and floating surfaces. Every surface in this system separates from its neighbor with a rule line (`rule-solid`) or a tone shift (`paper` → `panel`), never blur. Floating surfaces (the detail modal, the quiz card, tooltips, the serif-spectrum zoom popover) get a solid 1px `ink` border instead of a shadow — a page in a measured document doesn't cast light, it's outlined.
@@ -197,6 +201,11 @@ No shadows anywhere — this is a hard departure from the previous system, which
 Every corner in the system is square — `border-radius: 0` everywhere, with no exceptions; the timeline bars' old `rx="4"` rounding was flattened to `rx="0"` in this pass specifically to hold that line. Structure comes from rule lines: solid hairlines divide ordinary content, dashed lines mark the timeline's year grid and the header's tab rail. Borders, not radius or shadow, are this system's entire form language.
 
 ## Components
+
+### Hero (site header photo)
+- **Style:** a full-bleed black-and-white photo (a type designer at their desk) under a fixed teal wash (`rgba(0, 70, 67, 0.6)`, matching the timeline's own Romanesque-era rgba) fading to `paper` by the header's bottom edge. Brand lockup, tagline, and tab nav sit on top in `hero-ink` — a fixed cream that does not swap with light/dark mode, since neither the photo nor its wash do.
+- **Sizing:** the photo, wash, and fade are backgrounds on `.site-header` itself, sized to the header's real (content-driven) height — not a fixed aspect-ratio box — so the fade always lands exactly at the text content's own bottom edge regardless of how tall that content stacks at a given viewport width. `background-position: center top` keeps the photo's own top (the subject's face) intact when a short/compact layout crops the bottom of the frame; `min-height: 26vw` keeps that top slice from getting too thin.
+- **History:** three treatments were previewed (teal duotone / straight-grayscale dark scrim / a contained side panel, not full-bleed) and narrowed to the duotone per explicit request; the brand lockup was then pushed down and shrunk (~18%) after the first pass placed "Classified" directly over the subject's face.
 
 ### Tabs (header navigation)
 - **Style:** each tab is a vertical dashed rule (`border-left: 1px dashed ink-faint`) topped by a rotated label (`writing-mode: vertical-rl`, Inter, uppercase, tracked). The label is `sealing-wax` colored at all times now (was `ink-faint`/`ink`) — inactive/hover/active states are differentiated by **opacity** (`0.6` / `0.85` / `1`), not by switching color, at the user's request ("explore, identify, timeline etc be in orange").
