@@ -135,7 +135,7 @@ body {
    an asymmetric two-line lockup instead of one uniform size, at the
    user's explicit request. */
 .brand-word--type {
-  font-size: clamp(1.4rem, 4vw, 2.6rem);
+  font-size: clamp(2.1rem, 6vw, 3.9rem);
 }
 
 .brand-word--classified {
