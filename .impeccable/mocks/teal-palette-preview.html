@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<title>Teal Palette Preview</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@400;600;700&family=JetBrains+Mono:wght@400;700&display=swap" />
+<style>
+  * { box-sizing: border-box; }
+  body { margin: 0; background: #ccc; font-family: 'Inter', sans-serif; padding: 2rem; }
+  h1 { font-family: 'JetBrains Mono', monospace; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.06em; color: #333; margin: 0 0 1.5rem; }
+  .cols { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; }
+  .col-label { font-family: 'JetBrains Mono', monospace; font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.05em; color: #555; margin-bottom: 0.6rem; }
+
+  .stage {
+    --paper: #f0ede5;
+    --panel: #ffffff;
+    --ink: #004643;
+    --ink-soft: #2e5c59;
+    --ink-faint: #5c7d7a;
+    --rule-solid: #d7d2c5;
+    background: var(--paper);
+    padding: 1.75rem;
+  }
+  /* option B swaps the accent for a warm coral kept as a third note */
+  .stage-b { --accent: #bc3a14; }
+  /* option A has no third color at all — teal does double duty */
+  .stage-a { --accent: #004643; }
+
+  .brand-row { display: flex; justify-content: space-between; align-items: flex-start; }
+  .brand { font-family: 'Anton', sans-serif; font-size: 2.6rem; line-height: 0.9; text-transform: uppercase; color: var(--ink); margin: 0; }
+  .sub { font-size: 0.72rem; color: var(--ink-soft); max-width: 20ch; text-align: right; margin: 0; }
+
+  .tabs { display: flex; gap: 1.25rem; height: 46px; align-items: flex-end; margin-top: 1.25rem; border-bottom: 1px solid var(--rule-solid); }
+  .tab-label { font-family: 'Inter', sans-serif; font-size: 0.6rem; font-weight: 700; letter-spacing: 0.05em; text-transform: uppercase; color: var(--ink-faint); }
+  .tab-label.active { color: var(--ink); border-bottom: 2px solid var(--accent); padding-bottom: 4px; }
+
+  .body { padding-top: 1.25rem; }
+  .row { display: flex; align-items: baseline; gap: 1rem; border-top: 1px solid var(--rule-solid); padding: 0.7rem 0; }
+  .row:first-child { border-top: none; }
+  .idx { font-family: 'JetBrains Mono', monospace; font-size: 0.62rem; color: var(--ink-faint); width: 18px; }
+  .name { font-family: 'Anton', sans-serif; font-size: 1.3rem; text-transform: uppercase; color: var(--ink); flex: 1; }
+  .tag { font-family: 'JetBrains Mono', monospace; font-size: 0.58rem; font-weight: 700; color: var(--ink-soft); display: inline-flex; align-items: center; gap: 0.3rem; }
+  .tag::before { content: ""; width: 5px; height: 5px; background: var(--accent); }
+
+  .chip-row { display: flex; gap: 0.4rem; margin-top: 1rem; }
+  .chip { font-family: 'JetBrains Mono', monospace; font-size: 0.6rem; font-weight: 700; text-transform: uppercase; color: var(--ink-soft); background: var(--panel); border: 1px solid var(--ink); padding: 0.3rem 0.55rem; }
+  .chip.is-active { background: var(--ink); border-color: var(--ink); color: var(--paper); }
+</style>
+</head>
+<body>
+  <h1>Teal + cream palette — with a coral third note (B) vs fully two-tone (A)</h1>
+  <div class="cols">
+    <div>
+      <div class="col-label">A — fully two-tone, teal does double duty as accent too</div>
+      <div class="stage stage-a">
+        <div class="brand-row">
+          <div class="brand">Type<br/>Classified</div>
+          <p class="sub">A field guide to type classification.</p>
+        </div>
+        <div class="tabs">
+          <span class="tab-label active">Explore</span>
+          <span class="tab-label">Identify</span>
+          <span class="tab-label">Timeline</span>
+        </div>
+        <div class="chip-row">
+          <span class="chip is-active">All</span>
+          <span class="chip">Blackletter</span>
+          <span class="chip">Serif</span>
+        </div>
+        <div class="body">
+          <div class="row"><span class="idx">01</span><span class="name">Blackletter</span><span class="tag">Blackletter</span></div>
+          <div class="row"><span class="idx">02</span><span class="name">Garalde Oldstyle</span><span class="tag">Serif</span></div>
+          <div class="row"><span class="idx">03</span><span class="name">Transitional</span><span class="tag">Serif</span></div>
+        </div>
+      </div>
+    </div>
+
+    <div>
+      <div class="col-label">B — teal + cream ground, coral kept as the small accent mark</div>
+      <div class="stage stage-b">
+        <div class="brand-row">
+          <div class="brand">Type<br/>Classified</div>
+          <p class="sub">A field guide to type classification.</p>
+        </div>
+        <div class="tabs">
+          <span class="tab-label active">Explore</span>
+          <span class="tab-label">Identify</span>
+          <span class="tab-label">Timeline</span>
+        </div>
+        <div class="chip-row">
+          <span class="chip is-active">All</span>
+          <span class="chip">Blackletter</span>
+          <span class="chip">Serif</span>
+        </div>
+        <div class="body">
+          <div class="row"><span class="idx">01</span><span class="name">Blackletter</span><span class="tag">Blackletter</span></div>
+          <div class="row"><span class="idx">02</span><span class="name">Garalde Oldstyle</span><span class="tag">Serif</span></div>
+          <div class="row"><span class="idx">03</span><span class="name">Transitional</span><span class="tag">Serif</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

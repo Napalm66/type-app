@@ -7,67 +7,67 @@
       "paper": {
         "role": "neutral",
         "displayName": "Paper",
-        "canonical": "#f3e9dc",
-        "darkVariant": "#191510",
-        "tonalRamp": ["#1a1611", "#3a3226", "#5a5044", "#635749", "#706557", "#a8998a", "#ddd0bd", "#ffffff"]
+        "canonical": "#f0ede5",
+        "darkVariant": "#004643",
+        "tonalRamp": ["#004643", "#1a4d4a", "#2e5c59", "#3f6663", "#4d6a67", "#8fa8a5", "#d3dbd8", "#ffffff"]
       },
       "panel": {
         "role": "neutral",
         "displayName": "Panel",
         "canonical": "#ffffff",
-        "darkVariant": "#221d16",
-        "tonalRamp": ["#1a1611", "#3a3226", "#5a5044", "#635749", "#706557", "#a8998a", "#ddd0bd", "#ffffff"]
+        "darkVariant": "#0a5852",
+        "tonalRamp": ["#004643", "#1a4d4a", "#2e5c59", "#3f6663", "#4d6a67", "#8fa8a5", "#d3dbd8", "#ffffff"]
       },
       "ink": {
         "role": "neutral",
         "displayName": "Ink",
-        "canonical": "#1a1611",
-        "darkVariant": "#f3e9dc",
-        "tonalRamp": ["#1a1611", "#3a3226", "#5a5044", "#635749", "#706557", "#a8998a", "#ddd0bd", "#ffffff"]
+        "canonical": "#004643",
+        "darkVariant": "#f0ede5",
+        "tonalRamp": ["#004643", "#1a4d4a", "#2e5c59", "#3f6663", "#4d6a67", "#8fa8a5", "#d3dbd8", "#ffffff"]
       },
       "ink-soft": {
         "role": "neutral",
         "displayName": "Ink Soft",
-        "canonical": "#5a5044",
-        "darkVariant": "#c9bca8",
-        "tonalRamp": ["#1a1611", "#3a3226", "#5a5044", "#635749", "#706557", "#a8998a", "#ddd0bd", "#ffffff"]
+        "canonical": "#2e5c59",
+        "darkVariant": "#cddbd8",
+        "tonalRamp": ["#004643", "#1a4d4a", "#2e5c59", "#3f6663", "#4d6a67", "#8fa8a5", "#d3dbd8", "#ffffff"]
       },
       "ink-faint": {
         "role": "neutral",
         "displayName": "Ink Faint",
-        "canonical": "#706557",
-        "darkVariant": "#9c8f7c",
-        "tonalRamp": ["#1a1611", "#3a3226", "#5a5044", "#635749", "#706557", "#a8998a", "#ddd0bd", "#ffffff"],
+        "canonical": "#4d6a67",
+        "darkVariant": "#a8c2bf",
+        "tonalRamp": ["#004643", "#1a4d4a", "#2e5c59", "#3f6663", "#4d6a67", "#8fa8a5", "#d3dbd8", "#ffffff"],
         "contrastNote": "4.75:1 vs paper (light), 5.74:1 vs paper (dark) — both clear WCAG AA 4.5:1 for text, verified 2026-09-04."
       },
       "rule-solid": {
         "role": "neutral",
         "displayName": "Rule Solid",
-        "canonical": "#ddd0bd",
-        "darkVariant": "#3a3226",
-        "tonalRamp": ["#1a1611", "#3a3226", "#5a5044", "#635749", "#706557", "#a8998a", "#ddd0bd", "#ffffff"]
+        "canonical": "#d3dbd8",
+        "darkVariant": "#146b64",
+        "tonalRamp": ["#004643", "#1a4d4a", "#2e5c59", "#3f6663", "#4d6a67", "#8fa8a5", "#d3dbd8", "#ffffff"]
       },
       "rule-dashed": {
         "role": "neutral",
         "displayName": "Rule Dashed",
-        "canonical": "rgba(26, 22, 17, 0.22)",
-        "darkVariant": "rgba(243, 233, 220, 0.2)",
+        "canonical": "rgba(0, 70, 67, 0.22)",
+        "darkVariant": "rgba(240, 237, 229, 0.2)",
         "tonalRamp": []
       },
       "sealing-wax": {
         "role": "primary",
         "displayName": "Sealing Wax",
         "canonical": "#bc3a14",
-        "darkVariant": "#f2743f",
-        "tonalRamp": ["#3d0f03", "#5c1706", "#82210a", "#a02c0e", "#bc3a14", "#d95a2e", "#f2743f", "#ffb08a"],
+        "darkVariant": "#ffb27f",
+        "tonalRamp": ["#3d0f03", "#5c1706", "#82210a", "#a02c0e", "#bc3a14", "#e0713f", "#ffb27f", "#ffdcc4"],
         "contrastNote": "4.66:1 vs paper (light), 6.35:1 vs paper (dark) — the light-mode value was darkened from the initial #ee5a35 (2.85:1, failed as text) to #bc3a14 while staying visibly coral rather than brick; verified 2026-09-04."
       },
       "focus-ring": {
         "role": "neutral",
         "displayName": "Focus Ring",
-        "canonical": "#1a1611",
-        "darkVariant": "#f3e9dc",
-        "tonalRamp": ["#1a1611", "#3a3226", "#5a5044", "#635749", "#706557", "#a8998a", "#ddd0bd", "#ffffff"]
+        "canonical": "#004643",
+        "darkVariant": "#f0ede5",
+        "tonalRamp": ["#004643", "#1a4d4a", "#2e5c59", "#3f6663", "#4d6a67", "#8fa8a5", "#d3dbd8", "#ffffff"]
       }
     },
     "typographyMeta": {
@@ -91,9 +91,9 @@
       "name": "Tab",
       "kind": "nav",
       "refersTo": "tab",
-      "description": "Rotated vertical label riding a dashed grid rule — the header's view switcher. The active state's rule is now sealing-wax red (was ink) for a small deliberate dash of color in the header.",
+      "description": "Rotated vertical label riding a dashed grid rule — the header's view switcher. Per explicit request ('explore, identify, timeline etc be in orange'), the label is sealing-wax colored at all times; inactive/hover/active states are differentiated by opacity (0.6/0.85/1), not by switching between neutral and accent color.",
       "html": "<nav class=\"ds-tabs\"><button class=\"ds-tab ds-tab--active\"><span class=\"ds-tab-rule\"></span><span class=\"ds-tab-label\">Explore</span></button><button class=\"ds-tab\"><span class=\"ds-tab-rule\"></span><span class=\"ds-tab-label\">Identify</span></button></nav>",
-      "css": ".ds-tabs { display: flex; gap: 2rem; height: 78px; align-items: flex-end; border-bottom: 1px solid #ddd0bd; } .ds-tab { display: flex; flex-direction: column; align-items: center; justify-content: flex-end; height: 100%; background: none; border: none; padding: 0; cursor: pointer; } .ds-tab-rule { flex: 1; width: 0; border-left: 1px dashed #706557; } .ds-tab-label { writing-mode: vertical-rl; transform: rotate(180deg); font-family: Inter, sans-serif; font-size: 0.7rem; font-weight: 600; letter-spacing: 0.05em; text-transform: uppercase; color: #706557; margin-top: 0.5rem; } .ds-tab--active .ds-tab-rule { border-left-style: solid; border-left-color: #bc3a14; border-left-width: 2px; } .ds-tab--active .ds-tab-label { color: #1a1611; font-weight: 700; }"
+      "css": ".ds-tabs { display: flex; gap: 2rem; height: 78px; align-items: flex-end; border-bottom: 1px solid #d3dbd8; } .ds-tab { display: flex; flex-direction: column; align-items: center; justify-content: flex-end; height: 100%; background: none; border: none; padding: 0; cursor: pointer; } .ds-tab-rule { flex: 1; width: 0; border-left: 1px dashed #4d6a67; } .ds-tab-label { writing-mode: vertical-rl; transform: rotate(180deg); font-family: Inter, sans-serif; font-size: 0.7rem; font-weight: 600; letter-spacing: 0.05em; text-transform: uppercase; color: #bc3a14; opacity: 0.6; margin-top: 0.5rem; } .ds-tab--active .ds-tab-rule { border-left-style: solid; border-left-color: #bc3a14; border-left-width: 2px; } .ds-tab--active .ds-tab-label { opacity: 1; font-weight: 700; }"
     },
     {
       "name": "Filter Chip",
@@ -101,7 +101,7 @@
       "refersTo": "chip",
       "description": "Branch filter above the Explore list and the Compare picker. A solid white (panel) fill rather than transparent, so each chip reads as a distinct element against the cream paper page.",
       "html": "<div class=\"ds-chip-row\"><button class=\"ds-chip ds-chip--active\">ALL</button><button class=\"ds-chip\">SERIF</button></div>",
-      "css": ".ds-chip-row { display: flex; gap: 0.5rem; } .ds-chip { font-family: 'JetBrains Mono', monospace; font-size: 0.7rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.04em; color: #5a5044; background: #ffffff; border: 1px solid #1a1611; border-radius: 0; padding: 0.4rem 0.75rem; cursor: pointer; } .ds-chip:hover { border-color: #bc3a14; color: #bc3a14; } .ds-chip--active { background: #1a1611; border-color: #1a1611; color: #f3e9dc; }"
+      "css": ".ds-chip-row { display: flex; gap: 0.5rem; } .ds-chip { font-family: 'JetBrains Mono', monospace; font-size: 0.7rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.04em; color: #2e5c59; background: #ffffff; border: 1px solid #004643; border-radius: 0; padding: 0.4rem 0.75rem; cursor: pointer; } .ds-chip:hover { border-color: #bc3a14; color: #bc3a14; } .ds-chip--active { background: #004643; border-color: #004643; color: #f0ede5; }"
     },
     {
       "name": "Branch Tag",
@@ -109,7 +109,7 @@
       "refersTo": "tag",
       "description": "Classification-branch mark: a 7px sealing-wax marker square before plain ink-soft text, no box/border/fill. Third revision — a transparent outline read as too faint, a bordered+tinted box read as a heavy UI badge ('looks like a slob'); the marker square gives a legible color cue without the tag reading as a button.",
       "html": "<span class=\"ds-tag\">SERIF</span>",
-      "css": ".ds-tag { display: inline-flex; align-items: center; gap: 0.4rem; font-family: 'JetBrains Mono', monospace; font-size: 0.68rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; color: #5a5044; } .ds-tag::before { content: \"\"; width: 7px; height: 7px; background: #bc3a14; flex-shrink: 0; }"
+      "css": ".ds-tag { display: inline-flex; align-items: center; gap: 0.4rem; font-family: 'JetBrains Mono', monospace; font-size: 0.68rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; color: #2e5c59; } .ds-tag::before { content: \"\"; width: 7px; height: 7px; background: #bc3a14; flex-shrink: 0; }"
     },
     {
       "name": "Spec Row",
@@ -117,7 +117,7 @@
       "refersTo": "row",
       "description": "Explore-list row: index, oversized display name, live specimen (set in the classification's own verified font), tagline, era, branch tag.",
       "html": "<button class=\"ds-row\"><span class=\"ds-row-index\">03</span><span class=\"ds-row-main\"><span class=\"ds-row-name\">Garalde Oldstyle</span><span class=\"ds-row-specimen\">Aa Gg Qy</span><span class=\"ds-row-tagline\">The Aldine-Garamond tradition.</span></span><span class=\"ds-row-meta\"><span class=\"ds-row-era\">c. 1495 – 1700</span><span class=\"ds-tag\">SERIF</span></span></button>",
-      "css": ".ds-row { display: flex; align-items: baseline; gap: 1.25rem; width: 100%; text-align: left; background: none; border: none; border-top: 1px solid #ddd0bd; padding: 1rem 0; cursor: pointer; } .ds-row:hover { background: #ffffff; } .ds-row-index { font-family: 'JetBrains Mono', monospace; font-size: 0.68rem; color: #706557; width: 24px; flex-shrink: 0; padding-top: 0.4em; } .ds-row-main { flex: 1; } .ds-row-name { display: block; font-family: Anton, sans-serif; font-size: 2rem; text-transform: uppercase; line-height: 1; color: #1a1611; } .ds-row-specimen { display: block; margin-top: 0.4rem; font-family: Georgia, serif; font-size: 1.5rem; color: #5a5044; } .ds-row-tagline { display: block; margin-top: 0.3rem; font-family: Inter, sans-serif; font-size: 0.82rem; color: #5a5044; } .ds-row-meta { flex-shrink: 0; display: flex; flex-direction: column; align-items: flex-end; gap: 0.4rem; } .ds-row-era { font-family: 'JetBrains Mono', monospace; font-size: 0.68rem; color: #706557; }"
+      "css": ".ds-row { display: flex; align-items: baseline; gap: 1.25rem; width: 100%; text-align: left; background: none; border: none; border-top: 1px solid #d3dbd8; padding: 1rem 0; cursor: pointer; } .ds-row:hover { background: #ffffff; } .ds-row-index { font-family: 'JetBrains Mono', monospace; font-size: 0.68rem; color: #4d6a67; width: 24px; flex-shrink: 0; padding-top: 0.4em; } .ds-row-main { flex: 1; } .ds-row-name { display: block; font-family: Anton, sans-serif; font-size: 2rem; text-transform: uppercase; line-height: 1; color: #004643; } .ds-row-specimen { display: block; margin-top: 0.4rem; font-family: Georgia, serif; font-size: 1.5rem; color: #2e5c59; } .ds-row-tagline { display: block; margin-top: 0.3rem; font-family: Inter, sans-serif; font-size: 0.82rem; color: #2e5c59; } .ds-row-meta { flex-shrink: 0; display: flex; flex-direction: column; align-items: flex-end; gap: 0.4rem; } .ds-row-era { font-family: 'JetBrains Mono', monospace; font-size: 0.68rem; color: #4d6a67; }"
     },
     {
       "name": "Text Input",
@@ -125,7 +125,7 @@
       "refersTo": "n/a",
       "description": "The \"try your own text\" custom specimen field.",
       "html": "<input class=\"ds-input\" type=\"text\" placeholder=\"Type or paste a word…\" />",
-      "css": ".ds-input { font-family: Inter, sans-serif; font-size: 0.92rem; padding: 0.6rem 0.85rem; border: 1px solid #ddd0bd; border-radius: 0; background: #ffffff; color: #1a1611; } .ds-input::placeholder { color: #706557; } .ds-input:focus-visible { outline: 2px solid #1a1611; outline-offset: 1px; border-color: #706557; }"
+      "css": ".ds-input { font-family: Inter, sans-serif; font-size: 0.92rem; padding: 0.6rem 0.85rem; border: 1px solid #d3dbd8; border-radius: 0; background: #ffffff; color: #004643; } .ds-input::placeholder { color: #4d6a67; } .ds-input:focus-visible { outline: 2px solid #004643; outline-offset: 1px; border-color: #4d6a67; }"
     },
     {
       "name": "Floating Panel",
@@ -133,14 +133,14 @@
       "refersTo": "panel",
       "description": "The detail modal and quiz card shell — no shadow; separation from the page comes entirely from the solid ink border.",
       "html": "<div class=\"ds-panel\"><div class=\"ds-panel-era\">C. 1495 – 1700</div><div class=\"ds-panel-name\">Garalde Oldstyle</div></div>",
-      "css": ".ds-panel { background: #ffffff; border: 1px solid #1a1611; border-radius: 0; padding: 2rem; max-width: 640px; } .ds-panel-era { font-family: 'JetBrains Mono', monospace; font-size: 0.72rem; color: #706557; font-weight: 600; text-transform: uppercase; } .ds-panel-name { font-family: Anton, sans-serif; font-size: 2.4rem; text-transform: uppercase; line-height: 0.95; margin-top: 0.35rem; color: #1a1611; }"
+      "css": ".ds-panel { background: #ffffff; border: 1px solid #004643; border-radius: 0; padding: 2rem; max-width: 640px; } .ds-panel-era { font-family: 'JetBrains Mono', monospace; font-size: 0.72rem; color: #4d6a67; font-weight: 600; text-transform: uppercase; } .ds-panel-name { font-family: Anton, sans-serif; font-size: 2.4rem; text-transform: uppercase; line-height: 0.95; margin-top: 0.35rem; color: #004643; }"
     },
     {
       "name": "Anatomy Leader-Line",
       "kind": "custom",
       "refersTo": "n/a",
       "description": "Signature component: the dashed cap-line/mean-line/baseline annotation, the system's structural idiom extended app-wide.",
-      "html": "<svg width=\"280\" height=\"90\" viewBox=\"0 0 280 90\"><line x1=\"0\" y1=\"10\" x2=\"280\" y2=\"10\" stroke=\"#706557\" stroke-width=\"1\" stroke-dasharray=\"3 3\"/><text x=\"0\" y=\"7\" font-family=\"JetBrains Mono\" font-size=\"8\" fill=\"#706557\">CAP LINE</text><text x=\"10\" y=\"70\" font-family=\"Anton\" font-size=\"48\" fill=\"#1a1611\">Aa</text><line x1=\"0\" y1=\"75\" x2=\"280\" y2=\"75\" stroke=\"#706557\" stroke-width=\"1\" stroke-dasharray=\"3 3\"/><text x=\"0\" y=\"72\" font-family=\"JetBrains Mono\" font-size=\"8\" fill=\"#706557\">BASELINE</text></svg>",
+      "html": "<svg width=\"280\" height=\"90\" viewBox=\"0 0 280 90\"><line x1=\"0\" y1=\"10\" x2=\"280\" y2=\"10\" stroke=\"#4d6a67\" stroke-width=\"1\" stroke-dasharray=\"3 3\"/><text x=\"0\" y=\"7\" font-family=\"JetBrains Mono\" font-size=\"8\" fill=\"#4d6a67\">CAP LINE</text><text x=\"10\" y=\"70\" font-family=\"Anton\" font-size=\"48\" fill=\"#004643\">Aa</text><line x1=\"0\" y1=\"75\" x2=\"280\" y2=\"75\" stroke=\"#4d6a67\" stroke-width=\"1\" stroke-dasharray=\"3 3\"/><text x=\"0\" y=\"72\" font-family=\"JetBrains Mono\" font-size=\"8\" fill=\"#4d6a67\">BASELINE</text></svg>",
       "css": "svg text { letter-spacing: 0.03em; font-weight: 700; }"
     },
     {
@@ -148,24 +148,24 @@
       "kind": "custom",
       "refersTo": "n/a",
       "description": "Signature component: classification bars in flat sealing-wax over near-monochrome era-band tints, square corners, dashed gridlines.",
-      "html": "<svg width=\"320\" height=\"70\" viewBox=\"0 0 320 70\"><rect x=\"0\" y=\"10\" width=\"320\" height=\"50\" fill=\"rgba(26,22,17,0.08)\" /><line x1=\"160\" y1=\"10\" x2=\"160\" y2=\"60\" stroke=\"rgba(26,22,17,0.22)\" stroke-width=\"1\" stroke-dasharray=\"3 3\"/><rect x=\"40\" y=\"22\" width=\"200\" height=\"18\" rx=\"0\" fill=\"#bc3a14\" /><text x=\"48\" y=\"34\" font-family=\"JetBrains Mono\" font-size=\"10\" font-weight=\"700\" fill=\"#ffffff\">1150 – 1500</text></svg>",
+      "html": "<svg width=\"320\" height=\"70\" viewBox=\"0 0 320 70\"><rect x=\"0\" y=\"10\" width=\"320\" height=\"50\" fill=\"rgba(0,70,67,0.08)\" /><line x1=\"160\" y1=\"10\" x2=\"160\" y2=\"60\" stroke=\"rgba(0,70,67,0.22)\" stroke-width=\"1\" stroke-dasharray=\"3 3\"/><rect x=\"40\" y=\"22\" width=\"200\" height=\"18\" rx=\"0\" fill=\"#bc3a14\" /><text x=\"48\" y=\"34\" font-family=\"JetBrains Mono\" font-size=\"10\" font-weight=\"700\" fill=\"#ffffff\">1150 – 1500</text></svg>",
       "css": "text { letter-spacing: 0.02em; }"
     }
   ],
   "narrative": {
     "northStar": "The Measured Document",
-    "overview": "Type Classified reads as a technical reference, not a book: a page built like a measured drawing, where a dashed rule and a leader line prove a claim instead of decorating it. This replaced an earlier 'Specimen Ledger' identity (warm parchment, a serif display face, soft ambient shadows) at the user's explicit direction, pinned to two references — a portfolio built from massive stacked client names, and the Cooper Hewitt Museum's 'Type Culture Now' poster, with its dashed vertical grid and rotated section labels — translated onto a white ground instead of the originals' black.\n\nThe palette has moved twice since: first corrected to a genuinely neutral grey (paper #efece6 -> #e6e6e6, accent brightened #a8391f -> #c22400/#d9714a) after reading as too muted, then moved again — at the user's direction, referencing a font-marketplace specimen sheet (near-black / warm cream / coral-orange) — to today's warm cream-and-near-black palette (paper #e6e6e6 -> #f3e9dc light / #191510 dark, accent #c22400 -> #bc3a14 light / #f2743f dark). The light-mode accent had to be darkened from the reference's brighter coral (#ee5a35, 2.85:1 contrast) to #bc3a14 (4.66:1) to stay legible as text. The brand headline was also enlarged substantially (clamp(2.4rem,7vw,4rem) -> clamp(3.4rem,11vw,7rem)) so it functions as the first viewport's actual headline. Branch tags went through three revisions: a transparent outline (too faint), a bordered box with a tint fill (\"looks like a slob\" — too heavy, read as a UI badge), and finally a small marker square beside plain text. A header graphic (dimension-line SVG) was tried and then removed entirely as clutter.\n\nEvery classification name is set in a single oversized condensed grotesque, uppercase, carrying the page the way a poster's headline carries a spread. Everything measured — indices, era dates, diagnostic labels, dimension callouts — is set in a monospace, because a number in a monospace face reads as data, not prose. Corners are square throughout and nothing casts a shadow — separation between surfaces comes from a rule line or a change in tone, never blur.",
+    "overview": "Type Classified reads as a technical reference, not a book: a page built like a measured drawing, where a dashed rule and a leader line prove a claim instead of decorating it. This replaced an earlier 'Specimen Ledger' identity (warm parchment, a serif display face, soft ambient shadows) at the user's explicit direction, pinned to two references — a portfolio built from massive stacked client names, and the Cooper Hewitt Museum's 'Type Culture Now' poster, with its dashed vertical grid and rotated section labels — translated onto a white ground instead of the originals' black.\n\nThe palette has since moved three times. (1) Corrected to a genuinely neutral grey after reading as too muted: paper #e6e6e6, accent #a8391f -> #c22400 light / #d9714a -> #ff5a33 dark. (2) Ported to warm cream-and-near-black, referencing a font-marketplace specimen sheet: paper #e6e6e6 -> #f3e9dc light / #161616 -> #191510 dark, accent #c22400 -> #bc3a14 light (darkened from the reference's brighter #ee5a35, which measured only 2.85:1 as text) / #ff5a33 -> #f2743f dark. (3) Ported again to deep pine teal and cream, referencing a 'muzudesigns' two-tone font/color card, with the user explicitly choosing to keep a coral third note rather than go fully two-tone ('a dash of orange is good'): paper #f3e9dc -> #f0ede5 light / #191510 -> #004643 dark, ink #1a1611 -> #004643 light / #f3e9dc -> #f0ede5 dark (light and dark mode now literally swap the two reference colors), accent unchanged #bc3a14 light / #f2743f -> #ffb27f dark (lifted further since the dark paper is no longer near-black). The brand headline was also enlarged substantially (clamp(2.4rem,7vw,4rem) -> clamp(3.4rem,11vw,7rem)) so it functions as the first viewport's actual headline, and per explicit request the header tab labels (Explore/Identify/Timeline/Compare) now run in the accent color at all times, differentiated by opacity rather than switching colors; the 'Explore the Classifications' style section headings also gained looser letter-spacing (0.025em) after reading as cramped against the new palette. Branch tags went through three revisions: a transparent outline (too faint), a bordered box with a tint fill (\"looks like a slob\" — too heavy, read as a UI badge), and finally a small marker square beside plain text. A header graphic (dimension-line SVG) was tried and then removed entirely as clutter.\n\nEvery classification name is set in a single oversized condensed grotesque, uppercase, carrying the page the way a poster's headline carries a spread. Everything measured — indices, era dates, diagnostic labels, dimension callouts — is set in a monospace, because a number in a monospace face reads as data, not prose. Corners are square throughout and nothing casts a shadow — separation between surfaces comes from a rule line or a change in tone, never blur.",
     "keyCharacteristics": [
-      "Warm cream ground in light mode, rich near-black in dark mode — not a neutral grey, not a stark white/black",
+      "Cream ground in light mode, deep pine teal in dark mode — the two colors literally swap roles between themes",
       "One condensed display face (Anton) carries every name and headline, always uppercase, at a deliberately large scale",
       "A monospace face marks anything measured: indices, dates, dimensions, tags",
       "Dashed rules are structural, not decorative — they mark a grid, a leader line, a boundary",
       "Square corners everywhere; separation comes from a rule or a tone change, never a shadow",
-      "One coral-orange accent marks small things — a marker square on every tag, bars, the active tab, measurement call-outs — never a large fill"
+      "Coral-orange marks small things and the whole tab-label system — a marker square on every tag, bars, measurement call-outs, and every tab label (opacity-differentiated, not color-differentiated)"
     ],
     "rules": [
-      { "name": "The Small Mark Rule", "body": "Sealing Wax never fills a surface larger than a 7px marker square, a 2px border, or a bar on the timeline. A branch tag's own text stays ink-soft, not accent — the color lives in the marker, not the label.", "section": "colors" },
-      { "name": "The Cream-and-Black Rule", "body": "Every neutral carries the same warm cast, consistently — paper/rule/ink-faint lean cream, ink/panel-dark lean rich near-black. This reverses an earlier no-warmth rule; the palette has moved twice now and should stop drifting on the next pass.", "section": "colors" },
+      { "name": "The Small Mark Rule", "body": "Sealing Wax never fills a surface larger than a 7px marker square, a 2px border, or a bar on the timeline. A branch tag's own text stays ink-soft, not accent — the color lives in the marker, not the label. Tab labels are the one exception: their text is accent-colored at all times, differentiated by opacity rather than switching colors, per explicit request.", "section": "colors" },
+      { "name": "The Teal-and-Cream Rule", "body": "Every 'ink' step is a shade of deep pine teal, every 'paper' step a shade of cream — and in dark mode, teal and cream swap roles entirely, mirroring the reference's own two panels. This is the palette's third distinct direction this session; if it moves a fourth time, make the choice deliberately rather than drifting again.", "section": "colors" },
       { "name": "The One Voice, One Data Rule", "body": "Anton names things; Inter explains things; JetBrains Mono measures things. No role ever borrows another's job.", "section": "typography" },
       { "name": "The Line, Not Light Rule", "body": "No box-shadow appears anywhere in this system. A surface separates from the page behind it with a border or a tone change; if neither reads clearly enough, the surface's content or size is wrong, not its shadow.", "section": "elevation" }
     ],
@@ -178,7 +178,7 @@
     "donts": [
       "Don't reintroduce a shadow anywhere, however soft.",
       "Don't round a corner. border-radius: 0 is absolute, no exceptions — including SVG geometry.",
-      "Don't drift the neutrals' warmth without a deliberate decision — this palette has already moved three times.",
+      "Don't drift the neutrals' hue/warmth without a deliberate decision — this palette has already moved three times (neutral grey -> warm cream/near-black -> teal/cream).",
       "Don't ship a font whose classification lineage is wrong for the sake of a better-looking specimen — the live Aa Gg Qy specimens still render in each classification's own verified typeface beneath the new Anton display name, not replaced by it."
     ]
   }

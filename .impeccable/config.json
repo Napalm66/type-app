@@ -5,7 +5,9 @@
       ".impeccable/mocks/direction-preview.html",
       ".impeccable/mocks/pinned-direction-preview.html",
       ".impeccable/mocks/tag-treatment-preview.html",
-      ".impeccable/mocks/palette-explore-preview.html"
+      ".impeccable/mocks/palette-explore-preview.html",
+      ".impeccable/mocks/bold-orange-preview.html",
+      ".impeccable/mocks/teal-palette-preview.html"
     ],
     "ignoreValues": [
       {
@@ -34,6 +36,12 @@
         ],
         "createdAt": "2026-09-04T11:04:46.136Z",
         "reason": "Claude: mono labels inside the decorative header graphic SVG (cap line/mean line/baseline/descender line/x-height), sized to match the anatomy diagram's own tiny SVG label convention rather than the app-wide type scale"
+      },
+      {
+        "rule": "overused-font",
+        "value": "inter",
+        "createdAt": "2026-09-04T11:43:47.786Z",
+        "reason": "Inter is the established, documented body/UI font for this app (DESIGN.md Typography section) — not new drift, just present in a decision-support mock"
       }
     ]
   }

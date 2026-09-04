@@ -2,15 +2,15 @@
 name: Type Classified
 description: A field guide to type classification, for people who read type like weather.
 colors:
-  paper: "#f3e9dc"
+  paper: "#f0ede5"
   panel: "#ffffff"
-  ink: "#1a1611"
-  ink-soft: "#5a5044"
-  ink-faint: "#706557"
-  rule-solid: "#ddd0bd"
-  rule-dashed: "rgba(26, 22, 17, 0.22)"
+  ink: "#004643"
+  ink-soft: "#2e5c59"
+  ink-faint: "#4d6a67"
+  rule-solid: "#d3dbd8"
+  rule-dashed: "rgba(0, 70, 67, 0.22)"
   sealing-wax: "#bc3a14"
-  focus-ring: "#1a1611"
+  focus-ring: "#004643"
 typography:
   display:
     fontFamily: "Anton, 'Arial Narrow', sans-serif"
@@ -83,36 +83,36 @@ components:
 
 Type Classified reads as a technical reference, not a book: a page built like a measured drawing, where a dashed rule and a leader line prove a claim instead of decorating it. This replaced an earlier "Specimen Ledger" identity (warm parchment, a serif display face, soft ambient shadows) at the user's explicit direction, pinned to two references — a portfolio built from massive stacked client names, and the Cooper Hewitt Museum's "Type Culture Now" poster, with its dashed vertical grid and rotated section labels — translated onto a white ground instead of the originals' black.
 
-Every classification name is set in a single oversized condensed grotesque, uppercase, carrying the page the way a poster's headline carries a spread — the brand lockup itself runs large enough to anchor the whole first viewport, not just introduce it. Everything measured — indices, era dates, diagnostic labels, dimension callouts — is set in a monospace, because a number in a monospace face reads as data, not as prose. The one color note is a coral-orange, held to tags, bars, and small marks; nothing else about the palette carries color. Corners are square throughout and nothing casts a shadow — separation between surfaces comes from a rule line or a change in tone, never blur.
+Every classification name is set in a single oversized condensed grotesque, uppercase, carrying the page the way a poster's headline carries a spread — the brand lockup itself runs large enough to anchor the whole first viewport, not just introduce it. Everything measured — indices, era dates, diagnostic labels, dimension callouts — is set in a monospace, because a number in a monospace face reads as data, not as prose. The dominant color is now a deep pine teal (replacing the earlier near-black ink entirely), with a coral-orange kept as a small third note — the tab labels' whole word runs in that coral, at reduced opacity when inactive, full opacity when active, rather than switching between neutral and accent colors. Corners are square throughout and nothing casts a shadow — separation between surfaces comes from a rule line or a change in tone, never blur.
 
 **Key Characteristics:**
-- Warm cream ground in light mode, rich near-black in dark mode — not a neutral grey, not a stark white/black
-- One condensed display face (Anton) carries every name and headline, always uppercase, at a deliberately large scale
+- Cream ground in light mode, deep pine teal in dark mode — the two colors literally swap roles between themes, mirroring the reference's own two panels
+- One condensed display face (Anton) carries every name and headline, always uppercase, at a deliberately large scale; section headings carry extra letter-spacing (`0.025em`) for legibility at that tightness
 - A monospace face marks anything measured: indices, dates, dimensions, tags
 - Dashed rules are structural, not decorative — they mark a grid, a leader line, a boundary
 - Square corners everywhere; separation comes from a rule or a tone change, never a shadow
-- One coral-orange accent marks small things — a marker square on every tag, bars, the active tab, measurement call-outs — never a large fill
+- Coral-orange marks small things and the whole tab-label system — a marker square on every tag, bars, measurement call-outs, and every tab label (opacity-differentiated, not color-differentiated, between inactive/hover/active)
 
 ## Colors
 
-A warm cream/near-black system with one coral-orange accent — a deliberate move (at the user's direction, referencing a font-marketplace specimen sheet) away from the redesign's earlier neutral-grey palette, while keeping the accent just as restrained.
+A teal-and-cream system with a coral-orange accent kept as a small third note — the redesign's third palette move. Reference: a "muzudesigns" font/color pairing card (deep pine teal `#004643` + cream `#f0ede5`, a genuinely two-tone pairing with no third color at all). Presented with the choice of going fully two-tone or keeping a small accent, the user chose to keep the coral: **"a dash of orange is good."**
 
 ### Primary
-- **Sealing Wax** (`#bc3a14` light / `#f2743f` dark): a small marker square before every branch tag, the timeline's classification bars and era pins, the "key tell" callout's left rule, the active tab's rule. The light-mode value is deliberately deeper/more burnt than the dark-mode one — the same vivid coral read as text on cream measured only 2.85:1 contrast, so it was darkened to `#bc3a14` (4.66:1) while staying clearly coral, not brick-red.
+- **Sealing Wax** (`#bc3a14` light / `#ffb27f` dark): a small marker square before every branch tag, the timeline's classification bars and era pins, the "key tell" callout's left rule, and — per explicit request — every tab label's text color at all times (opacity, not color, differentiates its inactive/active states). The dark-mode value moved from `#f2743f` to a lighter `#ffb27f` specifically because the dark paper is no longer near-black — it's now a mid-toned teal (`#004643`), so the accent needed to lift further to clear 4.5:1 as text on both the teal paper (6.09:1) and the teal panel `#0a5852` (4.71:1).
 
 ### Neutral
-- **Paper** (`#f3e9dc` light / `#191510` dark): page background — a warm cream in light mode, a rich near-black (not neutral) in dark mode.
-- **Panel** (`#ffffff` light / `#221d16` dark): any surface that sits above the page — the detail modal, quiz card, row hover state, filter chips, tooltips, popovers.
-- **Ink** (`#1a1611` light / `#f3e9dc` dark): primary text, headings, borders on floating surfaces (modal, quiz card, filter chips, tooltips), focus rings.
-- **Ink Soft** (`#5a5044` light / `#c9bca8` dark): secondary text — descriptions, taglines.
-- **Ink Faint** (`#706557` light / `#9c8f7c` dark): tertiary text and structural marks — indices, era dates, dashed grid rules, inactive tab labels.
-- **Rule Solid** (`#ddd0bd` light / `#3a3226` dark): ordinary hairline dividers between rows and sections.
-- **Rule Dashed** (`rgba(26,22,17,.22)` light / `rgba(243,233,220,.2)` dark): the timeline's gridlines — the one place the dashed-rule motif survives as an actual stroke rather than a border style.
+- **Paper** (`#f0ede5` light / `#004643` dark): page background — cream in light mode, the reference's own deep pine teal in dark mode. Light and dark mode now literally swap the reference's two colors, the same way its own two panels do.
+- **Panel** (`#ffffff` light / `#0a5852` dark): any surface that sits above the page — the detail modal, quiz card, row hover state, filter chips, tooltips, popovers.
+- **Ink** (`#004643` light / `#f0ede5` dark): primary text, headings, borders on floating surfaces (modal, quiz card, filter chips, tooltips), focus rings. Deep pine teal replaces the previous near-black entirely — this is no longer a neutral-ink system.
+- **Ink Soft** (`#2e5c59` light / `#cddbd8` dark): secondary text — descriptions, taglines.
+- **Ink Faint** (`#4d6a67` light / `#a8c2bf` dark): tertiary text and structural marks — indices, era dates, dashed grid rules, inactive tab labels.
+- **Rule Solid** (`#d3dbd8` light / `#146b64` dark): ordinary hairline dividers between rows and sections.
+- **Rule Dashed** (`rgba(0,70,67,.22)` light / `rgba(240,237,229,.2)` dark): the timeline's gridlines — the one place the dashed-rule motif survives as an actual stroke rather than a border style.
 
 ### Named Rules
 **The Small Mark Rule.** Sealing Wax never fills a surface larger than a 7px marker square, a 2px border, or a bar on the timeline. A branch tag's own text stays `ink-soft`, not accent — the color lives in the marker, not the label.
 
-**The Cream-and-Black Rule.** Every neutral carries the same warm cast, consistently — paper/rule/ink-faint lean toward cream, ink/panel-dark lean toward a rich near-black. This reverses an earlier pass's rule (neutral grey, no warmth at all), itself a correction of the original redesign's faintly-warm-but-not-committed grey; the palette has now moved twice and should stop drifting between "warm" and "neutral" on the next pass — pick one deliberately if it changes again.
+**The Teal-and-Cream Rule.** The system's neutrals are no longer neutral at all — every "ink" step is a shade of deep pine teal, every "paper" step a shade of cream (or, in dark mode, the teal and cream swap roles entirely, mirroring the reference's own two panels). This is the palette's third distinct direction this session (neutral grey → warm cream/near-black → teal/cream); if it moves a fourth time, make the choice deliberately rather than drifting again.
 
 ## Typography
 
@@ -124,7 +124,7 @@ A warm cream/near-black system with one coral-orange accent — a deliberate mov
 
 ### Hierarchy
 - **Display** (400, `clamp(3.4rem, 11vw, 7rem)`, 0.88 line-height, uppercase): the site brand only. Sized deliberately large — at the user's explicit request after the first pass read too modest — so the brand lockup functions as the first viewport's actual headline, not a polite introduction above it.
-- **Title** (400, `clamp(1.4rem, 4vw, 2.1rem)` down to `clamp(1.6rem, 4.4vw, 2.5rem)` depending on context, 1.0–1.05 line-height, uppercase): every classification name — the Explore row, the detail panel, the quiz result — plus section intros and the quiz question. This single oversized-condensed-uppercase treatment is the system's most repeated move.
+- **Title** (400, `clamp(1.4rem, 4vw, 2.1rem)` down to `clamp(1.6rem, 4.4vw, 2.5rem)` depending on context, 1.0–1.05 line-height, uppercase): every classification name — the Explore row, the detail panel, the quiz result — plus section intros and the quiz question. This single oversized-condensed-uppercase treatment is the system's most repeated move. Section-intro headings (`view-intro h2`, e.g. "Explore the Classifications") carry `0.025em` letter-spacing and `1.05` line-height — Anton's native tracking is tight enough that a multi-word running phrase (unlike a single classification name) read as cramped without it.
 - **Body** (400, `1rem`, 1.5 line-height): running prose — descriptions, taglines, quiz hints.
 - **Mono** (700, `0.62rem`–`0.72rem`, 1.3 line-height, `0.04em`–`0.06em` tracking, usually uppercase): the system's other workhorse — row indices, era dates, diagnostic labels, branch tags, footer credits, timeline marks. Where the old system's "Whisper Label" was small Inter, this system's equivalent is monospace: it reads as data being cited, not prose being introduced.
 
@@ -151,8 +151,8 @@ Every corner in the system is square — `border-radius: 0` everywhere, with no 
 ## Components
 
 ### Tabs (header navigation)
-- **Style:** each tab is a vertical dashed rule (`border-left: 1px dashed ink-faint`) topped by a rotated label (`writing-mode: vertical-rl`, Inter, uppercase, tracked).
-- **Active:** the rule turns solid `sealing-wax` (2px, was `ink`), the label turns `ink` and bold.
+- **Style:** each tab is a vertical dashed rule (`border-left: 1px dashed ink-faint`) topped by a rotated label (`writing-mode: vertical-rl`, Inter, uppercase, tracked). The label is `sealing-wax` colored at all times now (was `ink-faint`/`ink`) — inactive/hover/active states are differentiated by **opacity** (`0.6` / `0.85` / `1`), not by switching color, at the user's request ("explore, identify, timeline etc be in orange").
+- **Active:** the rule turns solid `sealing-wax` (2px), the label reaches full opacity and bold weight.
 - **Focus:** `2px focus-ring` outline, `2px` offset.
 
 ### Chips (filters, branch tags)

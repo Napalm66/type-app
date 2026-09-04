@@ -41,15 +41,15 @@
    ========================================================================== */
 
 :root {
-  --paper: #f3e9dc;
+  --paper: #f0ede5;
   --panel: #ffffff;
-  --ink: #1a1611;
-  --ink-soft: #5a5044;
-  --ink-faint: #706557;
-  --rule: rgba(26, 22, 17, 0.22);
-  --rule-solid: #ddd0bd;
+  --ink: #004643;
+  --ink-soft: #2e5c59;
+  --ink-faint: #4d6a67;
+  --rule: rgba(0, 70, 67, 0.22);
+  --rule-solid: #d3dbd8;
   --accent: #bc3a14;
-  --focus: #1a1611;
+  --focus: #004643;
 
   --font-ui: "Inter", system-ui, -apple-system, sans-serif;
   --font-display: "Anton", "Arial Narrow", sans-serif;
@@ -60,15 +60,15 @@
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --paper: #191510;
-    --panel: #221d16;
-    --ink: #f3e9dc;
-    --ink-soft: #c9bca8;
-    --ink-faint: #9c8f7c;
-    --rule: rgba(243, 233, 220, 0.2);
-    --rule-solid: #3a3226;
-    --accent: #f2743f;
-    --focus: #f3e9dc;
+    --paper: #004643;
+    --panel: #0a5852;
+    --ink: #f0ede5;
+    --ink-soft: #cddbd8;
+    --ink-faint: #a8c2bf;
+    --rule: rgba(240, 237, 229, 0.2);
+    --rule-solid: #146b64;
+    --accent: #ffb27f;
+    --focus: #f0ede5;
   }
 }
 
@@ -163,13 +163,14 @@ body {
   font-weight: 600;
   letter-spacing: 0.05em;
   text-transform: uppercase;
-  color: var(--ink-faint);
+  color: var(--accent);
+  opacity: 0.6;
   margin-top: 0.5rem;
-  transition: color 0.15s ease;
+  transition: opacity 0.15s ease;
 }
 
 .tab:hover .tab-label {
-  color: var(--ink);
+  opacity: 0.85;
 }
 
 .tab.is-active .tab-rule {
@@ -179,7 +180,7 @@ body {
 }
 
 .tab.is-active .tab-label {
-  color: var(--ink);
+  opacity: 1;
   font-weight: 700;
 }
 
@@ -220,8 +221,9 @@ main.wrap {
 .view-intro h2 {
   font-family: var(--font-display);
   font-size: clamp(1.6rem, 3.4vw, 2.1rem);
+  letter-spacing: 0.025em;
   text-transform: uppercase;
-  line-height: 1;
+  line-height: 1.05;
   margin: 0 0 0.5rem;
 }
 
@@ -458,7 +460,7 @@ main.wrap {
 .detail-overlay {
   position: fixed;
   inset: 0;
-  background: rgba(26, 22, 17, 0.5);
+  background: rgba(0, 70, 67, 0.5);
   display: none;
   align-items: flex-start;
   justify-content: center;

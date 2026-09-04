@@ -20,8 +20,8 @@ function initTimeline(root, onOpenDetail) {
   // information, so bands now alternate between two neutral ink tints.
   // The boundary between eras is still fully legible from the inline
   // label plus the tooltip's full name/description on hover.
-  const ERA_TINT_A = "rgba(26, 22, 17, 0.05)";
-  const ERA_TINT_B = "rgba(26, 22, 17, 0.1)";
+  const ERA_TINT_A = "rgba(0, 70, 67, 0.05)";
+  const ERA_TINT_B = "rgba(0, 70, 67, 0.1)";
   const ART_PERIODS = [
     {
       name: "Romanesque",

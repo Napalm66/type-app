@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<title>Bold Orange Application Preview</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@400;600;700&family=JetBrains+Mono:wght@400;700&display=swap" />
+<style>
+  * { box-sizing: border-box; }
+  body { margin: 0; background: #ccc; font-family: 'Inter', sans-serif; padding: 2rem; }
+  h1 { font-family: 'JetBrains Mono', monospace; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.06em; color: #333; margin: 0 0 1.5rem; }
+  .cols { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; }
+  .col-label { font-family: 'JetBrains Mono', monospace; font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.05em; color: #555; margin-bottom: 0.6rem; }
+  .stage { overflow: hidden; }
+
+  :root {
+    --paper: #f3e9dc;
+    --panel: #ffffff;
+    --ink: #1a1611;
+    --ink-soft: #5a5044;
+    --ink-faint: #706557;
+    --rule-solid: #ddd0bd;
+    --accent: #bc3a14;
+    --accent-bold: #e8541c;
+  }
+
+  .stage { background: var(--paper); }
+
+  /* ---- OPTION A: solid orange header block ---- */
+  .a-header { background: var(--accent-bold); padding: 1.75rem 1.75rem 1.5rem; }
+  .a-brand-row { display: flex; justify-content: space-between; align-items: flex-start; }
+  .a-brand { font-family: 'Anton', sans-serif; font-size: 2.6rem; line-height: 0.9; text-transform: uppercase; color: #f3e9dc; margin: 0; }
+  .a-sub { font-size: 0.72rem; color: #f3e9dc; opacity: 0.9; max-width: 20ch; text-align: right; margin: 0; }
+  .a-tabs { display: flex; gap: 1.25rem; height: 46px; align-items: flex-end; margin-top: 1.25rem; border-top: 1px solid rgba(243,233,220,0.35); padding-top: 0.75rem; }
+  .a-tab-label { font-family: 'Inter', sans-serif; font-size: 0.6rem; font-weight: 700; letter-spacing: 0.05em; text-transform: uppercase; color: rgba(243,233,220,0.65); }
+  .a-tab-label.active { color: #f3e9dc; border-bottom: 2px solid #1a1611; padding-bottom: 4px; }
+  .a-body { padding: 1.5rem 1.75rem; }
+  .a-row { display: flex; align-items: baseline; gap: 1rem; border-top: 1px solid var(--rule-solid); padding: 0.7rem 0; }
+  .a-row:first-child { border-top: none; }
+  .a-idx { font-family: 'JetBrains Mono', monospace; font-size: 0.62rem; color: var(--ink-faint); width: 18px; }
+  .a-name { font-family: 'Anton', sans-serif; font-size: 1.3rem; text-transform: uppercase; color: var(--ink); flex: 1; }
+  .a-tag { font-family: 'JetBrains Mono', monospace; font-size: 0.58rem; font-weight: 700; color: var(--ink-soft); display: inline-flex; align-items: center; gap: 0.3rem; }
+  .a-tag::before { content: ""; width: 5px; height: 5px; background: var(--accent); }
+
+  /* ---- OPTION B: current restrained system + soft glow atmosphere ---- */
+  .b-header { padding: 1.75rem 1.75rem 1.5rem; position: relative; }
+  .b-glow { position: absolute; inset: 0; background: radial-gradient(ellipse 60% 50% at 70% 30%, rgba(232,84,28,0.35), transparent 70%); pointer-events: none; }
+  .b-brand-row { display: flex; justify-content: space-between; align-items: flex-start; position: relative; }
+  .b-brand { font-family: 'Anton', sans-serif; font-size: 2.6rem; line-height: 0.9; text-transform: uppercase; color: var(--ink); margin: 0; }
+  .b-sub { font-size: 0.72rem; color: var(--ink-soft); max-width: 20ch; text-align: right; margin: 0; }
+  .b-tabs { display: flex; gap: 1.25rem; height: 46px; align-items: flex-end; margin-top: 1.25rem; border-bottom: 1px solid var(--rule-solid); position: relative; }
+  .b-tab-label { font-family: 'Inter', sans-serif; font-size: 0.6rem; font-weight: 700; letter-spacing: 0.05em; text-transform: uppercase; color: var(--ink-faint); }
+  .b-tab-label.active { color: var(--ink); border-bottom: 2px solid var(--accent); padding-bottom: 4px; }
+  .b-body { padding: 1.5rem 1.75rem; }
+  .b-row { display: flex; align-items: baseline; gap: 1rem; border-top: 1px solid var(--rule-solid); padding: 0.7rem 0; }
+  .b-row:first-child { border-top: none; }
+  .b-idx { font-family: 'JetBrains Mono', monospace; font-size: 0.62rem; color: var(--ink-faint); width: 18px; }
+  .b-name { font-family: 'Anton', sans-serif; font-size: 1.3rem; text-transform: uppercase; color: var(--ink); flex: 1; }
+  .b-tag { font-family: 'JetBrains Mono', monospace; font-size: 0.58rem; font-weight: 700; color: var(--ink-soft); display: inline-flex; align-items: center; gap: 0.3rem; }
+  .b-tag::before { content: ""; width: 5px; height: 5px; background: var(--accent); }
+</style>
+</head>
+<body>
+  <h1>Bold-orange application options — same content, same accent color, different roles</h1>
+  <div class="cols">
+    <div>
+      <div class="col-label">A — solid orange header block (Chopen's move)</div>
+      <div class="stage">
+        <div class="a-header">
+          <div class="a-brand-row">
+            <div class="a-brand">Type<br/>Classified</div>
+            <p class="a-sub">A field guide to type classification.</p>
+          </div>
+          <div class="a-tabs">
+            <span class="a-tab-label active">Explore</span>
+            <span class="a-tab-label">Identify</span>
+            <span class="a-tab-label">Timeline</span>
+          </div>
+        </div>
+        <div class="a-body">
+          <div class="a-row"><span class="a-idx">01</span><span class="a-name">Blackletter</span><span class="a-tag">Blackletter</span></div>
+          <div class="a-row"><span class="a-idx">02</span><span class="a-name">Garalde Oldstyle</span><span class="a-tag">Serif</span></div>
+          <div class="a-row"><span class="a-idx">03</span><span class="a-name">Transitional</span><span class="a-tag">Serif</span></div>
+        </div>
+      </div>
+    </div>
+
+    <div>
+      <div class="col-label">B — current restrained system + soft orange glow atmosphere</div>
+      <div class="stage">
+        <div class="b-header">
+          <div class="b-glow"></div>
+          <div class="b-brand-row">
+            <div class="b-brand">Type<br/>Classified</div>
+            <p class="b-sub">A field guide to type classification.</p>
+          </div>
+          <div class="b-tabs">
+            <span class="b-tab-label active">Explore</span>
+            <span class="b-tab-label">Identify</span>
+            <span class="b-tab-label">Timeline</span>
+          </div>
+        </div>
+        <div class="b-body">
+          <div class="b-row"><span class="b-idx">01</span><span class="b-name">Blackletter</span><span class="b-tag">Blackletter</span></div>
+          <div class="b-row"><span class="b-idx">02</span><span class="b-name">Garalde Oldstyle</span><span class="b-tag">Serif</span></div>
+          <div class="b-row"><span class="b-idx">03</span><span class="b-name">Transitional</span><span class="b-tag">Serif</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
