@@ -1,7 +1,10 @@
 {
   "detector": {
     "ignoreRules": [],
-    "ignoreFiles": [],
+    "ignoreFiles": [
+      ".impeccable/mocks/direction-preview.html",
+      ".impeccable/mocks/pinned-direction-preview.html"
+    ],
     "ignoreValues": [
       {
         "rule": "side-tab",
@@ -11,6 +14,15 @@
         ],
         "createdAt": "2026-09-04T03:51:28.259Z",
         "reason": "Claude: .tell-box's 3px left border is the deliberate 'Key Tell' callout, documented in DESIGN.md's Small Mark Rule as an intentional sealing-wax accent border, not a habit default"
+      },
+      {
+        "rule": "design-system-font-size",
+        "value": "2rem",
+        "files": [
+          "css/style.css"
+        ],
+        "createdAt": "2026-09-04T10:42:58.866Z",
+        "reason": "Claude: intentional emphasis-scale variant of the Title role for detail-name/quiz-result-name (clamp(2rem,6vw,2.6rem)) — documented in DESIGN.md's Title hierarchy entry as a context-dependent size range, not drift"
       }
     ]
   }
