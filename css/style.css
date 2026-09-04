@@ -848,6 +848,15 @@ main.wrap {
   overflow-x: auto;
 }
 
+/* No pixel height on the <svg> itself (js/anatomy.js) — with only a
+   viewBox, width:100%/height:auto lets the diagram scale UP to fill the
+   panel's full width, not just cap at its own natural rendered size. */
+.anatomy-svg-wrap svg {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
 .anatomy-guide {
   stroke: var(--ink-faint);
   stroke-width: 1;

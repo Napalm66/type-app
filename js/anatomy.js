@@ -190,7 +190,7 @@ async function buildAnatomyHTML(item) {
   return `
     <div class="anatomy-block">
       <div class="anatomy-svg-wrap">
-        <svg viewBox="0 0 ${svgWidth} ${svgHeight}" width="100%" height="${svgHeight}" role="img" aria-label="Anatomy diagram for ${item.name}">
+        <svg viewBox="0 0 ${svgWidth} ${svgHeight}" role="img" aria-label="Anatomy diagram for ${item.name}">
           ${guideSVG}
           ${xHeightArrowSVG}
           ${refOSVG}
