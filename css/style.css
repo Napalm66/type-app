@@ -128,7 +128,7 @@ body {
    min-height keeps that top slice tall enough on short/compact layouts. */
 .site-header {
   position: relative;
-  min-height: 19vw;
+  min-height: 13vw;
   background-image:
     linear-gradient(rgba(0, 70, 67, 0.6), rgba(0, 70, 67, 0.6) 60%, var(--paper) 100%),
     url("../images/hero-typographer.jpg");
@@ -139,7 +139,7 @@ body {
 
 .hero-text {
   position: relative;
-  padding-top: 24%;
+  padding-top: 15%;
   padding-bottom: clamp(2rem, 5vw, 3rem);
 }
 
