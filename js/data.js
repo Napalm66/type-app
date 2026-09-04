@@ -130,6 +130,19 @@ const CLASSIFICATIONS = [
       serif: "bracketed-sharp",
       tell: "Higher contrast than Garalde, but serifs still bracketed (not hairline) and axis close to vertical.",
     },
+    visualCharacteristics: [
+      { label: "Terminals", text: "The ends of strokes may be pointed, rounded, angled, or may end in a teardrop or ball shape, but generally lighter, sharper, and straighter than Oldstyle terminals. Lowercase ascender terminals are often horizontal or very slightly slanted." },
+      { label: "Serifs", text: "Usually lightly bracketed, straighter and sharper than Oldstyle serifs." },
+      { label: "Stress", text: "Slightly oblique." },
+      { label: "Contrast", text: "Medium contrast between thick and thin strokes, generally higher contrast than Oldstyle typefaces." },
+      { label: "X-height", text: "Generally high in relation to the cap height." },
+      { label: "Set width", text: "Characters tend to be narrower than Oldstyle typefaces." },
+      { label: "Positive/Negative space", text: "Increased spacing and counters give a slightly lighter overall appearance than Oldstyle typefaces." },
+    ],
+    additionalFeatures: [
+      "More precise than Oldstyle typefaces",
+      "Ascenders of lowercase letters may be slightly taller than cap height",
+    ],
     keyTypefaces: ["Baskerville", "Times New Roman", "Georgia", "Mrs Eaves"],
     // "Times New Roman" leads by name — genuine, if the visitor's device
     // has it installed (no redistribution involved, just a CSS reference).
