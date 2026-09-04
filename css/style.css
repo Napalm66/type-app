@@ -50,6 +50,7 @@
   --rule-solid: #d3dbd8;
   --accent: #bc3a14;
   --focus: #004643;
+  --paper-grid: rgba(0, 70, 67, 0.05);
 
   --font-ui: "Inter", system-ui, -apple-system, sans-serif;
   --font-display: "Anton", "Arial Narrow", sans-serif;
@@ -69,6 +70,7 @@
     --rule-solid: #146b64;
     --accent: #ffb27f;
     --focus: #f0ede5;
+    --paper-grid: rgba(240, 237, 229, 0.05);
   }
 }
 
@@ -82,7 +84,15 @@ html {
 
 body {
   margin: 0;
-  background: var(--paper);
+  background-color: var(--paper);
+  /* A faint 28px graph-paper grid instead of a flat color — the same
+     structural-line language as the timeline/anatomy dashed rules, applied
+     as ambient page texture rather than a functional divider. Chosen over
+     a literal newsprint grain or halftone screen (both previewed) as the
+     option that reads as "measured document" rather than "aged paper." */
+  background-image:
+    repeating-linear-gradient(0deg, var(--paper-grid) 0, var(--paper-grid) 1px, transparent 1px, transparent 28px),
+    repeating-linear-gradient(90deg, var(--paper-grid) 0, var(--paper-grid) 1px, transparent 1px, transparent 28px);
   color: var(--ink);
   font-family: var(--font-ui);
   line-height: 1.5;

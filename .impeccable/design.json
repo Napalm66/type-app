@@ -54,6 +54,14 @@
         "darkVariant": "rgba(240, 237, 229, 0.2)",
         "tonalRamp": []
       },
+      "paper-grid": {
+        "role": "neutral",
+        "displayName": "Paper Grid",
+        "canonical": "rgba(0, 70, 67, 0.05)",
+        "darkVariant": "rgba(240, 237, 229, 0.05)",
+        "tonalRamp": [],
+        "contrastNote": "Not a text/UI contrast pair — a 28px repeating-linear-gradient grid on the body background, same ink/cream base as rule-dashed at a much lower 5% alpha, giving the whole page a faint graph-paper texture instead of a flat paper fill."
+      },
       "sealing-wax": {
         "role": "primary",
         "displayName": "Sealing Wax",

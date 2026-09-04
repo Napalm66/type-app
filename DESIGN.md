@@ -182,6 +182,8 @@ Unchanged from the previous system at the structural level: a single centered co
 
 Explore's card grid became a numbered list: each classification is a full-width row (index, oversized name, live specimen, tagline, era, branch tag) separated by hairline rules, rather than a grid of bordered cards. Compare's columns lost their individual card borders in favor of a single shared 1px rule grid (a `background`-and-`gap` trick, not per-cell borders) — reads as one ruled table, not three adjacent cards.
 
+The page background (`body`) carries a faint 28px graph-paper grid (`--paper-grid`, an `ink`/`cream`-derived rgba at 5% alpha, swapping with the theme like `--rule` does) instead of a flat `paper` color, added at the user's request for "texture... to make it newspaper feel." Chosen over a literal newsprint grain or a halftone dot screen (both previewed) specifically because a grid reads as this system's own structural-line language extended to the whole page, not a borrowed print effect — it's the same idea as the dashed timeline/anatomy rules, just ambient rather than functional.
+
 ## Elevation & Depth
 
 No shadows anywhere — this is a hard departure from the previous system, which used a soft ambient shadow on hover and floating surfaces. Every surface in this system separates from its neighbor with a rule line (`rule-solid`) or a tone shift (`paper` → `panel`), never blur. Floating surfaces (the detail modal, the quiz card, tooltips, the serif-spectrum zoom popover) get a solid 1px `ink` border instead of a shadow — a page in a measured document doesn't cast light, it's outlined.
