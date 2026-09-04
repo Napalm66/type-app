@@ -1,6 +1,6 @@
 ---
 name: Type Classified
-description: A field guide to type classification, for people who read type like weather.
+description: A field guide to type classification. For people who read type like weather.
 colors:
   paper: "#f0ede5"
   panel: "#ffffff"

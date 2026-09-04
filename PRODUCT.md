@@ -34,7 +34,7 @@ Where a static classification poster or Wikipedia table only shows finished exam
 
 ## Brand Commitments
 
-Name: "Type Classified." Tagline: "A field guide to type classification, for people who read type like weather."
+Name: "Type Classified." Tagline: "A field guide to type classification. For people who read type like weather."
 
 ## Evidence on Hand
 
