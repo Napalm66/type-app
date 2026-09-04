@@ -79,7 +79,7 @@
       }
     },
     "typographyMeta": {
-      "display": { "displayName": "Display", "purpose": "Every classification name and heading, always uppercase — the site brand, Explore row names, detail panel name, quiz question/result. The brand itself runs large (clamp(3.4rem, 11vw, 7rem)) so it reads as the first viewport's actual headline." },
+      "display": { "displayName": "Display", "purpose": "Every classification name and heading, always uppercase — the site brand, Explore row names, detail panel name, quiz question/result. The brand's \"Classified\" line runs very large (clamp(4.4rem, 14vw, 9rem)) so it reads as the first viewport's actual headline; \"Type\" sits above it as a small eyebrow (clamp(1.4rem, 4vw, 2.6rem)), an asymmetric two-line lockup rather than one uniform brand size." },
       "title": { "displayName": "Title", "purpose": "Section intros and the same oversized-uppercase treatment as display, at a slightly narrower size range for secondary headings." },
       "body": { "displayName": "Body", "purpose": "Running prose — descriptions, taglines, hints — plus the rotated tab labels." },
       "mono": { "displayName": "Mono", "purpose": "Anything measured: indices, era dates, diagnostic labels, branch tags, footer credits, timeline marks. A number set in this face reads as data, not prose." },

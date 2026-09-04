@@ -14,7 +14,7 @@ colors:
 typography:
   display:
     fontFamily: "Anton, 'Arial Narrow', sans-serif"
-    fontSize: "clamp(3.4rem, 11vw, 7rem)"
+    fontSize: "clamp(4.4rem, 14vw, 9rem)"
     fontWeight: 400
     lineHeight: 0.88
     letterSpacing: "0.003em"
@@ -71,6 +71,7 @@ typography:
     titleFluidMinB: "2rem" # detail/quiz-result name, smaller fluid endpoint
     titleFluidMaxB: "2.6rem" # detail/quiz-result name, larger fluid endpoint
     titleFluidMaxC: "1.8rem" # quiz question, larger fluid endpoint
+    brandEyebrowMax: "2.6rem" # "Type" eyebrow line above "Classified", larger fluid endpoint
     diagramXs: "7px" # anatomy x-height arrow label
     diagramSm: "7.5px" # timeline branch label
     diagramMd: "8px" # anatomy reference-glyph caption
@@ -166,7 +167,7 @@ A teal-and-cream system with a coral-orange accent kept as a small third note �
 **Character:** One oversized condensed grotesque carries every name and heading, always uppercase, the way a poster's headline or a portfolio's client list does — against a plain Inter for running prose and a JetBrains Mono for anything measured. There is no serif anywhere in the interface; the previous world's Fraunces is gone entirely, not merely demoted.
 
 ### Hierarchy
-- **Display** (400, `clamp(3.4rem, 11vw, 7rem)`, 0.88 line-height, uppercase): the site brand only. Sized deliberately large — at the user's explicit request after the first pass read too modest — so the brand lockup functions as the first viewport's actual headline, not a polite introduction above it.
+- **Display** (400, `clamp(4.4rem, 14vw, 9rem)`, 0.88 line-height, uppercase): the site brand's "Classified" line only. Sized deliberately large — at the user's explicit request, twice now (first to make the brand read as the viewport's actual headline, then again to grow "Classified" further) — so it's the loudest thing on the page. "Type" sits above it as a small eyebrow (`clamp(1.4rem, 4vw, 2.6rem)`, same face/weight/case) rather than matching size — an asymmetric two-line lockup instead of one uniform brand size, also per explicit request.
 - **Title** (400, `clamp(1.4rem, 4vw, 2.1rem)` up to `clamp(2rem, 6vw, 2.6rem)` depending on context, 1.0–1.05 line-height, uppercase): every classification name — the Explore row, the detail panel, the quiz result — plus section intros and the quiz question. This single oversized-condensed-uppercase treatment is the system's most repeated move; four fluid variants exist for different heading levels (row name, detail/quiz-result name, section intro, quiz question — endpoints enumerated in the `typography.scale` frontmatter as `titleFluidMin/MaxA/B/C`), not a single fixed size. Section-intro headings (`view-intro h2`, e.g. "Explore the Classifications") carry `0.025em` letter-spacing and `1.05` line-height — Anton's native tracking is tight enough that a multi-word running phrase (unlike a single classification name) read as cramped without it.
 - **Body** (400, `0.8rem`–`1rem`, 1.5 line-height): running prose — descriptions, taglines, quiz hints, diagnostic/tell-box copy. `1rem` is the representative size (used for the main description paragraph); the rest of the range is the natural spread of secondary copy (captions, hints, list items) that's grown across components — enumerated as `bodyXs`–`bodyXxxxl` in `typography.scale`, all Inter.
 - **Mono** (700, `0.62rem`–`1.2rem`, 1.3 line-height, `0.03em`–`0.06em` tracking, usually uppercase): the system's other workhorse — row indices, era dates, diagnostic labels, branch tags, footer credits, timeline marks, the detail panel's close glyph. `0.7rem` is the representative size; the full step range is enumerated as `monoXs`–`monoXxl` in `typography.scale`. Where the old system's "Whisper Label" was small Inter, this system's equivalent is monospace: it reads as data being cited, not prose being introduced.
