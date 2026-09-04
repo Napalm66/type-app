@@ -23,6 +23,33 @@
         ],
         "createdAt": "2026-09-04T10:42:58.866Z",
         "reason": "Claude: intentional emphasis-scale variant of the Title role for detail-name/quiz-result-name (clamp(2rem,6vw,2.6rem)) — documented in DESIGN.md's Title hierarchy entry as a context-dependent size range, not drift"
+      },
+      {
+        "rule": "design-system-font",
+        "value": "georgia",
+        "files": [
+          "css/style.css"
+        ],
+        "createdAt": "2026-09-04T11:04:45.743Z",
+        "reason": "Claude: deliberate choice for the header graphic's ghost glyph — Georgia represents an abstract 'any specimen', not the site's own Anton brand voice; documented in DESIGN.md's Header Graphic component entry"
+      },
+      {
+        "rule": "design-system-font-size",
+        "value": "210px",
+        "files": [
+          "css/style.css"
+        ],
+        "createdAt": "2026-09-04T11:04:45.933Z",
+        "reason": "Claude: one-off size for the header graphic's decorative ghost glyph, not a real typography role"
+      },
+      {
+        "rule": "design-system-font-size",
+        "value": "8px",
+        "files": [
+          "css/style.css"
+        ],
+        "createdAt": "2026-09-04T11:04:46.136Z",
+        "reason": "Claude: mono labels inside the decorative header graphic SVG (cap line/mean line/baseline/descender line/x-height), sized to match the anatomy diagram's own tiny SVG label convention rather than the app-wide type scale"
       }
     ]
   }
