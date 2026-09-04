@@ -1,0 +1,188 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-09-04T00:00:00Z",
+  "title": "Design System: Type Classified",
+  "extensions": {
+    "colorMeta": {
+      "parchment": {
+        "role": "neutral",
+        "displayName": "Parchment",
+        "canonical": "#f4f1ea",
+        "darkVariant": "#17150f",
+        "tonalRamp": ["#1c1a15", "#332f26", "#514c3f", "#6d6656", "#8a8371", "#b3ac97", "#d9d3c1", "#fbf9f4"]
+      },
+      "parchment-raised": {
+        "role": "neutral",
+        "displayName": "Parchment Raised",
+        "canonical": "#fbf9f4",
+        "darkVariant": "#211e17",
+        "tonalRamp": ["#1c1a15", "#332f26", "#514c3f", "#6d6656", "#8a8371", "#b3ac97", "#d9d3c1", "#fbf9f4"]
+      },
+      "ink": {
+        "role": "neutral",
+        "displayName": "Ink",
+        "canonical": "#1c1a15",
+        "darkVariant": "#f2ede0",
+        "tonalRamp": ["#1c1a15", "#332f26", "#514c3f", "#6d6656", "#8a8371", "#b3ac97", "#d9d3c1", "#fbf9f4"]
+      },
+      "ink-soft": {
+        "role": "neutral",
+        "displayName": "Ink Soft",
+        "canonical": "#514c3f",
+        "darkVariant": "#b8ae98",
+        "tonalRamp": ["#1c1a15", "#332f26", "#514c3f", "#6d6656", "#8a8371", "#b3ac97", "#d9d3c1", "#fbf9f4"]
+      },
+      "ink-faint": {
+        "role": "neutral",
+        "displayName": "Ink Faint",
+        "canonical": "#8a8371",
+        "darkVariant": "#7d7562",
+        "tonalRamp": ["#1c1a15", "#332f26", "#514c3f", "#6d6656", "#8a8371", "#b3ac97", "#d9d3c1", "#fbf9f4"]
+      },
+      "rule": {
+        "role": "neutral",
+        "displayName": "Rule",
+        "canonical": "#d9d3c1",
+        "darkVariant": "#38342a",
+        "tonalRamp": ["#1c1a15", "#332f26", "#514c3f", "#6d6656", "#8a8371", "#b3ac97", "#d9d3c1", "#fbf9f4"]
+      },
+      "sealing-wax": {
+        "role": "primary",
+        "displayName": "Sealing Wax",
+        "canonical": "#a8391f",
+        "darkVariant": "#d9714a",
+        "tonalRamp": ["#3a1108", "#4a170b", "#6e2210", "#922c16", "#a8391f", "#c2532f", "#d9714a", "#f3c3ab"]
+      },
+      "sealing-wax-soft": {
+        "role": "primary",
+        "displayName": "Sealing Wax, Faded",
+        "canonical": "#d9c9a8",
+        "darkVariant": "#4a3324",
+        "tonalRamp": ["#4a3324", "#6b4c34", "#8f6a48", "#b08d63", "#d9c9a8", "#e5d8bd", "#efe6d3", "#f8f2e6"]
+      },
+      "focus-ring": {
+        "role": "neutral",
+        "displayName": "Focus Ring",
+        "canonical": "#1c1a15",
+        "darkVariant": "#f2ede0",
+        "tonalRamp": ["#1c1a15", "#332f26", "#514c3f", "#6d6656", "#8a8371", "#b3ac97", "#d9d3c1", "#fbf9f4"]
+      }
+    },
+    "typographyMeta": {
+      "display": { "displayName": "Display", "purpose": "The site brand/H1 only — the single largest, most identity-carrying text on the page." },
+      "headline": { "displayName": "Headline", "purpose": "A classification's own name, in the detail panel and quiz result screen." },
+      "title": { "displayName": "Title", "purpose": "Section intros and the quiz question — one step down from a proper name." },
+      "body": { "displayName": "Body", "purpose": "Running copy: descriptions, taglines, hints. Always measure-capped, never full width." },
+      "label": { "displayName": "Label", "purpose": "Small uppercase tracked eyebrow text that organizes everything else — diagnostic tags, section headers, branch pills." }
+    },
+    "shadows": [
+      { "name": "ambient", "value": "0 1px 2px rgba(28,26,21,.06), 0 8px 24px -12px rgba(28,26,21,.18)", "purpose": "Shared soft two-layer shadow for card hover, tooltips, and the serif-spectrum zoom popover. Swaps to a black-based rgba pair in dark mode via the --shadow custom property." },
+      { "name": "modal", "value": "0 24px 64px -12px rgba(28,26,21,.35)", "purpose": "Heavier, more diffuse shadow reserved for the detail overlay panel. Not currently swapped for dark mode (hardcoded rgba) — worth revisiting if the modal reads too light-shadowed on dark backgrounds." },
+      { "name": "lens", "value": "0 6px 20px -4px rgba(28,26,21,.4)", "purpose": "Tight, directional shadow under the circular anatomy magnifier only. Also not currently dark-mode-swapped." }
+    ],
+    "motion": [
+      { "name": "ease-standard", "value": "0.15s ease", "purpose": "Default interactive transition — hover color/border/transform changes on tabs, chips, cards, quiz options." },
+      { "name": "ease-reveal", "value": "0.25s ease", "purpose": "View-switch fade-in (opacity + 4px translateY), also used at 0.3s for the quiz result reveal." },
+      { "name": "ease-float", "value": "0.12s-0.14s ease", "purpose": "Appearance/disappearance of floating elements — the anatomy lens, era tooltips, the serif-spectrum zoom popover — paired with a small opacity+scale or opacity+translateY change." }
+    ],
+    "breakpoints": [
+      { "name": "phone", "value": "520px", "purpose": "Only hard breakpoint in the system — tightens tab padding/font-size for small phones. Everything else is fluid via clamp()." }
+    ]
+  },
+  "components": [
+    {
+      "name": "Tab",
+      "kind": "nav",
+      "refersTo": "tab",
+      "description": "Top-level view switcher (Explore / Identify / Timeline / Compare).",
+      "html": "<nav class=\"ds-tabs\"><button class=\"ds-tab ds-tab--active\">Explore</button><button class=\"ds-tab\">Identify</button><button class=\"ds-tab\">Timeline</button></nav>",
+      "css": ".ds-tabs { display: flex; gap: 0.25rem; border-bottom: 1px solid #d9d3c1; } .ds-tab { font-family: Inter, system-ui, -apple-system, sans-serif; font-size: 0.95rem; font-weight: 600; color: #8a8371; background: none; border: none; padding: 0.65rem 0.9rem; cursor: pointer; position: relative; top: 1px; border-bottom: 2px solid transparent; transition: color 0.15s ease; } .ds-tab:hover { color: #1c1a15; } .ds-tab--active { color: #1c1a15; border-bottom-color: #a8391f; } .ds-tab:focus-visible { outline: 2px solid #1c1a15; outline-offset: 2px; }"
+    },
+    {
+      "name": "Filter Chip",
+      "kind": "chip",
+      "refersTo": "filter-chip",
+      "description": "Branch filter pill above the Explore card grid.",
+      "html": "<div class=\"ds-chip-row\"><button class=\"ds-chip ds-chip--active\">All</button><button class=\"ds-chip\">Serif</button><button class=\"ds-chip\">Sans</button></div>",
+      "css": ".ds-chip-row { display: flex; flex-wrap: wrap; gap: 0.5rem; } .ds-chip { font-family: Inter, system-ui, -apple-system, sans-serif; font-size: 0.85rem; font-weight: 600; color: #514c3f; background: #fbf9f4; border: 1px solid #d9d3c1; border-radius: 999px; padding: 0.4rem 0.9rem; cursor: pointer; transition: border-color 0.15s ease; } .ds-chip:hover { border-color: #8a8371; } .ds-chip--active { background: #1c1a15; border-color: #1c1a15; color: #f4f1ea; }"
+    },
+    {
+      "name": "Branch Tag",
+      "kind": "chip",
+      "refersTo": "n/a",
+      "description": "Small tinted classification-branch label on cards and timeline rows — the system's only tinted (not solid) accent fill.",
+      "html": "<span class=\"ds-branch-tag\">SERIF</span>",
+      "css": ".ds-branch-tag { display: inline-block; font-family: Inter, system-ui, -apple-system, sans-serif; font-size: 0.68rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; color: #a8391f; background: rgba(168,57,31,0.12); padding: 0.2rem 0.5rem; border-radius: 4px; }"
+    },
+    {
+      "name": "Spec Card",
+      "kind": "card",
+      "refersTo": "card",
+      "description": "Explore-grid card: a classification's name, era, live specimen, tagline, and branch tag.",
+      "html": "<button class=\"ds-card\"><div class=\"ds-card-meta\"><span class=\"ds-card-name\">Garalde Oldstyle</span><span class=\"ds-card-era\">c. 1495 – 1700</span></div><div class=\"ds-card-specimen\">Aa Gg Qy</div><p class=\"ds-card-tagline\">The Aldine-Garamond tradition — the workhorse of Western printing.</p><span class=\"ds-branch-tag\">SERIF</span></button>",
+      "css": ".ds-card { display: flex; flex-direction: column; gap: 0.75rem; text-align: left; background: #fbf9f4; border: 1px solid #d9d3c1; border-radius: 10px; padding: 1.25rem 1.25rem 1.1rem; cursor: pointer; font-family: Inter, system-ui, -apple-system, sans-serif; color: #1c1a15; transition: transform 0.15s ease, box-shadow 0.15s ease, border-color 0.15s ease; } .ds-card:hover { transform: translateY(-2px); border-color: #8a8371; box-shadow: 0 1px 2px rgba(28,26,21,.06), 0 8px 24px -12px rgba(28,26,21,.18); } .ds-card:focus-visible { outline: 2px solid #1c1a15; outline-offset: 2px; } .ds-card-meta { display: flex; justify-content: space-between; align-items: baseline; gap: 0.5rem; } .ds-card-name { font-weight: 700; font-size: 0.95rem; } .ds-card-era { font-size: 0.75rem; color: #8a8371; white-space: nowrap; } .ds-card-specimen { font-family: Georgia, serif; font-size: 2.2rem; line-height: 1.15; } .ds-card-tagline { font-size: 0.83rem; color: #514c3f; margin: 0; }"
+    },
+    {
+      "name": "Quiz Option",
+      "kind": "button",
+      "refersTo": "quiz-option",
+      "description": "Full-width answer button in the Identify decision-tree quiz.",
+      "html": "<button class=\"ds-quiz-option\"><span class=\"ds-quiz-option-label\">Has serifs</span><span class=\"ds-quiz-option-desc\">Small finishing strokes at the ends of the main stems.</span></button>",
+      "css": ".ds-quiz-option { display: block; width: 100%; text-align: left; background: #f4f1ea; border: 1px solid #d9d3c1; border-radius: 8px; padding: 0.85rem 1rem; cursor: pointer; font-family: Inter, system-ui, -apple-system, sans-serif; transition: border-color 0.15s ease; } .ds-quiz-option:hover { border-color: #a8391f; } .ds-quiz-option:focus-visible { outline: 2px solid #1c1a15; outline-offset: 2px; } .ds-quiz-option-label { font-weight: 700; font-size: 0.95rem; display: block; color: #1c1a15; } .ds-quiz-option-desc { color: #514c3f; font-size: 0.83rem; margin-top: 0.2rem; display: block; }"
+    },
+    {
+      "name": "Text Input",
+      "kind": "input",
+      "refersTo": "input",
+      "description": "The \"try your own text\" custom specimen field above the Explore grid.",
+      "html": "<input class=\"ds-input\" type=\"text\" placeholder=\"Type or paste a word, name, or short phrase…\" />",
+      "css": ".ds-input { font-family: Inter, system-ui, -apple-system, sans-serif; font-size: 0.92rem; padding: 0.6rem 0.85rem; border: 1px solid #d9d3c1; border-radius: 8px; background: #fbf9f4; color: #1c1a15; } .ds-input::placeholder { color: #8a8371; } .ds-input:focus-visible { outline: 2px solid #1c1a15; outline-offset: 1px; border-color: #8a8371; }"
+    },
+    {
+      "name": "Anatomy Lens",
+      "kind": "custom",
+      "refersTo": "n/a",
+      "description": "Signature component: a circular magnifier that shows a live, 2.8x-scaled clone of the anatomy diagram under the cursor/touch point. Resting (hidden) and visible states shown; the live version's inner content is a cloned, transformed SVG rather than static text.",
+      "html": "<div class=\"ds-lens ds-lens--visible\"><div class=\"ds-lens-inner\">Aa</div></div>",
+      "css": ".ds-lens { position: relative; width: 170px; height: 170px; border-radius: 50%; border: 2px solid #1c1a15; box-shadow: 0 6px 20px -4px rgba(28,26,21,.4); overflow: hidden; background: #fbf9f4; opacity: 0; transform: scale(0.85); transition: opacity 0.12s ease, transform 0.12s ease; display: flex; align-items: center; justify-content: center; } .ds-lens--visible { opacity: 1; transform: scale(1); } .ds-lens-inner { font-family: Georgia, serif; font-size: 4rem; color: #1c1a15; }"
+    },
+    {
+      "name": "Timeline Bar",
+      "kind": "custom",
+      "refersTo": "n/a",
+      "description": "Signature component: a classification's bar on the Gantt-style timeline, sitting over a lower-contrast era backdrop band, with a sealing-wax pin marker at its start.",
+      "html": "<svg width=\"320\" height=\"70\" viewBox=\"0 0 320 70\" xmlns=\"http://www.w3.org/2000/svg\"><rect x=\"0\" y=\"10\" width=\"320\" height=\"50\" fill=\"#d9d3c1\" opacity=\"0.3\" /><rect class=\"ds-tl-bar\" x=\"40\" y=\"22\" width=\"200\" height=\"26\" rx=\"3\" fill=\"#8a8371\" /><circle cx=\"40\" cy=\"35\" r=\"4\" fill=\"#a8391f\" /><text x=\"52\" y=\"39\" font-family=\"Inter, sans-serif\" font-size=\"10\" font-weight=\"700\" fill=\"#fbf9f4\">GARALDE OLDSTYLE</text></svg>",
+      "css": ".ds-tl-bar { cursor: pointer; transition: filter 0.15s ease; } .ds-tl-bar:hover { filter: brightness(1.15); }"
+    }
+  ],
+  "narrative": {
+    "northStar": "The Specimen Ledger",
+    "overview": "Type Classified reads like a naturalist's logbook crossed with a type foundry's specimen book: warm parchment pages, ink-brown text, and each classification laid out and labeled like a catalogued specimen — measured, comparative, quietly authoritative. Nothing here performs; it records. The system exists to make a diagnostic legible (contrast, axis, serif shape, x-height) at a glance, then reward a closer look with real detail — a magnifiable anatomy diagram, a font rendered in its correct historical lineage, a timeline that places the specimen in its century.\n\nThe palette and type pairing commit to warm and unhurried over cold and efficient: a serif display face (Fraunces) for names and headings paired with a plain, quiet sans (Inter) for everything functional, sitting on parchment rather than white or near-black. The one color note — a sealing-wax red — is used the way a stamp or a wax seal is used: sparingly, to mark something as worth attention, never as a fill. This system explicitly rejects the flashy SaaS-dashboard register (no neon gradients, no glassmorphism, no dense KPI-tile chrome) and the cold-minimalist-tech register (no stark white/black, no monospace-everything) in favor of staying legible, precise, and warm throughout.",
+    "keyCharacteristics": [
+      "Warm parchment surfaces, never true white or true black",
+      "A serif display face for identity and naming; a quiet sans for everything else",
+      "One accent color, used only as a mark (underline, tag, border, dot) — never a fill",
+      "Flat surfaces at rest; shadow appears only as a response to hover or an overlay opening",
+      "Diagnostic, comparative density — small uppercase tracked labels do a lot of the organizing work"
+    ],
+    "rules": [
+      { "name": "The Small Mark Rule", "body": "Sealing Wax never fills a surface larger than a tag, a 3px border, or a 1-2px underline/pin. If an element needs to feel important, give it a mark in this color; do not give it a background in this color.", "section": "colors" },
+      { "name": "The Warm-Neutral-Only Rule", "body": "No pure white (#fff) or pure black (#000) appears anywhere in the system, light or dark mode. Every neutral carries the same warm, slightly yellow-brown cast.", "section": "colors" },
+      { "name": "The Whisper-Label Rule", "body": "Every organizing label in the system (section headers, diagnostic tags, branch pills) is small, uppercase, letter-spaced, and colored ink-faint — quiet enough to never compete with the content it's labeling.", "section": "typography" },
+      { "name": "The Flat-At-Rest Rule", "body": "No card, chip, or panel carries a shadow in its default state. Shadow is earned by hover or by floating above the page — never applied as ambient decoration.", "section": "elevation" }
+    ],
+    "dos": [
+      "Do keep every neutral warm — background, text, and border colors all carry the same paper-and-ink cast; never introduce a cool gray or pure white/black.",
+      "Do use Sealing Wax only as a mark: an underline, a border, a tag tint, a dot, a pin. If it needs to fill a surface larger than a few px of border or a small tag, use ink instead.",
+      "Do pair Fraunces (names, headings, identity) with Inter (everything functional) — never use Fraunces for body copy or Inter for a classification's name.",
+      "Do leave cards and panels flat at rest; only add shadow in response to hover or when a surface floats above the page (modal, tooltip, popover, lens).",
+      "Do use the small-uppercase-tracked Label style for anything that organizes content rather than making it look like body copy."
+    ],
+    "donts": [
+      "Don't add shadows, gradients, or glassmorphism as decoration — this system explicitly rejects the flashy SaaS-dashboard register.",
+      "Don't introduce a second accent color. One mark color, used sparingly, is the entire palette's point.",
+      "Don't let corner radius exceed 10px on any surface, or drop to a sharp 0px.",
+      "Don't ship a font whose classification lineage is wrong for the sake of a better-looking specimen — accuracy is a harder constraint here than in almost any other kind of app."
+    ]
+  }
+}

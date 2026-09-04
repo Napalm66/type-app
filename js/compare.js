@@ -4,14 +4,18 @@ function initCompare(root) {
   let selected = [];
 
   function renderPicker() {
+    const atCap = selected.length >= MAX_COMPARE;
     return `
       <div class="compare-picker">
-        ${CLASSIFICATIONS.map(
-          (c) => `
-          <button class="filter-chip ${selected.includes(c.id) ? "is-active" : ""}" data-id="${c.id}">
+        ${CLASSIFICATIONS.map((c) => {
+          const isSelected = selected.includes(c.id);
+          const disabled = atCap && !isSelected;
+          return `
+          <button class="filter-chip ${isSelected ? "is-active" : ""}" data-id="${c.id}"
+            ${disabled ? `disabled title="Deselect one to compare a different classification"` : ""}>
             ${c.name}
-          </button>`
-        ).join("")}
+          </button>`;
+        }).join("")}
       </div>
     `;
   }

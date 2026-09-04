@@ -36,7 +36,7 @@
   --paper-raised: #fbf9f4;
   --ink: #1c1a15;
   --ink-soft: #514c3f;
-  --ink-faint: #8a8371;
+  --ink-faint: #6f6857;
   --rule: #d9d3c1;
   --accent: #a8391f;
   --accent-soft: #d9c9a8;
@@ -55,7 +55,7 @@
     --paper-raised: #211e17;
     --ink: #f2ede0;
     --ink-soft: #b8ae98;
-    --ink-faint: #7d7562;
+    --ink-faint: #998f7a;
     --rule: #38342a;
     --accent: #d9714a;
     --accent-soft: #4a3324;
@@ -275,10 +275,24 @@ main.wrap {
   border-color: var(--ink-faint);
 }
 
+.filter-chip:focus-visible {
+  outline: 2px solid var(--focus);
+  outline-offset: 2px;
+}
+
 .filter-chip.is-active {
   background: var(--ink);
   border-color: var(--ink);
   color: var(--paper);
+}
+
+.filter-chip:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+
+.filter-chip:disabled:hover {
+  border-color: var(--rule);
 }
 
 /* ---------- card grid ---------- */
@@ -985,6 +999,33 @@ main.wrap {
 .quiz-trail span {
   color: var(--ink-soft);
   font-weight: 600;
+}
+
+.quiz-view-full {
+  display: block;
+  width: 100%;
+  font-family: var(--font-ui);
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: var(--ink);
+  background: var(--paper);
+  border: 1px solid var(--rule);
+  border-radius: 8px;
+  padding: 0.75rem 1rem;
+  cursor: pointer;
+  transition: border-color 0.15s ease;
+  margin-bottom: 1.25rem;
+}
+
+.quiz-view-full:hover,
+.quiz-view-full:focus-visible {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+.quiz-view-full:focus-visible {
+  outline: 2px solid var(--focus);
+  outline-offset: 2px;
 }
 
 /* ---------- timeline ---------- */

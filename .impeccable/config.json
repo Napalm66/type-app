@@ -1,0 +1,17 @@
+{
+  "detector": {
+    "ignoreRules": [],
+    "ignoreFiles": [],
+    "ignoreValues": [
+      {
+        "rule": "side-tab",
+        "value": "*",
+        "files": [
+          "css/style.css"
+        ],
+        "createdAt": "2026-09-04T03:51:28.259Z",
+        "reason": "Claude: .tell-box's 3px left border is the deliberate 'Key Tell' callout, documented in DESIGN.md's Small Mark Rule as an intentional sealing-wax accent border, not a habit default"
+      }
+    ]
+  }
+}

@@ -67,7 +67,7 @@ function resolveSerif({ contrast, axis, serif }) {
   return "transitional";
 }
 
-function initIdentify(root) {
+function initIdentify(root, onOpenDetail) {
   let path = []; // { nodeId, answer }
   let answers = {};
 
@@ -174,6 +174,7 @@ function initIdentify(root) {
         ${item.diagnostics ? `<div class="tell-box"><strong>Key tell</strong>${item.diagnostics.tell}</div>` : ""}
         <p class="detail-description">${item.description}</p>
         <p class="key-typefaces"><b>Reference typefaces:</b> ${item.keyTypefaces.join(", ")}</p>
+        <button class="quiz-view-full">View full diagnostic &rarr;</button>
         <div class="quiz-nav">
           <button class="quiz-back">&larr; Back</button>
           <button class="quiz-restart">Start over</button>
@@ -182,6 +183,7 @@ function initIdentify(root) {
     `;
     root.querySelector(".quiz-back")?.addEventListener("click", back);
     root.querySelector(".quiz-restart")?.addEventListener("click", restart);
+    root.querySelector(".quiz-view-full")?.addEventListener("click", () => onOpenDetail?.(id));
   }
 
   render();

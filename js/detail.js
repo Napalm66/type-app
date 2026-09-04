@@ -83,14 +83,20 @@ function serifSpectrumHTML(currentId) {
   }).join("");
   return `
     <div class="serif-spectrum">
-      <div class="serif-spectrum-heading">Serif shape, oldstyle to slab <span class="serif-spectrum-hint">hover a shape to zoom in</span></div>
+      <div class="serif-spectrum-heading">Serif shape, oldstyle to slab <span class="serif-spectrum-hint">tap or hover a shape to zoom in</span></div>
       <div class="serif-spectrum-row">${items}</div>
     </div>
   `;
 }
 
+let serifSpectrumOutsideTouchHandler = null;
+
 function attachSerifSpectrumZoom(panelRoot) {
   const row = panelRoot.querySelector(".serif-spectrum-row");
+  if (serifSpectrumOutsideTouchHandler) {
+    document.removeEventListener("touchstart", serifSpectrumOutsideTouchHandler);
+    serifSpectrumOutsideTouchHandler = null;
+  }
   if (!row) return;
 
   document.querySelectorAll(".serif-spectrum-zoom").forEach((el) => el.remove());
@@ -98,26 +104,53 @@ function attachSerifSpectrumZoom(panelRoot) {
   zoom.className = "serif-spectrum-zoom";
   document.body.appendChild(zoom);
 
+  let openItem = null;
+
+  function showZoom(item) {
+    const spec = SERIF_SPECTRUM.find((s) => s.id === item.dataset.serifId);
+    if (!spec) return;
+    openItem = item;
+    zoom.innerHTML = `
+      <svg viewBox="${serifSpectrumViewBox(spec)}"><path d="${spec.path || serifShapePath(spec)}" /></svg>
+      <div class="serif-spectrum-zoom-label">${spec.label}</div>
+    `;
+    const rect = item.getBoundingClientRect();
+    zoom.classList.add("is-visible");
+    const zRect = zoom.getBoundingClientRect();
+    let left = rect.left + rect.width / 2 - zRect.width / 2;
+    left = Math.max(8, Math.min(left, window.innerWidth - zRect.width - 8));
+    let top = rect.top - zRect.height - 12;
+    if (top < 8) top = rect.bottom + 12;
+    zoom.style.left = left + "px";
+    zoom.style.top = top + "px";
+  }
+
+  function hideZoom() {
+    openItem = null;
+    zoom.classList.remove("is-visible");
+  }
+
   row.querySelectorAll(".serif-spectrum-item").forEach((item) => {
-    item.addEventListener("mouseenter", () => {
-      const spec = SERIF_SPECTRUM.find((s) => s.id === item.dataset.serifId);
-      if (!spec) return;
-      zoom.innerHTML = `
-        <svg viewBox="${serifSpectrumViewBox(spec)}"><path d="${spec.path || serifShapePath(spec)}" /></svg>
-        <div class="serif-spectrum-zoom-label">${spec.label}</div>
-      `;
-      const rect = item.getBoundingClientRect();
-      zoom.classList.add("is-visible");
-      const zRect = zoom.getBoundingClientRect();
-      let left = rect.left + rect.width / 2 - zRect.width / 2;
-      left = Math.max(8, Math.min(left, window.innerWidth - zRect.width - 8));
-      let top = rect.top - zRect.height - 12;
-      if (top < 8) top = rect.bottom + 12;
-      zoom.style.left = left + "px";
-      zoom.style.top = top + "px";
-    });
-    item.addEventListener("mouseleave", () => zoom.classList.remove("is-visible"));
+    item.addEventListener("mouseenter", () => showZoom(item));
+    item.addEventListener("mouseleave", () => hideZoom());
+
+    // Mobile: tap an item to open/close its zoom (hover doesn't exist on
+    // touch), matching the tap-to-toggle pattern used by the anatomy lens.
+    item.addEventListener(
+      "touchend",
+      (e) => {
+        e.preventDefault();
+        if (openItem === item) hideZoom();
+        else showZoom(item);
+      },
+      { passive: false }
+    );
   });
+
+  serifSpectrumOutsideTouchHandler = (e) => {
+    if (openItem && !row.contains(e.target)) hideZoom();
+  };
+  document.addEventListener("touchstart", serifSpectrumOutsideTouchHandler);
 }
 
 function initDetail(overlayRoot, panelRoot) {
@@ -127,6 +160,10 @@ function initDetail(overlayRoot, panelRoot) {
     panelRoot.innerHTML = "";
     removeExistingLens();
     document.querySelectorAll(".serif-spectrum-zoom").forEach((el) => el.remove());
+    if (serifSpectrumOutsideTouchHandler) {
+      document.removeEventListener("touchstart", serifSpectrumOutsideTouchHandler);
+      serifSpectrumOutsideTouchHandler = null;
+    }
   }
 
   async function open(id) {
@@ -187,7 +224,7 @@ function initDetail(overlayRoot, panelRoot) {
       ${serifSpectrumHTML(item.id)}
       ${subStylesHTML}
       <p class="key-typefaces"><b>Reference typefaces:</b> ${item.keyTypefaces.join(", ")}</p>
-      <div class="anatomy-heading">Anatomy <span class="anatomy-hint">hover the diagram to zoom in</span></div>
+      <div class="anatomy-heading">Anatomy <span class="anatomy-hint">tap or hover the diagram to zoom in</span></div>
       <div class="anatomy-loading" id="anatomy-slot">Measuring glyph metrics…</div>
       ${visualCharacteristicsHTML}
       ${additionalFeaturesHTML}

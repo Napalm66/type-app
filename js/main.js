@@ -12,7 +12,7 @@ initExplore({
   onOpenDetail: (id) => detail.open(id),
 });
 
-initIdentify(document.getElementById("identify-root"));
+initIdentify(document.getElementById("identify-root"), (id) => detail.open(id));
 initTimeline(document.getElementById("timeline-root"), (id) => detail.open(id));
 initCompare(document.getElementById("compare-root"));
 
