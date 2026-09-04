@@ -74,8 +74,10 @@
       "display": { "displayName": "Display", "purpose": "Every classification name and heading, always uppercase — the site brand, Explore row names, detail panel name, quiz question/result. The brand itself runs large (clamp(3.4rem, 11vw, 7rem)) so it reads as the first viewport's actual headline." },
       "title": { "displayName": "Title", "purpose": "Section intros and the same oversized-uppercase treatment as display, at a slightly narrower size range for secondary headings." },
       "body": { "displayName": "Body", "purpose": "Running prose — descriptions, taglines, hints — plus the rotated tab labels." },
-      "mono": { "displayName": "Mono", "purpose": "Anything measured: indices, era dates, diagnostic labels, branch tags, footer credits, timeline marks. A number set in this face reads as data, not prose." }
+      "mono": { "displayName": "Mono", "purpose": "Anything measured: indices, era dates, diagnostic labels, branch tags, footer credits, timeline marks. A number set in this face reads as data, not prose." },
+      "specimen": { "displayName": "Specimen (exception)", "purpose": "A classification's own verified period-accurate typeface for its live 'Aa Gg Qy' and anatomy diagram when self-hosted (Coelacanth/Venetian, Tinos/Transitional), overriding the four roles above for that one piece of content." }
     },
+    "typographyScaleNote": "display/title/body/mono above are each one representative size; DESIGN.md's frontmatter typography.scale enumerates the full set of supporting steps (monoXs-monoXxl, bodyXs-bodyXxxxl, titleFluidMin/MaxA/B/C, diagramXs-diagramXxl) that components have actually grown to use, so the design-system checker treats them as a real ramp instead of one-off values.",
     "shadows": [],
     "shadowNote": "This system uses no box-shadow anywhere — see DESIGN.md's 'The Line, Not Light Rule'. Separation between surfaces comes from a 1px border (rule-solid for flush content, ink for floating panels) or a paper/panel tone shift, never blur.",
     "motion": [

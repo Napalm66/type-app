@@ -34,6 +34,49 @@ typography:
     fontWeight: 700
     lineHeight: 1.3
     letterSpacing: "0.045em"
+  # Self-hosted, per-classification specimen faces (see fonts/OFL-*):
+  # Venetian Oldstyle and Transitional render their live "Aa Gg Qy" in
+  # their own verified period-accurate typeface rather than the system's
+  # three roles above. This is intentional and expected to keep growing as
+  # more classifications get a dedicated specimen font — it is a deliberate
+  # exception to the one-voice type system, not a drift from it.
+  specimen:
+    fontFamily: "Coelacanth, Tinos"
+  # The three roles above are single representative sizes; in practice each
+  # has grown a small supporting range as new components were added over
+  # time without that range ever being written back here. `scale` enumerates
+  # every additional step actually in use so the design-system checker can
+  # tell a real (if informal) ramp from an arbitrary one-off value. Named by
+  # which role's family they extend and roughly where they sit in that
+  # role's range (Xs < Sm < Md < Lg < Xl), not by which single component
+  # first introduced them — several components typically share a step.
+  scale:
+    monoXs: "0.62rem" # smallest mono captions (serif-spectrum label, anatomy fact label)
+    monoSm: "0.64rem" # diagnostic label
+    monoMd: "0.68rem" # row index/era, tell-box label, section-heading labels, tooltip strong
+    monoLg: "0.72rem" # detail era, zoom label, quiz result label/trail
+    monoXl: "0.78rem" # quiz trail (wide), timeline tooltip years
+    monoXxl: "1.2rem" # detail-panel close glyph
+    bodyXs: "0.8rem" # anatomy loading state
+    bodySm: "0.82rem" # row tagline, anatomy fact value
+    bodyMd: "0.83rem" # quiz option description
+    bodyLg: "0.85rem" # brand sub, key typefaces, sub-styles, visual characteristics
+    bodyXl: "0.88rem" # diagnostic value
+    bodyXxl: "0.9rem" # quiz hint, compare-empty state
+    bodyXxxl: "0.92rem" # custom-specimen text input
+    bodyXxxxl: "0.95rem" # quiz option label
+    headingSm: "1.3rem" # compare column name
+    titleFluidMinA: "1.6rem" # spec-row name / view-intro h2, smaller fluid endpoint
+    titleFluidMaxA: "2.5rem" # spec-row name, larger fluid endpoint
+    titleFluidMinB: "2rem" # detail/quiz-result name, smaller fluid endpoint
+    titleFluidMaxB: "2.6rem" # detail/quiz-result name, larger fluid endpoint
+    titleFluidMaxC: "1.8rem" # quiz question, larger fluid endpoint
+    diagramXs: "7px" # anatomy x-height arrow label
+    diagramSm: "7.5px" # timeline branch label
+    diagramMd: "8px" # anatomy reference-glyph caption
+    diagramLg: "9px" # anatomy guide/stress labels, timeline era label base size
+    diagramXl: "10px" # timeline mark/bar labels
+    diagramXxl: "11.5px" # timeline row-label name (HTML, not SVG, but same micro scale)
 rounded:
   flat: "0px"
 spacing:
@@ -124,9 +167,11 @@ A teal-and-cream system with a coral-orange accent kept as a small third note �
 
 ### Hierarchy
 - **Display** (400, `clamp(3.4rem, 11vw, 7rem)`, 0.88 line-height, uppercase): the site brand only. Sized deliberately large — at the user's explicit request after the first pass read too modest — so the brand lockup functions as the first viewport's actual headline, not a polite introduction above it.
-- **Title** (400, `clamp(1.4rem, 4vw, 2.1rem)` down to `clamp(1.6rem, 4.4vw, 2.5rem)` depending on context, 1.0–1.05 line-height, uppercase): every classification name — the Explore row, the detail panel, the quiz result — plus section intros and the quiz question. This single oversized-condensed-uppercase treatment is the system's most repeated move. Section-intro headings (`view-intro h2`, e.g. "Explore the Classifications") carry `0.025em` letter-spacing and `1.05` line-height — Anton's native tracking is tight enough that a multi-word running phrase (unlike a single classification name) read as cramped without it.
-- **Body** (400, `1rem`, 1.5 line-height): running prose — descriptions, taglines, quiz hints.
-- **Mono** (700, `0.62rem`–`0.72rem`, 1.3 line-height, `0.04em`–`0.06em` tracking, usually uppercase): the system's other workhorse — row indices, era dates, diagnostic labels, branch tags, footer credits, timeline marks. Where the old system's "Whisper Label" was small Inter, this system's equivalent is monospace: it reads as data being cited, not prose being introduced.
+- **Title** (400, `clamp(1.4rem, 4vw, 2.1rem)` up to `clamp(2rem, 6vw, 2.6rem)` depending on context, 1.0–1.05 line-height, uppercase): every classification name — the Explore row, the detail panel, the quiz result — plus section intros and the quiz question. This single oversized-condensed-uppercase treatment is the system's most repeated move; four fluid variants exist for different heading levels (row name, detail/quiz-result name, section intro, quiz question — endpoints enumerated in the `typography.scale` frontmatter as `titleFluidMin/MaxA/B/C`), not a single fixed size. Section-intro headings (`view-intro h2`, e.g. "Explore the Classifications") carry `0.025em` letter-spacing and `1.05` line-height — Anton's native tracking is tight enough that a multi-word running phrase (unlike a single classification name) read as cramped without it.
+- **Body** (400, `0.8rem`–`1rem`, 1.5 line-height): running prose — descriptions, taglines, quiz hints, diagnostic/tell-box copy. `1rem` is the representative size (used for the main description paragraph); the rest of the range is the natural spread of secondary copy (captions, hints, list items) that's grown across components — enumerated as `bodyXs`–`bodyXxxxl` in `typography.scale`, all Inter.
+- **Mono** (700, `0.62rem`–`1.2rem`, 1.3 line-height, `0.03em`–`0.06em` tracking, usually uppercase): the system's other workhorse — row indices, era dates, diagnostic labels, branch tags, footer credits, timeline marks, the detail panel's close glyph. `0.7rem` is the representative size; the full step range is enumerated as `monoXs`–`monoXxl` in `typography.scale`. Where the old system's "Whisper Label" was small Inter, this system's equivalent is monospace: it reads as data being cited, not prose being introduced.
+- **Diagram micro-scale** (7px–11.5px, mono, uncommon-case only): caption text baked directly into the anatomy and timeline SVGs (guide lines, stress angle, x-height arrow, era/bar labels) plus the timeline's HTML row-label name. Deliberately outside the rem-based UI scale above — these sizes are computed relative to a rendered glyph's own measured metrics, not chosen from the type system, and only ever appear as tiny annotations on a diagram, never as UI copy. Enumerated as `diagramXs`–`diagramXxl` in `typography.scale`.
+- **Specimen exception** — a classification's live "Aa Gg Qy" (and its anatomy diagram) render in that classification's *own* verified period-accurate typeface when one is self-hosted (Coelacanth for Venetian Oldstyle, Tinos for Transitional; see `typography.specimen` and `PRODUCT.md`), not in Display/Title/Body/Mono. This is deliberate and expected to keep growing — classification lineage accuracy outranks the one-voice type system for this one piece of content.
 
 ### Named Rules
 **The One Voice, One Data Rule.** Anton names things; Inter explains things; JetBrains Mono measures things. No role ever borrows another's job — body copy never goes condensed-uppercase, and a measurement is never set in anything but mono.
