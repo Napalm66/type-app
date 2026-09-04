@@ -358,6 +358,22 @@ const CLASSIFICATIONS = [
       serif: "none",
       tell: "Open apertures, some stroke modulation, often a two-story 'g' — feels closer to a serif face without the serifs.",
     },
+    visualCharacteristics: [
+      { label: "Terminals", text: "The ends of strokes may be rounded, squared, or angled." },
+      { label: "Serifs", text: "No serifs." },
+      { label: "Stress", text: "Usually oblique." },
+      { label: "Contrast", text: "May have low to medium contrast between thick and thin strokes." },
+      { label: "X-height", text: "Generally tall in relation to the cap height." },
+      { label: "Set width", text: "Characters tend to be moderate to wide." },
+    ],
+    additionalFeatures: [
+      "Apex of capital A is usually squared",
+      "Lowercase a is usually double storey",
+      "Lowercase g is usually double storey",
+      "Capital G does not have a spur",
+      "Look more organic or calligraphic than Grotesque and Geometric",
+      "Proportions are based on those of Humanist typefaces",
+    ],
     keyTypefaces: ["Gill Sans", "Frutiger", "Optima", "Open Sans"],
     // Open Sans is unambiguously classified as humanist by its own
     // designer (Steve Matteson) and design brief — "open apertures,
