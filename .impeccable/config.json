@@ -42,6 +42,96 @@
         "value": "inter",
         "createdAt": "2026-09-04T11:43:47.786Z",
         "reason": "Inter is the established, documented body/UI font for this app (DESIGN.md Typography section) — not new drift, just present in a decision-support mock"
+      },
+      {
+        "rule": "design-system-color",
+        "value": "rgba(90, 120, 80, 0.3)",
+        "files": [
+          "js/timeline.js"
+        ],
+        "createdAt": "2026-09-04T13:10:39.983Z",
+        "reason": "user confirmed: chronological teal-to-coral categorical palette for timeline era bands (data-encoding chart colors, not UI-chrome accent), option A of a previewed 3-way comparison"
+      },
+      {
+        "rule": "design-system-color",
+        "value": "rgba(140, 130, 70, 0.3)",
+        "files": [
+          "js/timeline.js"
+        ],
+        "createdAt": "2026-09-04T13:10:40.124Z",
+        "reason": "user confirmed: chronological teal-to-coral categorical palette for timeline era bands (data-encoding chart colors, not UI-chrome accent), option A of a previewed 3-way comparison"
+      },
+      {
+        "rule": "design-system-color",
+        "value": "rgba(160, 110, 70, 0.35)",
+        "files": [
+          "js/timeline.js"
+        ],
+        "createdAt": "2026-09-04T13:10:40.253Z",
+        "reason": "user confirmed: chronological teal-to-coral categorical palette for timeline era bands (data-encoding chart colors, not UI-chrome accent), option A of a previewed 3-way comparison"
+      },
+      {
+        "rule": "design-system-color",
+        "value": "rgba(170, 90, 90, 0.35)",
+        "files": [
+          "js/timeline.js"
+        ],
+        "createdAt": "2026-09-04T13:10:40.389Z",
+        "reason": "user confirmed: chronological teal-to-coral categorical palette for timeline era bands (data-encoding chart colors, not UI-chrome accent), option A of a previewed 3-way comparison"
+      },
+      {
+        "rule": "design-system-color",
+        "value": "rgba(180, 70, 90, 0.45)",
+        "files": [
+          "js/timeline.js"
+        ],
+        "createdAt": "2026-09-04T13:10:40.504Z",
+        "reason": "user confirmed: chronological teal-to-coral categorical palette for timeline era bands (data-encoding chart colors, not UI-chrome accent), option A of a previewed 3-way comparison"
+      },
+      {
+        "rule": "design-system-color",
+        "value": "rgba(180, 75, 60, 0.35)",
+        "files": [
+          "js/timeline.js"
+        ],
+        "createdAt": "2026-09-04T13:10:40.648Z",
+        "reason": "user confirmed: chronological teal-to-coral categorical palette for timeline era bands (data-encoding chart colors, not UI-chrome accent), option A of a previewed 3-way comparison"
+      },
+      {
+        "rule": "design-system-color",
+        "value": "rgba(188, 58, 20, 0.35)",
+        "files": [
+          "js/timeline.js"
+        ],
+        "createdAt": "2026-09-04T13:10:40.807Z",
+        "reason": "user confirmed: chronological teal-to-coral categorical palette for timeline era bands (data-encoding chart colors, not UI-chrome accent), option A of a previewed 3-way comparison"
+      },
+      {
+        "rule": "design-system-color",
+        "value": "rgba(188, 58, 20, 0.5)",
+        "files": [
+          "js/timeline.js"
+        ],
+        "createdAt": "2026-09-04T13:10:40.940Z",
+        "reason": "user confirmed: chronological teal-to-coral categorical palette for timeline era bands (data-encoding chart colors, not UI-chrome accent), option A of a previewed 3-way comparison"
+      },
+      {
+        "rule": "design-system-color",
+        "value": "rgba(0, 70, 67, 0.35)",
+        "files": [
+          "js/timeline.js"
+        ],
+        "createdAt": "2026-09-04T13:10:41.059Z",
+        "reason": "user confirmed: chronological teal-to-coral categorical palette for timeline era bands (data-encoding chart colors, not UI-chrome accent), option A of a previewed 3-way comparison"
+      },
+      {
+        "rule": "design-system-color",
+        "value": "rgba(46, 92, 89, 0.35)",
+        "files": [
+          "js/timeline.js"
+        ],
+        "createdAt": "2026-09-04T13:10:41.180Z",
+        "reason": "user confirmed: chronological teal-to-coral categorical palette for timeline era bands (data-encoding chart colors, not UI-chrome accent), option A of a previewed 3-way comparison"
       }
     ]
   }
