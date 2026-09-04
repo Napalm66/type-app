@@ -173,6 +173,19 @@ const CLASSIFICATIONS = [
       serif: "unbracketed-hairline",
       tell: "Unbracketed hairline serifs; extreme thick/thin contrast; perfectly vertical stress.",
     },
+    visualCharacteristics: [
+      { label: "Terminals", text: "The ends of strokes may be pointed, rounded, angled, or may end in a teardrop or ball shape, but generally lighter, sharper, and straighter than Transitional terminals. Lowercase ascender terminals are usually horizontal." },
+      { label: "Serifs", text: "Usually have little or mostly no bracketing, straighter and sharper than Transitional serifs." },
+      { label: "Stress", text: "Usually vertical." },
+      { label: "Contrast", text: "High contrast between thick and thin strokes." },
+      { label: "X-height", text: "Generally medium in relation to the cap height." },
+      { label: "Set width", text: "Characters tend to be narrower than Transitional typefaces." },
+      { label: "Positive/Negative space", text: "Generous spacing and counters give it a slightly lighter overall appearance than Transitional typefaces." },
+    ],
+    additionalFeatures: [
+      "Characters appear precise and mechanical",
+      "Characters are likely to be constructed out of interchangeable parts",
+    ],
     keyTypefaces: ["Bodoni", "Didot", "Walbaum", "Bodoni Moda"],
     // Playfair Display (previously used here) is explicitly not a direct
     // Bodoni/Didot revival — its own designer describes it as synthesizing
