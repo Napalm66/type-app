@@ -128,7 +128,7 @@ body {
    min-height keeps that top slice tall enough on short/compact layouts. */
 .site-header {
   position: relative;
-  min-height: 20vw;
+  min-height: 19vw;
   background-image:
     linear-gradient(rgba(0, 70, 67, 0.6), rgba(0, 70, 67, 0.6) 60%, var(--paper) 100%),
     url("../images/hero-typographer.jpg");
@@ -139,7 +139,7 @@ body {
 
 .hero-text {
   position: relative;
-  padding-top: 26%;
+  padding-top: 24%;
   padding-bottom: clamp(2rem, 5vw, 3rem);
 }
 
@@ -156,12 +156,16 @@ body {
   border-bottom-color: rgba(245, 242, 234, 0.28);
 }
 
-.hero-text .tab-rule {
-  border-left-color: rgba(245, 242, 234, 0.4);
+.hero-text .tab-label {
+  color: rgba(245, 242, 234, 0.7);
 }
 
-.hero-text .tab.is-active .tab-rule {
-  border-left-color: var(--accent);
+.hero-text .tab:hover .tab-label {
+  color: var(--hero-ink);
+}
+
+.hero-text .tab.is-active .tab-label {
+  color: var(--accent);
 }
 
 .brand-row {
@@ -206,58 +210,48 @@ body {
 .tabs {
   display: flex;
   gap: clamp(1.25rem, 4vw, 2.25rem);
-  height: 78px;
   align-items: flex-end;
   margin-top: 2rem;
-  padding-bottom: 0;
   border-bottom: 1px solid var(--rule-solid);
 }
 
+/* The active indicator is a horizontal underline directly on the tab
+   (overlapping .tabs's own 1px baseline via the negative margin) rather
+   than the previous vertical dashed rule above the label — a plainer,
+   more conventional underline-tab, at the user's explicit request. */
 .tab {
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: flex-end;
-  height: 100%;
   background: none;
   border: none;
-  padding: 0;
+  border-bottom: 2px solid transparent;
+  margin-bottom: -1px;
+  padding: 0 0 0.75rem;
   cursor: pointer;
-}
-
-.tab-rule {
-  flex: 1;
-  width: 0;
-  border-left: 1px dashed var(--ink-faint);
   transition: border-color 0.15s ease;
 }
 
 .tab-label {
-  writing-mode: vertical-rl;
-  transform: rotate(180deg);
   font-family: var(--font-ui);
   font-size: 0.7rem;
   font-weight: 600;
   letter-spacing: 0.05em;
   text-transform: uppercase;
-  color: var(--accent);
-  opacity: 0.6;
-  margin-top: 0.5rem;
-  transition: opacity 0.15s ease;
+  color: var(--ink-faint);
+  transition: color 0.15s ease;
 }
 
 .tab:hover .tab-label {
-  opacity: 0.85;
+  color: var(--ink);
 }
 
-.tab.is-active .tab-rule {
-  border-left-style: solid;
-  border-left-color: var(--accent);
-  border-left-width: 2px;
+.tab.is-active {
+  border-bottom-color: var(--accent);
 }
 
 .tab.is-active .tab-label {
-  opacity: 1;
+  color: var(--accent);
   font-weight: 700;
 }
 
@@ -1496,15 +1490,20 @@ main.wrap {
 
 /* ---------- footer ---------- */
 
+/* Fixed dark teal + reversed cream, not theme-swapped — a deliberately
+   "always dark" closing block (a colophon/masthead credit panel), at the
+   user's request, rather than following --ink/--paper's usual light/dark
+   swap. The strong tone-shift from paper to this solid block is itself
+   the separator, so no border is needed (The Line, Not Light Rule). */
 .site-footer {
-  border-top: 1px solid var(--rule-solid);
+  background: #004643;
   padding: 1.5rem 0 2.5rem;
 }
 
 .site-footer p {
   font-family: var(--font-mono);
   font-size: 0.7rem;
-  color: var(--ink-faint);
+  color: var(--hero-ink);
   max-width: 62ch;
   margin: 0;
   line-height: 1.6;
@@ -1516,7 +1515,7 @@ main.wrap {
 
 .site-footer a {
   color: inherit;
-  text-decoration-color: var(--rule-solid);
+  text-decoration-color: rgba(245, 242, 234, 0.4);
 }
 
 .site-footer a:hover {

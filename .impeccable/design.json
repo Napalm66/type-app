@@ -112,15 +112,15 @@
       "refersTo": "n/a",
       "description": "Full-bleed black-and-white photo (a type designer at their desk, user-supplied) behind the brand lockup/tagline/tab-nav, under a fixed teal wash fading to paper. Photo/wash/fade are sized to the header's real content height (not a fixed aspect-ratio box) so the fade always lands at the text's own bottom edge; background-position: center top keeps the subject's face intact when a short layout crops the frame.",
       "html": "<header class=\"ds-hero\"><div class=\"ds-hero-text\"><h1>Type<br/>Classified</h1></div></header>",
-      "css": ".ds-hero { position: relative; min-height: 20vw; background-image: linear-gradient(rgba(0,70,67,0.6), rgba(0,70,67,0.6) 60%, #f0ede5 100%), url(hero.jpg); background-size: 100% 100%, cover; background-position: center top, center top; background-repeat: no-repeat, no-repeat; } .ds-hero-text { padding-top: 26%; color: #f5f2ea; }"
+      "css": ".ds-hero { position: relative; min-height: 19vw; background-image: linear-gradient(rgba(0,70,67,0.6), rgba(0,70,67,0.6) 60%, #f0ede5 100%), url(hero.jpg); background-size: 100% 100%, cover; background-position: center top, center top; background-repeat: no-repeat, no-repeat; } .ds-hero-text { padding-top: 24%; color: #f5f2ea; }"
     },
     {
       "name": "Tab",
       "kind": "nav",
       "refersTo": "tab",
-      "description": "Rotated vertical label riding a dashed grid rule — the header's view switcher. Per explicit request ('explore, identify, timeline etc be in orange'), the label is sealing-wax colored at all times; inactive/hover/active states are differentiated by opacity (0.6/0.85/1), not by switching between neutral and accent color.",
-      "html": "<nav class=\"ds-tabs\"><button class=\"ds-tab ds-tab--active\"><span class=\"ds-tab-rule\"></span><span class=\"ds-tab-label\">Explore</span></button><button class=\"ds-tab\"><span class=\"ds-tab-rule\"></span><span class=\"ds-tab-label\">Identify</span></button></nav>",
-      "css": ".ds-tabs { display: flex; gap: 2rem; height: 78px; align-items: flex-end; border-bottom: 1px solid #d3dbd8; } .ds-tab { display: flex; flex-direction: column; align-items: center; justify-content: flex-end; height: 100%; background: none; border: none; padding: 0; cursor: pointer; } .ds-tab-rule { flex: 1; width: 0; border-left: 1px dashed #4d6a67; } .ds-tab-label { writing-mode: vertical-rl; transform: rotate(180deg); font-family: Inter, sans-serif; font-size: 0.7rem; font-weight: 600; letter-spacing: 0.05em; text-transform: uppercase; color: #bc3a14; opacity: 0.6; margin-top: 0.5rem; } .ds-tab--active .ds-tab-rule { border-left-style: solid; border-left-color: #bc3a14; border-left-width: 2px; } .ds-tab--active .ds-tab-label { opacity: 1; font-weight: 700; }"
+      "description": "Horizontal underline tab bar — reverted from an earlier rotated-vertical-label/dashed-rule treatment per explicit request. The 2px underline (transparent at rest, sealing-wax when active) sits directly on the tab, overlapping the bar's own 1px baseline. Sealing-wax marks the active tab only now (also reverted from an earlier 'always-accent, opacity-differentiated' rule) — inactive labels are ink-faint, hover lightens to ink.",
+      "html": "<nav class=\"ds-tabs\"><button class=\"ds-tab ds-tab--active\"><span class=\"ds-tab-label\">Explore</span></button><button class=\"ds-tab\"><span class=\"ds-tab-label\">Identify</span></button></nav>",
+      "css": ".ds-tabs { display: flex; gap: 2rem; align-items: flex-end; border-bottom: 1px solid #d3dbd8; } .ds-tab { display: flex; flex-direction: column; align-items: center; background: none; border: none; border-bottom: 2px solid transparent; margin-bottom: -1px; padding: 0 0 0.75rem; cursor: pointer; } .ds-tab-label { font-family: Inter, sans-serif; font-size: 0.7rem; font-weight: 600; letter-spacing: 0.05em; text-transform: uppercase; color: #4d6a67; } .ds-tab:hover .ds-tab-label { color: #004643; } .ds-tab--active { border-bottom-color: #bc3a14; } .ds-tab--active .ds-tab-label { color: #bc3a14; font-weight: 700; }"
     },
     {
       "name": "Filter Chip",
@@ -153,6 +153,14 @@
       "description": "The \"try your own text\" custom specimen field.",
       "html": "<input class=\"ds-input\" type=\"text\" placeholder=\"Type or paste a word…\" />",
       "css": ".ds-input { font-family: Inter, sans-serif; font-size: 0.92rem; padding: 0.6rem 0.85rem; border: 1px solid #d3dbd8; border-radius: 0; background: #ffffff; color: #004643; } .ds-input::placeholder { color: #4d6a67; } .ds-input:focus-visible { outline: 2px solid #004643; outline-offset: 1px; border-color: #4d6a67; }"
+    },
+    {
+      "name": "Footer",
+      "kind": "custom",
+      "refersTo": "n/a",
+      "description": "Colophon block: fixed dark-teal background with reversed cream text, not theme-swapped, per explicit request. No border — the tone-shift from paper is itself the separator.",
+      "html": "<footer class=\"ds-footer\"><p>Specimens are set in freely-licensed webfonts...</p></footer>",
+      "css": ".ds-footer { background: #004643; padding: 1.5rem 0 2.5rem; } .ds-footer p { font-family: 'JetBrains Mono', monospace; font-size: 0.7rem; color: #f5f2ea; line-height: 1.6; } .ds-footer a { color: inherit; text-decoration-color: rgba(245,242,234,0.4); } .ds-footer a:hover { color: #bc3a14; text-decoration-color: #bc3a14; }"
     },
     {
       "name": "Floating Panel",

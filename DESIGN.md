@@ -137,7 +137,7 @@ Every classification name is set in a single oversized condensed grotesque, uppe
 - A monospace face marks anything measured: indices, dates, dimensions, tags
 - Dashed rules are structural, not decorative — they mark a grid, a leader line, a boundary
 - Square corners everywhere; separation comes from a rule or a tone change, never a shadow
-- Coral-orange marks small things and the whole tab-label system — a marker square on every tag, bars, measurement call-outs, and every tab label (opacity-differentiated, not color-differentiated, between inactive/hover/active)
+- Coral-orange marks small things and the active tab only — a marker square on every tag, bars, measurement call-outs, and the one active tab's underline/label (inactive tabs stay neutral `ink-faint`)
 
 ## Colors
 
@@ -181,7 +181,7 @@ A teal-and-cream system with a coral-orange accent kept as a small third note �
 
 ## Layout
 
-Unchanged from the previous system at the structural level: a single centered column, `max-width: 1120px` (widened slightly from `1080px`), fluid `clamp()`-based padding, no hard breakpoint grid. What changed is the header: the old horizontal tab bar with an underline became a row of rotated, vertical labels riding dashed rules (`writing-mode: vertical-rl`), directly translating the pinned poster reference's own navigation device — each tab is now literally a labeled grid line, and its active state is the line turning solid.
+Unchanged from the previous system at the structural level: a single centered column, `max-width: 1120px` (widened slightly from `1080px`), fluid `clamp()`-based padding, no hard breakpoint grid. The header's tab bar went through two moves: the original pre-redesign horizontal underline bar first became a row of rotated, vertical labels riding dashed rules (`writing-mode: vertical-rl`), directly translating the pinned poster reference's own navigation device — then, later in the same project, reverted back to a horizontal underline bar per explicit request (see Tabs, under Components) — the poster-grid reading was judged not worth keeping once tried live.
 
 Explore's card grid became a numbered list: each classification is a full-width row (index, oversized name, live specimen, tagline, era, branch tag) separated by hairline rules, rather than a grid of bordered cards. Compare's columns lost their individual card borders in favor of a single shared 1px rule grid (a `background`-and-`gap` trick, not per-cell borders) — reads as one ruled table, not three adjacent cards.
 
@@ -204,12 +204,12 @@ Every corner in the system is square — `border-radius: 0` everywhere, with no 
 
 ### Hero (site header photo)
 - **Style:** a full-bleed black-and-white photo (a type designer at their desk) under a fixed teal wash (`rgba(0, 70, 67, 0.6)`, matching the timeline's own Romanesque-era rgba) fading to `paper` by the header's bottom edge. Brand lockup, tagline, and tab nav sit on top in `hero-ink` — a fixed cream that does not swap with light/dark mode, since neither the photo nor its wash do.
-- **Sizing:** the photo, wash, and fade are backgrounds on `.site-header` itself, sized to the header's real (content-driven) height — not a fixed aspect-ratio box — so the fade always lands exactly at the text content's own bottom edge regardless of how tall that content stacks at a given viewport width. `background-position: center top` keeps the photo's own top (the subject's face) intact when a short/compact layout crops the bottom of the frame; `min-height: 20vw` keeps that top slice from getting too thin. `.hero-text`'s `padding-top: 26%` pushes the brand lockup down past the subject's hand/chin before it starts.
-- **History:** three treatments were previewed (teal duotone / straight-grayscale dark scrim / a contained side panel, not full-bleed) and narrowed to the duotone per explicit request; the brand lockup was then pushed down and shrunk (~18%) after the first pass placed "Classified" directly over the subject's face. The photo itself was swapped once more — a taller 1600:1067 crop first, then a wider 1774:887 (2:1) crop the user supplied afterward specifically to make "the top part not too tall"; `min-height`/`.hero-text` padding were retuned (26vw→20vw, 34%→26%) to match the new crop's shallower proportions.
+- **Sizing:** the photo, wash, and fade are backgrounds on `.site-header` itself, sized to the header's real (content-driven) height — not a fixed aspect-ratio box — so the fade always lands exactly at the text content's own bottom edge regardless of how tall that content stacks at a given viewport width. `background-position: center top` keeps the photo's own top (the subject's face) intact when a short/compact layout crops the bottom of the frame; `min-height: 19vw` keeps that top slice from getting too thin. `.hero-text`'s `padding-top: 24%` pushes the brand lockup down past the subject's hand/chin before it starts.
+- **History:** three treatments were previewed (teal duotone / straight-grayscale dark scrim / a contained side panel, not full-bleed) and narrowed to the duotone per explicit request; the brand lockup was then pushed down and shrunk (~18%) after the first pass placed "Classified" directly over the subject's face. The photo itself was swapped/retuned twice more — a taller 1600:1067 crop first, then a wider 1774:887 (2:1) crop the user supplied specifically to make "the top part not too tall" (`min-height`/`.hero-text` padding retuned 26vw→20vw, 34%→26%), then that same crop trimmed a further 53px (~6%) off its own top per "crop off the man's top a little more without compromising the face" (retuned again, 20vw→19vw, 26%→24%) — each pass keeping the same margin between the crop's own safe-zone boundary (just past the subject's hand) and where the text starts.
 
 ### Tabs (header navigation)
-- **Style:** each tab is a vertical dashed rule (`border-left: 1px dashed ink-faint`) topped by a rotated label (`writing-mode: vertical-rl`, Inter, uppercase, tracked). The label is `sealing-wax` colored at all times now (was `ink-faint`/`ink`) — inactive/hover/active states are differentiated by **opacity** (`0.6` / `0.85` / `1`), not by switching color, at the user's request ("explore, identify, timeline etc be in orange").
-- **Active:** the rule turns solid `sealing-wax` (2px), the label reaches full opacity and bold weight.
+- **Style:** a conventional horizontal underline-tab bar now, not the poster-reference's rotated vertical rule — reverted per explicit request ("vertical orange line make horizontal and place under the tab that is in action"). Each label reads normally (no `writing-mode`/rotation); a `2px` `border-bottom` (transparent at rest, `sealing-wax` when active) sits directly on the tab, overlapping `.tabs`'s own `1px rule-solid` baseline via a `-1px` margin so the active underline reads as a bolder colored segment of that shared line.
+- **Color:** `sealing-wax` marks the active tab **only** now (label color + underline) — reverted from the earlier "always-accent, opacity-differentiated" rule per a later explicit request ("highlight only the tab when active"). Inactive labels are `ink-faint`, hover lightens to `ink` (or the fixed hero-photo cream/lighter variants when the tab bar sits over the hero photo).
 - **Focus:** `2px focus-ring` outline, `2px` offset.
 
 ### Chips (filters, branch tags)
@@ -220,6 +220,9 @@ Every corner in the system is square — `border-radius: 0` everywhere, with no 
 ### Rows (Explore list)
 - **Style:** a full-width flex row — mono index, then the classification's oversized Anton name with its live specimen and tagline beneath, then era date and branch tag at the trailing edge. Separated by `1px rule-solid` hairlines, no card border, no radius.
 - **Hover/Focus:** background shifts from `paper` to `panel` — the entire row highlights, the way a finger running down a ledger would.
+
+### Footer (colophon)
+- **Style:** a fixed dark-teal (`#004643`) block with reversed cream text (`hero-ink`) — not theme-swapped, at explicit request ("the lowest table can have a dark green table with text in reverse white"), so it reads as a deliberately dark closing panel in both light and dark mode rather than following `ink`/`paper`'s usual swap. No border: the tone-shift from `paper` is itself the separator (The Line, Not Light Rule). In dark mode this block happens to match the page's own `paper` teal almost exactly, so the "reversed panel" read recedes there — an accepted consequence of keeping the color fixed rather than theme-relative.
 
 ### Panels (detail modal, quiz card)
 - **Style:** `panel` background, `1px solid ink` border (not `rule-solid` — floating surfaces get the stronger, higher-contrast border since they're not sitting flush with the page), square corners, no shadow.
