@@ -1339,6 +1339,25 @@ main.wrap {
   color: var(--ink);
 }
 
+/* Era tooltip: a reversed card (ink background, panel-colored text)
+   instead of the classification tooltip's light panel — a visitor
+   should be able to tell at a glance which kind of info they're
+   looking at (the backdrop era vs. a specific classification) before
+   reading a word of it. */
+.tl-era-tooltip--era {
+  background: var(--ink);
+  color: var(--panel);
+  border-color: var(--panel);
+}
+
+.tl-era-tooltip--era strong {
+  color: var(--panel);
+}
+
+.tl-era-tooltip--era .tl-tooltip-closes {
+  border-top-color: var(--ink-faint);
+}
+
 .tl-era-tooltip::after {
   display: none;
 }

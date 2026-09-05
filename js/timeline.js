@@ -522,7 +522,11 @@ function initTimeline(root, onOpenDetail) {
     tooltip.className = "tl-era-tooltip";
     document.body.appendChild(tooltip);
 
-    function place(target, html) {
+    // Classification nodes are small boxes, so anchoring the tooltip to
+    // the node's own rect (flipping above/below if there's no room)
+    // works well.
+    function placeAtRect(target, html) {
+      tooltip.classList.remove("tl-era-tooltip--era");
       tooltip.innerHTML = html;
       const rect = target.getBoundingClientRect();
       tooltip.classList.add("is-visible");
@@ -530,22 +534,34 @@ function initTimeline(root, onOpenDetail) {
       let left = rect.left + rect.width / 2 - ttRect.width / 2;
       left = Math.max(8, Math.min(left, window.innerWidth - ttRect.width - 8));
       let top = rect.top - ttRect.height - 10;
-      let arrowBelow = false;
-      if (top < 8) {
-        top = rect.bottom + 10;
-        arrowBelow = true;
-      }
+      if (top < 8) top = rect.bottom + 10;
       tooltip.style.left = left + "px";
       tooltip.style.top = top + "px";
-      tooltip.classList.toggle("arrow-top", arrowBelow);
-      tooltip.classList.toggle("arrow-bottom", !arrowBelow);
-      tooltip.style.setProperty("--arrow-x", rect.left + rect.width / 2 - left + "px");
+    }
+
+    // Era bands run the full chart height, so anchoring to the band's
+    // own (very tall) rect would place the tooltip miles from wherever
+    // the cursor actually is — it worked fine when era bands were a
+    // thin strip in the old bar chart, but not now. Follow the cursor
+    // instead, same as the old chart already did for its bars.
+    function placeNearCursor(x, y, html) {
+      tooltip.classList.add("tl-era-tooltip--era");
+      tooltip.innerHTML = html;
+      tooltip.classList.add("is-visible");
+      const ttRect = tooltip.getBoundingClientRect();
+      const offset = 16;
+      let left = Math.min(x + offset, window.innerWidth - ttRect.width - 8);
+      let top = Math.min(y + offset, window.innerHeight - ttRect.height - 8);
+      tooltip.style.left = left + "px";
+      tooltip.style.top = top + "px";
     }
 
     svg.querySelectorAll(".tl-lg-era-band").forEach((group) => {
       const era = ART_PERIODS[Number(group.dataset.eraIndex)];
       if (!era) return;
-      group.addEventListener("mouseenter", () => place(group, `<strong>${era.tooltipName || era.name}</strong>${era.description}`));
+      const html = `<strong>${era.tooltipName || era.name}</strong>${era.description}`;
+      group.addEventListener("mouseenter", (e) => placeNearCursor(e.clientX, e.clientY, html));
+      group.addEventListener("mousemove", (e) => placeNearCursor(e.clientX, e.clientY, html));
       group.addEventListener("mouseleave", () => tooltip.classList.remove("is-visible"));
     });
 
@@ -557,7 +573,7 @@ function initTimeline(root, onOpenDetail) {
         const closesHTML = n.closesBecause
           ? `<div class="tl-tooltip-closes"><b>Ends because:</b> ${n.closesBecause}</div>`
           : "";
-        place(group, `<strong>${n.name}</strong><div class="tl-tooltip-years">${yearLabel}</div>${n.description || ""}${closesHTML}`);
+        placeAtRect(group, `<strong>${n.name}</strong><div class="tl-tooltip-years">${yearLabel}</div>${n.description || ""}${closesHTML}`);
       });
       group.addEventListener("mouseleave", () => tooltip.classList.remove("is-visible"));
     });
