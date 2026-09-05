@@ -256,10 +256,18 @@ body {
     text-align: left;
     max-width: none;
   }
+}
 
-  /* Mobile stacks the brand differently than desktop (narrower column,
-     tighter wraps), which put "Classified" right across the subject's
-     chin instead of his wrist — shift the text down further here only. */
+/* "Type" and "Classified" scale via two independent clamp() curves with
+   different vw coefficients, so a single width-relative padding-top
+   only clears the subject's chin at the widths where both happen to hit
+   their fixed min (narrow phones) or are both scaling in lockstep (wide
+   desktop) — the range between, where one clamp is still climbing and
+   the other already isn't, is exactly where "Classified" lands lowest
+   relative to its own text block and covers his chin/mouth instead of
+   his wrist. Covering that whole gap with one generous value, rather
+   than trying to track the curves precisely. */
+@media (max-width: 1000px) {
   .hero-text {
     padding-top: 21%;
   }
