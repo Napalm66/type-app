@@ -2,6 +2,12 @@ function initTimeline(root, onOpenDetail) {
   const domainStart = TIMELINE_DOMAIN_START;
   const domainEnd = TIMELINE_DOMAIN_END;
 
+  // On a touch device there's no hover, so a tap is the only signal
+  // available — used to reveal the quick-info tooltip (matching what a
+  // mouse hover shows) rather than jumping straight to the full detail
+  // view, which a visitor hasn't asked for yet by a single tap.
+  const isTouchDevice = window.matchMedia("(hover: none)").matches;
+
   // Broader art-historical backdrop the classifications emerged against.
   // Each period's onset year marks where its band starts and the prior
   // one ends (their canonical ranges actually overlap by decades, since
@@ -513,7 +519,9 @@ function initTimeline(root, onOpenDetail) {
     const svg = root.querySelector(".tl-lg-svg");
     svg.addEventListener("click", (e) => {
       const node = e.target.closest("[data-id]");
-      if (node) onOpenDetail(node.dataset.id);
+      // On touch, a tap is handled by the node's own listener in
+      // attachTooltips (reveal the tooltip) instead — see isTouchDevice.
+      if (node && !isTouchDevice) onOpenDetail(node.dataset.id);
     });
 
     attachTooltips(svg);
@@ -577,15 +585,39 @@ function initTimeline(root, onOpenDetail) {
     svg.querySelectorAll(".tl-lg-node").forEach((group) => {
       const n = byId[group.dataset.id];
       if (!n) return;
-      group.addEventListener("mouseenter", () => {
-        const yearLabel = `${n.start} – ${n.end === domainEnd ? "present" : n.end}`;
-        const closesHTML = n.closesBecause
-          ? `<div class="tl-tooltip-closes"><b>Ends because:</b> ${n.closesBecause}</div>`
-          : "";
-        placeAtRect(group, `<strong>${n.name}</strong><div class="tl-tooltip-years">${yearLabel}</div>${n.description || ""}${closesHTML}`);
-      });
-      group.addEventListener("mouseleave", () => tooltip.classList.remove("is-visible"));
+      const yearLabel = `${n.start} – ${n.end === domainEnd ? "present" : n.end}`;
+      const closesHTML = n.closesBecause
+        ? `<div class="tl-tooltip-closes"><b>Ends because:</b> ${n.closesBecause}</div>`
+        : "";
+      const html = `<strong>${n.name}</strong><div class="tl-tooltip-years">${yearLabel}</div>${n.description || ""}${closesHTML}`;
+
+      if (isTouchDevice) {
+        // No hover to reveal this on touch — a tap shows the same
+        // tooltip a mouse hover would, and taps again to dismiss it,
+        // rather than jumping straight to the full detail view.
+        group.addEventListener("click", (e) => {
+          e.stopPropagation();
+          const alreadyOpen = tooltip.classList.contains("is-visible") && tooltip.dataset.forId === n.id;
+          if (alreadyOpen) {
+            tooltip.classList.remove("is-visible");
+          } else {
+            placeAtRect(group, html);
+            tooltip.dataset.forId = n.id;
+          }
+        });
+      } else {
+        group.addEventListener("mouseenter", () => placeAtRect(group, html));
+        group.addEventListener("mouseleave", () => tooltip.classList.remove("is-visible"));
+      }
     });
+
+    if (isTouchDevice) {
+      // Tapping empty chart space (not a node) dismisses whatever
+      // tooltip is open.
+      svg.addEventListener("click", (e) => {
+        if (!e.target.closest("[data-id]")) tooltip.classList.remove("is-visible");
+      });
+    }
   }
 
   render();
