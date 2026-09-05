@@ -339,19 +339,14 @@ function initTimeline(root, onOpenDetail) {
 
   // Real supplied photos, keyed by era name. Eras not listed here still
   // fall back to the tone/icon placeholder until photos are supplied.
+  // One photo per era for now: with era bands permanently equal-width
+  // (STRIP_TARGET_WIDTH=130 against a ~168px column), only a single
+  // strip ever renders, so only the first photo is ever visible —
+  // additional photos here would just be unused dead weight until era
+  // bands can grow wide enough to show more than one strip.
   const ERA_PHOTOS = {
-    Romanesque: [
-      "images/eras/era-romanesque-1.jpg",
-      "images/eras/era-romanesque-2.jpg",
-      "images/eras/era-romanesque-3.jpg",
-      "images/eras/era-romanesque-4.jpg",
-    ],
-    Gothic: [
-      "images/eras/era-gothic-1.jpg",
-      "images/eras/era-gothic-2.jpg",
-      "images/eras/era-gothic-3.jpg",
-      "images/eras/era-gothic-4.jpg",
-    ],
+    Romanesque: ["images/eras/era-romanesque-1.jpg"],
+    Gothic: ["images/eras/era-gothic-1.jpg"],
   };
 
   // A generic "image placeholder" glyph: a frame with a mountain + sun,
