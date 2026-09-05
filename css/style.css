@@ -1213,6 +1213,40 @@ main.wrap {
 
 /* ---------- timeline ---------- */
 
+.tl-legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.25rem;
+  margin-bottom: 1rem;
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--ink-faint);
+}
+
+.tl-legend span {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.tl-legend-swatch {
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  flex-shrink: 0;
+}
+
+.tl-legend-swatch.is-solid {
+  background: var(--ink);
+}
+
+.tl-legend-swatch.is-dashed {
+  background: none;
+  border: 1px dashed var(--ink-faint);
+}
+
 .tl-lg-chart-wrap {
   border: 1px solid var(--rule-solid);
   border-radius: var(--radius);
@@ -1232,7 +1266,7 @@ main.wrap {
   fill: var(--ink);
 }
 
-.tl-lg-era-band {
+.tl-lg-era-header {
   cursor: help;
 }
 

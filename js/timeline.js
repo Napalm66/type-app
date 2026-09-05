@@ -427,14 +427,23 @@ function initTimeline(root, onOpenDetail) {
     const labelSVG = lines.map((line, li) => `<text x="${left + width / 2}" y="${chartTop + 12 + li * 11}" class="tl-era-label" font-size="10" text-anchor="middle">${line}</text>`).join("");
 
     const fillColor = eraColor(era);
-    const mosaicTop = chartTop + 26;
+    const headerHeight = 26;
+    const mosaicTop = chartTop + headerHeight;
     const mosaic = width > 40 ? mosaicSVG(era, i, left, mosaicTop, width, bandBottom - mosaicTop, fillColor) : "";
 
+    // The tooltip-triggering hover target is just the header strip (name
+    // + a transparent hit area matching it), not the whole full-height
+    // band — hovering the photo below shouldn't pop up the era
+    // description, only the header a visitor would actually read it as
+    // a label for.
     return `
       <g class="tl-lg-era-band" data-era-index="${i}">
         <rect x="${left}" y="${chartTop}" width="${width}" height="${bandHeight}" fill="${fillColor}" class="tl-lg-era-band-fill" />
         ${mosaic}
-        ${labelSVG}
+        <g class="tl-lg-era-header" data-era-index="${i}">
+          <rect x="${left}" y="${chartTop}" width="${width}" height="${headerHeight}" fill="transparent" />
+          ${labelSVG}
+        </g>
         <line x1="${left}" y1="${chartTop}" x2="${left}" y2="${bandBottom}" class="tl-lg-era-sep" />
       </g>
     `;
@@ -556,7 +565,7 @@ function initTimeline(root, onOpenDetail) {
       tooltip.style.top = top + "px";
     }
 
-    svg.querySelectorAll(".tl-lg-era-band").forEach((group) => {
+    svg.querySelectorAll(".tl-lg-era-header").forEach((group) => {
       const era = ART_PERIODS[Number(group.dataset.eraIndex)];
       if (!era) return;
       const html = `<strong>${era.tooltipName || era.name}</strong>${era.description}`;
