@@ -156,18 +156,6 @@ body {
   border-bottom-color: rgba(245, 242, 234, 0.28);
 }
 
-.hero-text .tab-label {
-  color: rgba(245, 242, 234, 0.7);
-}
-
-.hero-text .tab:hover .tab-label {
-  color: var(--hero-ink);
-}
-
-.hero-text .tab.is-active .tab-label {
-  color: var(--accent);
-}
-
 .brand-row {
   display: flex;
   justify-content: space-between;
@@ -232,18 +220,22 @@ body {
   transition: border-color 0.15s ease;
 }
 
+/* All four labels stay accent-colored at all times now — reverted back
+   from the "neutral until active" pass, per explicit request ("should be
+   in orange else people might miss the buttons"). The underline alone
+   now carries the active/inactive distinction. */
 .tab-label {
   font-family: var(--font-ui);
   font-size: 0.7rem;
   font-weight: 600;
   letter-spacing: 0.05em;
   text-transform: uppercase;
-  color: var(--ink-faint);
+  color: var(--accent);
   transition: color 0.15s ease;
 }
 
-.tab:hover .tab-label {
-  color: var(--ink);
+.tab:hover {
+  border-bottom-color: rgba(188, 58, 20, 0.35);
 }
 
 .tab.is-active {
@@ -251,7 +243,6 @@ body {
 }
 
 .tab.is-active .tab-label {
-  color: var(--accent);
   font-weight: 700;
 }
 
@@ -264,6 +255,13 @@ body {
   .brand-sub {
     text-align: left;
     max-width: none;
+  }
+
+  /* Mobile stacks the brand differently than desktop (narrower column,
+     tighter wraps), which put "Classified" right across the subject's
+     chin instead of his wrist — shift the text down further here only. */
+  .hero-text {
+    padding-top: 21%;
   }
 }
 
