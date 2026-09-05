@@ -1213,87 +1213,14 @@ main.wrap {
 
 /* ---------- timeline ---------- */
 
-.timeline-frozen-wrap {
-  display: flex;
-  align-items: stretch;
+.tl-lg-chart-wrap {
   border: 1px solid var(--rule-solid);
   border-radius: var(--radius);
   background: var(--panel);
-  overflow: hidden;
-}
-
-.timeline-label-col {
-  flex-shrink: 0;
-  width: 168px;
-  padding: 16px 8px 16px 12px;
-  box-sizing: border-box;
-  border-right: 1px solid var(--rule-solid);
-  background: var(--panel);
-  z-index: 1;
-}
-
-.timeline-label-header {
-  flex-shrink: 0;
-}
-
-.timeline-label-row {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  gap: 3px;
-  height: 32px;
-  width: 100%;
-  padding: 0;
-  background: none;
-  border: none;
-  text-align: left;
-  cursor: pointer;
-  font-family: inherit;
-}
-
-.timeline-label-row:hover .timeline-label-name {
-  color: var(--accent);
-}
-
-.timeline-label-name {
-  font-family: var(--font-ui);
-  font-size: 11.5px;
-  font-weight: 700;
-  color: var(--ink);
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  transition: color 0.15s ease;
-}
-
-.timeline-label-branch {
-  align-self: flex-start;
-  display: inline-flex;
-  align-items: center;
-  gap: 3px;
-  font-family: var(--font-mono);
-  font-size: 7.5px;
-  font-weight: 700;
-  letter-spacing: 0.03em;
-  color: var(--ink-soft);
-}
-
-.timeline-label-branch::before {
-  content: "";
-  width: 5px;
-  height: 5px;
-  background: var(--accent);
-  flex-shrink: 0;
-}
-
-.timeline-scroll-area {
-  flex: 1;
-  min-width: 0;
   overflow-x: auto;
-  padding: 16px clamp(0.75rem, 3vw, 1.5rem) 16px 10px;
 }
 
-.timeline-svg {
+.tl-lg-svg {
   display: block;
 }
 
@@ -1305,16 +1232,61 @@ main.wrap {
   fill: var(--ink);
 }
 
-.tl-era-group {
+.tl-lg-era-band {
   cursor: help;
 }
 
-.tl-era-group rect {
-  transition: filter 0.15s ease;
+.tl-lg-node-box {
+  fill: var(--panel);
+  stroke: var(--ink);
+  stroke-width: 1;
 }
 
-.tl-era-group:hover rect {
-  filter: brightness(0.92);
+.tl-lg-node-box.is-standalone {
+  stroke: var(--ink-faint);
+  stroke-dasharray: 3 3;
+}
+
+.tl-lg-node-name {
+  font-family: var(--font-display);
+  text-transform: uppercase;
+  fill: var(--ink);
+}
+
+.tl-lg-node-era {
+  font-family: var(--font-mono);
+  font-weight: 700;
+  fill: var(--ink-faint);
+}
+
+.tl-lg-node {
+  cursor: pointer;
+}
+
+.tl-lg-node:hover .tl-lg-node-box {
+  stroke-width: 1.6;
+}
+
+.tl-lg-connector {
+  fill: none;
+  stroke: var(--ink);
+  stroke-width: 1.5;
+}
+
+.tl-lg-connector-dot {
+  fill: var(--accent);
+}
+
+.tl-lg-era-sep {
+  stroke: var(--rule-solid);
+  stroke-width: 1;
+}
+
+.tl-lg-strip-icon {
+  fill: none;
+  stroke: var(--ink);
+  stroke-width: 1.6;
+  opacity: 0.18;
 }
 
 .tl-era-tooltip {
@@ -1369,87 +1341,6 @@ main.wrap {
 
 .tl-era-tooltip::after {
   display: none;
-}
-
-.tl-mark-label {
-  font-family: var(--font-mono);
-  font-size: 10px;
-  font-weight: 700;
-  fill: var(--ink-faint);
-}
-
-.tl-gridline {
-  stroke: var(--rule);
-  stroke-width: 1;
-  stroke-dasharray: 3 3;
-}
-
-.tl-bar {
-  cursor: pointer;
-  /* fill-box anchors scaleX's origin to the rect's own left edge (its
-     start date) rather than the SVG viewport's origin — growing in place
-     instead of from x=0. */
-  transform-box: fill-box;
-  transform-origin: left center;
-  transition: filter 0.15s ease, transform 0.55s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.15s ease;
-}
-
-.tl-bar:hover {
-  filter: brightness(1.15);
-}
-
-/* Draw-in: bars render at full width/position via the SVG attributes as
-   always, and this class scales the rect to zero width from its own left
-   edge; removing the class once the Timeline tab is first opened animates
-   it back to scaleX(1). transform, not width, so the browser composites
-   this instead of running layout on every frame. */
-.tl-bar.tl-bar--enter {
-  transform: scaleX(0);
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .tl-bar {
-    transition: filter 0.15s ease, opacity 0.15s ease;
-  }
-}
-
-.timeline-frozen-wrap.is-hovering .tl-row {
-  opacity: 0.35;
-  transition: opacity 0.15s ease;
-}
-
-.timeline-frozen-wrap.is-hovering .tl-row.tl-row--highlight {
-  opacity: 1;
-}
-
-.timeline-label-row {
-  transition: opacity 0.15s ease, color 0.15s ease;
-}
-
-.timeline-frozen-wrap.is-hovering .timeline-label-row {
-  opacity: 0.45;
-}
-
-.timeline-frozen-wrap.is-hovering .timeline-label-row.is-highlighted {
-  opacity: 1;
-}
-
-.tl-bar-label-inside {
-  font-family: var(--font-mono);
-  font-size: 10px;
-  font-weight: 700;
-  fill: var(--panel);
-}
-
-.tl-bar-label-outside {
-  font-family: var(--font-mono);
-  font-size: 10px;
-  font-weight: 700;
-  fill: var(--ink-soft);
-}
-
-.tl-bar-pin {
-  fill: var(--accent);
 }
 
 /* ---------- compare ---------- */
