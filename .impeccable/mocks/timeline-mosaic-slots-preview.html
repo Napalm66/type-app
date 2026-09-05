@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<title>Era Mosaic Slots Preview</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Anton&family=JetBrains+Mono:wght@400;500;700&display=swap" />
+<style>
+  :root {
+    --paper: #f0ede5; --panel: #ffffff; --ink: #004643; --ink-soft: #2e5c59; --ink-faint: #4d6a67;
+    --rule-solid: #d3dbd8; --accent: #bc3a14;
+    --font-ui: "Inter", system-ui, sans-serif; --font-display: "Anton", "Arial Narrow", sans-serif; --font-mono: "JetBrains Mono", monospace;
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--paper); font-family: var(--font-ui); padding: 2rem clamp(1.25rem, 4vw, 2.5rem) 6rem; color: var(--ink); }
+  h1 { font-family: var(--font-display); font-size: clamp(1.6rem, 3vw, 2.1rem); text-transform: uppercase; letter-spacing: 0.025em; margin: 0 0 0.5rem; }
+  .note { font-size: 0.9rem; color: var(--ink-soft); max-width: 78ch; margin: 0.5rem 0 1.5rem; line-height: 1.5; }
+  .note code { font-family: var(--font-mono); font-size: 0.85em; background: var(--panel); padding: 0.1em 0.3em; border: 1px solid var(--rule-solid); }
+  .row { display: flex; gap: 1.5rem; align-items: flex-start; margin-bottom: 2.5rem; flex-wrap: wrap; }
+  .era-demo { display: flex; flex-direction: column; }
+  .era-label { font-family: var(--font-mono); font-size: 0.68rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.04em; color: var(--ink-faint); margin-bottom: 0.4rem; }
+  svg { display: block; }
+  .mosaic-tile { fill: var(--panel); stroke: var(--ink); stroke-width: 1; }
+  .slot-label { font-family: var(--font-mono); fill: var(--ink); text-anchor: middle; }
+  .slot-size { font-family: var(--font-mono); fill: var(--ink-faint); text-anchor: middle; }
+</style>
+</head>
+<body>
+
+  <h1>Era mosaic — image slot map</h1>
+  <p class="note">Each tile below is one image slot, named <code>era-{slug}-{n}.jpg</code> — slot 1 is always the largest/"hero" tile for that era, slots 2+ are the progressively smaller supporting tiles the recursive split cascades into. Sized to the era's <strong>opened</strong> (widest) state, since that's the largest any tile ever renders at — the same image scales down cleanly for the narrower resting width, so one square master per slot covers both states via crop-to-fill.</p>
+
+<script>
+  const ERAS = [
+    { name: "Romanesque", slug: "romanesque" },
+    { name: "Gothic", slug: "gothic" },
+    { name: "Renaissance", slug: "renaissance" },
+    { name: "Baroque", slug: "baroque" },
+    { name: "Classicism", slug: "classicism" },
+    { name: "Romanticism", slug: "romanticism" },
+    { name: "Art Nouveau", slug: "art-nouveau" },
+    { name: "Modernism", slug: "modernism" },
+    { name: "Postmodernism", slug: "postmodernism" },
+    { name: "Digital & Variable Age", slug: "digital-variable-age" },
+  ];
+
+  function seededRandom(seedStr) {
+    let seed = 0;
+    for (let i = 0; i < seedStr.length; i++) seed = (seed * 31 + seedStr.charCodeAt(i)) >>> 0;
+    return function () {
+      seed = (seed * 1664525 + 1013904223) >>> 0;
+      return seed / 4294967296;
+    };
+  }
+
+  const MIN_TILE = 40;
+  const GAP = 3;
+  const MAX_DEPTH = 3; // -> up to 4 tiles (slots 1-4) at the widest state
+
+  function splitRect(rect, depth, rand) {
+    const { x, y, w, h } = rect;
+    if (depth <= 0 || w < MIN_TILE * 2 || h < MIN_TILE * 2) return [rect];
+    const vertical = w >= h;
+    const ratio = rand() < 0.5 ? 0.3 + rand() * 0.12 : 0.58 + rand() * 0.12;
+    let a, b;
+    if (vertical) {
+      const w1 = w * ratio;
+      a = { x, y, w: w1, h }; b = { x: x + w1, y, w: w - w1, h };
+    } else {
+      const h1 = h * ratio;
+      a = { x, y, w, h: h1 }; b = { x, y: y + h1, w, h: h - h1 };
+    }
+    const [hero, rest] = ratio < 0.5 ? [b, a] : [a, b];
+    return [hero, ...splitRect(rest, depth - 1, rand)];
+  }
+
+  function mosaicSVG(era, w, h) {
+    const rand = seededRandom(era.name);
+    const tiles = splitRect({ x: 0, y: 0, w, h }, MAX_DEPTH, rand);
+    const tileMarkup = tiles.map((t, i) => {
+      const inset = GAP / 2;
+      const x = t.x + inset, y = t.y + inset, tw = t.w - GAP, th = t.h - GAP;
+      if (tw <= 0 || th <= 0) return "";
+      const cx = x + tw / 2, cy = y + th / 2;
+      const canLabel = tw > 50 && th > 30;
+      return `
+        <rect x="${x}" y="${y}" width="${tw}" height="${th}" class="mosaic-tile" />
+        ${canLabel ? `
+          <text x="${cx}" y="${cy - 4}" class="slot-label" font-size="11" font-weight="700">${era.slug}-${i + 1}</text>
+          <text x="${cx}" y="${cy + 10}" class="slot-size" font-size="9">${Math.round(tw)}×${Math.round(th)}</text>
+        ` : ""}
+      `;
+    }).join("");
+    return `<svg viewBox="0 0 ${w} ${h}" width="${w}" height="${h}">${tileMarkup}</svg>`;
+  }
+
+  const OPEN_W = 480, H = 260;
+  let html = '<div class="row">';
+  ERAS.forEach((era) => {
+    html += `<div class="era-demo"><span class="era-label">${era.name}</span>${mosaicSVG(era, OPEN_W, H)}</div>`;
+  });
+  html += "</div>";
+  document.body.insertAdjacentHTML("beforeend", html);
+</script>
+
+</body>
+</html>

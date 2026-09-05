@@ -1,0 +1,446 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<title>Timeline Lineage Preview</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Anton&family=JetBrains+Mono:wght@400;500;700&display=swap" />
+<style>
+  :root {
+    --paper: #f0ede5;
+    --panel: #ffffff;
+    --ink: #004643;
+    --ink-soft: #2e5c59;
+    --ink-faint: #4d6a67;
+    --rule-solid: #d3dbd8;
+    --rule-dashed: rgba(0, 70, 67, 0.22);
+    --accent: #bc3a14;
+    --font-ui: "Inter", system-ui, sans-serif;
+    --font-display: "Anton", "Arial Narrow", sans-serif;
+    --font-mono: "JetBrains Mono", monospace;
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--paper); font-family: var(--font-ui); padding: 2rem clamp(1.25rem, 4vw, 2.5rem) 6rem; color: var(--ink); }
+  h1 { font-family: var(--font-display); font-size: clamp(1.6rem, 3vw, 2.1rem); text-transform: uppercase; letter-spacing: 0.025em; margin: 0 0 0.5rem; }
+  p.note { color: var(--ink-soft); font-size: 0.92rem; max-width: 70ch; margin: 0 0 2rem; }
+  .legend { display: flex; gap: 1.5rem; flex-wrap: wrap; margin-bottom: 1.5rem; font-family: var(--font-mono); font-size: 0.68rem; text-transform: uppercase; letter-spacing: 0.04em; color: var(--ink-faint); }
+  .legend span { display: inline-flex; align-items: center; gap: 0.4rem; }
+  .legend i { width: 10px; height: 10px; display: inline-block; }
+  .chart-wrap { overflow-x: auto; border: 1px solid var(--rule-solid); background: var(--panel); }
+  svg { display: block; }
+  .lg-node-box { fill: var(--panel); stroke: var(--ink); stroke-width: 1; }
+  .lg-node-box.is-standalone { stroke: var(--ink-faint); stroke-dasharray: 3 3; }
+  .lg-node-name { font-family: var(--font-display); text-transform: uppercase; fill: var(--ink); }
+  .lg-node-era { font-family: var(--font-mono); font-weight: 700; fill: var(--ink-faint); }
+  .lg-connector { fill: none; stroke: var(--ink); stroke-width: 1.5; }
+  .lg-connector-dot { fill: var(--accent); }
+  .lg-axis-line { stroke: var(--rule-dashed); stroke-width: 1; stroke-dasharray: 3 3; }
+  .lg-axis-label { font-family: var(--font-mono); font-size: 10px; fill: var(--ink-faint); }
+  .lg-era-label { font-family: var(--font-mono); font-weight: 700; letter-spacing: 0.03em; fill: var(--ink); }
+  .lg-era-sep { stroke: var(--rule-solid); stroke-width: 1; }
+  .lg-strip-icon { fill: none; stroke: var(--ink); stroke-width: 1.6; opacity: 0.18; }
+  .lg-era-band { cursor: pointer; }
+  /* Plain CSS :hover for a click affordance — recalculated fresh by the
+     browser off the live DOM every time, so (unlike JS-driven state) it
+     can't fight a full SVG replacement mid-interaction. */
+  .lg-era-band:not(.is-open):hover rect.lg-era-band-fill { filter: brightness(0.96); }
+</style>
+</head>
+<body>
+
+  <h1>Timeline — lineage tree (concept, with era bands + watermark placeholders)</h1>
+  <p class="note">Same chronological x-axis as the current Gantt-style Timeline. Era bands (Romanesque through Digital &amp; Variable Age — same names/dates/colors as the current Timeline) now run the full height, filled with equal-width vertical strips that fade to transparent toward the base — dissolving into the era's own color rather than ending on a hard edge — where real black-and-white era photos will drop in once supplied. Each era gets as many strips as its current width comfortably fits (one when narrow, several when a fisheye-opened era gets room), always equal width within that era. At rest, every era gets an equal share of the width, regardless of how long it actually lasted — a clean, uniform starting layout where every label fits on one line. <strong>Click</strong> an era band to open it: it expands to a fixed larger share of the chart and every other era compresses proportionally by its own real duration to make room — a true fisheye that reveals which eras actually ran long or short. Every classification box and connector shares that same distorted x-axis, so the lineage tree redistorts in sync. Click the open era again (or click a different one to switch directly to it) to close; closing back down to nothing open returns the scroll position to wherever it was before you opened the first one. This replaced an earlier hover-to-expand version — hovering merely to read a label while passing the cursor across the chart was triggering the same full redistortion by accident, which click fixes by requiring a deliberate action. Classification node names never wrap — each node's box extends past its natural date-driven width to fit its full name, pushing later nodes in the same lane over to make room.</p>
+
+  <div class="legend">
+    <span><i style="background:var(--ink);"></i> Solid border — has lineage connections</span>
+    <span><i style="border:1px dashed var(--ink-faint); background:none;"></i> Dashed — standalone, no documented link</span>
+    <span><i style="border:1px dashed var(--ink); background:none; opacity:0.4;"></i> Vertical strips, fading at the base — placeholder for real B&amp;W era photos</span>
+  </div>
+
+  <div class="chart-wrap">
+    <svg id="lg-svg"></svg>
+  </div>
+
+<script>
+  const DOMAIN_START = 1100, DOMAIN_END = 2026;
+  const CHART_WIDTH = 1700;
+  const LANE_HEIGHT = 56;
+  const NODE_HEIGHT = 30;
+  const ERA_BAND_TOP_PAD = 30;
+  const PAD_BOTTOM = 20, PAD_LEFT = 8, PAD_RIGHT = 8;
+
+  // A single-hue ramp of tints and shades of the app's own ink teal
+  // (#004643) — chronologically deepening from a pale tint at the
+  // earliest era to a rich, near-full-strength shade at the most recent
+  // — instead of a different hue per era. Keeps era bands visually part
+  // of the same "Measured Document" identity rather than reading as a
+  // rainbow legend. Each era's `alpha` is its position in that ramp;
+  // opening an era swaps its hue to the app's accent coral at that exact
+  // same alpha, so the highlighted band reads as "this one, lit up" —
+  // same depth in the ramp, different hue — rather than an unrelated
+  // color jumping in.
+  const TEAL_RGB = "0, 70, 67";
+  const ACCENT_RGB = "188, 58, 20";
+  function eraColor(era, isOpen) {
+    return `rgba(${isOpen ? ACCENT_RGB : TEAL_RGB}, ${era.alpha})`;
+  }
+
+  const ART_PERIODS = [
+    { name: "Romanesque", start: 1000, end: 1150, alpha: 0.16 },
+    { name: "Gothic", start: 1150, end: 1450, alpha: 0.22 },
+    { name: "Renaissance", start: 1450, end: 1600, alpha: 0.28 },
+    { name: "Baroque", start: 1600, end: 1750, alpha: 0.34 },
+    { name: "Classicism", start: 1750, end: 1815, alpha: 0.40 },
+    { name: "Romanticism", start: 1815, end: 1900, alpha: 0.46 },
+    { name: "Art Nouveau", start: 1900, end: 1910, alpha: 0.50 },
+    { name: "Modernism", start: 1910, end: 1970, alpha: 0.54 },
+    { name: "Postmodernism", start: 1970, end: 2000, alpha: 0.58 },
+    { name: "Digital & Variable Age", start: 2000, end: DOMAIN_END, alpha: 0.64 },
+  ];
+
+  // id, name, start, end, lane, standalone
+  const NODES = [
+    { id: "blackletter", name: "Blackletter", start: 1150, end: 1500, lane: 0, standalone: true },
+    { id: "venetian", name: "Venetian Oldstyle", start: 1470, end: 1500, lane: 1 },
+    { id: "garalde", name: "Garalde Oldstyle", start: 1495, end: 1700, lane: 1 },
+    { id: "transitional", name: "Transitional", start: 1700, end: 1790, lane: 1 },
+    { id: "modern", name: "Modern (Didone)", start: 1790, end: 1820, lane: 1 },
+    { id: "slab", name: "Slab Serif (Egyptian)", start: 1815, end: 1934, lane: 2 },
+    { id: "grotesque", name: "Grotesque Sans", start: 1815, end: 1900, lane: 3 },
+    { id: "neo-grotesque", name: "Neo-Grotesque", start: 1950, end: 1970, lane: 3 },
+    { id: "geometric", name: "Geometric Sans", start: 1925, end: 1970, lane: 4 },
+    { id: "humanist-sans", name: "Humanist Sans", start: 1916, end: 1976, lane: 5 },
+    { id: "glyphic", name: "Glyphic / Latin", start: 1900, end: 1940, lane: 6, standalone: true },
+    { id: "script", name: "Script", start: 1700, end: 1965, lane: 7, standalone: true },
+    { id: "display", name: "Display / Decorative", start: 1803, end: 2000, lane: 8, standalone: true },
+  ];
+
+  const EDGES = [
+    ["venetian", "garalde"], ["garalde", "transitional"], ["transitional", "modern"],
+    ["modern", "slab"], ["modern", "grotesque"],
+    ["grotesque", "neo-grotesque"], ["grotesque", "geometric"], ["grotesque", "humanist-sans"],
+  ];
+
+  const byId = Object.fromEntries(NODES.map((n) => [n.id, n]));
+  const laneCount = Math.max(...NODES.map((n) => n.lane)) + 1;
+  const chartTop = ERA_BAND_TOP_PAD;
+  const lanesTop = chartTop + 26;
+  const svgHeight = lanesTop + laneCount * LANE_HEIGHT + PAD_BOTTOM;
+  const innerWidth = CHART_WIDTH - PAD_LEFT - PAD_RIGHT;
+
+  const laneGroups = {};
+  NODES.forEach((n) => { (laneGroups[n.lane] = laneGroups[n.lane] || []).push(n); });
+
+  let measureCtx = document.createElement("canvas").getContext("2d");
+  function textWidth(text, font) {
+    measureCtx.font = font;
+    return measureCtx.measureText(text).width;
+  }
+
+  // Each era's true chronological span, clamped to the chart's domain.
+  const eraSpans = ART_PERIODS.map((era) => ({
+    era,
+    start: Math.max(era.start, DOMAIN_START),
+    end: Math.min(era.end, DOMAIN_END),
+  }));
+  eraSpans.forEach((e) => { e.duration = e.end - e.start; });
+  const totalDuration = eraSpans.reduce((sum, e) => sum + e.duration, 0);
+
+  // Hovering an era gives it a fixed, generous share of the total width;
+  // every other era compresses, keeping its own relative proportions,
+  // to make room — a true fisheye, not just a bigger label.
+  const EXPANDED_SHARE = 0.34;
+
+  // Returns { widths, lefts, scale(year) } for the current open state.
+  // scale(year) is piecewise-linear within whichever era segment the
+  // year falls in, so classification boxes/connectors that span an era
+  // boundary still interpolate smoothly across the distorted layout.
+  function computeLayout(openIndex) {
+    let widths;
+    if (openIndex == null) {
+      // Equal width at rest, regardless of real duration — a clean,
+      // uniform starting layout. Opening an era is what reveals which
+      // eras actually ran long or short, via the compression below.
+      widths = eraSpans.map(() => innerWidth / eraSpans.length);
+    } else {
+      const opened = eraSpans[openIndex];
+      const openedWidth = EXPANDED_SHARE * innerWidth;
+      const remaining = innerWidth - openedWidth;
+      const otherDuration = totalDuration - opened.duration;
+      widths = eraSpans.map((e, i) =>
+        i === openIndex ? openedWidth : (e.duration / otherDuration) * remaining
+      );
+    }
+    const lefts = [];
+    let cursor = PAD_LEFT;
+    widths.forEach((w) => { lefts.push(cursor); cursor += w; });
+
+    function scale(year) {
+      const clamped = Math.min(Math.max(year, DOMAIN_START), DOMAIN_END);
+      let i = eraSpans.findIndex((e) => clamped >= e.start && clamped <= e.end);
+      if (i === -1) i = clamped < eraSpans[0].start ? 0 : eraSpans.length - 1;
+      const e = eraSpans[i];
+      const t = e.duration === 0 ? 0 : (clamped - e.start) / e.duration;
+      return lefts[i] + t * widths[i];
+    }
+    return { widths, lefts, scale };
+  }
+
+  function laneY(lane) {
+    return lanesTop + lane * LANE_HEIGHT + LANE_HEIGHT / 2;
+  }
+
+  // Every node's name must render on one line — extend its box beyond
+  // its natural date-driven width if the text needs more room, rather
+  // than wrapping. Processed per lane, in chronological order, so a
+  // widened node pushes the next node in the same lane right instead of
+  // overlapping it (later nodes keep their own true width, just shifted).
+  const NAME_FONT = "700 11px Anton, sans-serif";
+  const NAME_PAD = 16;
+  const GAP = 3;
+  function layoutLane(nodes, scale) {
+    let prevRight = -Infinity;
+    nodes.sort((a, b) => a.start - b.start).forEach((n) => {
+      const naturalLeft = scale(n.start);
+      const naturalWidth = Math.max(scale(n.end) - naturalLeft, 90);
+      const requiredWidth = textWidth(n.name.toUpperCase(), NAME_FONT) + NAME_PAD;
+      n.boxWidth = Math.max(naturalWidth, requiredWidth);
+      n.boxLeft = Math.max(naturalLeft, prevRight + GAP);
+      prevRight = n.boxLeft + n.boxWidth;
+    });
+  }
+
+  // Splits `text` into at most two lines that fit `maxWidth`, breaking at
+  // the space closest to the midpoint. Returns [line] if it already fits.
+  function wrapTwoLines(text, font, maxWidth) {
+    if (textWidth(text, font) <= maxWidth) return [text];
+    const words = text.split(" ");
+    if (words.length < 2) return [text];
+    let bestSplit = 1;
+    let bestDiff = Infinity;
+    for (let i = 1; i < words.length; i++) {
+      const line1 = words.slice(0, i).join(" ");
+      const line2 = words.slice(i).join(" ");
+      const diff = Math.abs(textWidth(line1, font) - textWidth(line2, font));
+      if (diff < bestDiff) { bestDiff = diff; bestSplit = i; }
+    }
+    return [words.slice(0, bestSplit).join(" "), words.slice(bestSplit).join(" ")];
+  }
+
+  function buildMarks() {
+    const marks = [];
+    for (let y = DOMAIN_START; y < DOMAIN_END; y += 100) marks.push(y);
+    marks.push(DOMAIN_END);
+    return marks;
+  }
+
+  function axisSVG(scale) {
+    return buildMarks().map((y) => {
+      const xPos = scale(y);
+      return `<line x1="${xPos}" y1="${chartTop}" x2="${xPos}" y2="${svgHeight - PAD_BOTTOM}" class="lg-axis-line" />`;
+    }).join("");
+  }
+
+  // Deterministic PRNG seeded from a string (era name) — same era always
+  // produces the same mosaic composition "shape", stable across resizes
+  // (equal-width at rest vs. fisheye-expanded), rather than reshuffling.
+  function seededRandom(seedStr) {
+    let seed = 0;
+    for (let i = 0; i < seedStr.length; i++) seed = (seed * 31 + seedStr.charCodeAt(i)) >>> 0;
+    return function () {
+      seed = (seed * 1664525 + 1013904223) >>> 0;
+      return seed / 4294967296;
+    };
+  }
+
+  // Target width for one vertical strip — an era column this wide or
+  // narrower gets a single strip; wider columns split into more, always
+  // equal width within that era (never a mismatched mosaic of sizes).
+  const STRIP_TARGET_WIDTH = 130;
+  const STRIP_GAP = 3;
+
+  // A generic "image placeholder" glyph: a frame with a mountain + sun,
+  // the universal stand-in icon — clearly not final art, just a marker
+  // for where a real black-and-white era photo will be dropped in.
+  function stripIcon(cx, cy, size) {
+    const h = size, w = size * 1.3;
+    const x0 = cx - w / 2, y0 = cy - h / 2;
+    return `
+      <circle cx="${x0 + w * 0.28}" cy="${y0 + h * 0.32}" r="${h * 0.09}" class="lg-strip-icon" />
+      <path d="M ${x0} ${y0 + h * 0.82} L ${x0 + w * 0.32} ${y0 + h * 0.48} L ${x0 + w * 0.55} ${y0 + h * 0.68} L ${x0 + w * 0.75} ${y0 + h * 0.4} L ${x0 + w} ${y0 + h * 0.82}" class="lg-strip-icon" />
+    `;
+  }
+
+  // One vertical placeholder strip: solid for most of its height, then
+  // fades to fully transparent toward the bottom so it dissolves into
+  // the era's own color wash underneath rather than ending on a hard
+  // edge. Once real photos are supplied, this becomes an <image> at the
+  // same position, masked by the same gradient for the same fade.
+  function stripSVG(era, eraIndex, stripIndex, x, y, w, h, activeColor) {
+    const rand = seededRandom(era.name + "-" + stripIndex);
+    const tone = rand();
+    const color = tone < 0.4 ? "var(--panel)" : tone < 0.75 ? "var(--paper)" : activeColor;
+    const gradId = `strip-fade-${eraIndex}-${stripIndex}`;
+    const showIcon = w > 40 && h > 140;
+    return `
+      <defs>
+        <linearGradient id="${gradId}" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stop-color="${color}" stop-opacity="1" />
+          <stop offset="62%" stop-color="${color}" stop-opacity="1" />
+          <stop offset="100%" stop-color="${color}" stop-opacity="0" />
+        </linearGradient>
+      </defs>
+      <rect x="${x}" y="${y}" width="${w}" height="${h}" fill="url(#${gradId})" />
+      ${showIcon ? stripIcon(x + w / 2, y + h * 0.3, Math.min(w, h) * 0.28) : ""}
+    `;
+  }
+
+  // Splits the era band's full-height column into N equal-width vertical
+  // strips — one strip if the column is narrow, more the wider it gets
+  // (recomputed fresh at the current width, so it degrades gracefully as
+  // the fisheye compresses other eras down to a sliver).
+  function mosaicSVG(era, eraIndex, x, y, w, h, activeColor) {
+    const n = Math.max(1, Math.round(w / STRIP_TARGET_WIDTH));
+    const stripW = w / n;
+    let out = "";
+    for (let i = 0; i < n; i++) {
+      const sx = x + i * stripW + STRIP_GAP / 2;
+      const sw = stripW - STRIP_GAP;
+      if (sw <= 0) continue;
+      out += stripSVG(era, eraIndex, i, sx, y, sw, h, activeColor);
+    }
+    return out;
+  }
+
+  function eraBandSVG(era, i, left, width, isOpen) {
+    const bandBottom = svgHeight - PAD_BOTTOM;
+    const bandHeight = bandBottom - chartTop;
+    const nameFont = "700 10px 'JetBrains Mono', monospace";
+    const label = era.name.toUpperCase();
+    const lines = wrapTwoLines(label, nameFont, width - 8);
+    const labelSVG = lines.map((line, li) => `<text x="${left + width / 2}" y="${chartTop + 12 + li * 11}" class="lg-era-label" font-size="10" text-anchor="middle">${line}</text>`).join("");
+
+    // Opened era swaps hue to the accent coral at its own ramp depth
+    // (same alpha); every other era stays on the teal ramp.
+    const fillColor = eraColor(era, isOpen);
+    const mosaicTop = chartTop + 26;
+    const mosaic = width > 40 ? mosaicSVG(era, i, left, mosaicTop, width, bandBottom - mosaicTop, fillColor) : "";
+
+    return `
+      <g class="lg-era-band ${isOpen ? "is-open" : ""}" data-era-index="${i}">
+        <rect x="${left}" y="${chartTop}" width="${width}" height="${bandHeight}" fill="${fillColor}" class="lg-era-band-fill" />
+        ${mosaic}
+        ${labelSVG}
+        <line x1="${left}" y1="${chartTop}" x2="${left}" y2="${bandBottom}" class="lg-era-sep" />
+      </g>
+    `;
+  }
+
+  function nodeSVG(n) {
+    const left = n.boxLeft, width = n.boxWidth;
+    const cy = laneY(n.lane);
+    const top = cy - NODE_HEIGHT / 2;
+    const label = n.name.toUpperCase();
+    return `
+      <g class="lg-node" data-id="${n.id}">
+        <rect x="${left}" y="${top}" width="${width}" height="${NODE_HEIGHT}" class="lg-node-box ${n.standalone ? "is-standalone" : ""}" />
+        <text x="${left + width / 2}" y="${cy - 2}" class="lg-node-name" font-size="11" text-anchor="middle">${label}</text>
+        <text x="${left + width / 2}" y="${cy + 11}" class="lg-node-era" font-size="8" text-anchor="middle">${n.start}–${n.end === DOMAIN_END ? "present" : n.end}</text>
+      </g>
+    `;
+  }
+
+  function connectorSVG(parentId, childId) {
+    const p = byId[parentId], c = byId[childId];
+    const px = p.boxLeft + p.boxWidth, py = laneY(p.lane);
+    const cx = c.boxLeft, cy = laneY(c.lane);
+    if (p.lane === c.lane) {
+      return `<path d="M ${px} ${py} L ${cx} ${cy}" class="lg-connector" /><circle cx="${px}" cy="${py}" r="2.5" class="lg-connector-dot" />`;
+    }
+    const midX = px + 14;
+    return `
+      <path d="M ${px} ${py} L ${midX} ${py} L ${midX} ${cy} L ${cx} ${cy}" class="lg-connector" />
+      <circle cx="${px}" cy="${py}" r="2.5" class="lg-connector-dot" />
+    `;
+  }
+
+  let openEraIndex = null;
+  // The scroll position from just before any era was opened — restored
+  // when the user closes back down to no era open, per explicit request
+  // ("upon close, go back to its last position"). Captured once on the
+  // closed -> open transition, not re-captured while swapping between
+  // eras, so switching Gothic -> Renaissance -> closed still lands back
+  // where the user actually started, not wherever Renaissance happened
+  // to leave the scroll position.
+  let savedScrollLeft = null;
+
+  function render(openIndex) {
+    const { widths, lefts, scale } = computeLayout(openIndex);
+    Object.values(laneGroups).forEach((nodes) => layoutLane(nodes, scale));
+
+    const eraBandsSVG = eraSpans.map((e, i) =>
+      eraBandSVG(e.era, i, lefts[i], widths[i], i === openIndex)
+    ).join("");
+
+    const svgMarkup = `
+      <svg id="lg-svg" viewBox="0 0 ${CHART_WIDTH} ${svgHeight}" width="${CHART_WIDTH}" height="${svgHeight}">
+        ${eraBandsSVG}
+        ${axisSVG(scale)}
+        ${EDGES.map((e) => connectorSVG(e[0], e[1])).join("")}
+        ${NODES.map(nodeSVG).join("")}
+      </svg>
+    `;
+
+    // Plain instant swap — document.startViewTransition() was tried here,
+    // but its ~0.4s crossfade overlaps into ghosting/double-text when a
+    // click follows quickly on the last one's heels (a new transition
+    // starts before the last one finishes). Correctness over animation
+    // for now; a real smooth transition needs updating each element's
+    // attributes in place rather than replacing the whole SVG.
+    document.getElementById("lg-svg").outerHTML = svgMarkup;
+
+    if (openIndex != null) {
+      // Opening (or switching to) an era: center it.
+      const newSvg = document.getElementById("lg-svg");
+      const renderScale = newSvg.getBoundingClientRect().width / CHART_WIDTH;
+      const centerSvgX = lefts[openIndex] + widths[openIndex] / 2;
+      const targetScroll = centerSvgX * renderScale - chartWrap.clientWidth / 2;
+      chartWrap.scrollTo({ left: targetScroll, behavior: "smooth" });
+    } else if (savedScrollLeft != null) {
+      // Closed back down to nothing open: return to where we started.
+      chartWrap.scrollTo({ left: savedScrollLeft, behavior: "smooth" });
+      savedScrollLeft = null;
+    }
+  }
+
+  // Click toggles: click the open era again (or anywhere outside any
+  // band while one is open) to close; click a different era to switch
+  // directly to it. A plain click is a single discrete event, so — unlike
+  // the continuous mouseover/mouseout this replaced — there's no risk of
+  // the browser's native hover re-evaluation firing against fresh DOM
+  // mid-interaction; delegation to the stable chart-wrap is purely for
+  // convenience here, not a robustness requirement.
+  const chartWrap = document.querySelector(".chart-wrap");
+  chartWrap.addEventListener("click", (e) => {
+    const band = e.target.closest(".lg-era-band");
+    const clickedIndex = band ? Number(band.dataset.eraIndex) : null;
+
+    if (clickedIndex === openEraIndex) {
+      // Re-clicking the open era, or clicking empty space: close.
+      openEraIndex = null;
+      render(null);
+      return;
+    }
+    if (openEraIndex == null) {
+      savedScrollLeft = chartWrap.scrollLeft;
+    }
+    openEraIndex = clickedIndex;
+    render(clickedIndex);
+  });
+
+  render(null);
+</script>
+
+</body>
+</html>

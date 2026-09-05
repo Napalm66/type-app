@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<title>Era Mosaic Preview</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Anton&family=JetBrains+Mono:wght@400;500;700&display=swap" />
+<style>
+  :root {
+    --paper: #f0ede5;
+    --panel: #ffffff;
+    --ink: #004643;
+    --ink-soft: #2e5c59;
+    --ink-faint: #4d6a67;
+    --rule-solid: #d3dbd8;
+    --accent: #bc3a14;
+    --font-ui: "Inter", system-ui, sans-serif;
+    --font-display: "Anton", "Arial Narrow", sans-serif;
+    --font-mono: "JetBrains Mono", monospace;
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--paper); font-family: var(--font-ui); padding: 2rem clamp(1.25rem, 4vw, 2.5rem) 6rem; color: var(--ink); }
+  h1 { font-family: var(--font-display); font-size: clamp(1.6rem, 3vw, 2.1rem); text-transform: uppercase; letter-spacing: 0.025em; margin: 0 0 0.5rem; }
+  .note { font-size: 0.92rem; color: var(--ink-soft); max-width: 78ch; margin: 0.5rem 0 1.5rem; line-height: 1.5; }
+  .note code { font-family: var(--font-mono); font-size: 0.85em; background: var(--panel); padding: 0.1em 0.3em; border: 1px solid var(--rule-solid); }
+  .rule { border: none; border-top: 1px solid var(--rule-solid); margin: 2rem 0; }
+  .row { display: flex; gap: 1.5rem; align-items: flex-end; margin-bottom: 2rem; flex-wrap: wrap; }
+  .era-demo { display: flex; flex-direction: column; }
+  .era-label { font-family: var(--font-mono); font-size: 0.68rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.04em; color: var(--ink-faint); margin-bottom: 0.4rem; }
+  svg { display: block; }
+  .mosaic-tile { stroke: var(--ink); stroke-width: 1; }
+  .mosaic-icon { fill: none; stroke: var(--ink); stroke-width: 1.3; opacity: 0.5; }
+</style>
+</head>
+<body>
+
+  <h1>Era mosaic — figure/ground rectangle subdivision</h1>
+  <p class="note">
+    Technique: recursive asymmetric splitting. Each band's area is cut in two at an uneven ratio (never 50/50 — that reads as a grid); one side is kept as a single larger "hero" tile, the other is cut again, and again, cascading into progressively smaller supporting tiles. Because each cut is an exact partition (not floating boxes), tiles always cover 100% of the area with zero gaps — separation between tiles is the 1px ink border alone, no shadow. Depth (how many times it keeps cutting) scales with the era's available width, so a wide era gets a rich cascade of 5-6 tiles and a narrow one stays to 1-2 — different counts per era, driven by space, not a fixed rule. Each era is seeded by its own name, so the same era always produces the same composition shape at a given width, rather than reshuffling randomly on every render — important since these bands resize live (equal-width at rest, fisheye-expanded on click).
+  </p>
+  <p class="note">Tonal variation on the placeholder tiles (alternating panel/paper/tinted fills) stands in for the actual variation real black-and-white photos would bring — once real photos are supplied, each tile becomes an <code>&lt;image&gt;</code> with this exact same size/position, cropped to fill via <code>preserveAspectRatio="xMidYMid slice"</code>.</p>
+
+  <hr class="rule" />
+
+  <div id="demo-rest"></div>
+  <p class="note"><strong>At rest</strong> — every era band is the same width (equal-share layout). Notice the mosaic still varies era to era: the seed comes from the era's name, not its width, so Gothic and Romanticism (both roughly the same width here) still produce distinct compositions.</p>
+
+  <hr class="rule" />
+
+  <div id="demo-open"></div>
+  <p class="note"><strong>One era opened</strong> (Gothic, simulating a click) — same seed, recomputed for the new, much wider available width: more depth, richer cascade, same "shape language" as its resting-state version just scaled up with more room to subdivide, not a different random layout.</p>
+
+<script>
+  const ERAS = [
+    { name: "Romanesque", color: "rgba(0, 70, 67, 0.35)" },
+    { name: "Gothic", color: "rgba(46, 92, 89, 0.35)" },
+    { name: "Renaissance", color: "rgba(90, 120, 80, 0.3)" },
+    { name: "Baroque", color: "rgba(140, 130, 70, 0.3)" },
+    { name: "Classicism", color: "rgba(160, 110, 70, 0.35)" },
+    { name: "Romanticism", color: "rgba(170, 90, 90, 0.35)" },
+    { name: "Modernism", color: "rgba(180, 75, 60, 0.35)" },
+    { name: "Postmodernism", color: "rgba(188, 58, 20, 0.35)" },
+  ];
+
+  // Deterministic PRNG seeded from a string (era name) — same era always
+  // produces the same composition "shape", independent of Math.random().
+  function seededRandom(seedStr) {
+    let seed = 0;
+    for (let i = 0; i < seedStr.length; i++) seed = (seed * 31 + seedStr.charCodeAt(i)) >>> 0;
+    return function () {
+      seed = (seed * 1664525 + 1013904223) >>> 0;
+      return seed / 4294967296;
+    };
+  }
+
+  const MIN_TILE = 32;
+  const GAP = 3;
+
+  // Recursively splits `rect` at an uneven ratio; keeps ONE side as a
+  // single hero tile and recurses only on the other, `depth` times.
+  // This is what produces "one big + a cascade of smaller" instead of a
+  // balanced grid of equal quadrants.
+  function splitRect(rect, depth, rand) {
+    const { x, y, w, h } = rect;
+    if (depth <= 0 || w < MIN_TILE * 2 || h < MIN_TILE * 2) return [rect];
+    const vertical = w >= h;
+    // Ratio pulled toward the extremes (0.3-0.42 or 0.58-0.7), away from
+    // center — an even split is exactly the "mechanical grid" look this
+    // is meant to avoid.
+    const ratio = rand() < 0.5 ? 0.3 + rand() * 0.12 : 0.58 + rand() * 0.12;
+    let a, b;
+    if (vertical) {
+      const w1 = w * ratio;
+      a = { x, y, w: w1, h };
+      b = { x: x + w1, y, w: w - w1, h };
+    } else {
+      const h1 = h * ratio;
+      a = { x, y, w, h: h1 };
+      b = { x, y: y + h1, w, h: h - h1 };
+    }
+    const [hero, rest] = ratio < 0.5 ? [b, a] : [a, b];
+    return [hero, ...splitRect(rest, depth - 1, rand)];
+  }
+
+  function tileSVG(rect, i, rand, eraColor) {
+    const inset = GAP / 2;
+    const x = rect.x + inset, y = rect.y + inset, w = rect.w - GAP, h = rect.h - GAP;
+    if (w <= 0 || h <= 0) return "";
+    // Tonal placeholder variety standing in for real photo variation.
+    const tone = rand();
+    const fill = tone < 0.4 ? "var(--panel)" : tone < 0.75 ? "var(--paper)" : eraColor;
+    const cx = x + w / 2, cy = y + h / 2;
+    const iconSize = Math.min(w, h) * 0.42;
+    const half = iconSize / 2;
+    const showIcon = w > 26 && h > 26;
+    return `
+      <rect x="${x}" y="${y}" width="${w}" height="${h}" fill="${fill}" class="mosaic-tile" />
+      ${showIcon ? `
+        <circle cx="${cx - half + iconSize * 0.26}" cy="${cy - half + iconSize * 0.28}" r="${iconSize * 0.09}" class="mosaic-icon" />
+        <path d="M ${cx - half} ${cy + half * 0.6} L ${cx - half + iconSize * 0.32} ${cy - half * 0.1} L ${cx - half + iconSize * 0.55} ${cy + half * 0.3} L ${cx + half * 0.45} ${cy - half * 0.25} L ${cx + half} ${cy + half * 0.6}" class="mosaic-icon" />
+      ` : ""}
+    `;
+  }
+
+  function mosaicSVG(era, w, h) {
+    const rand = seededRandom(era.name);
+    // Depth scales with available width: richer cascade when there's
+    // more room, degrading gracefully to 1-2 tiles when there isn't.
+    const depth = w > 500 ? 5 : w > 260 ? 4 : w > 140 ? 3 : w > 80 ? 1 : 0;
+    const tiles = splitRect({ x: 0, y: 0, w, h }, depth, rand);
+    const rand2 = seededRandom(era.name + "-fill");
+    return `<svg viewBox="0 0 ${w} ${h}" width="${w}" height="${h}">
+      ${tiles.map((t, i) => tileSVG(t, i, rand2, era.color)).join("")}
+    </svg>`;
+  }
+
+  // ---------- Demo: at rest (equal width) ----------
+  (function () {
+    const w = 168, h = 230;
+    let html = '<div class="row">';
+    ERAS.forEach((era) => {
+      html += `<div class="era-demo"><span class="era-label">${era.name}</span>${mosaicSVG(era, w, h)}</div>`;
+    });
+    html += "</div>";
+    document.getElementById("demo-rest").innerHTML = html;
+  })();
+
+  // ---------- Demo: Gothic opened wide ----------
+  (function () {
+    const openW = 560, restW = 90, h = 230;
+    let html = '<div class="row">';
+    ERAS.forEach((era) => {
+      const w = era.name === "Gothic" ? openW : restW;
+      html += `<div class="era-demo"><span class="era-label">${era.name}</span>${mosaicSVG(era, w, h)}</div>`;
+    });
+    html += "</div>";
+    document.getElementById("demo-open").innerHTML = html;
+  })();
+</script>
+
+</body>
+</html>

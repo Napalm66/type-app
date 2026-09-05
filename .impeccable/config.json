@@ -8,7 +8,10 @@
       ".impeccable/mocks/palette-explore-preview.html",
       ".impeccable/mocks/bold-orange-preview.html",
       ".impeccable/mocks/teal-palette-preview.html",
-      ".impeccable/mocks/era-color-preview.html"
+      ".impeccable/mocks/era-color-preview.html",
+      ".impeccable/mocks/timeline-lineage-preview.html",
+      ".impeccable/mocks/timeline-image-placement-preview.html",
+      ".impeccable/mocks/timeline-mosaic-preview.html"
     ],
     "ignoreValues": [
       {
