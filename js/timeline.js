@@ -577,9 +577,28 @@ function initTimeline(root, onOpenDetail) {
       const era = ART_PERIODS[Number(group.dataset.eraIndex)];
       if (!era) return;
       const html = `<strong>${era.tooltipName || era.name}</strong>${era.description}`;
-      group.addEventListener("mouseenter", (e) => placeNearCursor(e.clientX, e.clientY, html));
-      group.addEventListener("mousemove", (e) => placeNearCursor(e.clientX, e.clientY, html));
-      group.addEventListener("mouseleave", () => tooltip.classList.remove("is-visible"));
+      const key = `era-${group.dataset.eraIndex}`;
+
+      if (isTouchDevice) {
+        // Same tap-to-toggle as classification nodes below — there's no
+        // hover on touch, so this is the only way to reach the era
+        // tooltip at all.
+        group.addEventListener("click", (e) => {
+          e.stopPropagation();
+          const alreadyOpen = tooltip.classList.contains("is-visible") && tooltip.dataset.forId === key;
+          if (alreadyOpen) {
+            tooltip.classList.remove("is-visible");
+          } else {
+            placeAtRect(group, html);
+            tooltip.classList.add("tl-era-tooltip--era");
+            tooltip.dataset.forId = key;
+          }
+        });
+      } else {
+        group.addEventListener("mouseenter", (e) => placeNearCursor(e.clientX, e.clientY, html));
+        group.addEventListener("mousemove", (e) => placeNearCursor(e.clientX, e.clientY, html));
+        group.addEventListener("mouseleave", () => tooltip.classList.remove("is-visible"));
+      }
     });
 
     svg.querySelectorAll(".tl-lg-node").forEach((group) => {
