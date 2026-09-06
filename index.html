@@ -38,6 +38,7 @@
           <button class="tab is-active" role="tab" aria-selected="true" data-view="explore"><span class="tab-label">Explore</span></button>
           <button class="tab" role="tab" aria-selected="false" data-view="identify"><span class="tab-label">Identify</span></button>
           <button class="tab" role="tab" aria-selected="false" data-view="timeline"><span class="tab-label">Timeline</span></button>
+          <button class="tab" role="tab" aria-selected="false" data-view="anatomy"><span class="tab-label">Anatomy</span></button>
           <button class="tab" role="tab" aria-selected="false" data-view="compare"><span class="tab-label">Compare</span></button>
         </nav>
       </div>
@@ -75,6 +76,14 @@
       <div id="timeline-root"></div>
     </section>
 
+    <section id="view-anatomy" class="view" aria-labelledby="anatomy-heading">
+      <div class="view-intro">
+        <h2 id="anatomy-heading">Anatomy</h2>
+        <p>The vocabulary for reading letterforms — the parts and measurements this guide points to again and again, explained once, in general.</p>
+      </div>
+      <div id="anatomy-primer-root"></div>
+    </section>
+
     <section id="view-compare" class="view" aria-labelledby="compare-heading">
       <div class="view-intro">
         <h2 id="compare-heading">Compare side by side</h2>
@@ -100,6 +109,7 @@
   <script src="js/specimen.js"></script>
   <script src="js/explore.js"></script>
   <script src="js/anatomy.js"></script>
+  <script src="js/anatomy-primer.js"></script>
   <script src="js/magnifier.js"></script>
   <script src="js/detail.js"></script>
   <script src="js/identify.js"></script>

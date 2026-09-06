@@ -14,6 +14,7 @@ initExplore({
 
 initIdentify(document.getElementById("identify-root"), (id) => detail.open(id));
 initTimeline(document.getElementById("timeline-root"), (id) => detail.open(id));
+initAnatomyPrimer(document.getElementById("anatomy-primer-root"));
 initCompare(document.getElementById("compare-root"));
 
 // tab switching
@@ -36,5 +37,6 @@ tabs.forEach((tab) => {
     // section the visitor switches to.
     detail.close();
     document.querySelector(".tl-era-tooltip")?.classList.remove("is-visible");
+    document.querySelector(".anatomy-lens")?.classList.remove("is-visible");
   });
 });

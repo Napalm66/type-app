@@ -1059,6 +1059,36 @@ main.wrap {
   color: var(--ink-soft);
 }
 
+/* ---------- Anatomy primer (standalone view) ---------- */
+
+.anatomy-primer {
+  max-width: 720px;
+}
+
+.anatomy-primer-card {
+  background: var(--panel);
+  border: 1px solid var(--rule-solid);
+  border-radius: var(--radius);
+  padding: clamp(1.5rem, 4vw, 2.5rem);
+  margin-bottom: 1.5rem;
+}
+
+.anatomy-primer-image-wrap {
+  cursor: zoom-in;
+}
+
+.anatomy-primer-image {
+  display: block;
+  width: 100%;
+  height: auto;
+  border: 1px solid var(--rule-solid);
+  border-radius: var(--radius);
+}
+
+.anatomy-primer-glossary .visual-characteristics-heading {
+  margin-bottom: 0.75rem;
+}
+
 /* ---------- identify (quiz) ---------- */
 
 .quiz-card {
@@ -1499,6 +1529,8 @@ main.wrap {
 
 @media (max-width: 520px) {
   .tabs {
+    flex-wrap: wrap;
+    row-gap: 0.6rem;
     gap: clamp(0.85rem, 5vw, 1.5rem);
   }
 }
