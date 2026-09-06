@@ -9,17 +9,18 @@ function attachMagnifier(wrapEl, svgEl) {
   removeExistingLens();
   if (!wrapEl || !svgEl) return;
 
-  // Touch devices already have native pinch-to-zoom, and the lens's own
+  // Mobile devices already have native pinch-to-zoom, and the lens's own
   // touchstart handler used preventDefault() to implement tap-to-open,
   // which fought that native gesture. Skip the custom lens entirely there.
   //
-  // any-hover/any-pointer, not hover/pointer: on a hybrid touchscreen +
-  // mouse laptop, plain hover/pointer track whichever input was used most
-  // recently — touch the screen once and hover/pointer report none/coarse
-  // even with a mouse sitting right there. any-hover/any-pointer ask "does
-  // ANY attached input support this", which is the actual capability
-  // question we want, independent of what was last touched.
-  if (window.matchMedia("(any-hover: none) and (any-pointer: coarse)").matches) return;
+  // Viewport width, not hover/pointer capability: on some hybrid
+  // touchscreen + mouse laptops, Chrome reports no hoverable/fine input
+  // at all regardless of whether a working mouse is attached (hover,
+  // pointer, and even any-hover/any-pointer all say "none"/"coarse"),
+  // so capability media queries can't reliably distinguish "desktop" from
+  // "mobile" on that hardware. Width is what "desktop version" vs "mobile
+  // version" actually means in how this app is used and tested.
+  if (window.innerWidth <= 768) return;
 
   const lens = document.createElement("div");
   lens.className = "anatomy-lens";

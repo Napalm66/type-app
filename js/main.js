@@ -77,11 +77,8 @@ window.addEventListener(
     "font:11px/1.5 monospace;padding:8px 10px;border-radius:4px;max-width:90vw;white-space:pre;";
   box.textContent =
     "DEBUG\n" +
-    "hover:none = " + window.matchMedia("(hover: none)").matches + "\n" +
-    "pointer:coarse = " + window.matchMedia("(pointer: coarse)").matches + "\n" +
-    "any-hover:none = " + window.matchMedia("(any-hover: none)").matches + "\n" +
-    "any-pointer:coarse = " + window.matchMedia("(any-pointer: coarse)").matches + "\n" +
-    "new combined = " + window.matchMedia("(any-hover: none) and (any-pointer: coarse)").matches + "\n" +
+    "innerWidth = " + window.innerWidth + "\n" +
+    "magnifier shows (width > 768) = " + (window.innerWidth > 768) + "\n" +
     "UA = " + navigator.userAgent;
   document.body.appendChild(box);
 })();
