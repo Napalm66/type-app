@@ -66,3 +66,20 @@ window.addEventListener(
   },
   { passive: true, capture: true }
 );
+
+// TEMPORARY DEBUG — remove once the magnifier-detection issue is diagnosed.
+// Shows the exact media-query values this browser reports, right on the
+// page, so this can be read without opening DevTools.
+(function () {
+  const box = document.createElement("div");
+  box.style.cssText =
+    "position:fixed;bottom:8px;right:8px;z-index:99999;background:#000;color:#0f0;" +
+    "font:11px/1.5 monospace;padding:8px 10px;border-radius:4px;max-width:90vw;white-space:pre;";
+  box.textContent =
+    "DEBUG\n" +
+    "hover:none = " + window.matchMedia("(hover: none)").matches + "\n" +
+    "pointer:coarse = " + window.matchMedia("(pointer: coarse)").matches + "\n" +
+    "combined = " + window.matchMedia("(hover: none) and (pointer: coarse)").matches + "\n" +
+    "UA = " + navigator.userAgent;
+  document.body.appendChild(box);
+})();
