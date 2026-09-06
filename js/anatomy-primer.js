@@ -10,16 +10,12 @@ const ANATOMY_PRIMER_GLOSSARY = [
   { label: "Counters", text: "The enclosed or partially enclosed space inside a letterform, like inside an o or e — more open counters read lighter overall." },
 ];
 
-function initAnatomyPrimer(root) {
+async function initAnatomyPrimer(root) {
   root.innerHTML = `
     <div class="anatomy-primer">
       <div class="anatomy-primer-card">
-        <div class="anatomy-primer-image-wrap">
-          <img
-            class="anatomy-primer-image"
-            src="images/anatomy_r6.svg"
-            alt="Labeled diagram of letterform anatomy: stem, bowl, counter, ascender, descender, serif, bracket, terminal, x-height, cap height, and related terms."
-          />
+        <div class="anatomy-primer-image-wrap" role="img" aria-label="Labeled diagram of letterform anatomy: stem, bowl, counter, ascender, descender, serif, bracket, terminal, x-height, cap height, and related terms.">
+          <div class="anatomy-loading">Loading diagram…</div>
         </div>
       </div>
       <div class="anatomy-primer-glossary">
@@ -32,14 +28,21 @@ function initAnatomyPrimer(root) {
   `;
 
   const wrap = root.querySelector(".anatomy-primer-image-wrap");
-  const img = wrap.querySelector("img");
+
+  // Inlining the raw SVG markup (rather than referencing it via <img src>)
+  // is what keeps the magnifier lens sharp: attachMagnifier clones whatever
+  // element it's given, and a cloned <img> is just the browser's already-
+  // rasterized bitmap at its displayed size — scaling that 2.8x blurs small
+  // labels. Cloned inline <svg> stays true vector at any zoom.
+  const svgText = await fetch("images/anatomy_r7.svg").then((r) => r.text());
+  wrap.innerHTML = svgText;
+  const svg = wrap.querySelector("svg");
+  svg.classList.add("anatomy-primer-image");
 
   function attach() {
-    attachMagnifier(wrap, img);
+    attachMagnifier(wrap, svg);
   }
-
-  if (img.complete) attach();
-  else img.addEventListener("load", attach, { once: true });
+  attach();
 
   // detail.close() fires on every tab switch (to dismiss any open
   // classification detail) and unconditionally nukes every .anatomy-lens
