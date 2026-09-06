@@ -1279,6 +1279,7 @@ main.wrap {
 
 .tl-lg-node-box {
   fill: var(--panel);
+  fill-opacity: 0.8;
   stroke: var(--ink);
   stroke-width: 1;
 }
@@ -1310,7 +1311,7 @@ main.wrap {
 
 .tl-lg-connector {
   fill: none;
-  stroke: var(--ink);
+  stroke: var(--accent);
   stroke-width: 1.5;
 }
 
