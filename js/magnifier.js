@@ -12,7 +12,12 @@ function attachMagnifier(wrapEl, svgEl) {
   // Touch devices already have native pinch-to-zoom, and the lens's own
   // touchstart handler used preventDefault() to implement tap-to-open,
   // which fought that native gesture. Skip the custom lens entirely there.
-  if (window.matchMedia("(hover: none)").matches) return;
+  //
+  // Checked together rather than on hover alone: some hybrid/touchscreen
+  // laptops misreport hover:none even with a mouse attached, but a real
+  // mouse still reports pointer:fine, so requiring coarse-pointer too
+  // keeps the magnifier available wherever a precise pointer exists.
+  if (window.matchMedia("(hover: none) and (pointer: coarse)").matches) return;
 
   const lens = document.createElement("div");
   lens.className = "anatomy-lens";
