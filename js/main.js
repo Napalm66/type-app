@@ -40,3 +40,29 @@ tabs.forEach((tab) => {
     document.querySelector(".anatomy-lens")?.classList.remove("is-visible");
   });
 });
+
+// The Timeline tooltip and detail modal are both position:fixed, placed
+// relative to the viewport at the moment they open — if the page (or the
+// timeline chart's own horizontally-scrolling wrapper) then scrolls,
+// they'd stay put while the node/era they're anchored to moves out from
+// under them. Close them on scroll rather than leave them floating in
+// the wrong spot.
+//
+// Scoped to the Timeline section only — elsewhere (e.g. Explore) a long
+// detail panel is meant to be scrollable without the act of scrolling
+// closing it.
+//
+// "scroll" doesn't bubble, so a listener on window's bubble phase would
+// only ever see the page's own scroll, not the chart wrapper's internal
+// horizontal scroll. Capture-phase listeners fire on the way down to the
+// target regardless of bubbling, so listening on window with capture:true
+// catches both.
+window.addEventListener(
+  "scroll",
+  () => {
+    if (!document.getElementById("view-timeline").classList.contains("is-active")) return;
+    detail.close();
+    document.querySelector(".tl-era-tooltip")?.classList.remove("is-visible");
+  },
+  { passive: true, capture: true }
+);
