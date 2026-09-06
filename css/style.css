@@ -692,7 +692,6 @@ main.wrap {
   margin-top: 1.25rem;
 }
 
-.visual-characteristics-heading,
 .additional-features-heading {
   font-family: var(--font-mono);
   font-size: 0.68rem;
@@ -700,6 +699,14 @@ main.wrap {
   text-transform: uppercase;
   letter-spacing: 0.05em;
   color: var(--ink-faint);
+  margin-bottom: 0.6rem;
+}
+
+.visual-characteristics-heading {
+  font-family: var(--font-ui);
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: var(--ink);
   margin-bottom: 0.6rem;
 }
 
