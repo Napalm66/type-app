@@ -79,7 +79,9 @@ window.addEventListener(
     "DEBUG\n" +
     "hover:none = " + window.matchMedia("(hover: none)").matches + "\n" +
     "pointer:coarse = " + window.matchMedia("(pointer: coarse)").matches + "\n" +
-    "combined = " + window.matchMedia("(hover: none) and (pointer: coarse)").matches + "\n" +
+    "any-hover:none = " + window.matchMedia("(any-hover: none)").matches + "\n" +
+    "any-pointer:coarse = " + window.matchMedia("(any-pointer: coarse)").matches + "\n" +
+    "new combined = " + window.matchMedia("(any-hover: none) and (any-pointer: coarse)").matches + "\n" +
     "UA = " + navigator.userAgent;
   document.body.appendChild(box);
 })();

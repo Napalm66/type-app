@@ -13,11 +13,13 @@ function attachMagnifier(wrapEl, svgEl) {
   // touchstart handler used preventDefault() to implement tap-to-open,
   // which fought that native gesture. Skip the custom lens entirely there.
   //
-  // Checked together rather than on hover alone: some hybrid/touchscreen
-  // laptops misreport hover:none even with a mouse attached, but a real
-  // mouse still reports pointer:fine, so requiring coarse-pointer too
-  // keeps the magnifier available wherever a precise pointer exists.
-  if (window.matchMedia("(hover: none) and (pointer: coarse)").matches) return;
+  // any-hover/any-pointer, not hover/pointer: on a hybrid touchscreen +
+  // mouse laptop, plain hover/pointer track whichever input was used most
+  // recently — touch the screen once and hover/pointer report none/coarse
+  // even with a mouse sitting right there. any-hover/any-pointer ask "does
+  // ANY attached input support this", which is the actual capability
+  // question we want, independent of what was last touched.
+  if (window.matchMedia("(any-hover: none) and (any-pointer: coarse)").matches) return;
 
   const lens = document.createElement("div");
   lens.className = "anatomy-lens";
