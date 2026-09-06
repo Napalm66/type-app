@@ -360,6 +360,7 @@ function initTimeline(root, onOpenDetail) {
     Postmodernism: ["images/eras/era-postmodernism-4.jpg"],
     "Digital & Variable Age": ["images/eras/era-digital-variable-age-1.jpg"],
     "Art Nouveau": ["images/eras/era-art-nouveau-3.jpg"],
+    Renaissance: ["images/eras/era-renaissance-3.jpg"],
   };
 
   // A generic "image placeholder" glyph: a frame with a mountain + sun,

@@ -819,6 +819,12 @@ main.wrap {
   padding: 0.5rem 0.25rem;
   border-radius: var(--radius);
   border: 1px solid transparent;
+  /* Without this, a grid item's minimum width defaults to its content's
+     min-content size — "Transitional" (the longest label, one word with
+     no break point) then forces its 1fr column wider than the other
+     four's equal share, and since the SVG is width:100%, its shape
+     renders visibly bigger too. */
+  min-width: 0;
 }
 
 .serif-spectrum-item.is-current {
@@ -844,6 +850,7 @@ main.wrap {
   font-weight: 600;
   color: var(--ink-faint);
   text-align: center;
+  overflow-wrap: break-word;
 }
 
 .serif-spectrum-item.is-current .serif-spectrum-label {

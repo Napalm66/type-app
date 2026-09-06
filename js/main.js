@@ -29,5 +29,12 @@ tabs.forEach((tab) => {
 
     document.querySelectorAll(".view").forEach((v) => v.classList.remove("is-active"));
     document.getElementById(`view-${tab.dataset.view}`).classList.add("is-active");
+
+    // Any open detail modal or Timeline tooltip belongs to the section
+    // just left — on mobile there's no hover to dismiss it implicitly,
+    // so it would otherwise stay floating on screen over whichever
+    // section the visitor switches to.
+    detail.close();
+    document.querySelector(".tl-era-tooltip")?.classList.remove("is-visible");
   });
 });
