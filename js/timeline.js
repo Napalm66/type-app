@@ -352,7 +352,14 @@ function initTimeline(root, onOpenDetail) {
   // bands can grow wide enough to show more than one strip.
   const ERA_PHOTOS = {
     Romanesque: ["images/eras/era-romanesque-1.jpg"],
-    Gothic: ["images/eras/era-gothic-1.jpg"],
+    Gothic: ["images/eras/era-gothic-4.jpg"],
+    Baroque: ["images/eras/era-baroque-3.jpg"],
+    Classicism: ["images/eras/era-classicism-1.jpg"],
+    Romanticism: ["images/eras/era-romanticism-1.jpg"],
+    Modernism: ["images/eras/era-modernism-4.jpg"],
+    Postmodernism: ["images/eras/era-postmodernism-4.jpg"],
+    "Digital & Variable Age": ["images/eras/era-digital-variable-age-1.jpg"],
+    "Art Nouveau": ["images/eras/era-art-nouveau-3.jpg"],
   };
 
   // A generic "image placeholder" glyph: a frame with a mountain + sun,
