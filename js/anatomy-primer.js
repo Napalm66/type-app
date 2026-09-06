@@ -17,7 +17,7 @@ function initAnatomyPrimer(root) {
         <div class="anatomy-primer-image-wrap">
           <img
             class="anatomy-primer-image"
-            src="images/anatomy_r5-01.svg"
+            src="images/anatomy_r6.svg"
             alt="Labeled diagram of letterform anatomy: stem, bowl, counter, ascender, descender, serif, bracket, terminal, x-height, cap height, and related terms."
           />
         </div>
