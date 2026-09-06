@@ -1066,7 +1066,15 @@ main.wrap {
 }
 
 .anatomy-primer-card {
-  background: var(--panel);
+  /* Fixed, not var(--paper)/var(--panel): the diagram's ink (specimen
+     letters, labels) is baked into anatomy_r7.svg as hardcoded hex, not
+     CSS variables, so it only reads correctly against a light ground.
+     In dark mode --paper and --panel both flip dark — one of them
+     (--paper) happens to exactly match the SVG's own specimen-letter
+     fill, which would make the letters invisible. This card stays a
+     light "paper" surface regardless of site theme, the way a printed
+     diagram would. */
+  background: #f4f1ea;
   border: 1px solid var(--rule-solid);
   border-radius: var(--radius);
   padding: clamp(1.5rem, 4vw, 2.5rem);

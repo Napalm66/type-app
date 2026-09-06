@@ -26,6 +26,23 @@ function attachMagnifier(wrapEl, svgEl) {
   lens.className = "anatomy-lens";
   lens.style.width = MAGNIFIER_SIZE + "px";
   lens.style.height = MAGNIFIER_SIZE + "px";
+  // The lens's own CSS background is only a fallback — the diagram's
+  // actual card (.anatomy-block or .anatomy-primer-card) is the real
+  // source of truth, and the two aren't always the same color (the
+  // primer card is a fixed light tone regardless of site theme, since
+  // the diagram's ink is hardcoded and only reads on a light ground).
+  // Copying the real ancestor background here keeps the lens's circular
+  // "porthole" from mismatching whatever it's actually floating over.
+  const bgSource = wrapEl.closest(".anatomy-block, .anatomy-primer-card");
+  if (bgSource) lens.style.background = getComputedStyle(bgSource).backgroundColor;
+
+  // The lens's default border (var(--ink)) flips light in dark mode,
+  // same as the rest of the theme — fine for .anatomy-block, which flips
+  // dark right alongside it. .anatomy-primer-card stays a fixed light
+  // tone in every theme (see its own CSS comment), so its border needs
+  // to stay a fixed dark tone too, or the outline vanishes into the card
+  // in dark mode exactly like the background mismatch did.
+  if (wrapEl.closest(".anatomy-primer-card")) lens.style.borderColor = "#004643";
 
   const inner = document.createElement("div");
   inner.className = "anatomy-lens-inner";
