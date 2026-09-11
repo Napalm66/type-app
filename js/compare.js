@@ -27,15 +27,12 @@ function initCompare(root) {
   let selected = [];
 
   function renderPicker() {
-    const atCap = selected.length >= MAX_COMPARE;
     return `
       <div class="compare-picker">
         ${CLASSIFICATIONS.map((c) => {
           const isSelected = selected.includes(c.id);
-          const disabled = atCap && !isSelected;
           return `
-          <button class="filter-chip ${isSelected ? "is-active" : ""}" data-id="${c.id}"
-            ${disabled ? `disabled title="Deselect one to compare a different classification"` : ""}>
+          <button class="filter-chip ${isSelected ? "is-active" : ""}" data-id="${c.id}">
             ${c.name}
           </button>`;
         }).join("")}
@@ -214,6 +211,11 @@ function initCompare(root) {
           selected = selected.filter((s) => s !== id);
         } else if (selected.length < MAX_COMPARE) {
           selected = [...selected, id];
+        } else {
+          // Already at the cap — swap in the newly clicked classification
+          // for the one picked longest ago, rather than requiring an
+          // explicit deselect first. Keeps the picker always clickable.
+          selected = [...selected.slice(1), id];
         }
         render();
       });
