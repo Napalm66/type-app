@@ -1514,6 +1514,194 @@ main.wrap {
   padding: 2rem 0;
 }
 
+.compare-diff-heading {
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--accent);
+  margin-bottom: 0.6rem;
+}
+
+.compare-diff {
+  margin-top: 1.75rem;
+}
+
+.compare-diff-wrap {
+  /* Fixed near-black, not var(--paper)/var(--panel)/teal — a deliberately
+     "reversed" box regardless of site theme. Neutral black (rather than
+     the app's own dark teal) was chosen specifically so it doesn't compete
+     with either the orange or the white specimen layer's own color the
+     way a colored background does. */
+  position: relative;
+  height: clamp(160px, 26vw, 260px);
+  border: 1px solid var(--ink);
+  background: #0a0a0a;
+  overflow: hidden;
+  cursor: ew-resize;
+  touch-action: none;
+  user-select: none;
+}
+
+.compare-diff-layer {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: clamp(2.7rem, 10.8vw, 6.1rem); /* "Typography" sizing, 80% bigger */
+  line-height: 1;
+  color: #bc3a14; /* fixed accent — see .compare-diff-wrap's fixed-dark note */
+  white-space: nowrap;
+  pointer-events: none;
+}
+
+.compare-diff-layer--b {
+  clip-path: inset(0 0 0 50%);
+  color: #ffffff;
+}
+
+.compare-diff-label {
+  position: absolute;
+  top: 0.6rem;
+  z-index: 1;
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  pointer-events: none;
+}
+
+.compare-diff-label--a {
+  left: 0.75rem;
+  color: #bc3a14;
+}
+
+.compare-diff-label--b {
+  right: 0.75rem;
+  color: #ffffff;
+}
+
+.compare-diff-handle {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 50%;
+  width: 2px;
+  background: var(--accent);
+  transform: translateX(-1px);
+  pointer-events: none;
+}
+
+.compare-diff-handle::before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 34px;
+  height: 34px;
+  background: var(--accent);
+}
+
+.compare-diff-handle::after {
+  content: "\2194";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: var(--panel);
+  font-size: 1rem;
+  font-weight: 700;
+}
+
+.compare-radar {
+  margin-top: 1.75rem;
+}
+
+.compare-radar-unavailable {
+  color: var(--ink-faint);
+  font-size: 0.85rem;
+}
+
+.compare-radar-row {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+  flex-wrap: wrap;
+}
+
+.compare-radar-svg {
+  width: 100%;
+  /* Grown in step with the viewBox (320 -> 415) so the render scale (px
+     per viewBox unit) holds steady — the chart geometry is 25% bigger in
+     viewBox units, so it ends up 25% bigger on screen too, while the
+     axis-label font-size (fixed in viewBox units) renders at the same
+     size as before. */
+  max-width: 523px;
+  height: auto;
+}
+
+.compare-radar-ring {
+  fill: none;
+  stroke: var(--rule-solid);
+  stroke-width: 1;
+}
+
+.compare-radar-axis-label {
+  font-family: var(--font-mono);
+  font-size: 9px;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+  fill: var(--ink-faint);
+}
+
+.compare-radar-shape {
+  stroke-width: 2;
+}
+
+.compare-radar-shape--a {
+  fill: color-mix(in srgb, var(--ink) 20%, transparent);
+  stroke: var(--ink);
+}
+
+.compare-radar-shape--b {
+  fill: color-mix(in srgb, var(--accent) 18%, transparent);
+  stroke: var(--accent);
+}
+
+.compare-radar-legend {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+}
+
+.compare-radar-legend-item {
+  position: relative;
+  padding-left: 1.2rem;
+}
+
+.compare-radar-legend-item::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0.2rem;
+  width: 12px;
+  height: 12px;
+}
+
+.compare-radar-legend-item--a::before {
+  background: var(--ink);
+}
+
+.compare-radar-legend-item--b::before {
+  background: var(--accent);
+}
+
 /* ---------- footer ---------- */
 
 /* Fixed dark teal + reversed cream, not theme-swapped — a deliberately

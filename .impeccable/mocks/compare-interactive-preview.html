@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Compare — Interactive Preview</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&family=EB+Garamond:wght@500&family=Bodoni+Moda:wght@700&family=Libre+Baskerville&family=Kameron:wght@600&family=Libre+Franklin:wght@700&family=Arimo:wght@700&family=Jost:wght@600&family=Open+Sans:wght@600&family=Cinzel:wght@600&display=swap" />
+<style>
+  :root {
+    --paper: #f0ede5;
+    --panel: #ffffff;
+    --ink: #004643;
+    --ink-soft: #2e5c59;
+    --ink-faint: #4d6a67;
+    --rule-solid: #d3dbd8;
+    --accent: #bc3a14;
+    --font-display: "Anton", "Arial Narrow", sans-serif;
+    --font-ui: "Inter", system-ui, sans-serif;
+    --font-mono: "JetBrains Mono", monospace;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    background: var(--paper);
+    color: var(--ink);
+    font-family: var(--font-ui);
+    padding: 2rem clamp(1rem, 4vw, 3rem) 5rem;
+  }
+  h1 {
+    font-family: var(--font-display);
+    text-transform: uppercase;
+    font-size: clamp(1.8rem, 5vw, 2.6rem);
+    letter-spacing: 0.02em;
+    margin: 0 0 0.4rem;
+  }
+  .note {
+    color: var(--ink-soft);
+    max-width: 62ch;
+    margin: 0 0 2rem;
+    font-size: 0.95rem;
+  }
+  .picker {
+    display: flex;
+    gap: 0.75rem;
+    flex-wrap: wrap;
+    margin-bottom: 2rem;
+  }
+  select {
+    font-family: var(--font-mono);
+    font-size: 0.78rem;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    background: var(--panel);
+    color: var(--ink);
+    border: 1px solid var(--ink);
+    border-radius: 0;
+    padding: 0.55rem 0.75rem;
+  }
+  .section {
+    background: var(--panel);
+    border: 1px solid var(--rule-solid);
+    padding: clamp(1.25rem, 3vw, 2rem);
+    margin-bottom: 2.5rem;
+  }
+  .section-label {
+    font-family: var(--font-mono);
+    font-size: 0.68rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--accent);
+    margin-bottom: 0.3rem;
+  }
+  .section-title {
+    font-family: var(--font-display);
+    text-transform: uppercase;
+    font-size: 1.3rem;
+    letter-spacing: 0.02em;
+    margin: 0 0 0.5rem;
+  }
+  .section-desc {
+    color: var(--ink-soft);
+    font-size: 0.88rem;
+    max-width: 68ch;
+    margin: 0 0 1.5rem;
+  }
+
+  /* ---- Section A: overlay diff slider ---- */
+  .diff-wrap {
+    position: relative;
+    height: 220px;
+    border: 1px solid var(--ink);
+    overflow: hidden;
+    cursor: ew-resize;
+    background: var(--paper);
+    user-select: none;
+  }
+  .diff-layer {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 8rem;
+    line-height: 1;
+    white-space: nowrap;
+  }
+  .diff-layer.a { color: var(--ink); }
+  .diff-layer.b {
+    color: var(--ink);
+    clip-path: inset(0 0 0 50%);
+  }
+  .diff-handle {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 50%;
+    width: 2px;
+    background: var(--accent);
+    transform: translateX(-1px);
+  }
+  .diff-handle::before {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 34px;
+    height: 34px;
+    border-radius: 50%;
+    background: var(--accent);
+  }
+  .diff-handle::after {
+    content: "\2194";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: var(--panel);
+    font-size: 1rem;
+    font-weight: 700;
+  }
+  .diff-caption {
+    display: flex;
+    justify-content: space-between;
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    color: var(--ink-faint);
+    margin-top: 0.6rem;
+  }
+
+  /* ---- Section B: radar chart ---- */
+  .radar-row {
+    display: flex;
+    gap: 2rem;
+    flex-wrap: wrap;
+    align-items: center;
+  }
+  .radar-legend {
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+    font-family: var(--font-mono);
+    font-size: 0.78rem;
+  }
+  .radar-legend-item {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+  .radar-swatch {
+    width: 12px;
+    height: 12px;
+    flex-shrink: 0;
+  }
+  .radar-axis-label {
+    font-size: 9px;
+    font-family: var(--font-mono);
+    fill: var(--ink-faint);
+    text-transform: uppercase;
+  }
+
+  footer {
+    max-width: 68ch;
+    color: var(--ink-faint);
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    line-height: 1.6;
+    border-top: 1px solid var(--rule-solid);
+    padding-top: 1rem;
+  }
+</style>
+</head>
+<body>
+
+<h1>Compare — Two Interactive Directions</h1>
+<p class="note">Two candidate ways to make comparing exactly two classifications more interactive than reading two columns of text side by side. Pick classifications below — both sections update together.</p>
+
+<div class="picker">
+  <select id="pick-a"></select>
+  <select id="pick-b"></select>
+</div>
+
+<div class="section">
+  <div class="section-label">Direction 1</div>
+  <h2 class="section-title">Specimen Overlay / Diff Slider</h2>
+  <p class="section-desc">The same letter, same size, same baseline — drag to wipe between the two classifications' actual specimen fonts. Structural differences (contrast, serif weight, stress) are seen directly on the glyph instead of read as a label.</p>
+  <div class="diff-wrap" id="diff-wrap">
+    <div class="diff-layer a" id="diff-a">Aa</div>
+    <div class="diff-layer b" id="diff-b">Aa</div>
+    <div class="diff-handle" id="diff-handle"></div>
+  </div>
+  <div class="diff-caption">
+    <span id="diff-label-a"></span>
+    <span id="diff-label-b"></span>
+  </div>
+</div>
+
+<div class="section">
+  <div class="section-label">Direction 2</div>
+  <h2 class="section-title">Diagnostic Radar</h2>
+  <p class="section-desc">Contrast and stress-axis angle are real, already-tracked values (stress in actual degrees, same numbers the anatomy diagram uses); serif-bracket strength is an ordinal reading of the existing serif-structure category. Two overlaid shapes make where two classifications actually diverge visible at a glance, instead of three rows of adjectives to compare word-by-word.</p>
+  <div class="radar-row">
+    <svg id="radar-svg" width="320" height="320" viewBox="0 0 320 320"></svg>
+    <div class="radar-legend" id="radar-legend"></div>
+  </div>
+</div>
+
+<footer>
+  Preview only — not wired into the real app. Fonts loaded from Google Fonts for this mock; the real app already self-hosts/loads these per classification. Radar axes: Contrast (none&rarr;high, 0&ndash;3), Stress (0&deg;&ndash;34&deg;, from the same AXIS_ANGLES used by the anatomy diagram), Serif Bracket (an ordinal reading of the serif-structure category, 0&ndash;3).
+</footer>
+
+<script>
+const CLASSIFICATIONS = [
+  { id: "venetian", name: "Venetian Oldstyle", fontStack: "Georgia, serif", diagnostics: { contrast: "low", axis: "oblique-strong", serif: "bracketed-robust" } },
+  { id: "garalde", name: "Garalde Oldstyle", fontStack: "'EB Garamond', serif", diagnostics: { contrast: "low-medium", axis: "oblique-moderate", serif: "bracketed-robust" } },
+  { id: "transitional", name: "Transitional", fontStack: "'Libre Baskerville', serif", diagnostics: { contrast: "medium", axis: "near-vertical", serif: "bracketed-sharp" } },
+  { id: "modern", name: "Modern (Didone)", fontStack: "'Bodoni Moda', serif", diagnostics: { contrast: "high", axis: "vertical", serif: "unbracketed-hairline" } },
+  { id: "slab", name: "Slab Serif (Egyptian)", fontStack: "'Kameron', serif", diagnostics: { contrast: "low", axis: "vertical", serif: "square-slab" } },
+  { id: "grotesque", name: "Grotesque Sans", fontStack: "'Libre Franklin', sans-serif", diagnostics: { contrast: "low", axis: "vertical", serif: "none" } },
+  { id: "neo-grotesque", name: "Neo-Grotesque", fontStack: "'Arimo', Arial, sans-serif", diagnostics: { contrast: "none", axis: "vertical", serif: "none" } },
+  { id: "geometric", name: "Geometric Sans", fontStack: "'Jost', sans-serif", diagnostics: { contrast: "none", axis: "vertical", serif: "none" } },
+  { id: "humanist-sans", name: "Humanist Sans", fontStack: "'Open Sans', sans-serif", diagnostics: { contrast: "low", axis: "slightly-oblique", serif: "none" } },
+  { id: "glyphic", name: "Glyphic / Latin", fontStack: "'Cinzel', serif", diagnostics: { contrast: "medium", axis: "vertical", serif: "flared-wedge" } },
+];
+
+const CONTRAST_SCALE = { none: 0, low: 1, "low-medium": 1.5, medium: 2, high: 3 };
+const AXIS_DEGREES = { vertical: 0, "near-vertical": 8, "slightly-oblique": 12, "oblique-moderate": 20, "oblique-strong": 34 };
+const SERIF_BRACKET_SCALE = { "bracketed-robust": 3, "square-slab": 2.5, "bracketed-sharp": 2, "flared-wedge": 1.5, "unbracketed-hairline": 0.5, none: 0 };
+
+const pickA = document.getElementById("pick-a");
+const pickB = document.getElementById("pick-b");
+CLASSIFICATIONS.forEach((c, i) => {
+  const optA = new Option(c.name, c.id, i === 1, i === 1);
+  const optB = new Option(c.name, c.id, i === 3, i === 3);
+  pickA.add(optA);
+  pickB.add(optB);
+});
+
+function byId(id) { return CLASSIFICATIONS.find((c) => c.id === id); }
+
+function renderDiff() {
+  const a = byId(pickA.value);
+  const b = byId(pickB.value);
+  const layerA = document.getElementById("diff-a");
+  const layerB = document.getElementById("diff-b");
+  layerA.style.fontFamily = a.fontStack;
+  layerB.style.fontFamily = b.fontStack;
+  document.getElementById("diff-label-a").textContent = a.name;
+  document.getElementById("diff-label-b").textContent = b.name;
+}
+
+const wrap = document.getElementById("diff-wrap");
+const handle = document.getElementById("diff-handle");
+const layerB = document.getElementById("diff-b");
+function setSplit(pct) {
+  pct = Math.max(0, Math.min(100, pct));
+  handle.style.left = pct + "%";
+  layerB.style.clipPath = `inset(0 0 0 ${pct}%)`;
+}
+let dragging = false;
+wrap.addEventListener("pointerdown", (e) => { dragging = true; moveSplit(e); });
+window.addEventListener("pointermove", (e) => { if (dragging) moveSplit(e); });
+window.addEventListener("pointerup", () => { dragging = false; });
+function moveSplit(e) {
+  const rect = wrap.getBoundingClientRect();
+  const pct = ((e.clientX - rect.left) / rect.width) * 100;
+  setSplit(pct);
+}
+
+function renderRadar() {
+  const a = byId(pickA.value);
+  const b = byId(pickB.value);
+  const svg = document.getElementById("radar-svg");
+  const cx = 160, cy = 150, r = 100;
+  const axes = ["Contrast", "Stress", "Serif Bracket"];
+  const angleFor = (i) => (Math.PI * 2 * i) / axes.length - Math.PI / 2;
+
+  function pointFor(value, max, i) {
+    const dist = (value / max) * r;
+    const ang = angleFor(i);
+    return [cx + dist * Math.cos(ang), cy + dist * Math.sin(ang)];
+  }
+
+  function shapeFor(item) {
+    const vals = [
+      CONTRAST_SCALE[item.diagnostics.contrast] ?? 0,
+      AXIS_DEGREES[item.diagnostics.axis] ?? 0,
+      SERIF_BRACKET_SCALE[item.diagnostics.serif] ?? 0,
+    ];
+    const maxes = [3, 34, 3];
+    return vals.map((v, i) => pointFor(v, maxes[i], i));
+  }
+
+  const ptsA = shapeFor(a);
+  const ptsB = shapeFor(b);
+
+  let svgContent = "";
+  // rings
+  [0.33, 0.66, 1].forEach((f) => {
+    const ring = axes.map((_, i) => pointFor(f, 1, i).join(",")).join(" ");
+    svgContent += `<polygon points="${ring}" fill="none" stroke="#d3dbd8" stroke-width="1"/>`;
+  });
+  // axis lines + labels
+  axes.forEach((label, i) => {
+    const [x, y] = pointFor(1, 1, i);
+    svgContent += `<line x1="${cx}" y1="${cy}" x2="${x}" y2="${y}" stroke="#d3dbd8" stroke-width="1"/>`;
+    const [lx, ly] = pointFor(1.22, 1, i);
+    svgContent += `<text x="${lx}" y="${ly}" text-anchor="middle" class="radar-axis-label">${label}</text>`;
+  });
+  // shape A
+  svgContent += `<polygon points="${ptsA.map((p) => p.join(",")).join(" ")}" fill="rgba(0,70,67,0.25)" stroke="#004643" stroke-width="2"/>`;
+  // shape B
+  svgContent += `<polygon points="${ptsB.map((p) => p.join(",")).join(" ")}" fill="rgba(188,58,20,0.18)" stroke="#bc3a14" stroke-width="2"/>`;
+
+  svg.innerHTML = svgContent;
+
+  document.getElementById("radar-legend").innerHTML = `
+    <div class="radar-legend-item"><span class="radar-swatch" style="background:#004643"></span>${a.name}</div>
+    <div class="radar-legend-item"><span class="radar-swatch" style="background:#bc3a14"></span>${b.name}</div>
+  `;
+}
+
+function renderAll() {
+  renderDiff();
+  renderRadar();
+}
+pickA.addEventListener("change", renderAll);
+pickB.addEventListener("change", renderAll);
+document.fonts.ready.then(renderAll);
+renderAll();
+</script>
+</body>
+</html>
