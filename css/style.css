@@ -1210,6 +1210,7 @@ main.wrap {
    any, but a future node without a mapped cue would fall back to blank)
    still keep the grid alignment. */
 .quiz-option-cue {
+  order: 2;
   flex-shrink: 0;
   min-width: 52px;
   min-height: 52px;
@@ -1253,6 +1254,7 @@ main.wrap {
 }
 
 .quiz-option-text {
+  order: 1;
   flex: 1;
   min-width: 0;
 }
