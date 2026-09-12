@@ -205,7 +205,7 @@ const CLASSIFICATIONS = [
     keyTypefaces: ["Bodoni", "Didot", "Walbaum", "Bodoni Moda"],
     examples: [
       { prompt: "A tight crop on just the hairline serif meeting its stem, with no curve at all", image: null },
-      { prompt: "A close-up comparing a thick stem right next to a thread-thin hairline", image: null },
+      { prompt: "A close-up of a small, round ball shape sitting right at the tip of a curved stroke", image: null },
     ],
     // Playfair Display (previously used here) is explicitly not a direct
     // Bodoni/Didot revival — its own designer describes it as synthesizing
