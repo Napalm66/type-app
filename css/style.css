@@ -1145,140 +1145,26 @@ main.wrap {
   max-width: 680px;
 }
 
-.quiz-progress {
-  display: flex;
-  gap: 0.3rem;
-  margin-bottom: 1.5rem;
-}
-
-.quiz-progress-dot {
-  height: 3px;
-  flex: 1;
-  background: var(--rule-solid);
-  overflow: hidden;
-}
-
-.quiz-progress-dot.is-done {
-  background: var(--accent);
-}
-
-.quiz-question {
-  font-family: var(--font-display);
-  font-size: clamp(1.4rem, 4vw, 1.8rem);
-  text-transform: uppercase;
-  line-height: 1.05;
-  margin: 0 0 0.5rem;
-}
-
-.quiz-hint {
-  color: var(--ink-soft);
-  font-size: 0.9rem;
-  margin: 0 0 1.5rem;
-}
-
-.quiz-options {
-  display: grid;
-  gap: 0.6rem;
-}
-
-.quiz-option {
-  display: flex;
-  align-items: center;
-  gap: 0.9rem;
-  text-align: left;
-  background: none;
-  border: 1px solid var(--rule-solid);
-  border-radius: var(--radius);
-  padding: 0.7rem 1rem;
-  cursor: pointer;
-  color: var(--ink);
-  font-family: var(--font-ui);
-  transition: border-color 0.15s ease;
-}
-
-.quiz-option:hover {
-  border-color: var(--accent);
-}
-
-.quiz-option:focus-visible {
-  outline: 2px solid var(--focus);
-  outline-offset: 2px;
-}
-
-/* Fixed-size slot so every option's text lines up regardless of whether
-   its cue is a font sample or an SVG - empty options (there shouldn't be
-   any, but a future node without a mapped cue would fall back to blank)
-   still keep the grid alignment. */
-.quiz-option-cue {
-  order: 2;
-  flex-shrink: 0;
-  min-width: 52px;
-  min-height: 52px;
-  max-width: 88px;
-  padding: 0.25rem 0.35rem;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border: 1px solid var(--rule-solid);
-  background: var(--paper);
-}
-
-/* A single glyph pair ("Ag") reads fine at a large size, but a full
-   classification name (used for options where the cue names a real
-   classification instead of showing a generic sample) needs to shrink
-   and wrap to fit the same box - "Neo-Grotesque" is the longest case. */
-.quiz-cue-font {
-  font-size: 0.85rem;
-  line-height: 1.05;
-  color: var(--ink);
-  text-align: center;
-  overflow-wrap: break-word;
-}
-
-.quiz-cue-svg,
-.quiz-cue-serif-svg {
-  width: 38px;
-  height: 38px;
-}
-
-.quiz-cue-ring-outer {
-  fill: var(--ink-soft);
-}
-
-.quiz-cue-ring-inner {
-  fill: var(--paper);
-}
-
-.quiz-cue-serif-svg path {
-  fill: var(--ink-soft);
-}
-
-.quiz-option-text {
-  order: 1;
-  flex: 1;
-  min-width: 0;
-}
-
-.quiz-option-label {
-  font-weight: 700;
-  font-size: 0.95rem;
-  display: block;
-}
-
-.quiz-option-desc {
-  color: var(--ink-soft);
-  font-size: 0.83rem;
-  margin-top: 0.2rem;
-}
-
-.quiz-nav {
-  margin-top: 1.5rem;
+.quiz-score-bar {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  margin-bottom: 1.25rem;
+  font-family: var(--font-mono);
 }
 
-.quiz-back,
+.quiz-score {
+  font-size: 0.78rem;
+  color: var(--ink-soft);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.quiz-score strong {
+  color: var(--ink);
+  font-size: 0.9rem;
+}
+
 .quiz-restart {
   background: none;
   border: none;
@@ -1292,56 +1178,129 @@ main.wrap {
   padding: 0.4rem 0;
 }
 
-.quiz-back:hover,
 .quiz-restart:hover {
   color: var(--ink);
 }
 
-.quiz-result {
-  animation: fade-in 0.2s steps(3, end);
-}
-
-.quiz-result-label {
-  font-family: var(--font-mono);
-  font-size: 0.72rem;
-  color: var(--accent);
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
-}
-
-.quiz-result-name {
-  font-family: var(--font-display);
-  font-size: clamp(2rem, 6vw, 2.6rem);
-  text-transform: uppercase;
-  line-height: 0.95;
-  margin: 0.35rem 0 1rem;
-}
-
-.quiz-result-specimen {
+.quiz-game-specimen {
   line-height: 1.1;
-  padding: 1.25rem 0;
+  padding: 1.5rem 0;
   border-top: 1px solid var(--rule-solid);
   border-bottom: 1px solid var(--rule-solid);
   margin-bottom: 1.25rem;
   word-break: break-word;
+  text-align: center;
 }
 
-.quiz-trail {
-  font-family: var(--font-mono);
-  font-size: 0.72rem;
-  color: var(--ink-faint);
+.quiz-game-prompt {
+  font-family: var(--font-display);
+  font-size: clamp(1.2rem, 3.4vw, 1.5rem);
+  text-transform: uppercase;
+  line-height: 1.05;
+  margin: 0 0 1rem;
+  text-align: center;
+}
+
+.quiz-game-choices {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 0.6rem;
   margin-bottom: 1.25rem;
 }
 
-.quiz-trail span {
-  color: var(--ink-soft);
+.quiz-game-choice {
+  text-align: center;
+  background: none;
+  border: 1px solid var(--rule-solid);
+  border-radius: var(--radius);
+  padding: 0.85rem 1rem;
+  cursor: pointer;
+  color: var(--ink);
+  font-family: var(--font-ui);
   font-weight: 600;
+  font-size: 0.92rem;
+  transition: border-color 0.15s ease, color 0.15s ease, opacity 0.15s ease;
 }
 
-.quiz-view-full {
-  display: block;
-  width: 100%;
+.quiz-game-choice:hover:not(:disabled) {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+.quiz-game-choice:focus-visible {
+  outline: 2px solid var(--focus);
+  outline-offset: 2px;
+}
+
+.quiz-game-choice.is-correct {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+.quiz-game-choice.is-incorrect {
+  color: var(--ink-faint);
+  text-decoration: line-through;
+}
+
+.quiz-game-choice:disabled:not(.is-correct):not(.is-incorrect) {
+  opacity: 0.4;
+}
+
+.quiz-game-feedback {
+  animation: fade-in 0.2s steps(3, end);
+}
+
+.quiz-game-feedback-label {
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  margin-bottom: 1rem;
+}
+
+.quiz-game-feedback.is-correct .quiz-game-feedback-label {
+  color: var(--accent);
+}
+
+.quiz-game-feedback.is-incorrect .quiz-game-feedback-label {
+  color: var(--ink-soft);
+}
+
+.quiz-game-tagline {
+  color: var(--ink-soft);
+  font-size: 0.9rem;
+  margin: 0 0 1.25rem;
+}
+
+.quiz-nav {
+  margin-top: 0.5rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+}
+
+.quiz-view-full-inline {
+  background: none;
+  border: none;
+  color: var(--ink-faint);
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  cursor: pointer;
+  padding: 0.4rem 0;
+}
+
+.quiz-view-full-inline:hover {
+  color: var(--ink);
+}
+
+/* The primary next action always lands last in its row (quiz-nav is
+   space-between), reading as the natural next step at the extreme right. */
+.quiz-game-next {
   font-family: var(--font-mono);
   font-size: 0.78rem;
   font-weight: 700;
@@ -1351,19 +1310,18 @@ main.wrap {
   background: none;
   border: 1px solid var(--rule-solid);
   border-radius: var(--radius);
-  padding: 0.75rem 1rem;
+  padding: 0.65rem 1.1rem;
   cursor: pointer;
-  transition: border-color 0.15s ease;
-  margin-bottom: 1.25rem;
+  transition: border-color 0.15s ease, color 0.15s ease;
 }
 
-.quiz-view-full:hover,
-.quiz-view-full:focus-visible {
+.quiz-game-next:hover,
+.quiz-game-next:focus-visible {
   border-color: var(--accent);
   color: var(--accent);
 }
 
-.quiz-view-full:focus-visible {
+.quiz-game-next:focus-visible {
   outline: 2px solid var(--focus);
   outline-offset: 2px;
 }
