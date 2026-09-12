@@ -269,6 +269,18 @@ body {
    than trying to track the curves precisely. */
 @media (max-width: 1000px) {
   .hero-text {
+    padding-top: 17%;
+  }
+}
+
+/* Real phones (≤640px, matching this file's other mobile breakpoint)
+   need more headroom than the 641-1000px "web at a smaller window" band
+   above — a real-device chin-coverage report only showed up at true
+   phone widths, and applying the larger value across the whole
+   ≤1000px band also reflowed ordinary desktop/tablet browser windows
+   in that range, which is not what was reported broken. */
+@media (max-width: 640px) {
+  .hero-text {
     padding-top: 27%;
   }
 }
