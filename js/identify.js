@@ -72,17 +72,16 @@ const DIRECT_RESULTS = {
 //   detail.js for the serif-shape spectrum shown there.
 const QUIZ_CUE_AXIS_DEGREES = { "oblique-strong": 34, "oblique-moderate": 20, vertical: 0 };
 const QUIZ_CUE_CONTRAST_VALUES = { low: 0, medium: 2, high: 3 };
-// All four stay on serifShapePath()'s straight-edged (curveH: 0) branch,
-// graded by serif height/width alone - the curveH > 0 branch produces a
-// bracket by widening the stem mid-curve with control points that turn
-// out not to read as a clean bracket at icon size (it was never actually
-// exercised before this: the app's three real bracketed shapes, in
-// detail.js's SERIF_SPECTRUM, use hand-traced paths, not that formula).
-const QUIZ_CUE_SERIF_SHAPES = {
-  slab: { stemW: 300, serifW: 680, serifH: 280, curveH: 0 },
-  "bracketed-robust": { stemW: 300, serifW: 560, serifH: 170, curveH: 0 },
-  "bracketed-sharp": { stemW: 280, serifW: 440, serifH: 90, curveH: 0 },
-  "unbracketed-hairline": { stemW: 340, serifW: 720, serifH: 25, curveH: 0 },
+// Real classifications from SERIF_SPECTRUM (detail.js, shown in Explore's
+// detail modal) stand in for each quiz option, rather than one-off
+// presets invented just for this question - venetian and garalde share
+// the same "bracketed-robust" diagnostic, so either represents that
+// option; venetian is used since it's the first oldstyle in the array.
+const QUIZ_CUE_SERIF_SHAPE_IDS = {
+  slab: "slab",
+  "bracketed-robust": "venetian",
+  "bracketed-sharp": "transitional",
+  "unbracketed-hairline": "modern",
 };
 const QUIZ_CUE_START_IDS = {
   "serif-contrast": "garalde",
@@ -93,8 +92,12 @@ const QUIZ_CUE_START_IDS = {
   display: "display",
 };
 
-function quizFontCueHTML(fontStack, text) {
-  return fontStack ? `<span class="quiz-cue-font" style="font-family:${fontStack};" aria-hidden="true">${text}</span>` : "";
+// The same sample word Explore/the detail modal shows for this
+// classification (its name's first word - deriveAnatomyWord, from
+// anatomy.js), not a generic "Ag" placeholder.
+function quizFontCueHTML(item) {
+  if (!item) return "";
+  return `<span class="quiz-cue-font" style="font-family:${item.fontStack};" aria-hidden="true">${escapeHtml(deriveAnatomyWord(item.name))}</span>`;
 }
 
 // A ring (outer circle minus an inner ellipse) standing in for an "O".
@@ -104,6 +107,12 @@ function quizFontCueHTML(fontStack, text) {
 // widening it 90° away (thick) - then the whole ellipse rotates to the
 // given stress angle. Two questions (contrast, then axis) share this one
 // generator, each fixing the other's value to isolate what it's asking.
+//
+// Rotation is negated to match anatomy.js's own stress-axis convention
+// (see its stressSVG: positive axisDeg there plots the line from
+// upper-left to lower-right, i.e. "tilted left" at the top) - plain
+// SVG rotate() turns the other way (positive = top tilts right), so
+// without the negation every oblique option pointed the wrong way.
 function quizContrastAxisSVG(contrastValue, axisDeg) {
   const size = 60;
   const c = size / 2;
@@ -116,17 +125,18 @@ function quizContrastAxisSVG(contrastValue, axisDeg) {
   return `
     <svg viewBox="0 0 ${size} ${size}" class="quiz-cue-svg" aria-hidden="true">
       <circle cx="${c}" cy="${c}" r="${outerR}" class="quiz-cue-ring-outer" />
-      <ellipse cx="${c}" cy="${c}" rx="${innerRx}" ry="${innerRy}" transform="rotate(${axisDeg} ${c} ${c})" class="quiz-cue-ring-inner" />
+      <ellipse cx="${c}" cy="${c}" rx="${innerRx}" ry="${innerRy}" transform="rotate(${-axisDeg} ${c} ${c})" class="quiz-cue-ring-inner" />
     </svg>
   `;
 }
 
 function quizSerifShapeSVG(serifKey) {
-  const preset = QUIZ_CUE_SERIF_SHAPES[serifKey];
-  if (!preset) return "";
+  const id = QUIZ_CUE_SERIF_SHAPE_IDS[serifKey];
+  const spec = id && SERIF_SPECTRUM.find((s) => s.id === id);
+  if (!spec) return "";
   return `
-    <svg viewBox="0 0 ${SERIF_VB_W} ${SERIF_VB_H}" class="quiz-cue-serif-svg" aria-hidden="true">
-      <path d="${serifShapePath(preset)}" />
+    <svg viewBox="${serifSpectrumViewBox(spec)}" class="quiz-cue-serif-svg" aria-hidden="true">
+      <path d="${spec.path || serifShapePath(spec)}" />
     </svg>
   `;
 }
@@ -134,8 +144,7 @@ function quizSerifShapeSVG(serifKey) {
 function quizOptionCueHTML(nodeId, opt) {
   if (nodeId === "start") {
     const id = QUIZ_CUE_START_IDS[opt.next];
-    const item = id && getById(id);
-    return item ? quizFontCueHTML(item.fontStack, "Ag") : "";
+    return quizFontCueHTML(id && getById(id));
   }
   if (nodeId === "serif-contrast") {
     return quizContrastAxisSVG(QUIZ_CUE_CONTRAST_VALUES[opt.value.contrast], 0);
@@ -147,8 +156,7 @@ function quizOptionCueHTML(nodeId, opt) {
     return quizSerifShapeSVG(opt.value.serif);
   }
   if (nodeId === "sans-construction") {
-    const item = getById(opt.value.sans);
-    return item ? quizFontCueHTML(item.fontStack, "ag") : "";
+    return quizFontCueHTML(getById(opt.value.sans));
   }
   return "";
 }

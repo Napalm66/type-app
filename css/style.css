@@ -1211,8 +1211,10 @@ main.wrap {
    still keep the grid alignment. */
 .quiz-option-cue {
   flex-shrink: 0;
-  width: 52px;
-  height: 52px;
+  min-width: 52px;
+  min-height: 52px;
+  max-width: 88px;
+  padding: 0.25rem 0.35rem;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -1220,10 +1222,16 @@ main.wrap {
   background: var(--paper);
 }
 
+/* A single glyph pair ("Ag") reads fine at a large size, but a full
+   classification name (used for options where the cue names a real
+   classification instead of showing a generic sample) needs to shrink
+   and wrap to fit the same box - "Neo-Grotesque" is the longest case. */
 .quiz-cue-font {
-  font-size: 1.3rem;
-  line-height: 1;
+  font-size: 0.85rem;
+  line-height: 1.05;
   color: var(--ink);
+  text-align: center;
+  overflow-wrap: break-word;
 }
 
 .quiz-cue-svg,
