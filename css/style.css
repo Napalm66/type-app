@@ -1182,11 +1182,14 @@ main.wrap {
 }
 
 .quiz-option {
+  display: flex;
+  align-items: center;
+  gap: 0.9rem;
   text-align: left;
   background: none;
   border: 1px solid var(--rule-solid);
   border-radius: var(--radius);
-  padding: 0.85rem 1rem;
+  padding: 0.7rem 1rem;
   cursor: pointer;
   color: var(--ink);
   font-family: var(--font-ui);
@@ -1200,6 +1203,50 @@ main.wrap {
 .quiz-option:focus-visible {
   outline: 2px solid var(--focus);
   outline-offset: 2px;
+}
+
+/* Fixed-size slot so every option's text lines up regardless of whether
+   its cue is a font sample or an SVG - empty options (there shouldn't be
+   any, but a future node without a mapped cue would fall back to blank)
+   still keep the grid alignment. */
+.quiz-option-cue {
+  flex-shrink: 0;
+  width: 52px;
+  height: 52px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid var(--rule-solid);
+  background: var(--paper);
+}
+
+.quiz-cue-font {
+  font-size: 1.3rem;
+  line-height: 1;
+  color: var(--ink);
+}
+
+.quiz-cue-svg,
+.quiz-cue-serif-svg {
+  width: 38px;
+  height: 38px;
+}
+
+.quiz-cue-ring-outer {
+  fill: var(--ink-soft);
+}
+
+.quiz-cue-ring-inner {
+  fill: var(--paper);
+}
+
+.quiz-cue-serif-svg path {
+  fill: var(--ink-soft);
+}
+
+.quiz-option-text {
+  flex: 1;
+  min-width: 0;
 }
 
 .quiz-option-label {

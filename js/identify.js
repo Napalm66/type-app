@@ -58,6 +58,101 @@ const DIRECT_RESULTS = {
   display: "display",
 };
 
+// A small visual cue per quiz option, so each choice can be read at a
+// glance instead of purely from its label. Two kinds are used:
+// - A live font sample (reusing the app's own classification fontStacks)
+//   wherever an option already corresponds to one real classification -
+//   the same "show the real thing" approach the rest of the app uses,
+//   not an invented icon language.
+// - A small parametric SVG for the two questions that aren't about a
+//   whole classification but a single visual property of one glyph
+//   (stroke contrast, stress axis, serif shape) - contrast/axis reuse one
+//   generator (a ring whose thin axis rotates and narrows), serif shape
+//   reuses serifShapePath()/SERIF_VB_W/SERIF_VB_H, already defined in
+//   detail.js for the serif-shape spectrum shown there.
+const QUIZ_CUE_AXIS_DEGREES = { "oblique-strong": 34, "oblique-moderate": 20, vertical: 0 };
+const QUIZ_CUE_CONTRAST_VALUES = { low: 0, medium: 2, high: 3 };
+// All four stay on serifShapePath()'s straight-edged (curveH: 0) branch,
+// graded by serif height/width alone - the curveH > 0 branch produces a
+// bracket by widening the stem mid-curve with control points that turn
+// out not to read as a clean bracket at icon size (it was never actually
+// exercised before this: the app's three real bracketed shapes, in
+// detail.js's SERIF_SPECTRUM, use hand-traced paths, not that formula).
+const QUIZ_CUE_SERIF_SHAPES = {
+  slab: { stemW: 300, serifW: 680, serifH: 280, curveH: 0 },
+  "bracketed-robust": { stemW: 300, serifW: 560, serifH: 170, curveH: 0 },
+  "bracketed-sharp": { stemW: 280, serifW: 440, serifH: 90, curveH: 0 },
+  "unbracketed-hairline": { stemW: 340, serifW: 720, serifH: 25, curveH: 0 },
+};
+const QUIZ_CUE_START_IDS = {
+  "serif-contrast": "garalde",
+  "sans-construction": "neo-grotesque",
+  blackletter: "blackletter",
+  script: "script",
+  glyphic: "glyphic",
+  display: "display",
+};
+
+function quizFontCueHTML(fontStack, text) {
+  return fontStack ? `<span class="quiz-cue-font" style="font-family:${fontStack};" aria-hidden="true">${text}</span>` : "";
+}
+
+// A ring (outer circle minus an inner ellipse) standing in for an "O".
+// With no contrast the inner ellipse is a circle too, so the ring reads
+// as an even, monoline stroke. As contrast increases, the inner ellipse
+// stretches along the stress axis - narrowing the ring there (thin) while
+// widening it 90° away (thick) - then the whole ellipse rotates to the
+// given stress angle. Two questions (contrast, then axis) share this one
+// generator, each fixing the other's value to isolate what it's asking.
+function quizContrastAxisSVG(contrastValue, axisDeg) {
+  const size = 60;
+  const c = size / 2;
+  const outerR = size * 0.37;
+  const base = size * 0.12;
+  const thick = base + contrastValue * (size * 0.06);
+  const thin = Math.max(size * 0.012, base - contrastValue * (size * 0.038));
+  const innerRy = outerR - thin;
+  const innerRx = outerR - thick;
+  return `
+    <svg viewBox="0 0 ${size} ${size}" class="quiz-cue-svg" aria-hidden="true">
+      <circle cx="${c}" cy="${c}" r="${outerR}" class="quiz-cue-ring-outer" />
+      <ellipse cx="${c}" cy="${c}" rx="${innerRx}" ry="${innerRy}" transform="rotate(${axisDeg} ${c} ${c})" class="quiz-cue-ring-inner" />
+    </svg>
+  `;
+}
+
+function quizSerifShapeSVG(serifKey) {
+  const preset = QUIZ_CUE_SERIF_SHAPES[serifKey];
+  if (!preset) return "";
+  return `
+    <svg viewBox="0 0 ${SERIF_VB_W} ${SERIF_VB_H}" class="quiz-cue-serif-svg" aria-hidden="true">
+      <path d="${serifShapePath(preset)}" />
+    </svg>
+  `;
+}
+
+function quizOptionCueHTML(nodeId, opt) {
+  if (nodeId === "start") {
+    const id = QUIZ_CUE_START_IDS[opt.next];
+    const item = id && getById(id);
+    return item ? quizFontCueHTML(item.fontStack, "Ag") : "";
+  }
+  if (nodeId === "serif-contrast") {
+    return quizContrastAxisSVG(QUIZ_CUE_CONTRAST_VALUES[opt.value.contrast], 0);
+  }
+  if (nodeId === "serif-axis") {
+    return quizContrastAxisSVG(2, QUIZ_CUE_AXIS_DEGREES[opt.value.axis]);
+  }
+  if (nodeId === "serif-shape") {
+    return quizSerifShapeSVG(opt.value.serif);
+  }
+  if (nodeId === "sans-construction") {
+    const item = getById(opt.value.sans);
+    return item ? quizFontCueHTML(item.fontStack, "ag") : "";
+  }
+  return "";
+}
+
 function resolveSerif({ contrast, axis, serif }) {
   if (serif === "slab") return "slab";
   if (serif === "unbracketed-hairline") return "modern";
@@ -132,8 +227,11 @@ function initIdentify(root, onOpenDetail) {
             .map(
               (opt, i) => `
             <button class="quiz-option" data-index="${i}">
-              <span class="quiz-option-label">${opt.label}</span>
-              <span class="quiz-option-desc">${opt.desc}</span>
+              <span class="quiz-option-cue">${quizOptionCueHTML(nodeId, opt)}</span>
+              <span class="quiz-option-text">
+                <span class="quiz-option-label">${opt.label}</span>
+                <span class="quiz-option-desc">${opt.desc}</span>
+              </span>
             </button>`
             )
             .join("")}
