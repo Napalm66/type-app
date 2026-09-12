@@ -269,7 +269,7 @@ body {
    than trying to track the curves precisely. */
 @media (max-width: 1000px) {
   .hero-text {
-    padding-top: 17%;
+    padding-top: 27%;
   }
 }
 
@@ -1164,6 +1164,7 @@ main.wrap {
   border-radius: var(--radius);
   padding: 0.85rem 1rem;
   cursor: pointer;
+  color: var(--ink);
   font-family: var(--font-ui);
   transition: border-color 0.15s ease;
 }
