@@ -6,6 +6,7 @@ const SPECIMEN_SIZES = {
   detail: { default: null, custom: "1.6rem" },
   compare: { default: "2rem", custom: "1.25rem" },
   quizResult: { default: "2.6rem", custom: "1.5rem" },
+  quizChoice: { default: "1.4rem", custom: "1rem" },
 };
 
 let customSpecimenText = "";

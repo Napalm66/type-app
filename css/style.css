@@ -1182,23 +1182,17 @@ main.wrap {
   color: var(--ink);
 }
 
-.quiz-game-specimen {
-  line-height: 1.1;
-  padding: 1.5rem 0;
-  border-top: 1px solid var(--rule-solid);
-  border-bottom: 1px solid var(--rule-solid);
-  margin-bottom: 1.25rem;
-  word-break: break-word;
-  text-align: center;
-}
-
 .quiz-game-prompt {
   font-family: var(--font-display);
   font-size: clamp(1.2rem, 3.4vw, 1.5rem);
   text-transform: uppercase;
   line-height: 1.05;
-  margin: 0 0 1rem;
+  margin: 0 0 1.25rem;
   text-align: center;
+}
+
+.quiz-game-prompt strong {
+  color: var(--accent);
 }
 
 .quiz-game-choices {
@@ -1208,22 +1202,44 @@ main.wrap {
   margin-bottom: 1.25rem;
 }
 
+/* Big square tiles - each shows the candidate's own specimen (same
+   neutral "Aa Gg Qy" sample as the question above, so it's a genuine
+   like-for-like visual comparison) with its name as a caption, not just
+   a name to read. */
 .quiz-game-choice {
+  aspect-ratio: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
   text-align: center;
   background: none;
   border: 1px solid var(--rule-solid);
   border-radius: var(--radius);
-  padding: 0.85rem 1rem;
+  padding: 0.75rem;
   cursor: pointer;
   color: var(--ink);
   font-family: var(--font-ui);
-  font-weight: 600;
-  font-size: 0.92rem;
   transition: border-color 0.15s ease, color 0.15s ease, opacity 0.15s ease;
+}
+
+.quiz-game-choice-specimen {
+  line-height: 1.1;
+  max-width: 100%;
+  overflow-wrap: break-word;
+}
+
+.quiz-game-choice-name {
+  font-weight: 600;
+  font-size: 0.85rem;
 }
 
 .quiz-game-choice:hover:not(:disabled) {
   border-color: var(--accent);
+}
+
+.quiz-game-choice:hover:not(:disabled) .quiz-game-choice-name {
   color: var(--accent);
 }
 
@@ -1234,10 +1250,17 @@ main.wrap {
 
 .quiz-game-choice.is-correct {
   border-color: var(--accent);
+}
+
+.quiz-game-choice.is-correct .quiz-game-choice-name {
   color: var(--accent);
 }
 
 .quiz-game-choice.is-incorrect {
+  opacity: 0.55;
+}
+
+.quiz-game-choice.is-incorrect .quiz-game-choice-name {
   color: var(--ink-faint);
   text-decoration: line-through;
 }

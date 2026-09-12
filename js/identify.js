@@ -1,8 +1,9 @@
-// Guess-the-classification game: a specimen renders in its real font
-// (SPECIMEN_TEXT, the same neutral "Aa Gg Qy" sample used elsewhere -
-// never the classification's own name, which would give the answer away),
-// the visitor picks one of four classification names, and gets instant
-// right/wrong feedback plus the classification's key tell to learn from.
+// Guess-the-classification game, flipped from name-recall to visual
+// recognition: the round names a target classification as plain text,
+// and four big square tiles each show a candidate's own specimen -
+// unlabeled, so picking correctly takes actually recognizing the look,
+// not just reading a label. Names reveal only after answering, alongside
+// the target's key tell to learn from.
 //
 // Distractors are picked to make the guess genuinely test knowledge, not
 // just "does this look nothing alike": same-branch classifications (the
@@ -33,8 +34,8 @@ function initIdentify(root, onOpenDetail) {
   let deckIndex = 0;
   let score = 0;
   let roundsPlayed = 0;
-  let roundItem = null;
-  let roundChoices = [];
+  let roundItem = null; // the named target classification
+  let roundChoices = []; // 4 candidates, shuffled, includes the target
   let selectedId = null;
 
   function startRound() {
@@ -79,7 +80,12 @@ function initIdentify(root, onOpenDetail) {
               if (c.id === roundItem.id) state = "is-correct";
               else if (c.id === selectedId) state = "is-incorrect";
             }
-            return `<button class="quiz-game-choice ${state}" data-id="${c.id}" ${selectedId ? "disabled" : ""}>${c.name}</button>`;
+            return `
+              <button class="quiz-game-choice ${state}" data-id="${c.id}" ${selectedId ? "disabled" : ""}>
+                <span class="quiz-game-choice-specimen">${renderSpecimenHTML(c, "quizChoice")}</span>
+                ${selectedId ? `<span class="quiz-game-choice-name">${c.name}</span>` : ""}
+              </button>
+            `;
           })
           .join("")}
       </div>
@@ -90,7 +96,7 @@ function initIdentify(root, onOpenDetail) {
     const correct = selectedId === roundItem.id;
     return `
       <div class="quiz-game-feedback ${correct ? "is-correct" : "is-incorrect"}">
-        <div class="quiz-game-feedback-label">${correct ? "Correct" : "Not quite — it's " + roundItem.name}</div>
+        <div class="quiz-game-feedback-label">${correct ? "Correct" : "Not quite"}</div>
         ${
           roundItem.diagnostics
             ? `<div class="tell-box"><strong>Key tell</strong>${roundItem.diagnostics.tell}</div>`
@@ -111,8 +117,7 @@ function initIdentify(root, onOpenDetail) {
           <span class="quiz-score">Score <strong>${score}</strong> / ${roundsPlayed}</span>
           <button class="quiz-restart">Restart</button>
         </div>
-        <div class="quiz-game-specimen">${renderSpecimenHTML(roundItem, "quizResult")}</div>
-        <p class="quiz-game-prompt">Which classification is this?</p>
+        <p class="quiz-game-prompt">Which one is <strong>${roundItem.name}</strong>?</p>
         ${renderChoices()}
         ${selectedId ? renderFeedback() : ""}
       </div>
