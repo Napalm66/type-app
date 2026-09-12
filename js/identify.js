@@ -70,6 +70,16 @@ function initIdentify(root, onOpenDetail) {
     startRound();
   }
 
+  // Each square is an empty image slot until a classification carries an
+  // `exampleImage` path (add that field to the relevant entries in
+  // js/data.js, e.g. exampleImage: "images/specimens/venetian-1.jpg") -
+  // then it shows as that square's background, still unlabeled until
+  // the round is answered.
+  function quizChoiceImageHTML(c) {
+    const bg = c.exampleImage ? ` style="background-image:url('${c.exampleImage}')"` : "";
+    return `<span class="quiz-game-choice-image"${bg}></span>`;
+  }
+
   function renderChoices() {
     return `
       <div class="quiz-game-choices">
@@ -82,7 +92,7 @@ function initIdentify(root, onOpenDetail) {
             }
             return `
               <button class="quiz-game-choice ${state}" data-id="${c.id}" ${selectedId ? "disabled" : ""}>
-                <span class="quiz-game-choice-specimen">${renderSpecimenHTML(c, "quizChoice")}</span>
+                ${quizChoiceImageHTML(c)}
                 ${selectedId ? `<span class="quiz-game-choice-name">${c.name}</span>` : ""}
               </button>
             `;
