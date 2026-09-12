@@ -5,9 +5,13 @@
 // prompt describing what visual detail to look for (and what to go
 // photograph). Either way it's unlabeled until answering, so picking
 // correctly takes actually recognizing the look, not reading a name.
-// Each classification carries two examples so repeat rounds don't always
-// show the same prompt/photo. Names reveal only after answering,
-// alongside the target's key tell to learn from.
+// Each classification carries two examples, used as two full 13-round
+// sets rather than picked at random per round: every classification
+// shows its first example throughout one pass through the deck, then
+// its second example throughout the next, alternating - so both
+// examples get equal, predictable coverage instead of leaving it to
+// chance. Names reveal only after answering, alongside the target's
+// key tell to learn from.
 //
 // Distractors are picked to make the guess genuinely test knowledge, not
 // just "does this look nothing alike": same-branch classifications (the
@@ -36,27 +40,26 @@ function buildChoices(item) {
 function initIdentify(root, onOpenDetail) {
   let deck = shuffle(CLASSIFICATIONS.map((c) => c.id));
   let deckIndex = 0;
+  let exampleSet = 0; // which of each classification's two examples this whole pass uses
   let score = 0;
   let roundsPlayed = 0;
   let roundItem = null; // the named target classification
   let roundChoices = []; // 4 candidates, shuffled, includes the target
-  let roundExamples = {}; // candidate id -> the example {prompt, image} picked for this round
+  let roundExamples = {}; // candidate id -> the example {prompt, image} used this round
   let selectedId = null;
 
   function startRound() {
     if (deckIndex >= deck.length) {
+      exampleSet = exampleSet === 0 ? 1 : 0;
       deck = shuffle(CLASSIFICATIONS.map((c) => c.id));
       deckIndex = 0;
     }
     roundItem = getById(deck[deckIndex]);
     roundChoices = buildChoices(roundItem);
-    // Each classification carries two examples (js/data.js) - a different
-    // one is picked at random per round so the same classification's
-    // square doesn't always show the same prompt/photo on repeat rounds.
     roundExamples = {};
     roundChoices.forEach((c) => {
       const list = c.examples && c.examples.length ? c.examples : [{ prompt: "", image: null }];
-      roundExamples[c.id] = list[Math.floor(Math.random() * list.length)];
+      roundExamples[c.id] = list[Math.min(exampleSet, list.length - 1)];
     });
     selectedId = null;
     render();
@@ -78,6 +81,7 @@ function initIdentify(root, onOpenDetail) {
   function restart() {
     deck = shuffle(CLASSIFICATIONS.map((c) => c.id));
     deckIndex = 0;
+    exampleSet = 0;
     score = 0;
     roundsPlayed = 0;
     startRound();
