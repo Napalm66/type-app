@@ -32,11 +32,19 @@ const NODES = {
   "serif-shape": {
     question: "What do the serifs themselves look like?",
     hint: "Zoom in on where a stem meets its serif.",
+    // Venetian and Garalde share the same "bracketed-robust" diagnostic
+    // value (real classifications, real ties - see resolveSerif below,
+    // which already tells them apart via axis/contrast rather than shape),
+    // but Explore's own serif spectrum still traces them as two visually
+    // distinct shapes. Both options below keep that same value - only
+    // their icon differs - so five choices are shown here, matching
+    // Explore's five, without changing how the answer resolves.
     options: [
-      { label: "Thick, squared-off slabs", desc: "Nearly as heavy as the stem, barely tapering.", value: { serif: "slab" }, next: "serif-result" },
-      { label: "Smooth, curved bracket", desc: "Eases gradually from stem into serif.", value: { serif: "bracketed-robust" }, next: "serif-result" },
-      { label: "Sharp, narrow bracket", desc: "A thinner, more precise curve than ‘smooth’.", value: { serif: "bracketed-sharp" }, next: "serif-result" },
-      { label: "No bracket — hairline", desc: "Serif meets the stem at a sharp, unblended angle.", value: { serif: "unbracketed-hairline" }, next: "serif-result" },
+      { label: "Thick, squared-off slabs", desc: "Nearly as heavy as the stem, barely tapering.", value: { serif: "slab" }, icon: "slab", next: "serif-result" },
+      { label: "Smooth, rounded bracket", desc: "Eases gradually from stem into serif, with an early, hand-cut warmth.", value: { serif: "bracketed-robust" }, icon: "venetian", next: "serif-result" },
+      { label: "Smooth, even bracket", desc: "The same gentle curve, but more regular and consistent.", value: { serif: "bracketed-robust" }, icon: "garalde", next: "serif-result" },
+      { label: "Sharp, narrow bracket", desc: "A thinner, more precise curve than ‘smooth’.", value: { serif: "bracketed-sharp" }, icon: "transitional", next: "serif-result" },
+      { label: "No bracket — hairline", desc: "Serif meets the stem at a sharp, unblended angle.", value: { serif: "unbracketed-hairline" }, icon: "modern", next: "serif-result" },
     ],
   },
   "sans-construction": {
@@ -72,17 +80,6 @@ const DIRECT_RESULTS = {
 //   detail.js for the serif-shape spectrum shown there.
 const QUIZ_CUE_AXIS_DEGREES = { "oblique-strong": 34, "oblique-moderate": 20, vertical: 0 };
 const QUIZ_CUE_CONTRAST_VALUES = { low: 0, medium: 2, high: 3 };
-// Real classifications from SERIF_SPECTRUM (detail.js, shown in Explore's
-// detail modal) stand in for each quiz option, rather than one-off
-// presets invented just for this question - venetian and garalde share
-// the same "bracketed-robust" diagnostic, so either represents that
-// option; venetian is used since it's the first oldstyle in the array.
-const QUIZ_CUE_SERIF_SHAPE_IDS = {
-  slab: "slab",
-  "bracketed-robust": "venetian",
-  "bracketed-sharp": "transitional",
-  "unbracketed-hairline": "modern",
-};
 const QUIZ_CUE_START_IDS = {
   "serif-contrast": "garalde",
   "sans-construction": "neo-grotesque",
@@ -130,9 +127,8 @@ function quizContrastAxisSVG(contrastValue, axisDeg) {
   `;
 }
 
-function quizSerifShapeSVG(serifKey) {
-  const id = QUIZ_CUE_SERIF_SHAPE_IDS[serifKey];
-  const spec = id && SERIF_SPECTRUM.find((s) => s.id === id);
+function quizSerifShapeSVG(specId) {
+  const spec = specId && SERIF_SPECTRUM.find((s) => s.id === specId);
   if (!spec) return "";
   return `
     <svg viewBox="${serifSpectrumViewBox(spec)}" class="quiz-cue-serif-svg" aria-hidden="true">
@@ -153,7 +149,7 @@ function quizOptionCueHTML(nodeId, opt) {
     return quizContrastAxisSVG(2, QUIZ_CUE_AXIS_DEGREES[opt.value.axis]);
   }
   if (nodeId === "serif-shape") {
-    return quizSerifShapeSVG(opt.value.serif);
+    return quizSerifShapeSVG(opt.icon);
   }
   if (nodeId === "sans-construction") {
     return quizFontCueHTML(getById(opt.value.sans));
