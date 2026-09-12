@@ -322,6 +322,18 @@ main.wrap {
   margin: 0 0 1.75rem;
 }
 
+/* Timeline and Anatomy split their intro into two sentences as separate
+   <p>s (for a sentence-per-line read), but the shared 1.75rem margin
+   above is sized to separate the intro from the next block, not to
+   space two sentences of the same intro apart - applied between both
+   <p>s here it read as a much bigger gap than normal line leading.
+   Collapsing every non-last <p> down to the same rhythm as a line break
+   keeps the two-sentence intros reading like one paragraph, matching
+   the single-<p> intros elsewhere. */
+.view-intro p:not(:last-child) {
+  margin-bottom: 0.35rem;
+}
+
 /* ---------- specimen tool ---------- */
 
 .specimen-tool {
