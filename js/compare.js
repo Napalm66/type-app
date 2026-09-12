@@ -176,10 +176,10 @@ function initCompare(root) {
       // Layer A isn't clipped away past the handle — it stays put so the
       // handle can be dragged back — but at full opacity there it was
       // rendering underneath layer B's differently-shaped letters and the
-      // two mixed into an illegible tangle. Masking A down to 70% opacity
+      // two mixed into an illegible tangle. Masking A down to 75% opacity
       // past the handle keeps it clearly visible as a "ghost" without
       // fighting B for attention there.
-      const mask = `linear-gradient(to right, black 0%, black ${pct}%, rgba(0,0,0,0.7) ${pct}%, rgba(0,0,0,0.7) 100%)`;
+      const mask = `linear-gradient(to right, black 0%, black ${pct}%, rgba(0,0,0,0.75) ${pct}%, rgba(0,0,0,0.75) 100%)`;
       layerA.style.maskImage = mask;
       layerA.style.webkitMaskImage = mask;
     }

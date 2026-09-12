@@ -1529,15 +1529,13 @@ main.wrap {
 }
 
 .compare-diff-wrap {
-  /* Fixed near-black, not var(--paper)/var(--panel)/teal — a deliberately
-     "reversed" box regardless of site theme. Neutral black (rather than
-     the app's own dark teal) was chosen specifically so it doesn't compete
-     with either the orange or the white specimen layer's own color the
-     way a colored background does. */
+  /* Fixed dark teal, not var(--paper)/var(--panel) — a deliberately
+     "reversed" box regardless of site theme, the same treatment the
+     footer and era tooltip already use. */
   position: relative;
   height: clamp(160px, 26vw, 260px);
   border: 1px solid var(--ink);
-  background: #0a0a0a;
+  background: #004643;
   overflow: hidden;
   cursor: ew-resize;
   touch-action: none;
