@@ -139,8 +139,8 @@ body {
 
 .hero-text {
   position: relative;
-  padding-top: 15%;
-  padding-bottom: clamp(2rem, 5vw, 3rem);
+  padding-top: 12%;
+  padding-bottom: clamp(0.85rem, 2.13vw, 1.28rem);
 }
 
 .hero-text .brand,
@@ -269,14 +269,14 @@ body {
    than trying to track the curves precisely. */
 @media (max-width: 1000px) {
   .hero-text {
-    padding-top: 21%;
+    padding-top: 17%;
   }
 }
 
 /* ---------- views ---------- */
 
 main.wrap {
-  padding-top: clamp(1.75rem, 4vw, 2.5rem);
+  padding-top: clamp(0.74rem, 1.7vw, 1.06rem);
   padding-bottom: 4rem;
   min-height: 60vh;
 }
