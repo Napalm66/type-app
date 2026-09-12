@@ -1,9 +1,13 @@
 // Guess-the-classification game, flipped from name-recall to visual
 // recognition: the round names a target classification as plain text,
-// and four big square tiles each show a candidate's own specimen -
-// unlabeled, so picking correctly takes actually recognizing the look,
-// not just reading a label. Names reveal only after answering, alongside
-// the target's key tell to learn from.
+// and four big square tiles show each candidate's example - a real photo
+// once one's supplied (js/data.js: examples[].image), otherwise the
+// prompt describing what visual detail to look for (and what to go
+// photograph). Either way it's unlabeled until answering, so picking
+// correctly takes actually recognizing the look, not reading a name.
+// Each classification carries two examples so repeat rounds don't always
+// show the same prompt/photo. Names reveal only after answering,
+// alongside the target's key tell to learn from.
 //
 // Distractors are picked to make the guess genuinely test knowledge, not
 // just "does this look nothing alike": same-branch classifications (the
@@ -36,6 +40,7 @@ function initIdentify(root, onOpenDetail) {
   let roundsPlayed = 0;
   let roundItem = null; // the named target classification
   let roundChoices = []; // 4 candidates, shuffled, includes the target
+  let roundExamples = {}; // candidate id -> the example {prompt, image} picked for this round
   let selectedId = null;
 
   function startRound() {
@@ -45,6 +50,14 @@ function initIdentify(root, onOpenDetail) {
     }
     roundItem = getById(deck[deckIndex]);
     roundChoices = buildChoices(roundItem);
+    // Each classification carries two examples (js/data.js) - a different
+    // one is picked at random per round so the same classification's
+    // square doesn't always show the same prompt/photo on repeat rounds.
+    roundExamples = {};
+    roundChoices.forEach((c) => {
+      const list = c.examples && c.examples.length ? c.examples : [{ prompt: "", image: null }];
+      roundExamples[c.id] = list[Math.floor(Math.random() * list.length)];
+    });
     selectedId = null;
     render();
   }
@@ -70,14 +83,15 @@ function initIdentify(root, onOpenDetail) {
     startRound();
   }
 
-  // Each square is an empty image slot until a classification carries an
-  // `exampleImage` path (add that field to the relevant entries in
-  // js/data.js, e.g. exampleImage: "images/specimens/venetian-1.jpg") -
-  // then it shows as that square's background, still unlabeled until
-  // the round is answered.
+  // Shows the round's chosen example for this candidate: a real photo
+  // once one exists (image on that example in js/data.js), or - until
+  // then - the prompt text describing what to look for (and what to go
+  // photograph), never the classification's own name.
   function quizChoiceImageHTML(c) {
-    const bg = c.exampleImage ? ` style="background-image:url('${c.exampleImage}')"` : "";
-    return `<span class="quiz-game-choice-image"${bg}></span>`;
+    const example = roundExamples[c.id] || {};
+    const bg = example.image ? ` style="background-image:url('${example.image}')"` : "";
+    const prompt = !example.image && example.prompt ? `<span class="quiz-game-choice-prompt">${example.prompt}</span>` : "";
+    return `<span class="quiz-game-choice-image"${bg}>${prompt}</span>`;
   }
 
   function renderChoices() {

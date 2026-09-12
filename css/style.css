@@ -1229,10 +1229,25 @@ main.wrap {
 .quiz-game-choice-image {
   flex: 1;
   min-height: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.5rem;
   background-color: var(--paper);
   background-size: cover;
   background-position: center;
   border: 1px dashed var(--rule-solid);
+}
+
+/* Describes one cropped, abstract diagnostic detail to look for (and to
+   go photograph) - never the classification's own name or a whole-word
+   description, which would give the round away at a glance. Disappears
+   once that example gets a real photo (js/data.js: examples[].image). */
+.quiz-game-choice-prompt {
+  font-size: 0.72rem;
+  font-style: italic;
+  color: var(--ink-faint);
+  line-height: 1.3;
 }
 
 .quiz-game-choice-name {

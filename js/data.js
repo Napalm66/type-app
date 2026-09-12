@@ -34,6 +34,10 @@ const CLASSIFICATIONS = [
       "Heavy vertical stems cause a strong vertical presence",
     ],
     keyTypefaces: ["Gutenberg's Textura", "Fraktur", "Cloister Black", "Old English"],
+    examples: [
+      { prompt: "A tight crop on one letter's sharp, diamond-shaped terminal", image: null },
+      { prompt: "An extreme close-up where the ink looks almost solid black", image: null },
+    ],
     fontStack: "'UnifrakturMaguntia', cursive",
     googleFont: "UnifrakturMaguntia",
     specimenSize: "2.4rem",
@@ -70,6 +74,10 @@ const CLASSIFICATIONS = [
       "Lowercase \"e\" has a slanted crossbar",
     ],
     keyTypefaces: ["Jenson", "Centaur", "Verona", "Golden Type"],
+    examples: [
+      { prompt: "A cropped close-up of a lowercase 'e', showing just its slanted crossbar", image: null },
+      { prompt: "A magnified curve of an 'o' or 'e' where the stroke stays almost the same weight all the way around", image: null },
+    ],
     // Coelacanth (self-hosted, see fonts/OFL-Coelacanth.md) is a free
     // direct revival of Bruce Rogers' Centaur — a genuine Jenson/Venetian
     // lineage typeface, unlike Cormorant Garamond (which is Garalde, i.e.
@@ -109,6 +117,10 @@ const CLASSIFICATIONS = [
       "Lowercase \"e\" has a horizontal bar",
     ],
     keyTypefaces: ["Garamond", "Bembo", "Caslon", "Janson"],
+    examples: [
+      { prompt: "A cropped close-up of a lowercase 'e', showing just its level, horizontal crossbar", image: null },
+      { prompt: "A magnified curve of an 'o' or 'G' showing a gentle diagonal stress axis", image: null },
+    ],
     fontStack: "'EB Garamond', serif",
     googleFont: "EB Garamond:wght@500",
     specimenSize: "3rem",
@@ -144,6 +156,10 @@ const CLASSIFICATIONS = [
       "Ascenders of lowercase letters may be slightly taller than cap height",
     ],
     keyTypefaces: ["Baskerville", "Times New Roman", "Georgia", "Mrs Eaves"],
+    examples: [
+      { prompt: "A close crop where a serif meets its stem — still curved, but crisper than an old-style face", image: null },
+      { prompt: "A magnified curve of an 'o' showing a stress axis sitting almost perfectly upright", image: null },
+    ],
     // "Times New Roman" leads by name — genuine, if the visitor's device
     // has it installed (no redistribution involved, just a CSS reference).
     // Tinos, a free SIL-OFL metric-compatible match for Times New Roman
@@ -187,6 +203,10 @@ const CLASSIFICATIONS = [
       "Characters are likely to be constructed out of interchangeable parts",
     ],
     keyTypefaces: ["Bodoni", "Didot", "Walbaum", "Bodoni Moda"],
+    examples: [
+      { prompt: "A tight crop on just the hairline serif meeting its stem, with no curve at all", image: null },
+      { prompt: "A close-up comparing a thick stem right next to a thread-thin hairline", image: null },
+    ],
     // Playfair Display (previously used here) is explicitly not a direct
     // Bodoni/Didot revival — its own designer describes it as synthesizing
     // Baskerville (Transitional), Didot, Bodoni, and Scotch Roman together,
@@ -227,6 +247,10 @@ const CLASSIFICATIONS = [
       "Characters appear precise and mechanical, likely to be constructed of interchangeable parts",
     ],
     keyTypefaces: ["Clarendon", "Rockwell", "Courier", "Kameron"],
+    examples: [
+      { prompt: "A tight crop on just the squared-off slab serif, nearly as thick as the stem", image: null },
+      { prompt: "A close-up of two strokes showing barely any thick/thin difference", image: null },
+    ],
     // Kameron (Vernon Adams) is explicitly a reworking of classic Slab
     // Serif/Egyptian forms blending geometric and Clarendon influences —
     // a closer match to this card than Roboto Slab, which is a screen-
@@ -268,6 +292,10 @@ const CLASSIFICATIONS = [
       "Often have a slightly squared appearance",
     ],
     keyTypefaces: ["Akzidenz-Grotesk", "Franklin Gothic", "News Gothic"],
+    examples: [
+      { prompt: "A cropped close-up of one letter's slightly irregular curve", image: null },
+      { prompt: "A magnified stroke showing just a hint of thick/thin contrast", image: null },
+    ],
     // Libre Franklin (Impallari Type) is an explicit open-source
     // revival of Franklin Gothic — this card's own key typeface —
     // unlike Archivo, an original 2012 design in the genre but not a
@@ -294,6 +322,10 @@ const CLASSIFICATIONS = [
       tell: "Tight apertures, very uniform stroke width, closed-off terminals (e.g. Helvetica's 'C' and 'S').",
     },
     keyTypefaces: ["Helvetica", "Univers", "Arial", "San Francisco"],
+    examples: [
+      { prompt: "A tight crop on the closed-off aperture of a 'C' or 'S'", image: null },
+      { prompt: "A close-up of two strokes showing no contrast between them at all", image: null },
+    ],
     fontStack: "'Arimo', Arial, sans-serif",
     googleFont: "Arimo:wght@700",
     specimenSize: "2.8rem",
@@ -332,6 +364,10 @@ const CLASSIFICATIONS = [
       "Proportions of characters are based on geometric shapes",
     ],
     keyTypefaces: ["Futura", "Century Gothic", "Avant Garde", "Kabel"],
+    examples: [
+      { prompt: "A cropped close-up of a lowercase 'a' bowl, nearly a perfect circle", image: null },
+      { prompt: "A tight crop on a corner or curve that looks compass-drawn", image: null },
+    ],
     // Jost was designed as an explicit homage to Paul Renner (Futura's
     // designer) — originally named "Renner*" before release — capturing
     // Futura's geometric proportions directly. Poppins is an original
@@ -375,6 +411,10 @@ const CLASSIFICATIONS = [
       "Proportions are based on those of Humanist typefaces",
     ],
     keyTypefaces: ["Gill Sans", "Frutiger", "Optima", "Open Sans"],
+    examples: [
+      { prompt: "A cropped close-up of a lowercase 'g', showing it as two-story", image: null },
+      { prompt: "A magnified close-up comparing the uneven stroke widths of two letters", image: null },
+    ],
     // Open Sans is unambiguously classified as humanist by its own
     // designer (Steve Matteson) and design brief — "open apertures,
     // wide forms" match this card's own diagnostic tell directly.
@@ -402,6 +442,10 @@ const CLASSIFICATIONS = [
       tell: "Small triangular/flared serifs that taper directly out of the stroke, no true bracket curve.",
     },
     keyTypefaces: ["Trajan", "Albertus", "Copperplate Gothic", "Post Antiqua"],
+    examples: [
+      { prompt: "A tight crop on a small triangular wedge flaring straight out of a stem", image: null },
+      { prompt: "A close-up of a serif that looks chiseled rather than drawn with a pen", image: null },
+    ],
     fontStack: "'Cinzel', serif",
     googleFont: "Cinzel:wght@600",
     specimenSize: "2.4rem",
@@ -422,6 +466,10 @@ const CLASSIFICATIONS = [
       { name: "Casual", note: "Looser, based on brush or marker lettering; less rigid connection between letters." },
     ],
     keyTypefaces: ["Snell Roundhand", "Shelley Script", "Brush Script"],
+    examples: [
+      { prompt: "A cropped close-up where two letters visibly connect", image: null },
+      { prompt: "A tight crop on a single flourish or loop", image: null },
+    ],
     fontStack: "'Tangerine', 'Sacramento', cursive",
     googleFont: "Tangerine:wght@700",
     specimenSize: "4rem",
@@ -438,6 +486,10 @@ const CLASSIFICATIONS = [
       "Display faces prioritize impact and personality over extended readability — fat faces, wood-type Western faces, grunge and novelty faces all live here. They frequently exaggerate a trait from another classification (extreme contrast, extreme weight, decorative ornament) past the point of legibility at text size.",
     closesBecause: "Closes at the 1990s grunge wave, matching the Postmodernism/Punk/Grunge era.",
     keyTypefaces: ["Fat Face", "Cooper Black", "Bungee", "Circus/Western faces"],
+    examples: [
+      { prompt: "An abstract crop of one bold, attention-grabbing shape", image: null },
+      { prompt: "A tight crop on an unusual, novelty detail unlike a normal reading typeface", image: null },
+    ],
     fontStack: "'Bungee', cursive",
     googleFont: "Bungee",
     specimenSize: "2.4rem",
