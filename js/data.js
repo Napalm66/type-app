@@ -35,8 +35,14 @@ const CLASSIFICATIONS = [
     ],
     keyTypefaces: ["Gutenberg's Textura", "Fraktur", "Cloister Black", "Old English"],
     examples: [
-      { prompt: "A tight crop on one letter's sharp, diamond-shaped terminal", image: null },
-      { prompt: "An extreme close-up where the ink looks almost solid black", image: null },
+      {
+        prompt: "A magnified diagonal stress line through a rounded stroke — cut by a broad-nib pen held at one steep, unvarying angle",
+        image: "images/examples/blackletter-1.jpg",
+      },
+      {
+        prompt: "An extreme close-up where the ink looks almost solid black — dense strokes and narrow counters built from short, straight pen strokes rather than one continuous curve",
+        image: "images/examples/blackletter-2.jpg",
+      },
     ],
     fontStack: "'UnifrakturMaguntia', cursive",
     googleFont: "UnifrakturMaguntia",
@@ -75,8 +81,14 @@ const CLASSIFICATIONS = [
     ],
     keyTypefaces: ["Jenson", "Centaur", "Verona", "Golden Type"],
     examples: [
-      { prompt: "A cropped close-up of a lowercase 'e', showing just its slanted crossbar", image: null },
-      { prompt: "A magnified curve of an 'o' or 'e' where the stroke stays almost the same weight all the way around", image: null },
+      {
+        prompt: "A cropped detail of a lowercase 'e', isolating only its crossbar — it sits on a diagonal axis, a direct trace of a broad pen held at one constant slant",
+        image: "images/examples/venetian-1.png",
+      },
+      {
+        prompt: "A magnified serif bracket, the curve easing generously and a little unevenly from stem into foot — an early, hand-cut curve, not a mechanically consistent one",
+        image: "images/examples/venetian-2.jpg",
+      },
     ],
     // Coelacanth (self-hosted, see fonts/OFL-Coelacanth.md) is a free
     // direct revival of Bruce Rogers' Centaur — a genuine Jenson/Venetian
@@ -118,8 +130,14 @@ const CLASSIFICATIONS = [
     ],
     keyTypefaces: ["Garamond", "Bembo", "Caslon", "Janson"],
     examples: [
-      { prompt: "A cropped close-up of a lowercase 'e', showing just its level, horizontal crossbar", image: null },
-      { prompt: "A magnified curve of an 'o' or 'G' showing a gentle diagonal stress axis", image: null },
+      {
+        prompt: "A magnified serif bracket — the same gentle curve as an earlier oldstyle, but more regular and consistent, cut with a steadier hand",
+        image: null,
+      },
+      {
+        prompt: "A cropped detail of a lowercase 'e', isolating only its crossbar — now level and horizontal, the clearest single detail marking the shift from the previous generation of romans",
+        image: null,
+      },
     ],
     fontStack: "'EB Garamond', serif",
     googleFont: "EB Garamond:wght@500",
@@ -157,8 +175,14 @@ const CLASSIFICATIONS = [
     ],
     keyTypefaces: ["Baskerville", "Times New Roman", "Georgia", "Mrs Eaves"],
     examples: [
-      { prompt: "A close crop where a serif meets its stem — still curved, but crisper than an old-style face", image: null },
-      { prompt: "A magnified curve of an 'o' showing a stress axis sitting almost perfectly upright", image: null },
+      {
+        prompt: "A close crop isolating where a serif meets its stem — the connecting curve is thinner and more precisely cut than an oldstyle bracket",
+        image: null,
+      },
+      {
+        prompt: "A cropped comparison of a lowercase letter's height against a capital beside it — the lowercase reaches unusually tall, a proportion pushed further than oldstyle romans allowed",
+        image: null,
+      },
     ],
     // "Times New Roman" leads by name — genuine, if the visitor's device
     // has it installed (no redistribution involved, just a CSS reference).
@@ -204,8 +228,11 @@ const CLASSIFICATIONS = [
     ],
     keyTypefaces: ["Bodoni", "Didot", "Walbaum", "Bodoni Moda"],
     examples: [
-      { prompt: "A tight crop on just the hairline serif meeting its stem, with no curve at all", image: null },
-      { prompt: "A close-up of a small, round ball shape sitting right at the tip of a curved stroke", image: null },
+      {
+        prompt: "An extreme close-up of a serif meeting its stem with no bracket curve at all — a flat hairline butting straight into a heavy vertical",
+        image: null,
+      },
+      { prompt: "A tight crop on a stroke terminal ending in a small, perfectly round ball rather than tapering to a point", image: null },
     ],
     // Playfair Display (previously used here) is explicitly not a direct
     // Bodoni/Didot revival — its own designer describes it as synthesizing
@@ -248,8 +275,14 @@ const CLASSIFICATIONS = [
     ],
     keyTypefaces: ["Clarendon", "Rockwell", "Courier", "Kameron"],
     examples: [
-      { prompt: "A tight crop on just the squared-off slab serif, nearly as thick as the stem", image: null },
-      { prompt: "A close-up of two strokes showing barely any thick/thin difference", image: null },
+      {
+        prompt: "A close crop on a serif nearly identical in weight to its own stem, meeting it at a hard right angle with no bracket curve",
+        image: null,
+      },
+      {
+        prompt: "A cropped comparison of a lowercase letter's height against a capital beside it — unusually tall, built for legibility at a distance rather than on the page",
+        image: null,
+      },
     ],
     // Kameron (Vernon Adams) is explicitly a reworking of classic Slab
     // Serif/Egyptian forms blending geometric and Clarendon influences —
@@ -293,8 +326,11 @@ const CLASSIFICATIONS = [
     ],
     keyTypefaces: ["Akzidenz-Grotesk", "Franklin Gothic", "News Gothic"],
     examples: [
-      { prompt: "A cropped close-up of one letter's slightly irregular curve", image: null },
-      { prompt: "A magnified stroke showing just a hint of thick/thin contrast", image: null },
+      { prompt: "A cropped detail of a curved stroke that isn't quite geometrically regular — a faint squareness where a bowl should be round", image: null },
+      {
+        prompt: "A cropped comparison of a lowercase letter's height against a capital beside it — noticeably tall, a 19th-century poster-face proportion",
+        image: null,
+      },
     ],
     // Libre Franklin (Impallari Type) is an explicit open-source
     // revival of Franklin Gothic — this card's own key typeface —
@@ -323,8 +359,11 @@ const CLASSIFICATIONS = [
     },
     keyTypefaces: ["Helvetica", "Univers", "Arial", "San Francisco"],
     examples: [
-      { prompt: "A tight crop on the closed-off aperture of a 'C' or 'S'", image: null },
-      { prompt: "A close-up of two strokes showing no contrast between them at all", image: null },
+      {
+        prompt: "A tight crop on the closed, nearly sealed aperture of a curved letter — deliberately tight, a mid-century Swiss choice for density at small sizes",
+        image: null,
+      },
+      { prompt: "A magnified comparison of two strokes on one letter showing genuinely zero variation in weight", image: null },
     ],
     fontStack: "'Arimo', Arial, sans-serif",
     googleFont: "Arimo:wght@700",
@@ -365,8 +404,11 @@ const CLASSIFICATIONS = [
     ],
     keyTypefaces: ["Futura", "Century Gothic", "Avant Garde", "Kabel"],
     examples: [
-      { prompt: "A cropped close-up of a lowercase 'a' bowl, nearly a perfect circle", image: null },
-      { prompt: "A tight crop on a corner or curve that looks compass-drawn", image: null },
+      {
+        prompt: "A cropped detail of a bowl built as a near-mathematically perfect circle, not an optically corrected oval",
+        image: null,
+      },
+      { prompt: "A close crop on an apex or corner cut at one precise, unmodulated angle", image: null },
     ],
     // Jost was designed as an explicit homage to Paul Renner (Futura's
     // designer) — originally named "Renner*" before release — capturing
@@ -412,8 +454,14 @@ const CLASSIFICATIONS = [
     ],
     keyTypefaces: ["Gill Sans", "Frutiger", "Optima", "Open Sans"],
     examples: [
-      { prompt: "A cropped close-up of a lowercase 'g', showing it as two-story", image: null },
-      { prompt: "A magnified close-up comparing the uneven stroke widths of two letters", image: null },
+      {
+        prompt: "A cropped detail of a two-story lowercase letter, its bowl and loop still legible as a serif construction with the serifs simply removed",
+        image: null,
+      },
+      {
+        prompt: "A magnified curve showing a faint diagonal lean to its thinnest points — calligraphic stress most other sans genres flatten to purely vertical",
+        image: null,
+      },
     ],
     // Open Sans is unambiguously classified as humanist by its own
     // designer (Steve Matteson) and design brief — "open apertures,
@@ -443,8 +491,11 @@ const CLASSIFICATIONS = [
     },
     keyTypefaces: ["Trajan", "Albertus", "Copperplate Gothic", "Post Antiqua"],
     examples: [
-      { prompt: "A tight crop on a small triangular wedge flaring straight out of a stem", image: null },
-      { prompt: "A close-up of a serif that looks chiseled rather than drawn with a pen", image: null },
+      {
+        prompt: "A tight crop on a small triangular wedge flaring directly out of the stem with no curved transition — a chisel cut into stone, not a pen stroke on paper",
+        image: null,
+      },
+      { prompt: "A close-up on a serif's outer edge showing a straight-line taper rather than a curve", image: null },
     ],
     fontStack: "'Cinzel', serif",
     googleFont: "Cinzel:wght@600",
@@ -467,8 +518,8 @@ const CLASSIFICATIONS = [
     ],
     keyTypefaces: ["Snell Roundhand", "Shelley Script", "Brush Script"],
     examples: [
-      { prompt: "A cropped close-up where two letters visibly connect", image: null },
-      { prompt: "A tight crop on a single flourish or loop", image: null },
+      { prompt: "A cropped detail at the point where one letter's stroke visibly joins the next", image: null },
+      { prompt: "A tight crop on a single decorative loop or flourish, extended past what's structurally necessary", image: null },
     ],
     fontStack: "'Tangerine', 'Sacramento', cursive",
     googleFont: "Tangerine:wght@700",
@@ -487,8 +538,8 @@ const CLASSIFICATIONS = [
     closesBecause: "Closes at the 1990s grunge wave, matching the Postmodernism/Punk/Grunge era.",
     keyTypefaces: ["Fat Face", "Cooper Black", "Bungee", "Circus/Western faces"],
     examples: [
-      { prompt: "An abstract crop of one bold, attention-grabbing shape", image: null },
-      { prompt: "A tight crop on an unusual, novelty detail unlike a normal reading typeface", image: null },
+      { prompt: "An abstract crop on one exaggerated feature — weight, contrast, or ornament pushed past what any text face would tolerate", image: null },
+      { prompt: "A tight crop on a genuinely novel construction detail matching no historical letterform convention", image: null },
     ],
     fontStack: "'Bungee', cursive",
     googleFont: "Bungee",
