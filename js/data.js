@@ -280,11 +280,11 @@ const CLASSIFICATIONS = [
     examples: [
       {
         prompt: "A close crop on a serif nearly identical in weight to its own stem, meeting it at a hard right angle with no bracket curve",
-        image: null,
+        image: "images/examples/slab-1.jpg",
       },
       {
         prompt: "A cropped comparison of a lowercase letter's height against a capital beside it — unusually tall, built for legibility at a distance rather than on the page",
-        image: null,
+        image: "images/examples/slab-2.jpg",
       },
     ],
     // Kameron (Vernon Adams) is explicitly a reworking of classic Slab
