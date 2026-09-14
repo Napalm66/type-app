@@ -177,11 +177,11 @@ const CLASSIFICATIONS = [
     examples: [
       {
         prompt: "A close crop isolating where a serif meets its stem — the connecting curve is thinner and more precisely cut than an oldstyle bracket",
-        image: null,
+        image: "images/examples/transitional-1.jpg",
       },
       {
         prompt: "A cropped comparison of a lowercase letter's height against a capital beside it — the lowercase reaches unusually tall, a proportion pushed further than oldstyle romans allowed",
-        image: null,
+        image: "images/examples/transitional-2.jpg",
       },
     ],
     // "Times New Roman" leads by name — genuine, if the visitor's device
