@@ -329,10 +329,13 @@ const CLASSIFICATIONS = [
     ],
     keyTypefaces: ["Akzidenz-Grotesk", "Franklin Gothic", "News Gothic"],
     examples: [
-      { prompt: "A cropped detail of a curved stroke that isn't quite geometrically regular — a faint squareness where a bowl should be round", image: null },
+      {
+        prompt: "A cropped detail of a curved stroke that isn't quite geometrically regular — a faint squareness where a bowl should be round",
+        image: "images/examples/grotesque-1.jpg",
+      },
       {
         prompt: "A cropped comparison of a lowercase letter's height against a capital beside it — noticeably tall, a 19th-century poster-face proportion",
-        image: null,
+        image: "images/examples/grotesque-2.jpg",
       },
     ],
     // Libre Franklin (Impallari Type) is an explicit open-source
