@@ -533,8 +533,14 @@ const CLASSIFICATIONS = [
     ],
     keyTypefaces: ["Snell Roundhand", "Shelley Script", "Brush Script"],
     examples: [
-      { prompt: "A cropped detail at the point where one letter's stroke visibly joins the next", image: null },
-      { prompt: "A tight crop on a single decorative loop or flourish, extended past what's structurally necessary", image: null },
+      {
+        prompt: "A cropped detail at the point where one letter's stroke visibly joins the next",
+        image: "images/examples/script-1.jpg",
+      },
+      {
+        prompt: "A tight crop on a single decorative loop or flourish, extended past what's structurally necessary",
+        image: "images/examples/script-2.jpg",
+      },
     ],
     fontStack: "'Tangerine', 'Sacramento', cursive",
     googleFont: "Tangerine:wght@700",
