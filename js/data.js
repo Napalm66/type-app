@@ -468,11 +468,11 @@ const CLASSIFICATIONS = [
     examples: [
       {
         prompt: "A cropped detail of a two-story lowercase letter, its bowl and loop still legible as a serif construction with the serifs simply removed",
-        image: null,
+        image: "images/examples/humanist-1.jpeg",
       },
       {
         prompt: "A magnified curve showing a faint diagonal lean to its thinnest points — calligraphic stress most other sans genres flatten to purely vertical",
-        image: null,
+        image: "images/examples/humanist-2.jpeg",
       },
     ],
     // Open Sans is unambiguously classified as humanist by its own
