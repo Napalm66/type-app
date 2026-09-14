@@ -7,7 +7,7 @@ A field guide to type classification, built for the web. Explore the major typef
 ## Views
 
 - **Explore** — browse all 13 classifications as cards, each with era, key typefaces, diagnostic "tells," and a live specimen you can customize.
-- **Identify** — anatomy diagrams with a hover magnifier for inspecting serif shapes, stroke contrast, and axis details up close.
+- **Identify** — name a classification, then spot it among four specimens: can your eye tell them apart?
 - **Timeline** — a Gantt-style chart placing every classification against the century it emerged in, layered over a backdrop of broader typographic/art-historical eras (Romanesque through Digital & Variable Age).
 - **Compare** — put two classifications side by side to see how their diagnostics differ.
 

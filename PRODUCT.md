@@ -20,7 +20,7 @@ Where a static classification poster or Wikipedia table only shows finished exam
 
 ## Operating Context
 
-- Four views: Explore (card grid, 13 classifications), Identify (branching quiz that narrows down to a classification from visual traits), Timeline (Gantt-style chart of classifications over art-historical eras), Compare (up to 3 classifications side by side).
+- Four views: Explore (card grid, 13 classifications), Identify (name a classification, then spot it among four specimens — can your eye tell them apart?), Timeline (Gantt-style chart of classifications over art-historical eras), Compare (up to 3 classifications side by side).
 - Detail panel (opened from an Explore card) shows the full diagnostic writeup, a serif-shape spectrum, and a font-accurate anatomy diagram with hover/tap-to-magnify.
 - Deployed publicly at type-app-nine.vercel.app; also used and tested locally via a PowerShell static file server.
 
