@@ -1373,15 +1373,24 @@ main.wrap {
 }
 
 /* The Key tell callout borrows .tell-box (shared with the Detail
-   panel, which stays accent-styled) but is recolored here to match
-   the round's own correct/incorrect state, so every one of the 13
-   questions reads the same way within each group. */
+   panel, which stays accent-styled) but is restyled here to match the
+   round's own correct/incorrect state, so every one of the 13
+   questions reads the same way within each group: a boxed callout in
+   accent orange when right, plain dark-green text with no box when
+   wrong. */
+.quiz-game-feedback.is-correct .tell-box {
+  border-color: var(--accent);
+}
+
 .quiz-game-feedback.is-incorrect .tell-box {
-  border-left-color: var(--ink-faint);
+  background: none;
+  border: none;
+  padding: 0;
+  color: var(--ink);
 }
 
 .quiz-game-feedback.is-incorrect .tell-box strong {
-  color: var(--ink-faint);
+  color: var(--ink);
 }
 
 .quiz-game-tagline {
