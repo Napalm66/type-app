@@ -409,9 +409,12 @@ const CLASSIFICATIONS = [
     examples: [
       {
         prompt: "A cropped detail of a bowl built as a near-mathematically perfect circle, not an optically corrected oval",
-        image: null,
+        image: "images/examples/geometric-1.jpg",
       },
-      { prompt: "A close crop on an apex or corner cut at one precise, unmodulated angle", image: null },
+      {
+        prompt: "A close crop on an apex or corner cut at one precise, unmodulated angle",
+        image: "images/examples/geometric-2.jpg",
+      },
     ],
     // Jost was designed as an explicit homage to Paul Renner (Futura's
     // designer) — originally named "Renner*" before release — capturing
