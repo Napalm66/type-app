@@ -1369,6 +1369,55 @@ main.wrap {
   outline-offset: 2px;
 }
 
+.quiz-results {
+  text-align: center;
+  padding: 1.5rem 0 0.5rem;
+  animation: fade-in 0.2s steps(3, end);
+}
+
+.quiz-results-score {
+  font-family: var(--font-display);
+  font-size: clamp(2.4rem, 8vw, 3.2rem);
+  color: var(--accent);
+  line-height: 1;
+  margin-bottom: 0.5rem;
+}
+
+.quiz-results-label {
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--ink-soft);
+  margin: 0 0 1.5rem;
+}
+
+.quiz-play-again {
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--ink);
+  background: none;
+  border: 1px solid var(--rule-solid);
+  border-radius: var(--radius);
+  padding: 0.65rem 1.1rem;
+  cursor: pointer;
+  transition: border-color 0.15s ease, color 0.15s ease;
+}
+
+.quiz-play-again:hover,
+.quiz-play-again:focus-visible {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+.quiz-play-again:focus-visible {
+  outline: 2px solid var(--focus);
+  outline-offset: 2px;
+}
+
 /* ---------- timeline ---------- */
 
 .tl-legend {

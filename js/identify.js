@@ -8,10 +8,15 @@
 // Each classification carries two examples, used as two full 13-round
 // sets rather than picked at random per round: every classification
 // shows its first example throughout one pass through the deck, then
-// its second example throughout the next, alternating - so both
-// examples get equal, predictable coverage instead of leaving it to
-// chance. Names reveal only after answering, alongside the target's
+// its second example the next time a game is played, alternating - so
+// both examples get equal, predictable coverage instead of leaving it
+// to chance. Names reveal only after answering, alongside the target's
 // key tell to learn from.
+//
+// A game is capped at 13 questions - one full pass through the deck -
+// ending on a results screen rather than looping forever. Starting a
+// new game (Restart mid-game, or Play again from results) also flips
+// which example set the next game uses.
 //
 // Distractors are picked to make the guess genuinely test knowledge, not
 // just "does this look nothing alike": same-branch classifications (the
@@ -47,13 +52,9 @@ function initIdentify(root, onOpenDetail) {
   let roundChoices = []; // 4 candidates, shuffled, includes the target
   let roundExamples = {}; // candidate id -> the example {prompt, image} used this round
   let selectedId = null;
+  let gameOver = false;
 
   function startRound() {
-    if (deckIndex >= deck.length) {
-      exampleSet = exampleSet === 0 ? 1 : 0;
-      deck = shuffle(CLASSIFICATIONS.map((c) => c.id));
-      deckIndex = 0;
-    }
     roundItem = getById(deck[deckIndex]);
     roundChoices = buildChoices(roundItem);
     roundExamples = {};
@@ -75,15 +76,21 @@ function initIdentify(root, onOpenDetail) {
 
   function next() {
     deckIndex++;
+    if (deckIndex >= deck.length) {
+      gameOver = true;
+      render();
+      return;
+    }
     startRound();
   }
 
-  function restart() {
+  function newGame() {
+    exampleSet = exampleSet === 0 ? 1 : 0;
     deck = shuffle(CLASSIFICATIONS.map((c) => c.id));
     deckIndex = 0;
-    exampleSet = 0;
     score = 0;
     roundsPlayed = 0;
+    gameOver = false;
     startRound();
   }
 
@@ -122,6 +129,7 @@ function initIdentify(root, onOpenDetail) {
 
   function renderFeedback() {
     const correct = selectedId === roundItem.id;
+    const isLastRound = deckIndex >= deck.length - 1;
     return `
       <div class="quiz-game-feedback ${correct ? "is-correct" : "is-incorrect"}">
         <div class="quiz-game-feedback-label">${correct ? "Correct" : "Not quite"}</div>
@@ -132,13 +140,37 @@ function initIdentify(root, onOpenDetail) {
         }
         <div class="quiz-nav">
           <button class="quiz-view-full-inline">View full diagnostic &rarr;</button>
-          <button class="quiz-game-next">Next &rarr;</button>
+          <button class="quiz-game-next">${isLastRound ? "See results" : "Next"} &rarr;</button>
         </div>
       </div>
     `;
   }
 
+  function renderResults() {
+    const perfect = score === roundsPlayed;
+    return `
+      <div class="quiz-results">
+        <div class="quiz-results-score">${score} / ${roundsPlayed}</div>
+        <p class="quiz-results-label">${perfect ? "Perfect score!" : "Quiz complete"}</p>
+        <button class="quiz-play-again">Play again &rarr;</button>
+      </div>
+    `;
+  }
+
   function render() {
+    if (gameOver) {
+      root.innerHTML = `
+        <div class="quiz-card">
+          <div class="quiz-score-bar">
+            <span class="quiz-score">Score <strong>${score}</strong> / ${roundsPlayed}</span>
+          </div>
+          ${renderResults()}
+        </div>
+      `;
+      root.querySelector(".quiz-play-again").addEventListener("click", newGame);
+      return;
+    }
+
     root.innerHTML = `
       <div class="quiz-card">
         <div class="quiz-score-bar">
@@ -151,7 +183,7 @@ function initIdentify(root, onOpenDetail) {
       </div>
     `;
 
-    root.querySelector(".quiz-restart").addEventListener("click", restart);
+    root.querySelector(".quiz-restart").addEventListener("click", newGame);
     root.querySelectorAll(".quiz-game-choice").forEach((btn) => {
       btn.addEventListener("click", () => choose(btn.dataset.id));
     });
