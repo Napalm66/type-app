@@ -5,18 +5,15 @@
 // prompt describing what visual detail to look for (and what to go
 // photograph). Either way it's unlabeled until answering, so picking
 // correctly takes actually recognizing the look, not reading a name.
-// Each classification carries two examples, used as two full 13-round
-// sets rather than picked at random per round: every classification
-// shows its first example throughout one pass through the deck, then
-// its second example the next time a game is played, alternating - so
-// both examples get equal, predictable coverage instead of leaving it
-// to chance. Names reveal only after answering, alongside the target's
-// key tell to learn from.
+// Each classification carries two examples, cycled by question index
+// rather than picked at random: odd/even rounds alternate between a
+// candidate's first and second example, so a single 13-question game
+// already mixes both instead of showing only one set until a replay.
+// Names reveal only after answering, alongside the target's key tell
+// to learn from.
 //
 // A game is capped at 13 questions - one full pass through the deck -
-// ending on a results screen rather than looping forever. Starting a
-// new game (Restart mid-game, or Play again from results) also flips
-// which example set the next game uses.
+// ending on a results screen rather than looping forever.
 //
 // Distractors are picked to make the guess genuinely test knowledge, not
 // just "does this look nothing alike": same-branch classifications (the
@@ -45,7 +42,6 @@ function buildChoices(item) {
 function initIdentify(root, onOpenDetail) {
   let deck = shuffle(CLASSIFICATIONS.map((c) => c.id));
   let deckIndex = 0;
-  let exampleSet = 0; // which of each classification's two examples this whole pass uses
   let score = 0;
   let roundsPlayed = 0;
   let roundItem = null; // the named target classification
@@ -57,6 +53,7 @@ function initIdentify(root, onOpenDetail) {
   function startRound() {
     roundItem = getById(deck[deckIndex]);
     roundChoices = buildChoices(roundItem);
+    const exampleSet = deckIndex % 2; // alternate example set by question, not by whole game
     roundExamples = {};
     roundChoices.forEach((c) => {
       const list = c.examples && c.examples.length ? c.examples : [{ prompt: "", image: null }];
@@ -85,7 +82,6 @@ function initIdentify(root, onOpenDetail) {
   }
 
   function newGame() {
-    exampleSet = exampleSet === 0 ? 1 : 0;
     deck = shuffle(CLASSIFICATIONS.map((c) => c.id));
     deckIndex = 0;
     score = 0;
