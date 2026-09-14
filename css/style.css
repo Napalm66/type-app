@@ -1393,12 +1393,6 @@ main.wrap {
   color: var(--ink);
 }
 
-.quiz-game-tagline {
-  color: var(--ink-soft);
-  font-size: 0.9rem;
-  margin: 0 0 1.25rem;
-}
-
 .quiz-nav {
   margin-top: 0.5rem;
   display: flex;

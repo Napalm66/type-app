@@ -143,11 +143,9 @@ function initIdentify(root, onOpenDetail) {
           <span class="quiz-game-feedback-mark">${correct ? "&#10003;" : "&#10005;"}</span>
           ${correct ? "Correct" : "Not quite"}
         </div>
-        ${
-          roundItem.diagnostics
-            ? `<div class="tell-box"><strong>Key tell</strong>${roundItem.diagnostics.tell}</div>`
-            : `<p class="quiz-game-tagline">${roundItem.tagline}</p>`
-        }
+        <div class="tell-box">
+          ${roundItem.diagnostics ? `<strong>Key tell</strong>${roundItem.diagnostics.tell}` : roundItem.tagline}
+        </div>
         <div class="quiz-nav">
           <button class="quiz-view-full-inline">View full diagnostic &rarr;</button>
           <button class="quiz-game-next">${isLastRound ? "See results" : "Next"} &rarr;</button>
