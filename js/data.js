@@ -132,11 +132,11 @@ const CLASSIFICATIONS = [
     examples: [
       {
         prompt: "A magnified serif bracket — the same gentle curve as an earlier oldstyle, but more regular and consistent, cut with a steadier hand",
-        image: null,
+        image: "images/examples/garalde-1.jpg",
       },
       {
         prompt: "A cropped detail of a lowercase 'e', isolating only its crossbar — now level and horizontal, the clearest single detail marking the shift from the previous generation of romans",
-        image: null,
+        image: "images/examples/garalde-2.png",
       },
     ],
     fontStack: "'EB Garamond', serif",
