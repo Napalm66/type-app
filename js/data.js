@@ -505,9 +505,12 @@ const CLASSIFICATIONS = [
     examples: [
       {
         prompt: "A tight crop on a small triangular wedge flaring directly out of the stem with no curved transition — a chisel cut into stone, not a pen stroke on paper",
-        image: null,
+        image: "images/examples/glyphic-1.jpg",
       },
-      { prompt: "A close-up on a serif's outer edge showing a straight-line taper rather than a curve", image: null },
+      {
+        prompt: "A close-up on a serif's outer edge showing a straight-line taper rather than a curve",
+        image: "images/examples/glyphic-2.jpg",
+      },
     ],
     fontStack: "'Cinzel', serif",
     googleFont: "Cinzel:wght@600",
