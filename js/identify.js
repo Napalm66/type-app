@@ -172,7 +172,7 @@ function initIdentify(root, onOpenDetail) {
       root.innerHTML = `
         <div class="quiz-card">
           <div class="quiz-score-bar">
-            <span class="quiz-score">Score <strong>${score}</strong> / ${roundsPlayed}</span>
+            <span class="quiz-score">Score <strong>${score}</strong> / ${deck.length}</span>
           </div>
           ${renderResults()}
         </div>
@@ -184,7 +184,7 @@ function initIdentify(root, onOpenDetail) {
     root.innerHTML = `
       <div class="quiz-card">
         <div class="quiz-score-bar">
-          <span class="quiz-score">Score <strong>${score}</strong> / ${roundsPlayed}</span>
+          <span class="quiz-score">Score <strong>${score}</strong> / ${deck.length}</span>
           <button class="quiz-restart">Restart</button>
         </div>
         <p class="quiz-game-prompt">Which one is <strong>${roundItem.name}</strong>?</p>
