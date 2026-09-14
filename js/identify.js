@@ -111,12 +111,19 @@ function initIdentify(root, onOpenDetail) {
         ${roundChoices
           .map((c) => {
             let state = "";
+            let mark = "";
             if (selectedId) {
-              if (c.id === roundItem.id) state = "is-correct";
-              else if (c.id === selectedId) state = "is-incorrect";
+              if (c.id === roundItem.id) {
+                state = "is-correct";
+                mark = `<span class="quiz-game-choice-mark">&#10003;</span>`;
+              } else if (c.id === selectedId) {
+                state = "is-incorrect";
+                mark = `<span class="quiz-game-choice-mark">&#10005;</span>`;
+              }
             }
             return `
               <button class="quiz-game-choice ${state}" data-id="${c.id}" ${selectedId ? "disabled" : ""}>
+                ${mark}
                 ${quizChoiceImageHTML(c)}
                 ${selectedId ? `<span class="quiz-game-choice-name">${c.name}</span>` : ""}
               </button>
@@ -132,7 +139,10 @@ function initIdentify(root, onOpenDetail) {
     const isLastRound = deckIndex >= deck.length - 1;
     return `
       <div class="quiz-game-feedback ${correct ? "is-correct" : "is-incorrect"}">
-        <div class="quiz-game-feedback-label">${correct ? "Correct" : "Not quite"}</div>
+        <div class="quiz-game-feedback-label">
+          <span class="quiz-game-feedback-mark">${correct ? "&#10003;" : "&#10005;"}</span>
+          ${correct ? "Correct" : "Not quite"}
+        </div>
         ${
           roundItem.diagnostics
             ? `<div class="tell-box"><strong>Key tell</strong>${roundItem.diagnostics.tell}</div>`

@@ -1207,6 +1207,7 @@ main.wrap {
    like-for-like visual comparison) with its name as a caption, not just
    a name to read. */
 .quiz-game-choice {
+  position: relative;
   aspect-ratio: 1;
   display: flex;
   flex-direction: column;
@@ -1222,6 +1223,25 @@ main.wrap {
   color: var(--ink);
   font-family: var(--font-ui);
   transition: border-color 0.15s ease, color 0.15s ease, opacity 0.15s ease;
+}
+
+/* A small filled badge (accent) or outlined badge (ink) marks the
+   correct/chosen-wrong tile - kept as a small corner mark, never a
+   fill across the whole tile, per the Small Mark Rule. */
+.quiz-game-choice-mark {
+  position: absolute;
+  top: -1px;
+  left: -1px;
+  z-index: 1;
+  width: 1.7rem;
+  height: 1.7rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-mono);
+  font-weight: 700;
+  font-size: 1rem;
+  line-height: 1;
 }
 
 /* Empty until a classification gets an exampleImage field (js/data.js) -
@@ -1269,20 +1289,38 @@ main.wrap {
 }
 
 .quiz-game-choice.is-correct {
+  border-width: 2px;
   border-color: var(--accent);
 }
 
 .quiz-game-choice.is-correct .quiz-game-choice-name {
   color: var(--accent);
+  font-weight: 700;
+}
+
+.quiz-game-choice.is-correct .quiz-game-choice-mark {
+  background: var(--accent);
+  color: var(--panel);
 }
 
 .quiz-game-choice.is-incorrect {
-  opacity: 0.55;
+  border-width: 2px;
+  border-color: var(--ink-faint);
+}
+
+.quiz-game-choice.is-incorrect .quiz-game-choice-image {
+  opacity: 0.5;
 }
 
 .quiz-game-choice.is-incorrect .quiz-game-choice-name {
   color: var(--ink-faint);
   text-decoration: line-through;
+}
+
+.quiz-game-choice.is-incorrect .quiz-game-choice-mark {
+  background: var(--panel);
+  color: var(--ink-faint);
+  border: 1px solid var(--ink-faint);
 }
 
 .quiz-game-choice:disabled:not(.is-correct):not(.is-incorrect) {
@@ -1294,6 +1332,9 @@ main.wrap {
 }
 
 .quiz-game-feedback-label {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
   font-family: var(--font-mono);
   font-size: 0.85rem;
   font-weight: 700;
@@ -1302,11 +1343,31 @@ main.wrap {
   margin-bottom: 1rem;
 }
 
+.quiz-game-feedback-mark {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 1.4rem;
+  height: 1.4rem;
+  font-size: 0.9rem;
+  flex-shrink: 0;
+}
+
 .quiz-game-feedback.is-correct .quiz-game-feedback-label {
   color: var(--accent);
 }
 
+.quiz-game-feedback.is-correct .quiz-game-feedback-mark {
+  background: var(--accent);
+  color: var(--panel);
+}
+
 .quiz-game-feedback.is-incorrect .quiz-game-feedback-label {
+  color: var(--ink-soft);
+}
+
+.quiz-game-feedback.is-incorrect .quiz-game-feedback-mark {
+  border: 1px solid var(--ink-soft);
   color: var(--ink-soft);
 }
 
