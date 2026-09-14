@@ -1199,7 +1199,8 @@ main.wrap {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   gap: 0.6rem;
-  margin-bottom: 1.25rem;
+  width: 85%;
+  margin: 0 auto 1.25rem;
 }
 
 /* Big square tiles - each shows the candidate's own specimen (same
