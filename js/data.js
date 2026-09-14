@@ -230,9 +230,12 @@ const CLASSIFICATIONS = [
     examples: [
       {
         prompt: "An extreme close-up of a serif meeting its stem with no bracket curve at all — a flat hairline butting straight into a heavy vertical",
-        image: null,
+        image: "images/examples/modern-1.jpg",
       },
-      { prompt: "A tight crop on a stroke terminal ending in a small, perfectly round ball rather than tapering to a point", image: null },
+      {
+        prompt: "A tight crop on a stroke terminal ending in a small, perfectly round ball rather than tapering to a point",
+        image: "images/examples/modern-2.jpg",
+      },
     ],
     // Playfair Display (previously used here) is explicitly not a direct
     // Bodoni/Didot revival — its own designer describes it as synthesizing
