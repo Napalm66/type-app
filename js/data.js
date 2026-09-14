@@ -367,9 +367,12 @@ const CLASSIFICATIONS = [
     examples: [
       {
         prompt: "A tight crop on the closed, nearly sealed aperture of a curved letter — deliberately tight, a mid-century Swiss choice for density at small sizes",
-        image: null,
+        image: "images/examples/neo-grotesque-1.jpg",
       },
-      { prompt: "A magnified comparison of two strokes on one letter showing genuinely zero variation in weight", image: null },
+      {
+        prompt: "A magnified comparison of two strokes on one letter showing genuinely zero variation in weight",
+        image: "images/examples/neo-grotesque-2.jpg",
+      },
     ],
     fontStack: "'Arimo', Arial, sans-serif",
     googleFont: "Arimo:wght@700",
