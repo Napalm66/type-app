@@ -544,8 +544,14 @@ const CLASSIFICATIONS = [
     closesBecause: "Closes at the 1990s grunge wave, matching the Postmodernism/Punk/Grunge era.",
     keyTypefaces: ["Fat Face", "Cooper Black", "Bungee", "Circus/Western faces"],
     examples: [
-      { prompt: "An abstract crop on one exaggerated feature — weight, contrast, or ornament pushed past what any text face would tolerate", image: null },
-      { prompt: "A tight crop on a genuinely novel construction detail matching no historical letterform convention", image: null },
+      {
+        prompt: "An abstract crop on one exaggerated feature — weight, contrast, or ornament pushed past what any text face would tolerate",
+        image: "images/examples/display-1.jpg",
+      },
+      {
+        prompt: "A tight crop on a genuinely novel construction detail matching no historical letterform convention",
+        image: "images/examples/display-2.jpg",
+      },
     ],
     fontStack: "'Bungee', cursive",
     googleFont: "Bungee",
