@@ -233,7 +233,7 @@ const CLASSIFICATIONS = [
         image: "images/examples/modern-1.jpg",
       },
       {
-        prompt: "A tight crop on a stroke terminal ending in a small, perfectly round ball rather than tapering to a point",
+        prompt: "A magnified comparison of two curved strokes' thinnest points, both falling on a perfectly vertical line — no calligraphic lean at all, the mark of a ruled instrument rather than a broad-nib pen",
         image: "images/examples/modern-2.jpg",
       },
     ],
