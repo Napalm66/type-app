@@ -465,6 +465,12 @@ main.wrap {
   padding: 1rem 0;
   cursor: pointer;
   transition: background 0.12s steps(2, end);
+  /* A <button> doesn't inherit the page's font by default (the UA
+     stylesheet gives it its own), so without this every row's tagline
+     silently rendered in Arial instead of Inter. Reset on the button
+     itself rather than just the tagline, so any future text added here
+     inherits correctly too. */
+  font: inherit;
 }
 
 .card-grid .spec-row:last-child {
