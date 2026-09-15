@@ -446,7 +446,7 @@ const CLASSIFICATIONS = [
       contrast: "low",
       axis: "slightly-oblique",
       serif: "none",
-      tell: "Open apertures, some stroke modulation, often a two-story 'g' — feels closer to a serif face without the serifs.",
+      tell: "Open apertures, some stroke modulation, often a two-story 'a' following the classic, traditional form seen in handwriting and calligraphic scripts and feels closer to a serif face without the serifs.",
     },
     visualCharacteristics: [
       { label: "Terminals", text: "The ends of strokes may be rounded, squared, or angled." },
