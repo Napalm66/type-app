@@ -1586,6 +1586,11 @@ main.wrap {
   stroke-width: 1.6;
 }
 
+.tl-lg-node:focus-visible {
+  outline: 2px solid var(--focus);
+  outline-offset: 2px;
+}
+
 .tl-lg-connector {
   fill: none;
   stroke: var(--accent);
@@ -1656,6 +1661,34 @@ main.wrap {
 
 .tl-tooltip-closes b {
   color: var(--ink);
+}
+
+/* .tl-era-tooltip itself is pointer-events: none - this button opts
+   back into pointer-events so it's tappable without changing the
+   tooltip's own (deliberately inert) hit-testing. */
+.tl-tooltip-open-detail {
+  display: block;
+  margin-top: 0.5rem;
+  background: none;
+  border: none;
+  color: var(--ink-faint);
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  cursor: pointer;
+  padding: 0.4rem 0 0;
+  pointer-events: auto;
+}
+
+.tl-tooltip-open-detail:hover {
+  color: var(--ink);
+}
+
+.tl-tooltip-open-detail:focus-visible {
+  outline: 2px solid var(--focus);
+  outline-offset: 2px;
 }
 
 /* Era tooltip: a reversed card (ink background, panel-colored text)

@@ -473,11 +473,13 @@ function initTimeline(root, onOpenDetail) {
       `<text x="${cx}" y="${firstLineY + i * 11}" class="tl-lg-node-name" font-size="${NAME_FONT_MAX}" text-anchor="middle">${line}</text>`
     ).join("");
     const eraY = firstLineY + (n.nameLines.length - 1) * 11 + 13;
+    const yearLabel = `${n.start}–${n.end === domainEnd ? "present" : n.end}`;
+    const ariaLabel = escapeHtml(`${n.name}, ${yearLabel}. Open full detail.`);
     return `
-      <g class="tl-lg-node" data-id="${n.id}">
+      <g class="tl-lg-node" data-id="${n.id}" tabindex="0" role="button" aria-label="${ariaLabel}">
         <rect x="${left}" y="${top}" width="${width}" height="${height}" class="tl-lg-node-box ${n.standalone ? "is-standalone" : ""}" />
         ${nameSVG}
-        <text x="${cx}" y="${eraY}" class="tl-lg-node-era" font-size="8" text-anchor="middle">${n.start}–${n.end === domainEnd ? "present" : n.end}</text>
+        <text x="${cx}" y="${eraY}" class="tl-lg-node-era" font-size="8" text-anchor="middle">${yearLabel}</text>
       </g>
     `;
   }
@@ -531,6 +533,17 @@ function initTimeline(root, onOpenDetail) {
       // attachTooltips (reveal the tooltip) instead — see isTouchDevice.
       if (node && !isTouchDevice) onOpenDetail(node.dataset.id);
     });
+    // Keyboard activation always opens the detail view directly (not a
+    // tooltip) regardless of device - there's no hover/tap distinction
+    // for a keyboard user, so the touch-only tooltip-first behavior above
+    // doesn't apply here.
+    svg.addEventListener("keydown", (e) => {
+      if (e.key !== "Enter" && e.key !== " " && e.key !== "Spacebar") return;
+      const node = e.target.closest(".tl-lg-node");
+      if (!node) return;
+      e.preventDefault();
+      onOpenDetail(node.dataset.id);
+    });
 
     attachTooltips(svg);
   }
@@ -546,6 +559,18 @@ function initTimeline(root, onOpenDetail) {
     const tooltip = document.createElement("div");
     tooltip.className = "tl-era-tooltip";
     document.body.appendChild(tooltip);
+
+    // Touch has no hover, so a node's tooltip is the only place to offer
+    // a path to the full detail view - the button below reuses the same
+    // onOpenDetail call the desktop click and keyboard handlers use, not
+    // a second code path.
+    tooltip.addEventListener("click", (e) => {
+      const btn = e.target.closest(".tl-tooltip-open-detail");
+      if (!btn) return;
+      e.stopPropagation();
+      tooltip.classList.remove("is-visible");
+      onOpenDetail(btn.dataset.id);
+    });
 
     // Classification nodes are small boxes, so anchoring the tooltip to
     // the node's own rect (flipping above/below if there's no room)
@@ -616,7 +641,13 @@ function initTimeline(root, onOpenDetail) {
       const closesHTML = n.closesBecause
         ? `<div class="tl-tooltip-closes"><b>Ends because:</b> ${n.closesBecause}</div>`
         : "";
-      const html = `<strong>${n.name}</strong><div class="tl-tooltip-years">${yearLabel}</div>${n.description || ""}${closesHTML}`;
+      // Touch-only: desktop already reaches the detail view via a plain
+      // click (bypassing the tooltip entirely), so this button would be
+      // redundant there.
+      const detailLinkHTML = isTouchDevice
+        ? `<button type="button" class="tl-tooltip-open-detail" data-id="${n.id}">View full diagnostic &rarr;</button>`
+        : "";
+      const html = `<strong>${n.name}</strong><div class="tl-tooltip-years">${yearLabel}</div>${n.description || ""}${closesHTML}${detailLinkHTML}`;
 
       if (isTouchDevice) {
         // No hover to reveal this on touch — a tap shows the same
