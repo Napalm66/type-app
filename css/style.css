@@ -590,6 +590,20 @@ main.wrap {
   position: relative;
 }
 
+/* Below this width the overlay's own padding plus the panel's padding
+   floor were compounding to leave body text at ~30 characters/line -
+   well under a comfortable reading measure. Trimming both here, not
+   just the panel, is what actually recovers the width. */
+@media (max-width: 480px) {
+  .detail-overlay {
+    padding: clamp(1rem, 5vh, 4rem) 0.5rem;
+  }
+
+  .detail-panel {
+    padding: 1.25rem;
+  }
+}
+
 .detail-close {
   position: absolute;
   top: 1rem;
