@@ -631,7 +631,7 @@ main.wrap {
   font-family: var(--font-mono);
   font-size: 0.72rem;
   color: var(--ink-faint);
-  font-weight: 600;
+  font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 0.04em;
 }
@@ -905,7 +905,7 @@ main.wrap {
 .serif-spectrum-label {
   font-family: var(--font-mono);
   font-size: 0.62rem;
-  font-weight: 600;
+  font-weight: 700;
   color: var(--ink-faint);
   text-align: center;
   overflow-wrap: break-word;
@@ -1675,7 +1675,7 @@ main.wrap {
 .tl-tooltip-years {
   font-family: var(--font-mono);
   font-size: 0.7rem;
-  font-weight: 600;
+  font-weight: 700;
   color: var(--ink-faint);
   margin-bottom: 0.4rem;
 }
