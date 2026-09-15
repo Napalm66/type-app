@@ -154,6 +154,8 @@ function attachSerifSpectrumZoom(panelRoot) {
 }
 
 function initDetail(overlayRoot, panelRoot) {
+  let lastFocusTrigger = null;
+
   function close() {
     overlayRoot.classList.remove("is-open");
     overlayRoot.setAttribute("aria-hidden", "true");
@@ -164,11 +166,16 @@ function initDetail(overlayRoot, panelRoot) {
       document.removeEventListener("touchstart", serifSpectrumOutsideTouchHandler);
       serifSpectrumOutsideTouchHandler = null;
     }
+    if (lastFocusTrigger && document.contains(lastFocusTrigger) && typeof lastFocusTrigger.focus === "function") {
+      lastFocusTrigger.focus();
+    }
+    lastFocusTrigger = null;
   }
 
   async function open(id) {
     const item = getById(id);
     if (!item) return;
+    lastFocusTrigger = document.activeElement;
 
     const diagnosticsHTML = item.diagnostics
       ? `<div class="diagnostics-grid">
@@ -234,6 +241,7 @@ function initDetail(overlayRoot, panelRoot) {
     overlayRoot.classList.add("is-open");
     overlayRoot.setAttribute("aria-hidden", "false");
     attachSerifSpectrumZoom(panelRoot);
+    panelRoot.querySelector(".detail-close")?.focus();
 
     const slot = panelRoot.querySelector("#anatomy-slot");
     const html = await buildAnatomyHTML(item);
@@ -245,11 +253,43 @@ function initDetail(overlayRoot, panelRoot) {
     }
   }
 
+  function getFocusableInPanel() {
+    return Array.from(
+      panelRoot.querySelectorAll('button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])')
+    ).filter((el) => !el.disabled && el.offsetParent !== null);
+  }
+
   overlayRoot.addEventListener("click", (e) => {
     if (e.target === overlayRoot) close();
   });
+
+  // Scoped to is-open so Escape/Tab don't act on a closed modal; Tab is
+  // trapped by re-querying focusable elements on every press rather than
+  // caching once, since the anatomy diagram injects asynchronously after
+  // open() returns.
   document.addEventListener("keydown", (e) => {
-    if (e.key === "Escape") close();
+    if (!overlayRoot.classList.contains("is-open")) return;
+
+    if (e.key === "Escape") {
+      close();
+      return;
+    }
+
+    if (e.key !== "Tab") return;
+    const focusable = getFocusableInPanel();
+    if (focusable.length === 0) return;
+    const first = focusable[0];
+    const last = focusable[focusable.length - 1];
+
+    if (e.shiftKey) {
+      if (document.activeElement === first || !panelRoot.contains(document.activeElement)) {
+        e.preventDefault();
+        last.focus();
+      }
+    } else if (document.activeElement === last || !panelRoot.contains(document.activeElement)) {
+      e.preventDefault();
+      first.focus();
+    }
   });
 
   return { open, close };
