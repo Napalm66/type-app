@@ -14,6 +14,12 @@ const CLASSIFICATIONS = [
     description:
       "Blackletter (or Gothic) scripts grew out of northern European manuscript hands. Letters are dense, angular, and vertical, with dramatic contrast built from a broad-nib pen held at a steep angle. Gutenberg's 42-line Bible was set in a Textura blackletter. It splintered into regional sub-styles before Roman letterforms took over most of Europe.",
     closesBecause: "Roman letterforms displaced blackletter as the dominant book type across most of Europe by 1500.",
+    diagnostics: {
+      contrast: "high",
+      axis: "oblique-strong",
+      serif: "diamond-broken",
+      tell: "Dense, angular strokes cut by a broad-nib pen held at a steep, oblique angle, producing dramatic contrast and sharp diamond-shaped feet instead of a rounded or bracketed serif.",
+    },
     subStyles: [
       { name: "Textura", note: "Most rigid and vertical; dense 'woven' texture, sharp diamond feet." },
       { name: "Rotunda", note: "Rounder, southern-European variant; softer curves than Textura." },
@@ -527,6 +533,11 @@ const CLASSIFICATIONS = [
     description:
       "Script faces imitate handwriting, from formal engraved copperplate scripts (used for invitations and certificates) to casual brush and marker scripts. Letters often connect or nearly connect, mimicking a single continuous pen or brush stroke.",
     closesBecause: "Closes as brush and casual script popularity waned with the rise of the International Typographic Style.",
+    diagnostics: {
+      contrast: "high",
+      serif: "connected",
+      tell: "Letters connect or nearly connect into a single continuous stroke, mimicking handwriting rather than terminating in a fixed serif — ranging from fine-hairline, high-contrast Formal/Copperplate to looser, brush-based Casual forms.",
+    },
     subStyles: [
       { name: "Formal / Copperplate", note: "Based on engraved calligraphy; fine hairlines, high contrast, often all-connected." },
       { name: "Casual", note: "Looser, based on brush or marker lettering; less rigid connection between letters." },
@@ -557,6 +568,10 @@ const CLASSIFICATIONS = [
     description:
       "Display faces prioritize impact and personality over extended readability — fat faces, wood-type Western faces, grunge and novelty faces all live here. They frequently exaggerate a trait from another classification (extreme contrast, extreme weight, decorative ornament) past the point of legibility at text size.",
     closesBecause: "Closes at the 1990s grunge wave, matching the Postmodernism/Punk/Grunge era.",
+    diagnostics: {
+      serif: "varies",
+      tell: "Exaggerates a trait borrowed from another classification — extreme contrast, extreme weight, or decorative ornament — past the point of legibility at text size, rather than following one fixed serif/contrast/axis signature of its own.",
+    },
     keyTypefaces: ["Fat Face", "Cooper Black", "Bungee", "Circus/Western faces"],
     examples: [
       {

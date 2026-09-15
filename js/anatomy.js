@@ -62,6 +62,9 @@ const SERIF_DESCRIPTIONS = {
   "square-slab": "Slab serif — thick, squared-off, with minimal or no bracket.",
   "flared-wedge": "Flared serif — tapers directly out of the stroke, no true bracket.",
   none: "No serif — a clean, unadorned stroke terminal.",
+  "diamond-broken": "Broken, angular strokes with diamond-shaped feet — not a classic bracketed serif.",
+  connected: "Strokes connect directly into the next letter — no fixed serif to speak of.",
+  varies: "Construction varies widely by design — often an exaggerated trait, not a standard serif.",
 };
 
 const BRANCH_FALLBACK_SERIF_NOTE = {
