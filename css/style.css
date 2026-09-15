@@ -752,10 +752,12 @@ main.wrap {
 }
 
 .visual-characteristics-heading {
-  font-family: var(--font-ui);
-  font-size: 0.85rem;
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
   font-weight: 700;
-  color: var(--ink);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--ink-faint);
   margin-bottom: 0.6rem;
 }
 
