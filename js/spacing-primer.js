@@ -98,8 +98,8 @@ function initSpacingPrimer(root) {
             <p class="spacing-card-hint">Compare with Paragraph Breaks below — most typography uses one convention or the other, not both.</p>
             <div class="spacing-specimen-wrap">
               <div class="spacing-specimen spacing-paragraphs" id="spacing-specimen-indent">
-                <p class="spacing-para">A paragraph break signals a shift in thought, a place for the reader's eye to rest before the next idea begins.</p>
-                <p class="spacing-para" id="spacing-indent-target">Indentation marks that shift by pulling the first line inward, without adding any space above it.</p>
+                <p class="spacing-para">The archive occupied the building's top floor, and sunlight came in low through the west windows every afternoon.</p>
+                <p class="spacing-para" id="spacing-indent-target">Nobody had reorganized the shelves in years, so finding anything meant knowing where old habits had left things.</p>
               </div>
             </div>
             <div class="spacing-control">
