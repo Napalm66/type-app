@@ -36,7 +36,14 @@ function initSpacingPrimer(root) {
     <div class="spacing-primer">
 
       <div class="spacing-group">
-        <div class="spacing-group-heading">Horizontal spacing</div>
+        <div class="spacing-group-heading">
+          <svg class="spacing-group-icon" viewBox="0 0 20 12" aria-hidden="true">
+            <line x1="1" y1="6" x2="19" y2="6" />
+            <line x1="1" y1="2" x2="1" y2="10" />
+            <line x1="19" y1="2" x2="19" y2="10" />
+          </svg>
+          Horizontal spacing
+        </div>
 
         <div class="spacing-card-grid">
 
@@ -76,13 +83,16 @@ function initSpacingPrimer(root) {
 
           <div class="spacing-card">
             <h3 class="spacing-card-title">Indent / Tab</h3>
-            <p class="spacing-card-def">A first-line indent — traditionally set with a tab character — pushes only the opening line of a new paragraph inward, while every other line stays flush with the margin. It marks a new paragraph without adding any vertical space.</p>
+            <p class="spacing-card-def">A tab indent pushes a single line in from the margin, without adding any space above it — the same mark a grocery list uses to show a note belongs to the item above it, not a new entry of its own.</p>
             <p class="spacing-card-hint">Compare with Paragraph Breaks below — most typography uses one convention or the other, not both.</p>
             <div class="spacing-specimen-wrap">
-              <div class="spacing-specimen spacing-paragraphs" id="spacing-specimen-indent">
-                <p class="spacing-para">A paragraph break signals a shift in thought, a place for the reader's eye to rest before the next idea begins.</p>
-                <p class="spacing-para" id="spacing-indent-target">Indentation marks that shift by pulling the first line inward, without adding any space above it.</p>
-              </div>
+              <ul class="spacing-specimen spacing-list" id="spacing-specimen-indent">
+                <li class="spacing-list-item">Milk</li>
+                <li class="spacing-list-item">Eggs</li>
+                <li class="spacing-list-item">Bread</li>
+                <li class="spacing-list-item" id="spacing-indent-target">— wholemeal, if they have it</li>
+                <li class="spacing-list-item">Butter</li>
+              </ul>
             </div>
             <div class="spacing-control">
               <div class="spacing-control-row">
@@ -100,7 +110,14 @@ function initSpacingPrimer(root) {
       </div>
 
       <div class="spacing-group">
-        <div class="spacing-group-heading">Vertical spacing</div>
+        <div class="spacing-group-heading">
+          <svg class="spacing-group-icon" viewBox="0 0 12 20" aria-hidden="true">
+            <line x1="6" y1="1" x2="6" y2="19" />
+            <line x1="2" y1="1" x2="10" y2="1" />
+            <line x1="2" y1="19" x2="10" y2="19" />
+          </svg>
+          Vertical spacing
+        </div>
 
         <div class="spacing-card-grid">
 

@@ -1176,6 +1176,9 @@ main.wrap {
 }
 
 .spacing-group-heading {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
   font-family: var(--font-mono);
   font-size: 0.68rem;
   font-weight: 700;
@@ -1183,6 +1186,23 @@ main.wrap {
   letter-spacing: 0.05em;
   color: var(--ink-faint);
   margin-bottom: 0.75rem;
+}
+
+/* A small dimension-line mark (echoing the app's anatomy-diagram
+   measurement-arrow language) gives each group heading a distinct
+   at-a-glance shape beyond its text - horizontal ticks for Horizontal
+   spacing, vertical ticks for Vertical spacing. Colored via the accent
+   per the Small Mark Rule, not the muted heading ink. */
+.spacing-group-icon {
+  flex: none;
+  width: 0.9rem;
+  height: 0.9rem;
+  color: var(--accent);
+}
+
+.spacing-group-icon line {
+  stroke: currentColor;
+  stroke-width: 1.5;
 }
 
 .spacing-card-grid {
@@ -1254,6 +1274,20 @@ main.wrap {
 }
 
 .spacing-para + .spacing-para {
+  margin-top: 0;
+}
+
+.spacing-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.spacing-list-item {
+  margin-top: 0.35rem;
+}
+
+.spacing-list-item:first-child {
   margin-top: 0;
 }
 
