@@ -242,8 +242,15 @@ body {
   border-bottom-color: var(--accent);
 }
 
+/* The one deliberate exception to the "no shadow anywhere" rule: a
+   small dark text-shadow purely so the white active-tab label stays
+   legible over the busy hero photo behind it - not a decorative
+   drop-shadow on a UI shape, which the rule still forbids everywhere
+   else. */
 .tab.is-active .tab-label {
+  color: var(--hero-ink);
   font-weight: 700;
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.55);
 }
 
 .tab:focus-visible {
