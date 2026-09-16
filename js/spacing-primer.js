@@ -98,8 +98,8 @@ function initSpacingPrimer(root) {
             <p class="spacing-card-hint">Compare with Paragraph Breaks below — most typography uses one convention or the other, not both.</p>
             <div class="spacing-specimen-wrap">
               <div class="spacing-specimen spacing-paragraphs" id="spacing-specimen-indent">
-                <p class="spacing-para">The archive occupied the building's top floor, and sunlight came in low through the west windows every afternoon.</p>
-                <p class="spacing-para" id="spacing-indent-target">Nobody had reorganized the shelves in years, so finding anything meant knowing where old habits had left things.</p>
+                <p class="spacing-para">The archive occupied the building's top floor, where sunlight came in low through the west-facing windows every single afternoon.</p>
+                <p class="spacing-para" id="spacing-indent-target">Nobody had reorganized the shelves in years, so finding anything meant already knowing exactly where old habits kept it.</p>
               </div>
             </div>
             <div class="spacing-control">
