@@ -54,13 +54,15 @@ function initSpacingPrimer(root) {
               <div class="spacing-kerning-demo" id="spacing-specimen-kerning">
                 <div class="spacing-kerning-row">
                   <span class="spacing-kerning-pair">AV</span>
-                  <span class="spacing-kerning-pair">Tt</span>
-                  <span class="spacing-kerning-pair">Le</span>
+                  <span class="spacing-kerning-pair">YA</span>
+                  <span class="spacing-kerning-pair">Te</span>
+                  <span class="spacing-kerning-pair">Fa</span>
                 </div>
                 <div class="spacing-kerning-row">
-                  <span class="spacing-kerning-pair">11</span>
                   <span class="spacing-kerning-pair">14</span>
-                  <span class="spacing-kerning-pair">47</span>
+                  <span class="spacing-kerning-pair">74</span>
+                  <span class="spacing-kerning-pair">04</span>
+                  <span class="spacing-kerning-pair">27</span>
                 </div>
               </div>
             </div>
