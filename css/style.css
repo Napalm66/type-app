@@ -1180,11 +1180,11 @@ main.wrap {
   align-items: center;
   gap: 0.5rem;
   font-family: var(--font-mono);
-  font-size: 0.68rem;
+  font-size: 1rem;
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 0.05em;
-  color: var(--ink-faint);
+  color: var(--accent);
   margin-bottom: 0.75rem;
 }
 
@@ -1299,20 +1299,6 @@ main.wrap {
 }
 
 .spacing-para + .spacing-para {
-  margin-top: 0;
-}
-
-.spacing-list {
-  list-style: none;
-  margin: 0;
-  padding: 0;
-}
-
-.spacing-list-item {
-  margin-top: 0.35rem;
-}
-
-.spacing-list-item:first-child {
   margin-top: 0;
 }
 
