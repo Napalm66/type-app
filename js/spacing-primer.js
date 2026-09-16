@@ -42,19 +42,18 @@ function initSpacingPrimer(root) {
 
           <div class="spacing-card">
             <h3 class="spacing-card-title">Kerning</h3>
-            <p class="spacing-card-def">Kerning tightens the space between specific letter pairs — like A/V, T/o, or W/a — where their natural shapes would otherwise leave an uneven gap. It works pair by pair, not evenly across a whole word.</p>
+            <p class="spacing-card-def">Kerning adjusts the space between one specific letter pair — like A/V, T/o, or W/a — where their natural shapes would otherwise leave an uneven gap. It works pair by pair, not evenly across a whole word like tracking does.</p>
             <div class="spacing-specimen-wrap">
-              <span class="spacing-specimen spacing-specimen--large" id="spacing-specimen-kerning">A<span id="spacing-kerning-pair">V</span>ATAR</span>
+              <span class="spacing-specimen spacing-specimen--large" id="spacing-specimen-kerning">AV</span>
             </div>
             <div class="spacing-control">
               <div class="spacing-control-row">
-                <span class="spacing-control-label" id="spacing-label-kerning">Kerning</span>
-                <span class="spacing-readout" id="spacing-readout-kerning">ON</span>
+                <label class="spacing-control-label" for="spacing-slider-kerning">Kerning</label>
+                <span class="spacing-readout" id="spacing-readout-kerning">-0.05em</span>
               </div>
-              <button type="button" class="spacing-toggle" id="spacing-toggle-kerning"
-                role="switch" aria-checked="true" aria-labelledby="spacing-label-kerning">
-                <span class="spacing-toggle-track"><span class="spacing-toggle-thumb"></span></span>
-              </button>
+              <input type="range" class="spacing-slider" id="spacing-slider-kerning"
+                min="-0.15" max="0.15" step="0.01" value="-0.05"
+                aria-describedby="spacing-readout-kerning" />
             </div>
           </div>
 
@@ -167,18 +166,20 @@ function initSpacingPrimer(root) {
     </div>
   `;
 
-  // Demonstrates the concept directly on the A/V pair (a manual space
-  // adjustment) rather than relying on the font-kerning CSS property -
-  // that property's effect depends on both the specific font's own
-  // embedded kerning table and the browser's support for it, neither
-  // guaranteed to render visibly the same way everywhere.
-  spacingWireToggle({
-    button: root.querySelector("#spacing-toggle-kerning"),
+  // A two-letter specimen adjusted directly via letter-spacing, the
+  // same mechanism Tracking uses below - the difference is scope, not
+  // mechanism: kerning corrects one specific pair, tracking spreads a
+  // uniform adjustment across a whole run of letters. Using the real
+  // letter-spacing property (rather than the font-kerning property, whose
+  // effect depends on both the font's own kerning table and the
+  // browser's support for it) also guarantees a reliably visible result
+  // regardless of environment.
+  spacingWireSlider({
+    input: root.querySelector("#spacing-slider-kerning"),
     readout: root.querySelector("#spacing-readout-kerning"),
-    labelOn: "ON",
-    labelOff: "OFF",
-    onToggle: (on) => {
-      root.querySelector("#spacing-kerning-pair").style.marginLeft = on ? "-0.09em" : "0";
+    format: (v) => `${v >= 0 ? "+" : ""}${v.toFixed(2)}em`,
+    onInput: (v) => {
+      root.querySelector("#spacing-specimen-kerning").style.letterSpacing = `${v}em`;
     },
   });
 
