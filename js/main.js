@@ -15,6 +15,7 @@ initExplore({
 initIdentify(document.getElementById("identify-root"), (id) => detail.open(id));
 initTimeline(document.getElementById("timeline-root"), (id) => detail.open(id));
 initAnatomyPrimer(document.getElementById("anatomy-primer-root"));
+initSpacingPrimer(document.getElementById("spacing-primer-root"));
 initCompare(document.getElementById("compare-root"));
 
 // tab switching
