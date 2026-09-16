@@ -49,9 +49,20 @@ function initSpacingPrimer(root) {
 
           <div class="spacing-card">
             <h3 class="spacing-card-title">Kerning</h3>
-            <p class="spacing-card-def">Kerning adjusts the space between one specific letter pair — like A/V, T/o, or W/a — where their natural shapes would otherwise leave an uneven gap. It works pair by pair, not evenly across a whole word like tracking does.</p>
+            <p class="spacing-card-def">Kerning adjusts the space between one specific character pair — where their natural shapes would otherwise leave an uneven gap — rather than evenly across a whole word like tracking does. It applies just as much to numerals as to letters.</p>
             <div class="spacing-specimen-wrap">
-              <span class="spacing-specimen spacing-specimen--large" id="spacing-specimen-kerning">AV</span>
+              <div class="spacing-kerning-demo" id="spacing-specimen-kerning">
+                <div class="spacing-kerning-row">
+                  <span class="spacing-kerning-pair">AV</span>
+                  <span class="spacing-kerning-pair">Tt</span>
+                  <span class="spacing-kerning-pair">Le</span>
+                </div>
+                <div class="spacing-kerning-row">
+                  <span class="spacing-kerning-pair">11</span>
+                  <span class="spacing-kerning-pair">14</span>
+                  <span class="spacing-kerning-pair">47</span>
+                </div>
+              </div>
             </div>
             <div class="spacing-control">
               <div class="spacing-control-row">
@@ -196,7 +207,9 @@ function initSpacingPrimer(root) {
     readout: root.querySelector("#spacing-readout-kerning"),
     format: (v) => `${v >= 0 ? "+" : ""}${v.toFixed(2)}em`,
     onInput: (v) => {
-      root.querySelector("#spacing-specimen-kerning").style.letterSpacing = `${v}em`;
+      root.querySelectorAll("#spacing-specimen-kerning .spacing-kerning-pair").forEach((pair) => {
+        pair.style.letterSpacing = `${v}em`;
+      });
     },
   });
 

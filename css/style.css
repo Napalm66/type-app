@@ -1265,6 +1265,31 @@ main.wrap {
   white-space: nowrap;
 }
 
+/* Two rows - letters, then numerals - each holding several pairs side
+   by side. The gap between pairs is fixed; only the letter-spacing
+   inside each pair span moves with the slider, so the demo reads as
+   several independent kerning adjustments rather than one run of text
+   being tracked apart. */
+.spacing-kerning-demo {
+  display: flex;
+  flex-direction: column;
+  gap: 0.7rem;
+}
+
+.spacing-kerning-row {
+  display: flex;
+  gap: 1.6rem;
+  flex-wrap: wrap;
+}
+
+.spacing-kerning-pair {
+  font-family: var(--font-ui);
+  color: var(--ink);
+  font-size: clamp(1.4rem, 5vw, 2rem);
+  font-weight: 600;
+  white-space: nowrap;
+}
+
 .spacing-specimen--paragraph {
   margin: 0;
 }
