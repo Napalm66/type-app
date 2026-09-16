@@ -69,10 +69,10 @@ function initSpacingPrimer(root) {
             <div class="spacing-control">
               <div class="spacing-control-row">
                 <label class="spacing-control-label" for="spacing-slider-kerning">Kerning</label>
-                <span class="spacing-readout" id="spacing-readout-kerning">-0.05em</span>
+                <span class="spacing-readout" id="spacing-readout-kerning">+0.00em</span>
               </div>
               <input type="range" class="spacing-slider" id="spacing-slider-kerning"
-                min="-0.15" max="0.15" step="0.01" value="-0.05"
+                min="-0.15" max="0.15" step="0.01" value="0"
                 aria-describedby="spacing-readout-kerning" />
             </div>
           </div>
