@@ -53,6 +53,7 @@ const AXIS_ANGLES = {
   "near-vertical": 8,
   vertical: 0,
   "slightly-oblique": 12,
+  "barely-oblique": 5,
 };
 
 const SERIF_DESCRIPTIONS = {

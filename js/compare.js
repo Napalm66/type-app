@@ -7,8 +7,8 @@ const MAX_COMPARE = 2;
 // classification. CONTRAST_SCALE and SERIF_BRACKET_SCALE are ordinal
 // readings of the existing contrast/serif categories — there's no prior
 // numeric version of those two to match against.
-const COMPARE_CONTRAST_SCALE = { none: 0, low: 1, "low-medium": 1.5, medium: 2, high: 3 };
-const COMPARE_AXIS_DEGREES = { vertical: 0, "near-vertical": 8, "slightly-oblique": 12, "oblique-moderate": 20, "oblique-strong": 34 };
+const COMPARE_CONTRAST_SCALE = { none: 0, "very-low": 0.1, low: 1, "low-medium": 1.5, medium: 2, high: 3 };
+const COMPARE_AXIS_DEGREES = { vertical: 0, "barely-oblique": 5, "near-vertical": 8, "slightly-oblique": 12, "oblique-moderate": 20, "oblique-strong": 34 };
 const COMPARE_SERIF_BRACKET_SCALE = {
   "bracketed-robust": 3,
   "square-slab": 2.5,
