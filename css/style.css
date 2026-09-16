@@ -1165,8 +1165,10 @@ main.wrap {
 /* ---------- spacing primer ---------- */
 
 .spacing-primer {
-  max-width: 760px;
-  margin-top: 2.5rem;
+  /* No max-width cap, unlike .anatomy-primer's 720px - as its own full
+     view (not nested content), letting the card grid use the page's
+     full width fits 3 cards per row instead of 2, and this content is
+     already card-bounded, not a text measure that needs capping. */
 }
 
 .spacing-group {
