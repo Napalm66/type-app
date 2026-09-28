@@ -1393,6 +1393,61 @@ main.wrap {
   outline-offset: 2px;
 }
 
+/* Mobile only, matching this file's other mobile breakpoints (640px):
+   enlarges the slider thumb and expands the toggle's tappable area
+   well beyond its visible track - the sizes above match this app's
+   flat/bordered control language, but as literal hit targets they sit
+   under what a fingertip can reliably land on. Also adds the
+   press-to-magnify cue: the moment a touch lands on the thumb, before
+   any drag, it pops larger to confirm it's been grabbed, then settles
+   back on release. Scoped to viewport width rather than pointer:coarse
+   - a touch-capable desktop/laptop at desktop width should still get
+   the normal mouse-sized controls, only a narrow/mobile layout should. */
+@media (max-width: 640px) {
+  .spacing-slider {
+    height: 4px;
+  }
+
+  .spacing-slider::-webkit-slider-runnable-track {
+    height: 4px;
+  }
+
+  .spacing-slider::-moz-range-track {
+    height: 4px;
+  }
+
+  .spacing-slider::-webkit-slider-thumb {
+    width: 24px;
+    height: 24px;
+    margin-top: -10px;
+    transition: transform 0.1s ease;
+  }
+
+  .spacing-slider::-moz-range-thumb {
+    width: 24px;
+    height: 24px;
+    transition: transform 0.1s ease;
+  }
+
+  .spacing-slider:active::-webkit-slider-thumb {
+    transform: scale(1.4);
+  }
+
+  .spacing-slider:active::-moz-range-thumb {
+    transform: scale(1.4);
+  }
+
+  .spacing-toggle {
+    position: relative;
+  }
+
+  .spacing-toggle::before {
+    content: "";
+    position: absolute;
+    inset: -14px;
+  }
+}
+
 /* Real <button role="switch">, not a styled checkbox or clickable div -
    Enter/Space activation and focus come from the button element itself. */
 .spacing-toggle {
