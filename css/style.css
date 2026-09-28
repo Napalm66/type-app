@@ -1218,8 +1218,16 @@ main.wrap {
   gap: 1rem;
 }
 
+/* A faint tone-shift off the page's own --paper (same technique as the
+   Anatomy glossary's highlighted rows) rather than a shadow - the card
+   previously matched the body background exactly and read as flush
+   with the page, told apart only by its 1px border. Shaded toward
+   black rather than tinted toward white (too subtle to read against
+   --paper's own already-light cream) or --ink (read as a teal/green
+   cast) - black stays neutral in both themes while giving a clearly
+   visible edge. */
 .spacing-card {
-  background: var(--paper);
+  background: color-mix(in srgb, black 5%, var(--paper));
   border: 1px solid var(--rule-solid);
   border-radius: var(--radius);
   padding: 1rem 1.1rem 1.2rem;
