@@ -190,6 +190,40 @@ function initSpacingPrimer(root) {
         </div>
       </div>
 
+      <div class="spacing-group">
+        <div class="spacing-group-heading">
+          <svg class="spacing-group-icon" viewBox="0 0 16 16" aria-hidden="true">
+            <line x1="2" y1="14" x2="14" y2="2" />
+            <line x1="2" y1="14" x2="2" y2="10" />
+            <line x1="2" y1="14" x2="6" y2="14" />
+            <line x1="14" y1="2" x2="14" y2="6" />
+            <line x1="14" y1="2" x2="10" y2="2" />
+          </svg>
+          Type size
+        </div>
+
+        <div class="spacing-card-grid">
+
+          <div class="spacing-card">
+            <h3 class="spacing-card-title">Point size</h3>
+            <p class="spacing-card-def">Point size is the base unit a typeface is set at — one point is 1/72 of an inch. Every other measurement on this page is usually described relative to it: leading as "10 on 12", tracking and kerning in em, a unit that itself scales with point size.</p>
+            <div class="spacing-specimen-wrap">
+              <span class="spacing-specimen spacing-specimen--large" id="spacing-specimen-pointsize">Size changes everything.</span>
+            </div>
+            <div class="spacing-control">
+              <div class="spacing-control-row">
+                <label class="spacing-control-label" for="spacing-slider-pointsize">Point size</label>
+                <span class="spacing-readout" id="spacing-readout-pointsize">24pt</span>
+              </div>
+              <input type="range" class="spacing-slider" id="spacing-slider-pointsize"
+                min="8" max="96" step="1" value="24"
+                aria-describedby="spacing-readout-pointsize" />
+            </div>
+          </div>
+
+        </div>
+      </div>
+
     </div>
   `;
 
@@ -258,6 +292,18 @@ function initSpacingPrimer(root) {
     labelOff: "OFF",
     onToggle: (on) => {
       root.querySelector("#spacing-parabreak-target").style.marginTop = on ? "1em" : "0";
+    },
+  });
+
+  // Real pt unit, not em/rem like the other specimens - the whole point
+  // of this card is the absolute unit itself, not a value relative to
+  // some other size.
+  spacingWireSlider({
+    input: root.querySelector("#spacing-slider-pointsize"),
+    readout: root.querySelector("#spacing-readout-pointsize"),
+    format: (v) => `${v}pt`,
+    onInput: (v) => {
+      root.querySelector("#spacing-specimen-pointsize").style.fontSize = `${v}pt`;
     },
   });
 }
