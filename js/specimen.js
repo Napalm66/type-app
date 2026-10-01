@@ -6,9 +6,10 @@ const SPECIMEN_SIZES = {
   detail: { default: null, custom: "1.6rem" },
   compare: { default: "2rem", custom: "1.25rem" },
   // Compare with two classifications picked - the same sizes as
-  // "compare" above, scaled up 20% now that the specimen isn't sharing
-  // the grid with an empty-state message or a lone unpaired column.
-  compareDual: { default: "2.4rem", custom: "1.5rem" },
+  // "compare" above, scaled up 56% (20% then another 30% on top) now
+  // that the specimen isn't sharing the grid with an empty-state
+  // message or a lone unpaired column.
+  compareDual: { default: "3.12rem", custom: "1.95rem" },
   quizResult: { default: "2.6rem", custom: "1.5rem" },
   quizChoice: { default: "1.4rem", custom: "1rem" },
 };
