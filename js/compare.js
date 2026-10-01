@@ -139,6 +139,7 @@ function initCompare(root) {
     }
 
     const items = selected.map((id) => CLASSIFICATIONS.find((c) => c.id === id));
+    const specimenContext = items.length === 2 ? "compareDual" : "compare";
 
     const grid = `
       <div class="compare-grid">
@@ -147,7 +148,7 @@ function initCompare(root) {
             (item) => `
             <div class="compare-col">
               <div class="compare-col-name">${item.name}</div>
-              <div class="compare-col-specimen">${renderSpecimenHTML(item, "compare")}</div>
+              <div class="compare-col-specimen">${renderSpecimenHTML(item, specimenContext)}</div>
               <p class="spec-row-tagline">${item.tagline}</p>
             </div>`
           )
