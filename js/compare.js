@@ -139,7 +139,6 @@ function initCompare(root) {
     }
 
     const items = selected.map((id) => CLASSIFICATIONS.find((c) => c.id === id));
-    const specimenContext = items.length === 2 ? "compareDual" : "compare";
 
     const grid = `
       <div class="compare-grid">
@@ -148,7 +147,7 @@ function initCompare(root) {
             (item) => `
             <div class="compare-col">
               <div class="compare-col-name">${item.name}</div>
-              <div class="compare-col-specimen">${renderSpecimenHTML(item, specimenContext)}</div>
+              <div class="compare-col-specimen">${renderSpecimenHTML(item, "compare")}</div>
               <p class="spec-row-tagline">${item.tagline}</p>
             </div>`
           )
@@ -162,9 +161,57 @@ function initCompare(root) {
     return grid + renderDiffSlider(a, b) + renderRadar(a, b);
   }
 
+  // scrollWidth isn't usable here: the layer is an inset:0 flex
+  // container, so once its content stops overflowing, scrollWidth just
+  // reports the container's own (fixed) width instead of the smaller
+  // text width — masking whether there's still room to grow. A Range
+  // over the text node gives the word's true rendered width instead.
+  function measureTextWidth(el) {
+    const range = document.createRange();
+    range.selectNodeContents(el);
+    return range.getBoundingClientRect().width;
+  }
+
+  // The CSS clamp's font-size targets a generous size tuned for an
+  // average word, but "Typography" set in an extreme display face (e.g.
+  // Bungee) can run far wider per character than a text face — wide
+  // enough to overflow the box outright at the clamp's upper range.
+  // Rather than shrinking the clamp for every pair to stay safe for
+  // that one worst case, measure the actual rendered word after each
+  // render/resize and only scale font-size down when it would
+  // genuinely overflow, so most pairs keep the full intended size.
+  function fitDiffSpecimen() {
+    const wrap = root.querySelector("#compare-diff-wrap");
+    const layerA = root.querySelector("#compare-diff-a");
+    const layerB = root.querySelector("#compare-diff-b");
+    if (!wrap || !layerA || !layerB) return;
+
+    layerA.style.fontSize = "";
+    layerB.style.fontSize = "";
+    // 80% of the box width, not box-width-minus-a-fixed-margin — most
+    // pairs hit this ceiling rather than the CSS clamp's own size, so a
+    // small fixed margin left the word sitting right up against the
+    // edge at almost every box size. A proportional margin keeps that
+    // same breathing room whether the box is narrow or wide.
+    const safeWidth = wrap.getBoundingClientRect().width * 0.8;
+
+    // Text width doesn't scale perfectly linearly with font-size (hinting,
+    // kerning-table rounding), so a single proportional correction can
+    // undershoot — re-measure and correct again until it actually fits.
+    for (let i = 0; i < 6; i++) {
+      const widest = Math.max(measureTextWidth(layerA), measureTextWidth(layerB));
+      if (widest <= safeWidth) break;
+      const currentSize = parseFloat(getComputedStyle(layerA).fontSize);
+      const nextSize = `${(currentSize * (safeWidth / widest)).toFixed(1)}px`;
+      layerA.style.fontSize = nextSize;
+      layerB.style.fontSize = nextSize;
+    }
+  }
+
   function attachDiffSlider() {
     const wrap = root.querySelector("#compare-diff-wrap");
     if (!wrap) return;
+    fitDiffSpecimen();
     const handle = root.querySelector("#compare-diff-handle");
     const layerA = root.querySelector("#compare-diff-a");
     const layerB = root.querySelector("#compare-diff-b");
@@ -223,6 +270,15 @@ function initCompare(root) {
     });
     attachDiffSlider();
   }
+
+  // The clamp's vw component means the natural size (and so whether it
+  // needs fitting) changes with viewport width — re-check on resize
+  // rather than only at render time.
+  let resizeTimer;
+  window.addEventListener("resize", () => {
+    clearTimeout(resizeTimer);
+    resizeTimer = setTimeout(fitDiffSpecimen, 100);
+  });
 
   render();
 }

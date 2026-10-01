@@ -2173,7 +2173,7 @@ main.wrap {
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: clamp(2.7rem, 10.8vw, 6.1rem); /* "Typography" sizing, 80% bigger */
+  font-size: clamp(4.55rem, 18.19vw, 10.28rem); /* "Typography" sizing — 80%, then ~110% more, then 20% back down for edge breathing room */
   line-height: 1;
   color: #bc3a14; /* fixed accent — see .compare-diff-wrap's fixed-dark note */
   white-space: nowrap;
