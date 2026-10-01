@@ -1422,6 +1422,13 @@ main.wrap {
 @media (max-width: 640px) {
   .spacing-slider {
     height: 4px;
+    /* Without this, a touchscreen browser spends the first few pixels
+       of every drag deciding whether the gesture is meant to scroll
+       the (vertically scrollable) page or drag the thumb, which reads
+       as the slider being sluggish/unresponsive to touch. Declaring
+       this element as "don't use touch here for scrolling" hands the
+       gesture straight to the slider with no recognition delay. */
+    touch-action: none;
   }
 
   .spacing-slider::-webkit-slider-runnable-track {
