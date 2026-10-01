@@ -51,7 +51,7 @@ function initSpacingPrimer(root) {
 
           <div class="spacing-card">
             <h3 class="spacing-card-title">Point size</h3>
-            <p class="spacing-card-def">Point size is the base unit a typeface is set at — one point is 1/72 of an inch. Every other measurement on this page is usually described relative to it: leading as "10 on 12", tracking and kerning in em, a unit that itself scales with point size.</p>
+            <p class="spacing-card-def">Point size is the base unit a typeface is set at — one point is 1/72 of an inch. Every other measurement on this page is expressed in points too: kerning and tracking between characters, leading between lines, baseline shift within one.</p>
             <div class="spacing-specimen-wrap">
               <span class="spacing-specimen spacing-specimen--large" id="spacing-specimen-pointsize">Size changes everything.</span>
             </div>
@@ -104,10 +104,10 @@ function initSpacingPrimer(root) {
             <div class="spacing-control">
               <div class="spacing-control-row">
                 <label class="spacing-control-label" for="spacing-slider-kerning">Kerning</label>
-                <span class="spacing-readout" id="spacing-readout-kerning">+0.00em</span>
+                <span class="spacing-readout" id="spacing-readout-kerning">+0.0pt</span>
               </div>
               <input type="range" class="spacing-slider" id="spacing-slider-kerning"
-                min="-0.15" max="0.15" step="0.01" value="0"
+                min="-3" max="3" step="0.1" value="0"
                 aria-describedby="spacing-readout-kerning" />
             </div>
           </div>
@@ -121,10 +121,10 @@ function initSpacingPrimer(root) {
             <div class="spacing-control">
               <div class="spacing-control-row">
                 <label class="spacing-control-label" for="spacing-slider-tracking">Tracking</label>
-                <span class="spacing-readout" id="spacing-readout-tracking">+0.00em</span>
+                <span class="spacing-readout" id="spacing-readout-tracking">+0.0pt</span>
               </div>
               <input type="range" class="spacing-slider" id="spacing-slider-tracking"
-                min="-0.05" max="0.3" step="0.01" value="0"
+                min="-2" max="10" step="0.1" value="0"
                 aria-describedby="spacing-readout-tracking" />
             </div>
           </div>
@@ -171,15 +171,15 @@ function initSpacingPrimer(root) {
             <h3 class="spacing-card-title">Leading</h3>
             <p class="spacing-card-def">Leading is the vertical distance between the baselines of consecutive lines, named for the strips of lead metal compositors once inserted between lines of type. Set too tight, lines crowd the reader's eye; set too loose, each line reads like its own island.</p>
             <div class="spacing-specimen-wrap">
-              <p class="spacing-specimen spacing-specimen--paragraph" id="spacing-specimen-leading" style="line-height:1.5;">Typeset a paragraph too tight, and its lines start to crowd the reader's eye. Set it too loose, and each line reads like its own island, and the paragraph loses its shape.</p>
+              <p class="spacing-specimen spacing-specimen--paragraph" id="spacing-specimen-leading" style="line-height:19pt;">Typeset a paragraph too tight, and its lines start to crowd the reader's eye. Set it too loose, and each line reads like its own island, and the paragraph loses its shape.</p>
             </div>
             <div class="spacing-control">
               <div class="spacing-control-row">
                 <label class="spacing-control-label" for="spacing-slider-leading">Leading</label>
-                <span class="spacing-readout" id="spacing-readout-leading">1.50</span>
+                <span class="spacing-readout" id="spacing-readout-leading">19.0pt</span>
               </div>
               <input type="range" class="spacing-slider" id="spacing-slider-leading"
-                min="1.0" max="2.5" step="0.05" value="1.5"
+                min="12" max="32" step="0.5" value="19"
                 aria-describedby="spacing-readout-leading" />
             </div>
           </div>
@@ -193,10 +193,10 @@ function initSpacingPrimer(root) {
             <div class="spacing-control">
               <div class="spacing-control-row">
                 <label class="spacing-control-label" for="spacing-slider-baseline">Baseline shift</label>
-                <span class="spacing-readout" id="spacing-readout-baseline">0.00em</span>
+                <span class="spacing-readout" id="spacing-readout-baseline">+0.0pt</span>
               </div>
               <input type="range" class="spacing-slider" id="spacing-slider-baseline"
-                min="-0.5" max="0.5" step="0.05" value="0"
+                min="-6" max="6" step="0.25" value="0"
                 aria-describedby="spacing-readout-baseline" />
             </div>
           </div>
@@ -240,10 +240,10 @@ function initSpacingPrimer(root) {
   spacingWireSlider({
     input: root.querySelector("#spacing-slider-kerning"),
     readout: root.querySelector("#spacing-readout-kerning"),
-    format: (v) => `${v >= 0 ? "+" : ""}${v.toFixed(2)}em`,
+    format: (v) => `${v >= 0 ? "+" : ""}${v.toFixed(1)}pt`,
     onInput: (v) => {
       root.querySelectorAll("#spacing-specimen-kerning .spacing-kerning-pair").forEach((pair) => {
-        pair.style.letterSpacing = `${v}em`;
+        pair.style.letterSpacing = `${v}pt`;
       });
     },
   });
@@ -251,9 +251,9 @@ function initSpacingPrimer(root) {
   spacingWireSlider({
     input: root.querySelector("#spacing-slider-tracking"),
     readout: root.querySelector("#spacing-readout-tracking"),
-    format: (v) => `${v >= 0 ? "+" : ""}${v.toFixed(2)}em`,
+    format: (v) => `${v >= 0 ? "+" : ""}${v.toFixed(1)}pt`,
     onInput: (v) => {
-      root.querySelector("#spacing-specimen-tracking").style.letterSpacing = `${v}em`;
+      root.querySelector("#spacing-specimen-tracking").style.letterSpacing = `${v}pt`;
     },
   });
 
@@ -270,9 +270,9 @@ function initSpacingPrimer(root) {
   spacingWireSlider({
     input: root.querySelector("#spacing-slider-leading"),
     readout: root.querySelector("#spacing-readout-leading"),
-    format: (v) => v.toFixed(2),
+    format: (v) => `${v.toFixed(1)}pt`,
     onInput: (v) => {
-      root.querySelector("#spacing-specimen-leading").style.lineHeight = String(v);
+      root.querySelector("#spacing-specimen-leading").style.lineHeight = `${v}pt`;
     },
   });
 
@@ -281,9 +281,9 @@ function initSpacingPrimer(root) {
   spacingWireSlider({
     input: root.querySelector("#spacing-slider-baseline"),
     readout: root.querySelector("#spacing-readout-baseline"),
-    format: (v) => `${v >= 0 ? "+" : ""}${v.toFixed(2)}em`,
+    format: (v) => `${v >= 0 ? "+" : ""}${v.toFixed(1)}pt`,
     onInput: (v) => {
-      root.querySelector("#spacing-baseline-target").style.transform = `translateY(${(-v).toFixed(2)}em)`;
+      root.querySelector("#spacing-baseline-target").style.transform = `translateY(${(-v).toFixed(2)}pt)`;
     },
   });
 
@@ -297,9 +297,10 @@ function initSpacingPrimer(root) {
     },
   });
 
-  // Real pt unit, not em/rem like the other specimens - the whole point
-  // of this card is the absolute unit itself, not a value relative to
-  // some other size.
+  // Point size is set on font-size directly rather than scaled off
+  // another value, unlike the other cards' kerning/tracking/leading/
+  // baseline pt measurements, which are themselves set relative to
+  // this specimen's own (fixed) font-size.
   spacingWireSlider({
     input: root.querySelector("#spacing-slider-pointsize"),
     readout: root.querySelector("#spacing-readout-pointsize"),
