@@ -37,6 +37,40 @@ function initSpacingPrimer(root) {
 
       <div class="spacing-group">
         <div class="spacing-group-heading">
+          <svg class="spacing-group-icon" viewBox="0 0 16 16" aria-hidden="true">
+            <line x1="2" y1="14" x2="14" y2="2" />
+            <line x1="2" y1="14" x2="2" y2="10" />
+            <line x1="2" y1="14" x2="6" y2="14" />
+            <line x1="14" y1="2" x2="14" y2="6" />
+            <line x1="14" y1="2" x2="10" y2="2" />
+          </svg>
+          Type size
+        </div>
+
+        <div class="spacing-card-grid">
+
+          <div class="spacing-card">
+            <h3 class="spacing-card-title">Point size</h3>
+            <p class="spacing-card-def">Point size is the base unit a typeface is set at — one point is 1/72 of an inch. Every other measurement on this page is usually described relative to it: leading as "10 on 12", tracking and kerning in em, a unit that itself scales with point size.</p>
+            <div class="spacing-specimen-wrap">
+              <span class="spacing-specimen spacing-specimen--large" id="spacing-specimen-pointsize">Size changes everything.</span>
+            </div>
+            <div class="spacing-control">
+              <div class="spacing-control-row">
+                <label class="spacing-control-label" for="spacing-slider-pointsize">Point size</label>
+                <span class="spacing-readout" id="spacing-readout-pointsize">24pt</span>
+              </div>
+              <input type="range" class="spacing-slider" id="spacing-slider-pointsize"
+                min="8" max="96" step="1" value="24"
+                aria-describedby="spacing-readout-pointsize" />
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <div class="spacing-group">
+        <div class="spacing-group-heading">
           <svg class="spacing-group-icon" viewBox="0 0 20 12" aria-hidden="true">
             <line x1="1" y1="6" x2="19" y2="6" />
             <line x1="1" y1="2" x2="1" y2="10" />
@@ -44,6 +78,7 @@ function initSpacingPrimer(root) {
           </svg>
           Horizontal spacing
         </div>
+        <p class="spacing-group-synopsis">Space measured side to side: between one letter pair, across a whole word, and at a paragraph's first line.</p>
 
         <div class="spacing-card-grid">
 
@@ -128,6 +163,7 @@ function initSpacingPrimer(root) {
           </svg>
           Vertical spacing
         </div>
+        <p class="spacing-group-synopsis">Space measured top to bottom: between lines, within a single character, and between paragraphs.</p>
 
         <div class="spacing-card-grid">
 
@@ -184,40 +220,6 @@ function initSpacingPrimer(root) {
                 role="switch" aria-checked="true" aria-labelledby="spacing-label-parabreak">
                 <span class="spacing-toggle-track"><span class="spacing-toggle-thumb"></span></span>
               </button>
-            </div>
-          </div>
-
-        </div>
-      </div>
-
-      <div class="spacing-group">
-        <div class="spacing-group-heading">
-          <svg class="spacing-group-icon" viewBox="0 0 16 16" aria-hidden="true">
-            <line x1="2" y1="14" x2="14" y2="2" />
-            <line x1="2" y1="14" x2="2" y2="10" />
-            <line x1="2" y1="14" x2="6" y2="14" />
-            <line x1="14" y1="2" x2="14" y2="6" />
-            <line x1="14" y1="2" x2="10" y2="2" />
-          </svg>
-          Type size
-        </div>
-
-        <div class="spacing-card-grid">
-
-          <div class="spacing-card">
-            <h3 class="spacing-card-title">Point size</h3>
-            <p class="spacing-card-def">Point size is the base unit a typeface is set at — one point is 1/72 of an inch. Every other measurement on this page is usually described relative to it: leading as "10 on 12", tracking and kerning in em, a unit that itself scales with point size.</p>
-            <div class="spacing-specimen-wrap">
-              <span class="spacing-specimen spacing-specimen--large" id="spacing-specimen-pointsize">Size changes everything.</span>
-            </div>
-            <div class="spacing-control">
-              <div class="spacing-control-row">
-                <label class="spacing-control-label" for="spacing-slider-pointsize">Point size</label>
-                <span class="spacing-readout" id="spacing-readout-pointsize">24pt</span>
-              </div>
-              <input type="range" class="spacing-slider" id="spacing-slider-pointsize"
-                min="8" max="96" step="1" value="24"
-                aria-describedby="spacing-readout-pointsize" />
             </div>
           </div>
 

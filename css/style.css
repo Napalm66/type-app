@@ -1195,6 +1195,14 @@ main.wrap {
   margin-bottom: 0.75rem;
 }
 
+.spacing-group-synopsis {
+  font-family: var(--font-ui);
+  font-size: 0.85rem;
+  color: var(--ink-soft);
+  max-width: 60ch;
+  margin: -0.35rem 0 1rem;
+}
+
 /* A small dimension-line mark (echoing the app's anatomy-diagram
    measurement-arrow language) gives each group heading a distinct
    at-a-glance shape beyond its text - horizontal ticks for Horizontal
